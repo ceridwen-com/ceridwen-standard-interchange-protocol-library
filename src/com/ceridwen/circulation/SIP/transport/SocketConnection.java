@@ -4,6 +4,7 @@ import com.ceridwen.circulation.SIP.messages.*;
 import java.io.*;
 import java.net.*;
 import org.apache.commons.logging.*;
+import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 
 
 public class SocketConnection extends Connection {
@@ -48,20 +49,33 @@ public class SocketConnection extends Connection {
 
     }
   }
-  protected void send(String cmd) throws IOException {
-    out.write(cmd);
-    out.newLine();
-    out.flush();
+
+  protected void send(String cmd) throws ConnectionFailure {
+    try {
+      out.write(cmd);
+      out.newLine();
+      out.flush();
+    }
+    catch (Exception ex) {
+      throw new ConnectionFailure(ex);
+    }
   }
-  protected String waitfor(String match) throws IOException {
+
+  protected String waitfor(String match) throws ConnectionFailure {
     StringBuffer message = new StringBuffer();
     char buffer[] = new char[2048];
     int len;
 
-    do {
-      len = in.read(buffer);
-      message.append(new String(buffer, 0, len));
-    } while ((message.toString()).lastIndexOf(match) < 0);
+    try {
+      do {
+        len = in.read(buffer);
+        message.append(new String(buffer, 0, len));
+      }
+      while ( (message.toString()).lastIndexOf(match) < 0);
+    }
+    catch (Exception ex) {
+      throw new ConnectionFailure(ex);
+    }
 
     String msg = message.toString();
     int cutoff = msg.lastIndexOf(match);

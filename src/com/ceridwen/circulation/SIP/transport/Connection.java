@@ -12,7 +12,28 @@ package com.ceridwen.circulation.SIP.transport;
 import com.ceridwen.circulation.SIP.messages.*;
 import com.ceridwen.circulation.SIP.exceptions.*;
 import org.apache.commons.logging.*;
-import java.io.*;
+import java.net.Socket;
+import java.util.TimerTask;
+import java.util.Timer;
+
+class KillConnectionTask extends TimerTask {
+  private static Log log = LogFactory.getLog(TimerTask.class);
+  private Connection connection;
+
+  public KillConnectionTask(Connection conn) {
+    this.connection = conn;
+  }
+
+  public void run() {
+    try {
+      log.info("Attempting to force close timed out connection");
+      this.connection.disconnect();
+    }
+    catch (Exception ex) {
+      log.info("Force closed timed out connection failed", ex);
+    }
+  }
+}
 
 public abstract class Connection {
   private static Log log = LogFactory.getLog(Connection.class);
@@ -89,8 +110,8 @@ public abstract class Connection {
   public abstract boolean isConnected();
   public abstract void disconnect();
 
-  protected abstract void send(String msg) throws IOException;
-  protected abstract String waitfor(String match) throws IOException;
+  protected abstract void send(String msg) throws ConnectionFailure;
+  protected abstract String waitfor(String match) throws ConnectionFailure;
 
   public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded {
     String request, response = null;
@@ -102,11 +123,20 @@ public abstract class Connection {
       int retries = 0;
       do {
         retry = false;
+        Timer timer = null;
         try {
           request = msg.encode(new Character(getSequence()));
           log.debug(">>> " + request);
+          long timeout = this.getIdleTimeout();
+          if (timeout > 0) {
+            timer = new Timer();
+            timer.schedule(new KillConnectionTask(this), (long)(timeout * 3));
+          }
           send(request);
           response = waitfor("\r");
+          if (timer != null) {
+            timer.cancel();
+          }
           response = strim(response);
           log.debug("<<< " + response);
           if (response.startsWith("96")) {
@@ -114,6 +144,9 @@ public abstract class Connection {
           }
         }
         catch (ConnectionFailure ex) {
+          if (timer != null) {
+            timer.cancel();
+          }
           try {
             Thread.sleep(this.getRetryWait());
           }

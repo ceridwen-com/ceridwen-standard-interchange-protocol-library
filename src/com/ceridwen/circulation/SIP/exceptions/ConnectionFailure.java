@@ -12,6 +12,9 @@ package com.ceridwen.circulation.SIP.exceptions;
 public class ConnectionFailure extends Exception {
   public ConnectionFailure() {
   }
+  public ConnectionFailure(Throwable cause) {
+    super(cause);
+  }
   public static void main(String[] args) {
     ConnectionFailure connectionFailure1 = new ConnectionFailure();
   }
