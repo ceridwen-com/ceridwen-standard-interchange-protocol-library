@@ -130,7 +130,7 @@ public abstract class Connection {
           long timeout = this.getIdleTimeout();
           if (timeout > 0) {
             timer = new Timer();
-            timer.schedule(new KillConnectionTask(this), (long)(timeout * 3));
+            timer.schedule(new KillConnectionTask(this), (long)(timeout));
           }
           send(request);
           response = waitfor("\r");
