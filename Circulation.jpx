@@ -121,7 +121,7 @@
   <property category="sys" name="JDK" value="java version 1.4.2_04-b05"/>
   <property category="sys" name="JvmVersion" value="1.2"/>
   <property category="sys" name="LastTag" value="0"/>
-  <property category="sys" name="Libraries" value="Apache Commons Logging 1.0.3;Apache Commons Beanutils 1.6.0;Apache Commons Net 1.1.0;../Utlilities/Utilities.jpx"/>
+  <property category="sys" name="Libraries" value="../Utlilities/Utilities.jpx;Apache Commons Logging 1.0.4;Apache Commons Beanutils 1.7.0;Apache Commons Net 1.2.2"/>
   <property category="sys" name="MakeStable" value="0"/>
   <property category="sys" name="OutPath" value="classes"/>
   <property category="sys" name="SourcePath" value="src;test"/>
@@ -133,6 +133,11 @@
   <property category="sys" name="WorkingDirectory" value="."/>
   <property category="sys" name="ant.usehostjdk" value="0"/>
   <property category="sys" name="ant.useprojectlibraries" value="1"/>
+  <property category="team" name="ignorePath.0" value="ceridwen-circulation.jar"/>
+  <property category="team" name="ignorePath.1" value="classes"/>
+  <property category="team" name="ignorePath.2" value="Circulation.refactor"/>
+  <property category="team" name="ignorePath.3" value="Circulation.refactorstatus"/>
+  <property category="team" name="ignorePath.4" value="bak"/>
   <node name="ceridwen-circulation" type="Archive">
     <property category="archiving" name="contentRules.1" value="I:**/*.*"/>
     <property category="archiving" name="obfuscator" value="RetroGuard for J2ME"/>
@@ -140,4 +145,5 @@
     <property category="archiving" name="targetPath" value="ceridwen-circulation.jar"/>
     <property category="archiving" name="usingRules" value="1"/>
   </node>
+  <file path="src/com/ceridwen/circulation/SIP/messages/Message.num"/>
 </project>
