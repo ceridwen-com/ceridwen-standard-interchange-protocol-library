@@ -1,4 +1,5 @@
 * text=auto !eol
+/Circulation.jpx -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
 src/com/ceridwen/circulation/SIP/exceptions/RetriesExceeded.java -text
 src/com/ceridwen/circulation/SIP/helpers/FixedFieldDescriptor.java -text
