@@ -3,6 +3,8 @@ package com.ceridwen.circulation.SIP.transport;
 import org.apache.commons.net.telnet.*;
 import java.io.*;
 import org.apache.commons.logging.*;
+import com.ceridwen.util.net.TimeoutSocketFactory;
+
 
 public class TelnetConnection extends Connection {
   private static Log log = LogFactory.getLog(TelnetConnection.class);
@@ -45,7 +47,8 @@ public class TelnetConnection extends Connection {
     }
     log.debug("Attempting connection: " + retry);
     try {
-      client.setDefaultTimeout(this.getConnectionTimeout());
+      client.setSocketFactory(new TimeoutSocketFactory(this.getConnectionTimeout()));
+      client.setDefaultTimeout(this.getIdleTimeout());
       client.connect(this.getHost(), this.getPort());
       client.setSoTimeout(this.getIdleTimeout());
       out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
