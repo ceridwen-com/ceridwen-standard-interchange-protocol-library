@@ -1,0 +1,13 @@
+[PropertyInfo]
+command,String,false,false, , ,true,<default>
+endSession,Boolean,false,false,endSession,endSession,true,<default>
+transactionDate,java.util.Date,false,false,transactionId,transactionId,true,<default>
+institutionId,String,false,false,institutionId,institutionId,true,<default>
+patronIdentifier,String,false,false,patronIdentifier,patronIdentifier,true,<default>
+screenMessage,String,false,false,screenMessage,screenMessage,true,<default>
+printLine,String,false,false,printLine,printLine,true,<default>
+[IconNames]
+
+
+
+

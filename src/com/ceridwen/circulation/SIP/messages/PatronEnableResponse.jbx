@@ -1,0 +1,17 @@
+[PropertyInfo]
+command,String,false,false, , ,true,<default>
+patronStatus,String,false,false,patronStatus,patronStatus,true,<default>
+language,String,false,false,language,language,true,<default>
+transactionDate,java.util.Date,false,false,transactionDate,transactionDate,true,<default>
+institutionId,String,false,false,institutionId,institutionId,true,<default>
+patronIdentifier,String,false,false,patronIdentifier,patronIdentifier,true,<default>
+personalName,String,false,false,personalName,personalName,true,<default>
+validPatron,Boolean,false,false,validPatron,validPatron,true,<default>
+validPatronPassword,Boolean,false,false,validPatronPassword,validPatronPassword,true,<default>
+screenMessage,String,false,false,screenMessage,screenMessage,true,<default>
+printLine,String,false,false,printLine,printLine,true,<default>
+[IconNames]
+
+
+
+

@@ -1,0 +1,19 @@
+[PropertyInfo]
+command,String,false,false, , ,true,<default>
+thirdPartyAllowed,boolean,false,false,thirdPartyAllowed,thirdPartyAllowed,true,<default>
+noBlock,boolean,false,false,noBlock,noBlock,true,<default>
+transactionDate,java.util.Date,false,false,transactionDate,transactionDate,true,<default>
+noBlockDueDate,java.util.Date,false,false,noBlockDueDate,noBlockDueDate,true,<default>
+institutionId,String,false,false,institutionId,institutionId,true,<default>
+patronIdentifier,String,false,false,patronIdentifier,patronIdentifier,true,<default>
+patronPassword,String,false,false,patronPassword,patronPassword,true,<default>
+itemIdentifier,String,false,false,itemIdentifier,itemIdentifier,true,<default>
+titleIdentifier,String,false,false,titleIdentifier,titleIdentifier,true,<default>
+terminalPassword,String,false,false,terminalPassword,terminalPassword,true,<default>
+itemProperties,String,false,false,itemProperties,itemProperties,true,<default>
+feeAcknowledged,Boolean,false,false,feeAcknowledged,feeAcknowledged,true,<default>
+[IconNames]
+
+
+
+
