@@ -26,11 +26,11 @@ class KillConnectionTask extends TimerTask {
 
   public void run() {
     try {
-      log.info("Attempting to force close timed out connection");
+      log.error("Attempting to force close timed out connection");
       this.connection.disconnect();
     }
     catch (Exception ex) {
-      log.info("Force closed timed out connection failed", ex);
+      log.error("Force closed timed out connection failed", ex);
     }
   }
 }
