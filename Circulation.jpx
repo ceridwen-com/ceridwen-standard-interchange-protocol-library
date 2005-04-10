@@ -145,5 +145,10 @@
     <property category="archiving" name="targetPath" value="ceridwen-circulation.jar"/>
     <property category="archiving" name="usingRules" value="1"/>
   </node>
+  <node name="Source" type="Archive">
+    <property category="archiving" name="archiverClass" value="com.borland.jbuilder.wizard.archive.SourceArchiver"/>
+    <property category="archiving" name="targetCompressed" value="1"/>
+    <property category="archiving" name="targetPath" value="Circulation-src.jar"/>
+  </node>
   <file path="src/com/ceridwen/circulation/SIP/messages/Message.num"/>
 </project>
