@@ -2,6 +2,7 @@
 /Circulation.jpx -text
 /ceridwen-circulation.jar -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
+src/com/ceridwen/circulation/SIP/exceptions/MandatoryFieldOmitted.java -text
 src/com/ceridwen/circulation/SIP/exceptions/RetriesExceeded.java -text
 src/com/ceridwen/circulation/SIP/helpers/FixedFieldDescriptor.java -text
 src/com/ceridwen/circulation/SIP/helpers/FlagBitmap.java -text

@@ -1,8 +1,8 @@
 #Contents updated by BuildNumberOT
-#Wed Mar 09 13:14:20 GMT 2005
-version=2.00.445
+#Wed May 11 16:27:43 BST 2005
+version=2.00.454
+date=Wed May 11 16\:27\:43 BST 2005
 name=3M SIP Protocol Engine
-date=Wed Mar 09 13\:14\:20 GMT 2005
 author=Matthew J. Dovey
-epoch=1110374060325
-build=445
+epoch=1115825263316
+build=454

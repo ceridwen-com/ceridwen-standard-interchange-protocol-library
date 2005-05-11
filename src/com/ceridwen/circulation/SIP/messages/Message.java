@@ -16,6 +16,7 @@ import java.beans.*;
 import java.util.*;
 import com.ceridwen.circulation.SIP.helpers.*;
 import java.text.SimpleDateFormat;
+import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 
 public abstract class Message implements Serializable {
   private static Log log = LogFactory.getLog(Message.class);
@@ -114,7 +115,7 @@ public abstract class Message implements Serializable {
     return ret.toString();
   }
 
-  public String encode(Character sequence) {
+  public String encode(Character sequence) throws MandatoryFieldOmitted {
     TreeMap fixed = new TreeMap();
     TreeMap variable = new TreeMap();
     StringBuffer message = new StringBuffer();
@@ -130,7 +131,16 @@ public abstract class Message implements Serializable {
       }
       if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
         VariableFieldDescriptor field = (VariableFieldDescriptor)SIPField;
-        variable.put(field.ID, getProp(desc));
+        String value = getProp(desc);
+        if (value != null) {
+          if (value.length() > 0) {
+            variable.put(field.ID, getProp(desc));
+          }
+        } else {
+          if (field.mandatory) {
+            throw new MandatoryFieldOmitted();
+          }
+        }
       }
     }
 
@@ -236,6 +246,11 @@ public abstract class Message implements Serializable {
   }
 
   private static boolean CheckChecksum(String message, char sequence) {
+    /**@todo add checksum checking
+     *
+     */
+
+
     return true;
   }
 
