@@ -20,7 +20,7 @@ public class ACSStatus extends Message {
   private Boolean offlineOk;
   private String timeoutPeriod;
   private String retriesAllowed;
-  private Date dateTimeSync;
+  private Date dateTimeSync = new Date();
   private String protocolVersion;
   private String institutionId;
   private String libraryName;

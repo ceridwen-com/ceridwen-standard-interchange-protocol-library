@@ -14,7 +14,7 @@ import java.util.Date;
 public class CheckOut extends Message {
   private Boolean renewalPolicy;
   private Boolean noBlock;
-  private Date transactionDate;
+  private Date transactionDate = new Date();
   private Date nbDueDate;
   private String institutionId;
   private String patronIdentifier;

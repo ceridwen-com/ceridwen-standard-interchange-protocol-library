@@ -2,7 +2,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 public class FeePaidResponse extends Message {
   private Boolean paymentAccepted;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
   private String transactionId;

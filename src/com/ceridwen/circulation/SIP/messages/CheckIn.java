@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class CheckIn extends Message {
   private Boolean noBlock;
-  private Date transactionDate;
+  private Date transactionDate = new Date();
   private Date returnDate;
   private String currentLocation;
   private String institutionId;

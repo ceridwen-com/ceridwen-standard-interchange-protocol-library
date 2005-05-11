@@ -1,7 +1,7 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class ItemStatusUpdate extends Message {
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String itemIdentifier;
   private String terminalPassword;

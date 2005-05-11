@@ -12,7 +12,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class ItemInformation extends Message {
-  private Date transactionDate;
+  private Date transactionDate = new Date();
   private String institutionId;
   private String itemIdentifier;
   private String terminalPassword;

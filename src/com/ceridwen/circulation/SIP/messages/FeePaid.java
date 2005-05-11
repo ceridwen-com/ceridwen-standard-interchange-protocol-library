@@ -1,7 +1,7 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class FeePaid extends Message {
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String feeType;
   private String paymentType;
   private String currencyType;

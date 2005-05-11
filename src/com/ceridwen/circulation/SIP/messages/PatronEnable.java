@@ -1,7 +1,7 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class PatronEnable extends Message {
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
   private String terminalPassword;

@@ -122,21 +122,26 @@ public abstract class Message implements Serializable {
 
     PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
 
-    for (int n=0; n<descs.length; n++) {
+    for (int n = 0; n < descs.length; n++) {
       PropertyDescriptor desc = descs[n];
       Object SIPField = desc.getValue("SIPFieldDescriptor");
       if (SIPField.getClass().equals(FixedFieldDescriptor.class)) {
-        FixedFieldDescriptor field = (FixedFieldDescriptor)SIPField;
-        fixed.put(new Integer(field.start), pad(getProp(desc), field));
+        FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
+        String value = getProp(desc);
+        if (value.length() == 0) {
+          if (!field.blankAllowed) {
+            throw new MandatoryFieldOmitted();
+          }
+        }
+        fixed.put(new Integer(field.start), pad(value, field));
       }
       if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-        VariableFieldDescriptor field = (VariableFieldDescriptor)SIPField;
+        VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
         String value = getProp(desc);
-        if (value != null) {
-          if (value.length() > 0) {
-            variable.put(field.ID, getProp(desc));
-          }
-        } else {
+        if (value.length() > 0) {
+          variable.put(field.ID, getProp(desc));
+        }
+        else {
           if (field.mandatory) {
             throw new MandatoryFieldOmitted();
           }

@@ -2,7 +2,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 public class Hold extends Message {
   private String holdMode;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date expirationDate;
   private String pickupLocation;
   private String holdType;

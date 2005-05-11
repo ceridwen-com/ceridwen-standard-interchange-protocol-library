@@ -3,7 +3,7 @@ package com.ceridwen.circulation.SIP.messages;
 public class Renew extends Message {
   private boolean thirdPartyAllowed;
   private boolean noBlock;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date noBlockDueDate;
   private String institutionId;
   private String patronIdentifier;

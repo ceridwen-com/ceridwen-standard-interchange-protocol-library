@@ -6,7 +6,7 @@ public class EndSessionResponse extends Message {
   private String patronIdentifier;
   private String screenMessage;
   private String printLine;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   public String getCommand() {
     return "36";
   }

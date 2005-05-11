@@ -2,8 +2,6 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
-
-
 /**
  * <p>Title: RTSI</p>
  * <p>Description: Real Time Self Issue</p>
@@ -14,8 +12,8 @@ import java.util.Date;
  */
 
 public class PatronStatusRequest extends Message {
-  private String language;
-  private Date transactionDate;
+  private String language = "000";
+  private Date transactionDate = new Date();
   private String institutionId;
   private String patronIdentifier;
   private String terminalPassword;

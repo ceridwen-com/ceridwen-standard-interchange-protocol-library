@@ -2,7 +2,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 public class ItemStatusUpdateResponse extends Message {
   private Boolean ok;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String itemIdentifier;
   private String titleIdentifier;
   private String itemProperties;

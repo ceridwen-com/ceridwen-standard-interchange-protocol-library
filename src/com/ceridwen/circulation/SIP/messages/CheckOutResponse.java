@@ -16,7 +16,7 @@ public class CheckOutResponse extends Message {
   private Boolean renewalOk;
   private Boolean magenticMedia;
   private Boolean desensitize;
-  private Date transactionDate;
+  private Date transactionDate = new Date();
   private String institutionId;
   private String patronIdentifier;
   private String itemIdentifier;

@@ -12,8 +12,8 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class PatronInformation extends Message {
-  private String language;
-  private Date transactionDate;
+  private String language = "000";
+  private Date transactionDate = new Date();
   private String summary;
   private String institutionId;
   private String patronIdentifier;

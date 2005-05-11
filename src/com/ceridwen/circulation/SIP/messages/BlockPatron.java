@@ -2,7 +2,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 public class BlockPatron extends Message {
   private Boolean cardRetained;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String blockedCardMessage;
   private String patronIdentifier;

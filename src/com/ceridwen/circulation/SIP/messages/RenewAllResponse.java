@@ -4,7 +4,7 @@ public class RenewAllResponse extends Message {
   private Boolean ok;
   private String renewedCount;
   private String unrenewedCount;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String screenMessage;
   private String printLine;

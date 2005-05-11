@@ -2,8 +2,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 public class PatronEnableResponse extends Message {
   private String patronStatus;
-  private String language;
-  private java.util.Date transactionDate;
+  private String language = "000";
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
   private String personalName;

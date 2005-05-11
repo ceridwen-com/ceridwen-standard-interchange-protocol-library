@@ -16,7 +16,7 @@ public class CheckInResponse extends Message {
   private Boolean resensitize;
   private Boolean magenticMedia;
   private Boolean alert;
-  private Date transactionDate;
+  private Date transactionDate = new java.util.Date();
   private String institutionId;
   private String itemIdentifier;
   private String permanentLocation;

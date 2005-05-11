@@ -15,7 +15,7 @@ public class ItemInformationResponse extends Message {
   private String circulationStatus;
   private String securityMarker;
   private String feeType;
-  private Date transactionDate;
+  private Date transactionDate = new Date();
   private String holdQueueLength;
   private String dueDate;
   private Date recallDate;

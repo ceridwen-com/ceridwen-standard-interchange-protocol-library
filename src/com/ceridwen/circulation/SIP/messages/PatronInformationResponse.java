@@ -13,8 +13,8 @@ import java.util.Date;
 
 public class PatronInformationResponse extends Message {
   private String patronStatus;
-  private String language;
-  private Date transactionDate;
+  private String language = "000";
+  private Date transactionDate = new Date();
   private String holdItemsCount;
   private String overdueItemsCount;
   private String chargedItemsCount;

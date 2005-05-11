@@ -5,7 +5,7 @@ public class RenewResponse extends Message {
   private Boolean renewalOk;
   private Boolean magneticMedia;
   private Boolean desensitize;
-  private java.util.Date transactionDate;
+  private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
   private String itemIdentifier;
