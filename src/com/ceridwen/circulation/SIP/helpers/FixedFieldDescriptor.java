@@ -12,17 +12,17 @@ package com.ceridwen.circulation.SIP.helpers;
 public class FixedFieldDescriptor {
   public int start;
   public int end;
-  public boolean blankAllowed = true;
+  public boolean allowBlank = true;
 
-  public FixedFieldDescriptor(int start, int end, boolean blankAllowed) {
+  public FixedFieldDescriptor(int start, int end, boolean allowBlank) {
     this.start = start;
     this.end = end;
-    this.blankAllowed = blankAllowed;
+    this.allowBlank = allowBlank;
   }
 
   public FixedFieldDescriptor(int start, int end) {
     this.start = start;
     this.end = end;
-    this.blankAllowed = true;
+    this.allowBlank = true;
   }
 }

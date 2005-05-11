@@ -41,8 +41,8 @@ public class PatronInformationBeanInfo extends SimpleBeanInfo {
       _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
       _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
       _patronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AD"));
-      _startItem.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BP"));
-      _endItem.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BQ"));
+      _startItem.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BP", false));
+      _endItem.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BQ", false));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _endItem,

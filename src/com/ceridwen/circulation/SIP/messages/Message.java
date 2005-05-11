@@ -17,6 +17,7 @@ import java.util.*;
 import com.ceridwen.circulation.SIP.helpers.*;
 import java.text.SimpleDateFormat;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
+import com.ceridwen.circulation.SIP.exceptions.*;
 
 public abstract class Message implements Serializable {
   private static Log log = LogFactory.getLog(Message.class);
@@ -129,7 +130,7 @@ public abstract class Message implements Serializable {
         FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
         String value = getProp(desc);
         if (value.length() == 0) {
-          if (!field.blankAllowed) {
+          if (!field.allowBlank) {
             throw new MandatoryFieldOmitted();
           }
         }
@@ -139,12 +140,10 @@ public abstract class Message implements Serializable {
         VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
         String value = getProp(desc);
         if (value.length() > 0) {
-          variable.put(field.ID, getProp(desc));
+          variable.put(field.ID, value);
         }
-        else {
-          if (field.mandatory) {
-            throw new MandatoryFieldOmitted();
-          }
+        else if (field.required) {
+          variable.put(field.ID, value);
         }
       }
     }
@@ -199,7 +198,7 @@ public abstract class Message implements Serializable {
 
   }
 
-  public static Message decode(String message, Character sequence) {
+  public static Message decode(String message, Character sequence) throws ChecksumError, MandatoryFieldOmitted {
 
     if (sequence != null) {
       if (!CheckChecksum(message, sequence.charValue())) {

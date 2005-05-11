@@ -46,12 +46,12 @@ public class PatronStatusResponseBeanInfo extends SimpleBeanInfo {
       _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
       _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
       _personalName.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AE"));
-      _validPatron.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BL"));
-      _validPatronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CQ"));
-      _currencyType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BH"));
-      _feeAmount.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BV"));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF"));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG"));
+      _validPatron.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BL", true));
+      _validPatronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CQ", true));
+      _currencyType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BH", true));
+      _feeAmount.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BV", true));
+      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF", true));
+      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG", true));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _currencyType,

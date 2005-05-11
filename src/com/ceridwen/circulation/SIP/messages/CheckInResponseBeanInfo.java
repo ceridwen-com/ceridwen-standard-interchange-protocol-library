@@ -47,13 +47,14 @@ public class CheckInResponseBeanInfo extends SimpleBeanInfo {
 
       _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
       _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
-      _titleIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AJ"));
-      _sortBin.setValue("SIPFieldDescriptor", new VariableFieldDescriptor(""));
-      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
-      _mediaType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CK"));
-      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH"));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF"));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG"));
+      _permanentLocation.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AQ"));
+      _titleIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AJ", true));
+      _sortBin.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CL", true));
+      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA", true));
+      _mediaType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CK", true));
+      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH", true));
+      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF", true));
+      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG", true));
 
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {

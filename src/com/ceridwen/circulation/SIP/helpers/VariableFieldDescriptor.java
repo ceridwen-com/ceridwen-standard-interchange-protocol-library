@@ -12,15 +12,15 @@ package com.ceridwen.circulation.SIP.helpers;
 public class VariableFieldDescriptor {
   public static final char TERMINATOR = '|';
   public String ID;
-  public boolean mandatory = false;
+  public boolean required = true;
 
   public VariableFieldDescriptor(String ID) {
     this.ID = ID;
-    this.mandatory = false;
+    this.required = true;
   }
 
-  public VariableFieldDescriptor(String ID, boolean mandatory) {
+  public VariableFieldDescriptor(String ID, boolean required) {
     this.ID = ID;
-    this.mandatory = mandatory;
+    this.required = required;
   }
 }

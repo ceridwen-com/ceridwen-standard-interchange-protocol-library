@@ -54,15 +54,15 @@ public class CheckOutResponseBeanInfo extends SimpleBeanInfo {
       _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
       _titleIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AJ"));
       _dueDate.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AH"));
-      _feeType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BT"));
-      _securityInhibit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CI"));
-      _currencyType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BH"));
-      _feeAmount.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BV"));
-      _mediaType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CK"));
-      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH"));
-      _transactionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BK"));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF"));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG"));
+      _feeType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BT", true));
+      _securityInhibit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CI", true));
+      _currencyType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BH", true));
+      _feeAmount.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BV", true));
+      _mediaType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CK", true));
+      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH", true));
+      _transactionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BK", true));
+      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF", true));
+      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG", true));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _currencyType,

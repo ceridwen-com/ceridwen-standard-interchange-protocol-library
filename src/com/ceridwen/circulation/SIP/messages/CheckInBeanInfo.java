@@ -41,8 +41,8 @@ public class CheckInBeanInfo extends SimpleBeanInfo {
       _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
       _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
       _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
-      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH"));
-      _cancel.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BI"));
+      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH", false));
+      _cancel.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BI", false));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _cancel,

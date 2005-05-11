@@ -45,10 +45,10 @@ public class CheckOutBeanInfo extends SimpleBeanInfo {
       _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
       _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
       _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
-      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH"));
-      _patronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AD"));
-      _feeAcknowledged.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BO"));
-      _cancel.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BI"));
+      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH", false));
+      _patronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AD", false));
+      _feeAcknowledged.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BO", false));
+      _cancel.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BI", false));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _cancel,
