@@ -1,16 +1,21 @@
 package com.ceridwen.circulation.SIP.transport;
 
-import com.ceridwen.circulation.SIP.messages.*;
-import java.io.*;
-import java.net.*;
-import org.apache.commons.logging.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 
 
 public class SocketConnection extends Connection {
   private static Log log = LogFactory.getLog(SocketConnection.class);
 
-  Socket socket;
+  private Socket socket;
   private BufferedReader in;
   private BufferedWriter out;
 
@@ -50,7 +55,7 @@ public class SocketConnection extends Connection {
     }
   }
 
-  protected void send(String cmd) throws ConnectionFailure {
+  protected void internalSend(String cmd) throws ConnectionFailure {
     try {
       out.write(cmd);
       out.newLine();
@@ -61,7 +66,7 @@ public class SocketConnection extends Connection {
     }
   }
 
-  protected String waitfor(String match) throws ConnectionFailure {
+  protected String internalWaitfor(String match) throws ConnectionFailure {
     StringBuffer message = new StringBuffer();
     char buffer[] = new char[2048];
     int len;

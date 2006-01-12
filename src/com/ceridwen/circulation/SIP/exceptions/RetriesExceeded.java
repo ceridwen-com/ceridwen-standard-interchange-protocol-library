@@ -12,8 +12,4 @@ package com.ceridwen.circulation.SIP.exceptions;
 public class RetriesExceeded extends Exception {
   public RetriesExceeded() {
   }
-  public static void main(String[] args) {
-    RetriesExceeded retriesExceeded1 = new RetriesExceeded();
-  }
-
 }

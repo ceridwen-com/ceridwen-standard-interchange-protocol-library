@@ -13,7 +13,4 @@ public class MandatoryFieldOmitted extends Exception {
   public MandatoryFieldOmitted() {
   }
 
-  public static void main(String[] args) {
-    MandatoryFieldOmitted mandatoryfieldomitted = new MandatoryFieldOmitted();
-  }
 }

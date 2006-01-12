@@ -12,8 +12,9 @@ package com.ceridwen.circulation.SIP.helpers;
 public class FlagBitmap {
   public static boolean flagSet(String flags) {
     for (int n = 0; n < flags.length(); n++) {
-      if (flags.charAt(n) == 'Y')
+      if (flags.charAt(n) == 'Y') {
         return true;
+      }
     }
     return false;
   }

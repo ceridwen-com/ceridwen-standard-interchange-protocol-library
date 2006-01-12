@@ -1,10 +1,15 @@
 package com.ceridwen.circulation.SIP.transport;
 
-import org.apache.commons.net.telnet.*;
-import java.io.*;
-import org.apache.commons.logging.*;
-import com.ceridwen.util.net.TimeoutSocketFactory;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.net.telnet.TelnetClient;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.util.net.TimeoutSocketFactory;
 
 
 public class TelnetConnection extends Connection {
@@ -64,8 +69,9 @@ public class TelnetConnection extends Connection {
         }
         return connect(retry - 1);
       }
-      else
+      else {
         return false;
+      }
     }
     try {
       login(this.getUsername(), this.getPassword());
@@ -81,8 +87,9 @@ public class TelnetConnection extends Connection {
         }
         return connect(retry - 1);
       }
-      else
+      else {
         return false;
+      }
     }
     return true;
   }
@@ -94,7 +101,7 @@ public class TelnetConnection extends Connection {
     send(pass);
   }
 
-  protected void send(String cmd) throws ConnectionFailure {
+  protected void internalSend(String cmd) throws ConnectionFailure {
     try {
       out.write(cmd);
       out.newLine();
@@ -104,7 +111,7 @@ public class TelnetConnection extends Connection {
     }
   }
 
-  protected String waitfor(String match) throws ConnectionFailure {
+  protected String internalWaitfor(String match) throws ConnectionFailure {
     StringBuffer message = new StringBuffer();
     char buffer[] = new char[2048];
     int len;

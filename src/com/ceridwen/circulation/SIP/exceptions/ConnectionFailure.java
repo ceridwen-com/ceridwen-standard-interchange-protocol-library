@@ -15,8 +15,4 @@ public class ConnectionFailure extends Exception {
   public ConnectionFailure(Throwable cause) {
     super(cause);
   }
-  public static void main(String[] args) {
-    ConnectionFailure connectionFailure1 = new ConnectionFailure();
-  }
-
 }

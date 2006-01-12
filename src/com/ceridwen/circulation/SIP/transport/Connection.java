@@ -9,31 +9,15 @@ package com.ceridwen.circulation.SIP.transport;
  * @version 1.0
  */
 
-import com.ceridwen.circulation.SIP.messages.*;
-import com.ceridwen.circulation.SIP.exceptions.*;
-import org.apache.commons.logging.*;
-import java.net.Socket;
-import java.util.TimerTask;
 import java.util.Timer;
+import java.util.TimerTask;
 
-class KillConnectionTask extends TimerTask {
-  private static Log log = LogFactory.getLog(TimerTask.class);
-  private Connection connection;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
+import com.ceridwen.circulation.SIP.messages.Message;
 
-  public KillConnectionTask(Connection conn) {
-    this.connection = conn;
-  }
-
-  public void run() {
-    try {
-      log.error("Attempting to force close timed out connection");
-      this.connection.disconnect();
-    }
-    catch (Exception ex) {
-      log.error("Force closed timed out connection failed", ex);
-    }
-  }
-}
 
 public abstract class Connection {
   private static Log log = LogFactory.getLog(Connection.class);
@@ -84,11 +68,12 @@ public abstract class Connection {
     return retryWait;
   }
 
-  char getSequence() {
+  private char getSequence() {
     char ret = sequence;
     sequence++;
-    if (sequence > '9')
+    if (sequence > '9') {
       sequence = '0';
+    }
     return ret;
   }
 
@@ -110,8 +95,50 @@ public abstract class Connection {
   public abstract boolean isConnected();
   public abstract void disconnect();
 
-  protected abstract void send(String msg) throws ConnectionFailure;
-  protected abstract String waitfor(String match) throws ConnectionFailure;
+  protected abstract void internalSend(String msg) throws ConnectionFailure;
+  protected abstract String internalWaitfor(String match) throws ConnectionFailure;
+
+  public void send(String msg) throws ConnectionFailure {
+    Timer timer = null;
+    long timeout = this.getIdleTimeout();
+    if (timeout > 0) {
+      timer = new Timer();
+      timer.schedule(new KillConnectionTask(this), timeout);
+    }
+    try {
+      internalSend(msg);
+    } catch (ConnectionFailure ex) {
+      if (timer != null) {
+        timer.cancel();
+      }
+      throw ex;
+    }
+    if (timer != null) {
+      timer.cancel();
+    }
+  }
+
+  public String waitfor(String match) throws ConnectionFailure {
+    String ret = null;
+    Timer timer = null;
+    long timeout = this.getIdleTimeout();
+    if (timeout > 0) {
+      timer = new Timer();
+      timer.schedule(new KillConnectionTask(this), timeout);
+    }
+    try {
+      ret = internalWaitfor(match);
+    } catch (ConnectionFailure ex) {
+      if (timer != null) {
+        timer.cancel();
+      }
+      throw ex;
+    }
+    if (timer != null) {
+      timer.cancel();
+    }
+    return ret;
+  }
 
   public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded {
     String request, response = null;
@@ -123,20 +150,11 @@ public abstract class Connection {
       int retries = 0;
       do {
         retry = false;
-        Timer timer = null;
         try {
           request = msg.encode(new Character(getSequence()));
           log.debug(">>> " + request);
-          long timeout = this.getIdleTimeout();
-          if (timeout > 0) {
-            timer = new Timer();
-            timer.schedule(new KillConnectionTask(this), (long)(timeout));
-          }
           send(request);
           response = waitfor("\r");
-          if (timer != null) {
-            timer.cancel();
-          }
           response = strim(response);
           log.debug("<<< " + response);
           if (response.startsWith("96")) {
@@ -144,9 +162,6 @@ public abstract class Connection {
           }
         }
         catch (ConnectionFailure ex) {
-          if (timer != null) {
-            timer.cancel();
-          }
           try {
             Thread.sleep(this.getRetryWait());
           }
@@ -170,8 +185,27 @@ public abstract class Connection {
       throw e;
     }
     catch (Exception e) {
-      throw new ConnectionFailure();
+      throw new ConnectionFailure(e);
     }
   }
 
+}
+
+class KillConnectionTask extends TimerTask {
+  private static Log log = LogFactory.getLog(TimerTask.class);
+  private Connection connection;
+
+  public KillConnectionTask(Connection conn) {
+    this.connection = conn;
+  }
+
+  public void run() {
+    try {
+      log.error("Attempting to force close timed out connection");
+      this.connection.disconnect();
+    }
+    catch (Exception ex) {
+      log.error("Force closed timed out connection failed", ex);
+    }
+  }
 }
