@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 
 
 public abstract class Connection {
@@ -140,13 +141,19 @@ public abstract class Connection {
     return ret;
   }
 
-  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded {
+  /**@todo Add a new exception MessageNotUnderstood
+   *
+   */
+
+
+  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, MessageNotUnderstood {
     String request, response = null;
     if (msg == null) {
-      throw new RetriesExceeded(); //This will signal a corrupted data
+      throw new MessageNotUnderstood(); //This will signal a corrupted data
     }
     try {
       boolean retry;
+      boolean understood = false;
       int retries = 0;
       do {
         retry = false;
@@ -160,6 +167,7 @@ public abstract class Connection {
           if (response.startsWith("96")) {
             throw new ConnectionFailure();
           }
+          understood = true;
         }
         catch (ConnectionFailure ex) {
           try {
@@ -171,7 +179,11 @@ public abstract class Connection {
           retry = true;
           retries++;
           if (retries > this.getRetryAttempts()) {
-            throw new RetriesExceeded();
+            if (understood) {
+              throw new RetriesExceeded();
+            } else {
+              throw new MessageNotUnderstood();
+            }
           }
         }
       }
