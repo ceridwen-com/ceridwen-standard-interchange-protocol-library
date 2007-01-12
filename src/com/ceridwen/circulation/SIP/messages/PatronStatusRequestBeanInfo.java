@@ -1,7 +1,6 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.*;
 import com.ceridwen.circulation.SIP.helpers.*;
 
 /**
