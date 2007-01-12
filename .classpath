@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Commons BeanUtils 1.7.0"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Utilities"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Commons Logging 1.1.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Commons Net 1.4.1"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Utilities"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

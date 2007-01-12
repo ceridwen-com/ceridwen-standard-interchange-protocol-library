@@ -3,6 +3,13 @@
 /.project -text
 /Circulation.jpx -text
 /ceridwen-circulation.jar -text
+lib/commons-beanutils-1.7.0/LICENSE.txt -text
+lib/commons-beanutils-1.7.0/NOTICE.txt -text
+lib/commons-beanutils-1.7.0/README.txt -text
+lib/commons-beanutils-1.7.0/RELEASE-NOTES.txt -text
+lib/commons-beanutils-1.7.0/commons-beanutils-bean-collections.jar -text
+lib/commons-beanutils-1.7.0/commons-beanutils-core.jar -text
+lib/commons-beanutils-1.7.0/commons-beanutils.jar -text
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
 src/com/ceridwen/circulation/SIP/exceptions/MandatoryFieldOmitted.java -text
