@@ -1,4 +1,6 @@
 * text=auto !eol
+/.classpath -text
+/.project -text
 /Circulation.jpx -text
 /ceridwen-circulation.jar -text
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
