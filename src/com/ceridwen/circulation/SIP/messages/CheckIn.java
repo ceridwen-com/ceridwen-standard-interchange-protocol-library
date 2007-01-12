@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class CheckIn extends Message {
-  private Boolean noBlock;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7321140594135175919L;
+private Boolean noBlock;
   private Date transactionDate = new Date();
   private Date returnDate;
   private String currentLocation;

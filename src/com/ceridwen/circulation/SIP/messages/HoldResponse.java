@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class HoldResponse extends Message {
-  private Boolean ok;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2267131763722749419L;
+private Boolean ok;
   private Boolean available;
   private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date expirationDate;

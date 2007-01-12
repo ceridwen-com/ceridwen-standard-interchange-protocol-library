@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class ItemInformationResponse extends Message {
-  private String circulationStatus;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6408854778106704492L;
+private String circulationStatus;
   private String securityMarker;
   private String feeType;
   private Date transactionDate = new Date();

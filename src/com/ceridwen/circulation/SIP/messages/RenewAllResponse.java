@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class RenewAllResponse extends Message {
-  private Boolean ok;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5428582577226346891L;
+private Boolean ok;
   private String renewedCount;
   private String unrenewedCount;
   private java.util.Date transactionDate = new java.util.Date();

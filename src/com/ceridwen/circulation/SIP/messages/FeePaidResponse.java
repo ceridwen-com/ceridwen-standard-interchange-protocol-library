@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class FeePaidResponse extends Message {
-  private Boolean paymentAccepted;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3684506970071368895L;
+private Boolean paymentAccepted;
   private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;

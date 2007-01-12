@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class RenewResponse extends Message {
-  private Boolean ok;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 434658072913047721L;
+private Boolean ok;
   private Boolean renewalOk;
   private Boolean magneticMedia;
   private Boolean desensitize;

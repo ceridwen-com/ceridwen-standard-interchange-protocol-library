@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class EndSessionResponse extends Message {
-  private Boolean endSession;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8955079727656656773L;
+private Boolean endSession;
   private String institutionId;
   private String patronIdentifier;
   private String screenMessage;

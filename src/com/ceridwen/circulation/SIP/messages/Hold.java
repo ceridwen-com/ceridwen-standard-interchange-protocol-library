@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class Hold extends Message {
-  private String holdMode;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6526613321625525740L;
+private String holdMode;
   private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date expirationDate;
   private String pickupLocation;

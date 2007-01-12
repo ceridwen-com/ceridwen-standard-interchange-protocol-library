@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class PatronInformation extends Message {
-  private String language = "000";
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4603960140773936894L;
+private String language = "000";
   private Date transactionDate = new Date();
   private String summary;
   private String institutionId;

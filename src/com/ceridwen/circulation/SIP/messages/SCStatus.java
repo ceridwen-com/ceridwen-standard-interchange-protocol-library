@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
  */
 
 public class SCStatus extends Message {
-  private String statusCode;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6198644705404364776L;
+private String statusCode;
   private String maxPrintWidth;
   private String protocolVersion;
 

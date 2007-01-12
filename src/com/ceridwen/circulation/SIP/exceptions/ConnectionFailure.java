@@ -10,7 +10,11 @@
 package com.ceridwen.circulation.SIP.exceptions;
 
 public class ConnectionFailure extends Exception {
-  public ConnectionFailure() {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5184375852496129646L;
+public ConnectionFailure() {
   }
   public ConnectionFailure(Throwable cause) {
     super(cause);

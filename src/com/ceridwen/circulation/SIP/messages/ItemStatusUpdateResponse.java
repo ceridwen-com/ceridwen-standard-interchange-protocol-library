@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class ItemStatusUpdateResponse extends Message {
-  private Boolean ok;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 428496319623237121L;
+private Boolean ok;
   private java.util.Date transactionDate = new java.util.Date();
   private String itemIdentifier;
   private String titleIdentifier;

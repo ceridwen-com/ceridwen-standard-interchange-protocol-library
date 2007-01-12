@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class EndPatronSession extends Message {
-  private java.util.Date transactionDate  = new java.util.Date();
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1263417214546161837L;
+private java.util.Date transactionDate  = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
   private String terminalPassword;

@@ -12,7 +12,11 @@ import java.util.Date;
  */
 
 public class PatronInformationResponse extends Message {
-  private String patronStatus;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5284231102576474180L;
+private String patronStatus;
   private String language = "000";
   private Date transactionDate = new Date();
   private String holdItemsCount;

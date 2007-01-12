@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class RenewAll extends Message {
-  private java.util.Date transactionDate = new java.util.Date();
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7106820916482094784L;
+private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
   private String patronPassword;

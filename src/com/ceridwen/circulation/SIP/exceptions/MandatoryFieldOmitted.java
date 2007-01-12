@@ -10,7 +10,12 @@
 package com.ceridwen.circulation.SIP.exceptions;
 
 public class MandatoryFieldOmitted extends Exception {
-  public MandatoryFieldOmitted() {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -152536357897100116L;
+
+public MandatoryFieldOmitted() {
   }
 
 }

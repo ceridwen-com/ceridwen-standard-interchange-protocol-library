@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class Renew extends Message {
-  private boolean thirdPartyAllowed;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 158409818027250051L;
+private boolean thirdPartyAllowed;
   private boolean noBlock;
   private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date noBlockDueDate;

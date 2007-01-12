@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class CheckOut extends Message {
-  private Boolean renewalPolicy;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8454866593857815453L;
+private Boolean renewalPolicy;
   private Boolean noBlock;
   private Date transactionDate = new Date();
   private Date nbDueDate;

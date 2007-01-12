@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class BlockPatron extends Message {
-  private Boolean cardRetained;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7336173091305475737L;
+private Boolean cardRetained;
   private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String blockedCardMessage;

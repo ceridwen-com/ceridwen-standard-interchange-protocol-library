@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class ACSStatus extends Message {
-  private Boolean onLineStatus;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -611426325284828647L;
+private Boolean onLineStatus;
   private Boolean checkInOk;
   private Boolean checkOutOk;
   private Boolean renewalPolicy;

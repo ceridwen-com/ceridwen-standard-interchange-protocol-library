@@ -1,7 +1,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class LoginResponse extends Message {
-  private Boolean ok;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7739633345494042411L;
+private Boolean ok;
   public String getCommand() {
     return "94";
   }

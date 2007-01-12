@@ -12,7 +12,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class CheckOutResponse extends Message {
-  private Boolean ok;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9222995766948881317L;
+private Boolean ok;
   private Boolean renewalOk;
   private Boolean magenticMedia;
   private Boolean desensitize;
