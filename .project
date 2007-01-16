@@ -3,8 +3,19 @@
 	<name>Circulation</name>
 	<comment></comment>
 	<projects>
+		<project>Utilities</project>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/Build Number.launch</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
@@ -13,5 +24,14 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.tssap.selena.model.modeling_nature</nature>
+		<nature>com.borland.selena.uml20.uml20_nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Suspended Root</name>
+			<type>2</type>
+			<locationURI>SuspendedRootVariable</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
