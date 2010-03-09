@@ -2,9 +2,7 @@
 /.classpath -text
 .externalToolBuilders/Build[!!-~]Number.launch -text
 /.project -text
-/Circulation.jpx -text
 /buildnum.xml -text
-/ceridwen-circulation.jar -text
 lib/commons-beanutils-1.7.0/LICENSE.txt -text
 lib/commons-beanutils-1.7.0/NOTICE.txt -text
 lib/commons-beanutils-1.7.0/README.txt -text
