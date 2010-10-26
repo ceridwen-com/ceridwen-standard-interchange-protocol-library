@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="create_jar" name="Create Jar">
     <target name="create_jar">
-        <jar destfile="C:/Users/Matthew/Documents/Eclipse/Circulation/bin/ceridwen-circulation.jar">
-            <fileset dir="C:/Users/Matthew/Documents/Eclipse/Circulation/bin" excludes="**.jar"/>
+        <jar destfile="bin/ceridwen-circulation.jar">
+            <fileset dir="bin" excludes="**.jar"/>
         </jar>
     </target>
 </project>
