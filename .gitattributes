@@ -3,6 +3,7 @@
 .externalToolBuilders/Build[!!-~]Number.launch -text
 /.project -text
 /buildnum.xml -text
+/ceridwen-circulation.jardesc -text svneol=unset#text/plain
 lib/commons-beanutils-1.7.0/LICENSE.txt -text
 lib/commons-beanutils-1.7.0/NOTICE.txt -text
 lib/commons-beanutils-1.7.0/README.txt -text
