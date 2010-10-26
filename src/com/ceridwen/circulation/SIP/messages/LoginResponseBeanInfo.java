@@ -13,7 +13,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class LoginResponseBeanInfo extends SimpleBeanInfo {
-  Class beanClass = LoginResponse.class;
+  Class<LoginResponse> beanClass = LoginResponse.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

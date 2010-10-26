@@ -13,7 +13,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class FeePaidBeanInfo extends SimpleBeanInfo {
-  Class beanClass = FeePaid.class;
+  Class<FeePaid> beanClass = FeePaid.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

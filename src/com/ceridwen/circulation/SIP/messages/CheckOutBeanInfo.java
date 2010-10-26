@@ -13,7 +13,7 @@ import java.beans.*;
 import com.ceridwen.circulation.SIP.helpers.*;
 
 public class CheckOutBeanInfo extends SimpleBeanInfo {
-  Class beanClass = CheckOut.class;
+  Class<CheckOut> beanClass = CheckOut.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

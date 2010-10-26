@@ -14,7 +14,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class PatronStatusResponseBeanInfo extends SimpleBeanInfo {
-  Class beanClass = PatronStatusResponse.class;
+  Class<PatronStatusResponse> beanClass = PatronStatusResponse.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;
@@ -86,7 +86,7 @@ public class PatronStatusResponseBeanInfo extends SimpleBeanInfo {
     return null;
   }
   public BeanInfo[] getAdditionalBeanInfo() {
-    Class superclass = beanClass.getSuperclass();
+    Class<?> superclass = beanClass.getSuperclass();
     try {
       BeanInfo superBeanInfo = Introspector.getBeanInfo(superclass);
       return new BeanInfo[] { superBeanInfo };

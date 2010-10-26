@@ -13,7 +13,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class ItemStatusUpdateResponseBeanInfo extends SimpleBeanInfo {
-  Class beanClass = ItemStatusUpdateResponse.class;
+  Class<ItemStatusUpdateResponse> beanClass = ItemStatusUpdateResponse.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

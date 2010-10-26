@@ -13,7 +13,7 @@ import java.beans.*;
 import com.ceridwen.circulation.SIP.helpers.*;
 
 public class ACSStatusBeanInfo extends SimpleBeanInfo {
-  Class beanClass = ACSStatus.class;
+  Class<ACSStatus> beanClass = ACSStatus.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

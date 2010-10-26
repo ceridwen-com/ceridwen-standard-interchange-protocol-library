@@ -14,7 +14,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class SCStatusBeanInfo extends SimpleBeanInfo {
-  Class beanClass = SCStatus.class;
+  Class<SCStatus> beanClass = SCStatus.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

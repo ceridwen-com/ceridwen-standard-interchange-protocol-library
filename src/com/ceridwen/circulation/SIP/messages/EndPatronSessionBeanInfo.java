@@ -13,7 +13,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class EndPatronSessionBeanInfo extends SimpleBeanInfo {
-  Class beanClass = EndPatronSession.class;
+  Class<EndPatronSession> beanClass = EndPatronSession.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

@@ -13,7 +13,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class RenewBeanInfo extends SimpleBeanInfo {
-  Class beanClass = Renew.class;
+  Class<Renew> beanClass = Renew.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

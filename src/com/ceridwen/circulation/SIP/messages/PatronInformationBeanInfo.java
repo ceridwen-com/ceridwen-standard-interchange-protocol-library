@@ -13,7 +13,7 @@ import com.ceridwen.circulation.SIP.helpers.*;
  */
 
 public class PatronInformationBeanInfo extends SimpleBeanInfo {
-  Class beanClass = PatronInformation.class;
+  Class<PatronInformation> beanClass = PatronInformation.class;
   String iconColor16x16Filename;
   String iconColor32x32Filename;
   String iconMono16x16Filename;

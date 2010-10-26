@@ -16,13 +16,17 @@ import java.beans.*;
 import java.util.*;
 import com.ceridwen.circulation.SIP.helpers.*;
 import java.text.SimpleDateFormat;
-import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.*;
 
 public abstract class Message implements Serializable {
-  private static Log log = LogFactory.getLog(Message.class);
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1609258005567594730L;
 
-    private static Class[] _messages = {
+private static Log log = LogFactory.getLog(Message.class);
+
+    private static Class<?>[] _messages = {
         PatronStatusRequest.class,
         PatronStatusResponse.class,
         CheckOut.class,
@@ -117,8 +121,8 @@ public abstract class Message implements Serializable {
   }
 
   public String encode(Character sequence) throws MandatoryFieldOmitted {
-    TreeMap fixed = new TreeMap();
-    TreeMap variable = new TreeMap();
+    TreeMap<Integer, String> fixed = new TreeMap<Integer, String>();
+    TreeMap<String, String> variable = new TreeMap<String, String>();
     StringBuffer message = new StringBuffer();
 
     PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
@@ -150,13 +154,13 @@ public abstract class Message implements Serializable {
 
     message.append(this.getCommand());
 
-    Iterator fixedIterate = fixed.keySet().iterator();
+    Iterator<Integer> fixedIterate = fixed.keySet().iterator();
     while (fixedIterate.hasNext()) {
         Integer key = (Integer)fixedIterate.next();
         message.append(fixed.get(key));
     }
 
-    Iterator varIterate = variable.keySet().iterator();
+    Iterator<String> varIterate = variable.keySet().iterator();
     while (varIterate.hasNext()) {
         String key = (String)varIterate.next();
         message.append(key);
@@ -207,7 +211,7 @@ public abstract class Message implements Serializable {
     }
     String command = message.substring(0, 2);
     try {
-      Message msg = (Message)((Class) messages.get(command)).newInstance();
+      Message msg = (Message)((Class<?>) messages.get(command)).newInstance();
       PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(msg);
 
       int fixedFieldEnd = 2;
@@ -228,7 +232,7 @@ public abstract class Message implements Serializable {
         }
       }
 
-      Hashtable fields = msg.parseVarFields(fixedFieldEnd + 1, message);
+      Hashtable<String, String> fields = msg.parseVarFields(fixedFieldEnd + 1, message);
 
       for (int n = 0; n < descs.length; n++) {
         PropertyDescriptor desc = descs[n];
@@ -280,8 +284,8 @@ public abstract class Message implements Serializable {
     return command + check.toString();
   }
 
-  private Hashtable parseVarFields(int offset, String data) {
-    Hashtable fields = new Hashtable();
+  private Hashtable<String, String> parseVarFields(int offset, String data) {
+    Hashtable<String, String> fields = new Hashtable<String, String>();
     int status = 1;
     StringBuffer fieldtag = new StringBuffer();
     StringBuffer fielddata = new StringBuffer();
@@ -321,7 +325,7 @@ public abstract class Message implements Serializable {
       return (Message)in.readObject();
   }
 
-  private static Hashtable messages = new Hashtable();
+  private static Hashtable<Object, Class<?>> messages = new Hashtable<Object, Class<?>>();
 
   static {
     com.ceridwen.util.versioning.ComponentRegistry.registerComponent(Message.class);
