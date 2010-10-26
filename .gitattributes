@@ -1,9 +1,9 @@
 * text=auto !eol
 /.classpath -text
 .externalToolBuilders/Build[!!-~]Number.launch -text
+.externalToolBuilders/Package[!!-~]Circulation[!!-~]Jar.launch -text svneol=unset#text/plain
 /.project -text
 /buildnum.xml -text
-/ceridwen-circulation.jardesc -text svneol=unset#text/plain
 lib/commons-beanutils-1.7.0/LICENSE.txt -text
 lib/commons-beanutils-1.7.0/NOTICE.txt -text
 lib/commons-beanutils-1.7.0/README.txt -text
@@ -11,6 +11,7 @@ lib/commons-beanutils-1.7.0/RELEASE-NOTES.txt -text
 lib/commons-beanutils-1.7.0/commons-beanutils-bean-collections.jar -text
 lib/commons-beanutils-1.7.0/commons-beanutils-core.jar -text
 lib/commons-beanutils-1.7.0/commons-beanutils.jar -text
+/package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
 src/com/ceridwen/circulation/SIP/exceptions/MandatoryFieldOmitted.java -text
