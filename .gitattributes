@@ -4,13 +4,12 @@
 .externalToolBuilders/Package[!!-~]Circulation[!!-~]Jar.launch -text svneol=unset#text/plain
 /.project -text
 /buildnum.xml -text
-lib/commons-beanutils-1.7.0/LICENSE.txt -text
-lib/commons-beanutils-1.7.0/NOTICE.txt -text
-lib/commons-beanutils-1.7.0/README.txt -text
-lib/commons-beanutils-1.7.0/RELEASE-NOTES.txt -text
-lib/commons-beanutils-1.7.0/commons-beanutils-bean-collections.jar -text
-lib/commons-beanutils-1.7.0/commons-beanutils-core.jar -text
-lib/commons-beanutils-1.7.0/commons-beanutils.jar -text
+lib/commons-beanutils-1.8.3/LICENSE.txt -text svneol=unset#text/plain
+lib/commons-beanutils-1.8.3/NOTICE.txt -text svneol=unset#text/plain
+lib/commons-beanutils-1.8.3/RELEASE-NOTES.txt -text svneol=unset#text/plain
+lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar -text
+lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar -text
+lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar -text
 /package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
