@@ -248,12 +248,17 @@ private static Log log = LogFactory.getLog(Message.class);
 
   }
 
-  public static Message decode(String message, Character sequence) throws ChecksumError, MandatoryFieldOmitted {
+  public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError {
 
-    if (sequence != null) {
-      if (!CheckChecksum(message, sequence.charValue())) {
+    if (checksumCheck) {
+      if (!CheckChecksum(message)) {
         throw new ChecksumError();
       }
+    }
+    if (sequence != null) {
+        if (!CheckSequence(message, sequence.charValue())) {
+        	throw new SequenceError();
+        }
     }
     String command = message.substring(0, 2);
     try {
@@ -286,7 +291,7 @@ private static Log log = LogFactory.getLog(Message.class);
     }
   }
 
-  private static boolean CheckChecksum(String message, char sequence) {
+  private static boolean CheckChecksum(String message) {
 	try {
 		String tail = message.substring(message.length()-6);
 		if (!tail.startsWith("AZ")) {
@@ -308,6 +313,20 @@ private static Log log = LogFactory.getLog(Message.class);
     return true;
   }
 
+  private static boolean CheckSequence(String message, char sequence) {
+	try {
+		String tail = message.substring(message.length()-9);
+		if (!tail.startsWith("AY")) {
+			return true;
+		}
+		return tail.startsWith("AY" + sequence);
+	} catch (Exception ex) {
+	}
+
+    return true;
+  }
+  
+  
   private String AddChecksum(String command, char sequence) {
     StringBuffer check = new StringBuffer();
     int checksum = 0;

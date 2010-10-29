@@ -2,6 +2,7 @@ package com.ceridwen.circulation.SIP;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
+import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.PatronInformationResponse;
 
@@ -20,7 +21,7 @@ public class testmessages {
 		try {
 			String msg = test.encode('A');
 			System.out.println(msg);
-			Message resp = PatronInformationResponse.decode(msg, 'A');
+			Message resp = PatronInformationResponse.decode(msg, 'A', true);
 			resp.xmlEncode(System.out);
 			
 			
@@ -29,6 +30,9 @@ public class testmessages {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ChecksumError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SequenceError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

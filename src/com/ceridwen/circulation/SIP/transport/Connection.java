@@ -54,8 +54,23 @@ public abstract class Connection {
   private int retryWait;
   private String host;
   private int port;
+  private boolean addChecksum = true;
   private boolean strictSequenceChecking = false;
+  private boolean strictChecksumChecking = false;
   
+  public void setAddChecksum(boolean flag)
+  {
+	  this.addChecksum = flag;
+  }
+  public boolean getAddChecksum() {
+	  return this.addChecksum;
+  }
+  public void setStrictChecksumChecking(boolean flag) {
+	  this.strictChecksumChecking = flag;
+  }
+  public boolean getStrictChecksumChecking() {
+	  return this.strictChecksumChecking;
+  }
   public void setStrictSequenceChecking(boolean flag)
   {
 	  this.strictSequenceChecking = flag;
@@ -185,7 +200,11 @@ public abstract class Connection {
       do {
         retry = false;
         try {
-          request = msg.encode(new Character(getNextSequence()));
+          if (this.getAddChecksum()) {
+        	  request = msg.encode(new Character(getNextSequence()));
+          } else {
+        	  request = msg.encode(null);        	  
+          }
           log.debug(">>> " + request);
           send(request);
           response = waitfor("\r");
@@ -219,9 +238,9 @@ public abstract class Connection {
         throw new ConnectionFailure();
       }    
       if (this.getStrictSequenceChecking()) {
-    	  return Message.decode(response, sequence);
+    	  return Message.decode(response, sequence, this.getStrictChecksumChecking());
       } else {
-    	  return Message.decode(response, null);    	  
+    	  return Message.decode(response, null, this.getStrictChecksumChecking());    	  
       }
     }
     catch (RetriesExceeded e) {
