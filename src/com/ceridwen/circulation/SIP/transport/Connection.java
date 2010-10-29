@@ -54,16 +54,16 @@ public abstract class Connection {
   private int retryWait;
   private String host;
   private int port;
-  private boolean addChecksum = true;
+  private boolean addSequenceAndChecksum = true;
   private boolean strictSequenceChecking = false;
   private boolean strictChecksumChecking = false;
   
-  public void setAddChecksum(boolean flag)
+  public void setAddSequenceAndChecksum(boolean flag)
   {
-	  this.addChecksum = flag;
+	  this.addSequenceAndChecksum = flag;
   }
-  public boolean getAddChecksum() {
-	  return this.addChecksum;
+  public boolean getAddSequenceAndChecksum() {
+	  return this.addSequenceAndChecksum;
   }
   public void setStrictChecksumChecking(boolean flag) {
 	  this.strictChecksumChecking = flag;
@@ -200,7 +200,7 @@ public abstract class Connection {
       do {
         retry = false;
         try {
-          if (this.getAddChecksum()) {
+          if (this.getAddSequenceAndChecksum()) {
         	  request = msg.encode(new Character(getNextSequence()));
           } else {
         	  request = msg.encode(null);        	  
