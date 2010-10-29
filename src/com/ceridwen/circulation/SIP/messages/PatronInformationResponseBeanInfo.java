@@ -70,7 +70,7 @@ public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _unavailableHoldsCount = new PropertyDescriptor("unavailableHoldsCount", beanClass, "getUnavailableHoldsCount", "setUnavailableHoldsCount");
-      PropertyDescriptor _unavilableHoldItems = new PropertyDescriptor("unavilableHoldItems", beanClass, "getUnavilableHoldItems", "setUnavilableHoldItems");
+      PropertyDescriptor _unavailableHoldItems = new PropertyDescriptor("unavailableHoldItems", beanClass, "getUnavailableHoldItems", "setUnavailableHoldItems");
       PropertyDescriptor _validPatron = new PropertyDescriptor("validPatron", beanClass, "getValidPatron", "setValidPatron");
       PropertyDescriptor _validPatronPassword = new PropertyDescriptor("validPatronPassword", beanClass, "getValidPatronPassword", "setValidPatronPassword");
 
@@ -94,7 +94,13 @@ public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
       _validPatronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CQ", true));
       _currencyType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BH", true));
       _feeAmount.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BV", true));
-      _feeLimit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CC", true));
+      _feeLimit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CC", true));    
+      _holdItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AS", false));
+      _overdueItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AT", false));
+      _chargedItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AU", false));
+      _fineItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AV", false));
+      _recallItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BU", false));
+      _unavailableHoldItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CD", false));
       _homeAddress.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BD", true));
       _eMailAddress.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BE", true));
       _homePhoneNumber.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BF", true));
@@ -131,7 +137,7 @@ public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
         _screenMessage,
         _transactionDate,
         _unavailableHoldsCount,
-        _unavilableHoldItems,
+        _unavailableHoldItems,
         _validPatron,
         _validPatronPassword};
       return pds;

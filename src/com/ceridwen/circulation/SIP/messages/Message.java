@@ -100,31 +100,39 @@ private static Log log = LogFactory.getLog(Message.class);
     }
   }
 
-  private String getProp(PropertyDescriptor desc) {
-    String ret = null;
+  private String[] getProp(PropertyDescriptor desc) {
+    String[] ret = null;
     try {
       Object value = desc.getReadMethod().invoke(this, new Object[0]);
       if (desc.getPropertyType() == Boolean.class) {
         if (value == null)
           if (desc.getName().equalsIgnoreCase("magneticMedia"))
-            ret = "U";
+            ret = new String[]{"U"};
           else
-            ret = "N";
+            ret = new String[]{"N"};
         else if (desc.getName().equalsIgnoreCase("ok")) {
-          ret = ((Boolean)value).booleanValue()?"1":"0";
+          ret = new String[]{((Boolean)value).booleanValue()?"1":"0"};
         } else {
-          ret = ((Boolean)value).booleanValue()?"Y":"N";
+          ret = new String[]{((Boolean)value).booleanValue()?"Y":"N"};
         }
       } else if (desc.getPropertyType() == Date.class) {
-        ret = mangleDate((Date)value);
+    	if (value != null) {
+    		ret = new String[]{mangleDate((Date)value)};
+    	}
+      } else if (desc.getPropertyType() == String[].class) {
+    	  if (value != null) {
+    		  ret = (String[])value;
+    	  }
       } else {
-        ret = value.toString();
+    	if (value != null) {  
+    		ret = new String[]{value.toString()};
+    	}
       }
     } catch (Exception ex) {
 
     }
 
-    return (ret != null)?ret:"";
+    return (ret != null)?ret:new String[]{""};
   }
 
   private String pad(String input, FixedFieldDescriptor field) {
@@ -141,7 +149,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
   public String encode(Character sequence) throws MandatoryFieldOmitted {
     TreeMap<Integer, String> fixed = new TreeMap<Integer, String>();
-    TreeMap<String, String> variable = new TreeMap<String, String>();
+    TreeMap<String, String[]> variable = new TreeMap<String, String[]>();
     StringBuffer message = new StringBuffer();
 
     PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
@@ -149,25 +157,27 @@ private static Log log = LogFactory.getLog(Message.class);
     for (int n = 0; n < descs.length; n++) {
       PropertyDescriptor desc = descs[n];
       Object SIPField = desc.getValue("SIPFieldDescriptor");
-      if (SIPField.getClass().equals(FixedFieldDescriptor.class)) {
-        FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
-        String value = getProp(desc);
-        if (value.length() == 0) {
-          if (!field.allowBlank) {
-            throw new MandatoryFieldOmitted();
-          }
-        }
-        fixed.put(new Integer(field.start), pad(value, field));
-      }
-      if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-        VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
-        String value = getProp(desc);
-        if (value.length() > 0) {
-          variable.put(field.ID, value);
-        }
-        else if (field.required) {
-          variable.put(field.ID, value);
-        }
+      if (SIPField != null) {
+	      if (SIPField.getClass().equals(FixedFieldDescriptor.class)) {
+	        FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
+	        String[] value = getProp(desc);
+	        if (value[0].length() == 0) {
+	          if (!field.allowBlank) {
+	            throw new MandatoryFieldOmitted();
+	          }
+	        }
+	        fixed.put(new Integer(field.start), pad(value[0], field));
+	      }
+	      if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
+	        VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
+	        String[] value = getProp(desc);
+	        if (value[0].length() > 0) {
+	          variable.put(field.ID, value);
+	        }
+	        else if (field.required) {
+	          variable.put(field.ID, value);
+	        }
+	      }
       }
     }
 
@@ -182,9 +192,12 @@ private static Log log = LogFactory.getLog(Message.class);
     Iterator<String> varIterate = variable.keySet().iterator();
     while (varIterate.hasNext()) {
         String key = (String)varIterate.next();
-        message.append(key);
-        message.append(variable.get(key));
-        message.append(VariableFieldDescriptor.TERMINATOR);
+        String[] values = (String[])variable.get(key);
+        for (String value : values) {
+	        message.append(key);
+	        message.append(value);
+	        message.append(VariableFieldDescriptor.TERMINATOR);
+        }
     }
 
     if (sequence != null)
@@ -214,6 +227,20 @@ private static Log log = LogFactory.getLog(Message.class);
         desc.getWriteMethod().invoke(this,
                                      new Object[] {new String(value)});
       }
+      if (desc.getPropertyType() == String[].class) {
+    	  String[] current = (String[])desc.getReadMethod().invoke(this, new Object[0]);
+    	  if (current == null) {
+    	        desc.getWriteMethod().invoke(this,
+                        new Object[] {new String[]{new String(value)}});
+    	  } else {
+    		  List<String> l = new ArrayList<String>(current.length+1);
+    		  l.addAll(Arrays.asList(current));
+    		  l.add(new String(value));
+  	          desc.getWriteMethod().invoke(this,
+                    new Object[] {l.toArray(new String[l.size()])});
+    	  }
+      }
+      
     }
     catch (Exception ex) {
 
@@ -225,7 +252,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
     if (sequence != null) {
       if (!CheckChecksum(message, sequence.charValue())) {
-        return null;
+        throw new ChecksumError();
       }
     }
     String command = message.substring(0, 2);
@@ -251,20 +278,7 @@ private static Log log = LogFactory.getLog(Message.class);
         }
       }
 
-      Hashtable<String, String> fields = msg.parseVarFields(fixedFieldEnd + 1, message);
-
-      for (int n = 0; n < descs.length; n++) {
-        PropertyDescriptor desc = descs[n];
-        Object SIPField = desc.getValue("SIPFieldDescriptor");
-        String value = "";
-        if (SIPField != null) {
-          if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-            VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
-            value = (String) fields.get(field.ID);
-            msg.setProp(desc, value);
-          }
-        }
-      }
+      msg.parseVarFields(fixedFieldEnd + 1, message);
 
       return msg;
     } catch (Exception ex) {
@@ -273,10 +287,23 @@ private static Log log = LogFactory.getLog(Message.class);
   }
 
   private static boolean CheckChecksum(String message, char sequence) {
-    /**@todo add checksum checking
-     *
-     */
-
+	try {
+		String tail = message.substring(message.length()-6);
+		if (!tail.startsWith("AZ")) {
+			return true;
+		}
+		String truncated = message.substring(0, message.length()-4);
+		String check = tail.substring(2);
+		byte[] bytes = truncated.getBytes("ASCII");
+	    int checksum = 0;
+	    for (int n = 0; n < bytes.length; n++) {
+	        checksum += bytes[n];
+	    }
+        checksum = -checksum & 0xffff;
+	    
+        return (Integer.toHexString(checksum).toUpperCase().equals(check));
+	} catch (Exception ex) {
+	}
 
     return true;
   }
@@ -303,8 +330,7 @@ private static Log log = LogFactory.getLog(Message.class);
     return command + check.toString();
   }
 
-  private Hashtable<String, String> parseVarFields(int offset, String data) {
-    Hashtable<String, String> fields = new Hashtable<String, String>();
+  private void parseVarFields(int offset, String data) {
     int status = 1;
     StringBuffer fieldtag = new StringBuffer();
     StringBuffer fielddata = new StringBuffer();
@@ -322,15 +348,32 @@ private static Log log = LogFactory.getLog(Message.class);
       }
       else if (status == 3) {
         if (data.charAt(n) == VariableFieldDescriptor.TERMINATOR) {
-          fields.put(fieldtag.toString(), fielddata.toString());
-          status = 1;
+        	this.setFieldProp(fieldtag.toString(), fielddata.toString());
+        	status = 1;
         }
         else {
           fielddata.append(data.charAt(n));
         }
       }
     }
-    return fields;
+    return;
+  }
+  
+  private void setFieldProp(String tag, String data)
+  {
+      PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
+      for (int n = 0; n < descs.length; n++) {
+          PropertyDescriptor desc = descs[n];
+          Object SIPField = desc.getValue("SIPFieldDescriptor");
+          if (SIPField != null) {
+            if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
+              VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
+              if (field.ID.equals(tag)) {
+            	  this.setProp(desc, data);
+              }
+            }
+          }
+        }
   }
 
   public void xmlEncode(OutputStream strm) {

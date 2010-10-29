@@ -160,11 +160,6 @@ public abstract class Connection {
     return ret;
   }
 
-  /**@todo Add a new exception MessageNotUnderstood
-   *
-   */
-
-
   public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, MessageNotUnderstood {
     String request, response = null;
     if (msg == null) {

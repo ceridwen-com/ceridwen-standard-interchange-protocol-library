@@ -60,9 +60,7 @@ private String patronStatus;
   private String[] chargedItems;
   private String[] fineItems;
   private String[] recallItems;
-  private String[] unavilableHoldItems;
-  /**@todo: add array support
-   */
+  private String[] unavailableHoldItems;
   private String homeAddress;
   private String eMailAddress;
   private String homePhoneNumber;
@@ -156,8 +154,8 @@ private String patronStatus;
   public String getUnavailableHoldsCount() {
     return unavailableHoldsCount;
   }
-  public String[] getUnavilableHoldItems() {
-    return unavilableHoldItems;
+  public String[] getUnavailableHoldItems() {
+    return unavailableHoldItems;
   }
   public Boolean getValidPatron() {
     return validPatron;
@@ -171,8 +169,8 @@ private String patronStatus;
   public void setValidPatron(Boolean validPatron) {
     this.validPatron = validPatron;
   }
-  public void setUnavilableHoldItems(String[] unavilableHoldItems) {
-    this.unavilableHoldItems = unavilableHoldItems;
+  public void setUnavailableHoldItems(String[] unavilableHoldItems) {
+    this.unavailableHoldItems = unavailableHoldItems;
   }
   public void setUnavailableHoldsCount(String unavailableHoldsCount) {
     this.unavailableHoldsCount = unavailableHoldsCount;
