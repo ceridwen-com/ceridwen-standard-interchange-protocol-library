@@ -169,7 +169,7 @@ private String patronStatus;
   public void setValidPatron(Boolean validPatron) {
     this.validPatron = validPatron;
   }
-  public void setUnavailableHoldItems(String[] unavilableHoldItems) {
+  public void setUnavailableHoldItems(String[] unavailableHoldItems) {
     this.unavailableHoldItems = unavailableHoldItems;
   }
   public void setUnavailableHoldsCount(String unavailableHoldsCount) {
