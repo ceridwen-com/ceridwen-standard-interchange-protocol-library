@@ -33,8 +33,12 @@ import java.util.TimerTask;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
+import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 
@@ -50,7 +54,16 @@ public abstract class Connection {
   private int retryWait;
   private String host;
   private int port;
-
+  private boolean strictSequenceChecking = false;
+  
+  public void setStrictSequenceChecking(boolean flag)
+  {
+	  this.strictSequenceChecking = flag;
+  }
+  public boolean getStrictSequenceChecking()
+  {
+	  return this.strictSequenceChecking;
+  }
   public void setHost(String host) {
     this.host = host;
   }
@@ -88,7 +101,7 @@ public abstract class Connection {
     return retryWait;
   }
 
-  private char getSequence() {
+  private char getNextSequence() {
     char ret = sequence;
     sequence++;
     if (sequence > '9') {
@@ -160,7 +173,7 @@ public abstract class Connection {
     return ret;
   }
 
-  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, MessageNotUnderstood {
+  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood, MandatoryFieldOmitted {
     String request, response = null;
     if (msg == null) {
       throw new MessageNotUnderstood(); //This will signal a corrupted data
@@ -172,7 +185,7 @@ public abstract class Connection {
       do {
         retry = false;
         try {
-          request = msg.encode(new Character(getSequence()));
+          request = msg.encode(new Character(getNextSequence()));
           log.debug(">>> " + request);
           send(request);
           response = waitfor("\r");
@@ -204,17 +217,17 @@ public abstract class Connection {
       while (retry);
       if (response == null) {
         throw new ConnectionFailure();
+      }    
+      if (this.getStrictSequenceChecking()) {
+    	  return Message.decode(response, sequence);
+      } else {
+    	  return Message.decode(response, null);    	  
       }
-      return Message.decode(response, null);
     }
     catch (RetriesExceeded e) {
       throw e;
     }
-    catch (Exception e) {
-      throw new ConnectionFailure(e);
-    }
   }
-
 }
 
 class KillConnectionTask extends TimerTask {
