@@ -65,7 +65,7 @@ public class TelnetConnection extends Connection {
     return client.isConnected();
   }
 
-  protected boolean connect(int retry) {
+  protected void connect(int retry) throws Exception {
     try {
       client.disconnect();
     } catch (Exception ex) {
@@ -86,10 +86,9 @@ public class TelnetConnection extends Connection {
         } catch (Exception ex) {
           log.debug("Thread sleep error", ex);
         }
-        return connect(retry - 1);
-      }
-      else {
-        return false;
+        connect(retry - 1);
+      } else {
+    	  throw e;
       }
     }
     try {
@@ -104,13 +103,11 @@ public class TelnetConnection extends Connection {
         } catch (Exception ex) {
           log.debug("Thread sleep error", ex);
         }
-        return connect(retry - 1);
-      }
-      else {
-        return false;
+        connect(retry - 1);
+      } else {
+        throw e;
       }
     }
-    return true;
   }
 
   private void login(String user, String pass) throws ConnectionFailure {

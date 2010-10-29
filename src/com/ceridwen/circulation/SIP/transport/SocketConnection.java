@@ -38,14 +38,13 @@ public class SocketConnection extends Connection {
   private BufferedReader in;
   private BufferedWriter out;
 
-  protected boolean connect(int retryAttempts) {
+  protected void connect(int retryAttempts) throws Exception {
     try {
       socket = new java.net.Socket();
       socket.connect(new InetSocketAddress(this.getHost(), this.getPort()), this.getConnectionTimeout());
       socket.setSoTimeout(this.getIdleTimeout());
       out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      return true;
     }
     catch (Exception ex) {
       if (retryAttempts > 0) {
@@ -55,10 +54,10 @@ public class SocketConnection extends Connection {
         catch (Exception ex1) {
           log.debug("Thread sleep error", ex1);
         }
-        return connect(retryAttempts - 1);
+        connect(retryAttempts - 1);
       }
       else {
-        return false;
+        throw ex;
       }
     }
   }

@@ -135,11 +135,11 @@ public abstract class Connection {
     return ret;
   }
 
-  public synchronized boolean connect() {
-    return connect(this.getRetryAttempts());
+  public synchronized void connect() throws Exception {
+    connect(this.getRetryAttempts());
   }
 
-  protected abstract boolean connect(int retryAttempts);
+  protected abstract void connect(int retryAttempts) throws Exception;
   public abstract boolean isConnected();
   public abstract void disconnect();
 
