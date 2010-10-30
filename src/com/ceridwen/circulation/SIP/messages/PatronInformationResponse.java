@@ -23,6 +23,7 @@ import java.util.Date;
 
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
+import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
 /**
  * <p>Title: RTSI</p>
@@ -38,7 +39,7 @@ public class PatronInformationResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 5284231102576474180L;
-private String patronStatus;
+  private PatronStatus patronStatus = new PatronStatus();
   private Language language = Language.UNKNOWN;
   private Date transactionDate = new Date();
   private String holdItemsCount;
@@ -133,7 +134,7 @@ private String patronStatus;
   public String getPatronIdentifier() {
     return patronIdentifier;
   }
-  public String getPatronStatus() {
+  public PatronStatus getPatronStatus() {
     return patronStatus;
   }
   public String getPersonalName() {
@@ -196,7 +197,7 @@ private String patronStatus;
   public void setPersonalName(String personalName) {
     this.personalName = personalName;
   }
-  public void setPatronStatus(String patronStatus) {
+  public void setPatronStatus(PatronStatus patronStatus) {
     this.patronStatus = patronStatus;
   }
   public void setPatronIdentifier(String patronIdentifier) {

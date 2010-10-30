@@ -20,13 +20,14 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
+import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
 public class PatronEnableResponse extends Message {
   /**
 	 * 
 	 */
 	private static final long serialVersionUID = 5941325479001778479L;
-private String patronStatus;
+private PatronStatus patronStatus = new PatronStatus();
   private Language language = Language.UNKNOWN;
   private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
@@ -39,10 +40,10 @@ private String patronStatus;
   public String getCommand() {
     return "26";
   }
-  public String getPatronStatus() {
+  public PatronStatus getPatronStatus() {
     return patronStatus;
   }
-  public void setPatronStatus(String patronStatus) {
+  public void setPatronStatus(PatronStatus patronStatus) {
     this.patronStatus = patronStatus;
   }
   public Language getLanguage() {
