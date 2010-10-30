@@ -32,6 +32,7 @@ import java.util.Date;
 
 import com.ceridwen.circulation.SIP.types.enumerations.CirculationStatus;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 
 public class ItemInformationResponse extends Message {
   /**
@@ -40,7 +41,7 @@ public class ItemInformationResponse extends Message {
 	private static final long serialVersionUID = 6408854778106704492L;
 private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   private String securityMarker;
-  private String feeType;
+  private FeeType feeType = FeeType.OTHER;
   private Date transactionDate = new Date();
   private String holdQueueLength;
   private String dueDate;
@@ -76,7 +77,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   public String getFeeAmount() {
     return feeAmount;
   }
-  public String getFeeType() {
+  public FeeType getFeeType() {
     return feeType;
   }
   public Date getHoldPickupDate() {
@@ -157,7 +158,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   public void setHoldPickupDate(Date holdPickupDate) {
     this.holdPickupDate = holdPickupDate;
   }
-  public void setFeeType(String feeType) {
+  public void setFeeType(FeeType feeType) {
     this.feeType = feeType;
   }
   public void setFeeAmount(String feeAmount) {

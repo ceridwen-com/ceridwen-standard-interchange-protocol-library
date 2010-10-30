@@ -31,6 +31,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 
 public class CheckOutResponse extends Message {
   /**
@@ -47,7 +48,7 @@ private Boolean ok;
   private String itemIdentifier;
   private String titleIdentifier;
   private String dueDate;
-  private String feeType;
+  private FeeType feeType = FeeType.OTHER;
   private Boolean securityInhibit;
   private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
@@ -72,7 +73,7 @@ private Boolean ok;
   public String getFeeAmount() {
     return feeAmount;
   }
-  public String getFeeType() {
+  public FeeType getFeeType() {
     return feeType;
   }
   public String getInstitutionId() {
@@ -159,7 +160,7 @@ private Boolean ok;
   public void setInstitutionId(String institutionId) {
     this.institutionId = institutionId;
   }
-  public void setFeeType(String feeType) {
+  public void setFeeType(FeeType feeType) {
     this.feeType = feeType;
   }
   public void setFeeAmount(String feeAmount) {

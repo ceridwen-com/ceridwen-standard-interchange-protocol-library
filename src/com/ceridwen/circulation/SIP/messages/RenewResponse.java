@@ -20,6 +20,7 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 
 public class RenewResponse extends Message {
   /**
@@ -36,7 +37,7 @@ private Boolean ok;
   private String itemIdentifier;
   private String titleIdentifier;
   private String dueDate;
-  private String feeType;
+  private FeeType feeType = FeeType.OTHER;
   private Boolean securityInhibit;
   private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
@@ -108,10 +109,10 @@ private Boolean ok;
   public void setDueDate(String dueDate) {
     this.dueDate = dueDate;
   }
-  public String getFeeType() {
+  public FeeType getFeeType() {
     return feeType;
   }
-  public void setFeeType(String feeType) {
+  public void setFeeType(FeeType feeType) {
     this.feeType = feeType;
   }
   public Boolean getSecurityInhibit() {
