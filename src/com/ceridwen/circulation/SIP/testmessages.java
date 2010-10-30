@@ -18,7 +18,6 @@ public class testmessages {
 		ACSStatus test = new ACSStatus();
 				
 //		test.setEMailAddress("test@test");
-		test.setSupportedMessages(new SupportedMessages());
 		test.getSupportedMessages().set(SupportedMessages.LOGIN);
 //		test.getLanguage().getLanguage() 
 //		test.setHoldItems(new String[]{"Test1", "Test2"});
