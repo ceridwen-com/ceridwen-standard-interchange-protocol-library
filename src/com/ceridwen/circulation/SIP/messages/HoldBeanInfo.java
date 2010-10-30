@@ -54,7 +54,7 @@ public class HoldBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
-      PropertyDescriptor _feeAckowledged = new PropertyDescriptor("feeAckowledged", beanClass, "getFeeAckowledged", "setFeeAckowledged");
+      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "getFeeAcknowledged", "setFeeAcknowledged");
 
       _holdMode.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
       _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,20));
@@ -68,7 +68,7 @@ public class HoldBeanInfo extends SimpleBeanInfo {
       _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
       _titleIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AJ"));
       _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
-      _feeAckowledged.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BO"));
+      _feeAcknowledged.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BO"));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _holdMode,
@@ -82,7 +82,7 @@ public class HoldBeanInfo extends SimpleBeanInfo {
         _itemIdentifier,
         _titleIdentifier,
         _terminalPassword,
-        _feeAckowledged};
+        _feeAcknowledged};
       return pds;
     }
     catch(IntrospectionException ex) {

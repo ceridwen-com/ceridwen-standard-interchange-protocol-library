@@ -19,30 +19,33 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.types.enumerations.HoldMode;
+import com.ceridwen.circulation.SIP.types.enumerations.HoldType;
+
 public class Hold extends Message {
   /**
 	 * 
 	 */
 	private static final long serialVersionUID = -6526613321625525740L;
-private String holdMode;
+private HoldMode holdMode = HoldMode.CHANGE;
   private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date expirationDate;
   private String pickupLocation;
-  private String holdType;
+  private HoldType holdType = HoldType.OTHER;
   private String institutionId;
   private String patronIdentifier;
   private String patronPassword;
   private String itemIdentifier;
   private String titleIdentifier;
   private String terminalPassword;
-  private Boolean feeAckowledged;
+  private Boolean feeAcknowledged;
   public String getCommand() {
     return "15";
   }
-  public String getHoldMode() {
+  public HoldMode getHoldMode() {
     return holdMode;
   }
-  public void setHoldMode(String holdMode) {
+  public void setHoldMode(HoldMode holdMode) {
     this.holdMode = holdMode;
   }
   public java.util.Date getTransactionDate() {
@@ -63,10 +66,10 @@ private String holdMode;
   public void setPickupLocation(String pickupLocation) {
     this.pickupLocation = pickupLocation;
   }
-  public String getHoldType() {
+  public HoldType getHoldType() {
     return holdType;
   }
-  public void setHoldType(String holdType) {
+  public void setHoldType(HoldType holdType) {
     this.holdType = holdType;
   }
   public String getInstitutionId() {
@@ -105,10 +108,10 @@ private String holdMode;
   public void setTerminalPassword(String terminalPassword) {
     this.terminalPassword = terminalPassword;
   }
-  public Boolean getFeeAckowledged() {
-    return feeAckowledged;
+  public Boolean getFeeAcknowledged() {
+    return feeAcknowledged;
   }
-  public void setFeeAckowledged(Boolean feeAckowledged) {
-    this.feeAckowledged = feeAckowledged;
+  public void setFeeAcknowledged(Boolean feeAcknowledged) {
+    this.feeAcknowledged = feeAcknowledged;
   }
 }
