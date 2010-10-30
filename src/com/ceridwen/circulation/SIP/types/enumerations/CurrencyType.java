@@ -1,6 +1,6 @@
 package com.ceridwen.circulation.SIP.types.enumerations;
 
-public enum Currencies implements AbstractEnumeration {
+public enum CurrencyType implements AbstractEnumeration {
 	USDOLLAR("USD"),
 	CANADIANDOLLAR("CAD"),
 	POUNDSTERLING("GBP"),
@@ -10,7 +10,7 @@ public enum Currencies implements AbstractEnumeration {
 	SPANISHPESETA("ESP"),
 	YEN("JPY");	
 	private final String code;	
-	private Currencies(String code) {
+	private CurrencyType(String code) {
 		this.code = code;
 	}
 	@Override

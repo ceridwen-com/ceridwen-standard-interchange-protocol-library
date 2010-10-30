@@ -21,6 +21,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+
 /**
  * <p>Title: RTSI</p>
  * <p>Description: Real Time Self Issue</p>
@@ -52,7 +54,7 @@ private String patronStatus;
   private String chargedItemsLimit;
   private Boolean validPatron;
   private Boolean validPatronPassword;
-  private String currencyType;
+  private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
   private String feeLimit;
   private String[] holdItems;
@@ -79,7 +81,7 @@ private String patronStatus;
   public String getChargedItemsLimit() {
     return chargedItemsLimit;
   }
-  public String getCurrencyType() {
+  public CurrencyType getCurrencyType() {
     return currencyType;
   }
   public String getEMailAddress() {
@@ -250,7 +252,7 @@ private String patronStatus;
   public void setChargedItemsLimit(String chargedItemsLimit) {
     this.chargedItemsLimit = chargedItemsLimit;
   }
-  public void setCurrencyType(String currencyType) {
+  public void setCurrencyType(CurrencyType currencyType) {
     this.currencyType = currencyType;
   }
   public void setEMailAddress(String eMailAddress) {

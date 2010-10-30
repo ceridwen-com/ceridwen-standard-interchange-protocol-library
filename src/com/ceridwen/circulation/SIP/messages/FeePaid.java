@@ -19,6 +19,8 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+
 public class FeePaid extends Message {
   /**
 	 * 
@@ -27,7 +29,7 @@ public class FeePaid extends Message {
 private java.util.Date transactionDate = new java.util.Date();
   private String feeType;
   private String paymentType;
-  private String currencyType;
+  private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
   private String institutionId;
   private String patronIdentifier;
@@ -56,10 +58,10 @@ private java.util.Date transactionDate = new java.util.Date();
   public void setPaymentType(String paymentType) {
     this.paymentType = paymentType;
   }
-  public String getCurrencyType() {
+  public CurrencyType getCurrencyType() {
     return currencyType;
   }
-  public void setCurrencyType(String currencyType) {
+  public void setCurrencyType(CurrencyType currencyType) {
     this.currencyType = currencyType;
   }
   public String getFeeAmount() {

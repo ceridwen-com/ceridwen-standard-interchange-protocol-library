@@ -30,6 +30,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+
 public class CheckOutResponse extends Message {
   /**
 	 * 
@@ -47,7 +49,7 @@ private Boolean ok;
   private String dueDate;
   private String feeType;
   private Boolean securityInhibit;
-  private String currencyType;
+  private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
   private String mediaType;
   private String itemProperties;
@@ -58,7 +60,7 @@ private Boolean ok;
   public String getCommand() {
     return "12";
   }
-  public String getCurrencyType() {
+  public CurrencyType getCurrencyType() {
     return currencyType;
   }
   public Boolean getDesensitize() {
@@ -169,7 +171,7 @@ private Boolean ok;
   public void setDesensitize(Boolean desensitize) {
     this.desensitize = desensitize;
   }
-  public void setCurrencyType(String currencyType) {
+  public void setCurrencyType(CurrencyType currencyType) {
     this.currencyType = currencyType;
   }
 }

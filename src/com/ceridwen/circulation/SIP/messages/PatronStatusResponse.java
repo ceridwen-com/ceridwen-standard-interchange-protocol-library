@@ -21,6 +21,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+
 /**
  * <p>Title: RTSI</p>
  * <p>Description: Real Time Self Issue</p>
@@ -43,7 +45,7 @@ private String patronStatus;
   private String personalName;
   private Boolean validPatron;
   private Boolean validPatronPassword;
-  private String currencyType;
+  private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
   private String screenMessage;
   private String printLine;
@@ -51,7 +53,7 @@ private String patronStatus;
   public String getCommand() {
     return "24";
   }
-  public String getCurrencyType() {
+  public CurrencyType getCurrencyType() {
     return currencyType;
   }
   public String getFeeAmount() {
@@ -120,7 +122,7 @@ private String patronStatus;
   public void setFeeAmount(String feeAmount) {
     this.feeAmount = feeAmount;
   }
-  public void setCurrencyType(String currencyType) {
+  public void setCurrencyType(CurrencyType currencyType) {
     this.currencyType = currencyType;
   }
 }

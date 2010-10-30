@@ -111,7 +111,7 @@ src/com/ceridwen/circulation/SIP/types/descriptors/FixedFieldDescriptor.java -te
 src/com/ceridwen/circulation/SIP/types/descriptors/VariableFieldDescriptor.java -text
 src/com/ceridwen/circulation/SIP/types/enumerations/AbstractEnumeration.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/CirculationStatus.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/types/enumerations/Currencies.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/CurrencyType.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/FeeType.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/HoldMode.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/HoldType.java -text svneol=unset#text/plain

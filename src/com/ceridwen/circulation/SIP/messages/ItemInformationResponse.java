@@ -30,12 +30,15 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.CirculationStatus;
+import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+
 public class ItemInformationResponse extends Message {
   /**
 	 * 
 	 */
 	private static final long serialVersionUID = 6408854778106704492L;
-private String circulationStatus;
+private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   private String securityMarker;
   private String feeType;
   private Date transactionDate = new Date();
@@ -46,7 +49,7 @@ private String circulationStatus;
   private String itemIdentifier;
   private String titleIdentifier;
   private String owner;
-  private String currencyType;
+  private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
   private String mediaType;
   private String permanentLocation;
@@ -58,10 +61,10 @@ private String circulationStatus;
   public String getCommand() {
     return "18";
   }
-  public String getCirculationStatus() {
+  public CirculationStatus getCirculationStatus() {
     return circulationStatus;
   }
-  public String getCurrencyType() {
+  public CurrencyType getCurrencyType() {
     return currencyType;
   }
   public String getCurrentLocation() {
@@ -166,10 +169,10 @@ private String circulationStatus;
   public void setCurrentLocation(String currentLocation) {
     this.currentLocation = currentLocation;
   }
-  public void setCurrencyType(String currencyType) {
+  public void setCurrencyType(CurrencyType currencyType) {
     this.currencyType = currencyType;
   }
-  public void setCirculationStatus(String circulationStatus) {
+  public void setCirculationStatus(CirculationStatus circulationStatus) {
     this.circulationStatus = circulationStatus;
   }
 }
