@@ -34,6 +34,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.CirculationStatus;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
+import com.ceridwen.circulation.SIP.types.enumerations.SecurityMarker;
 
 public class ItemInformationResponse extends Message {
   /**
@@ -41,7 +42,7 @@ public class ItemInformationResponse extends Message {
 	 */
 	private static final long serialVersionUID = 6408854778106704492L;
 private CirculationStatus circulationStatus = CirculationStatus.OTHER;
-  private String securityMarker;
+  private SecurityMarker securityMarker = SecurityMarker.OTHER;
   private FeeType feeType = FeeType.OTHER;
   private Date transactionDate = new Date();
   private String holdQueueLength;
@@ -111,7 +112,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   public String getScreenMessage() {
     return screenMessage;
   }
-  public String getSecurityMarker() {
+  public SecurityMarker getSecurityMarker() {
     return securityMarker;
   }
   public String getTitleIdentifier() {
@@ -126,7 +127,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   public void setTitleIdentifier(String titleIdentifier) {
     this.titleIdentifier = titleIdentifier;
   }
-  public void setSecurityMarker(String securityMarker) {
+  public void setSecurityMarker(SecurityMarker securityMarker) {
     this.securityMarker = securityMarker;
   }
   public void setScreenMessage(String screenMessage) {
