@@ -43,6 +43,7 @@ private PatronStatus patronStatus = new PatronStatus();
   public PatronStatus getPatronStatus() {
     return patronStatus;
   }
+  @Deprecated
   public void setPatronStatus(PatronStatus patronStatus) {
     this.patronStatus = patronStatus;
   }

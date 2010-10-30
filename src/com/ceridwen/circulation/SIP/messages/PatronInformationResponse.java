@@ -197,6 +197,7 @@ public class PatronInformationResponse extends Message {
   public void setPersonalName(String personalName) {
     this.personalName = personalName;
   }
+  @Deprecated  
   public void setPatronStatus(PatronStatus patronStatus) {
     this.patronStatus = patronStatus;
   }

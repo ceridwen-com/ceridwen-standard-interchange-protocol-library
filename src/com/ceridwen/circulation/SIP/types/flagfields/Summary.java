@@ -30,7 +30,7 @@ public class Summary extends AbstractFlagField {
 	public void set(int field) {
 		this.flags = "";
 		if (field < 0) {
-			super.unset(0);
+			super.unsetAll();
 		} else {
 			super.set(field);
 		}

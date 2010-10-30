@@ -86,6 +86,11 @@ public abstract class AbstractFlagField implements Serializable {
 			this.flags = this.flags.substring(0, field) + this.getValid()[0] + this.flags.substring(field+1);
 		}		
 	}
+	
+	public void unsetAll() {
+		this.flags = "";
+		this.checkLength();
+	}
 
 	  private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 	    ois.defaultReadObject();

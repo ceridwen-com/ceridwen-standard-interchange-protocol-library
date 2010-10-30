@@ -111,6 +111,7 @@ private Boolean onLineStatus;
   public void setTerminalLocation(String terminalLocation) {
     this.terminalLocation = terminalLocation;
   }
+  @Deprecated  
   public void setSupportedMessages(SupportedMessages supportedMessages) {
     this.supportedMessages = supportedMessages;
   }
