@@ -4,10 +4,9 @@ import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
+import com.ceridwen.circulation.SIP.messages.ACSStatus;
 import com.ceridwen.circulation.SIP.messages.Message;
-import com.ceridwen.circulation.SIP.messages.PatronInformation;
-import com.ceridwen.circulation.SIP.messages.PatronStatusRequest;
-import com.ceridwen.circulation.SIP.messages.PatronStatusResponse;
+import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class testmessages {
 
@@ -16,10 +15,11 @@ public class testmessages {
 	 */
 	public static void main(String[] args) {
 		
-		PatronStatusRequest test = new PatronStatusRequest();
+		ACSStatus test = new ACSStatus();
 				
 //		test.setEMailAddress("test@test");
-		test.setLanguage("000");
+		test.setSupportedMessages(new SupportedMessages());
+		test.getSupportedMessages().set(SupportedMessages.LOGIN);
 //		test.getLanguage().getLanguage() 
 //		test.setHoldItems(new String[]{"Test1", "Test2"});
 		try {
