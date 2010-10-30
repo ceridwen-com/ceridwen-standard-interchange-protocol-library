@@ -21,6 +21,8 @@ src/com/ceridwen/circulation/SIP/exceptions/SequenceError.java -text svneol=unse
 src/com/ceridwen/circulation/SIP/helpers/FixedFieldDescriptor.java -text
 src/com/ceridwen/circulation/SIP/helpers/FlagBitmap.java -text
 src/com/ceridwen/circulation/SIP/helpers/VariableFieldDescriptor.java -text
+src/com/ceridwen/circulation/SIP/messages/ACSResend.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/messages/ACSResendBeanInfo.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/messages/ACSStatus.java -text
 src/com/ceridwen/circulation/SIP/messages/ACSStatusBeanInfo.java -text
 src/com/ceridwen/circulation/SIP/messages/BlockPatron.java -text
@@ -96,6 +98,8 @@ src/com/ceridwen/circulation/SIP/messages/RenewBeanInfo.java -text
 src/com/ceridwen/circulation/SIP/messages/RenewResponse.java -text
 src/com/ceridwen/circulation/SIP/messages/RenewResponse.jbx -text
 src/com/ceridwen/circulation/SIP/messages/RenewResponseBeanInfo.java -text
+src/com/ceridwen/circulation/SIP/messages/SCResend.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/messages/SCResendBeanInfo.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/messages/SCStatus.java -text
 src/com/ceridwen/circulation/SIP/messages/SCStatusBeanInfo.java -text
 src/com/ceridwen/circulation/SIP/testmessages.java -text svneol=unset#text/plain

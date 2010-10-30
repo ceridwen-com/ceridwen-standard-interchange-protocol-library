@@ -40,6 +40,7 @@ import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.messages.SCResend;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 
 
@@ -190,6 +191,7 @@ public abstract class Connection {
 
   public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood, MandatoryFieldOmitted {
     String request, response = null;
+    Message responseMessage = null;
     if (msg == null) {
       throw new MessageNotUnderstood(); //This will signal a corrupted data
     }
@@ -210,7 +212,12 @@ public abstract class Connection {
           response = waitfor("\r");
           response = strim(response);
           log.debug("<<< " + response);
-          if (response.startsWith("96")) {
+          if (this.getStrictSequenceChecking()) {
+        	  responseMessage = Message.decode(response, sequence, this.getStrictChecksumChecking());
+          } else {
+        	  responseMessage=  Message.decode(response, null, this.getStrictChecksumChecking());    	  
+          }
+          if (responseMessage instanceof SCResend) {
             throw new ConnectionFailure();
           }
           understood = true;
@@ -234,14 +241,10 @@ public abstract class Connection {
         }
       }
       while (retry);
-      if (response == null) {
+      if (responseMessage == null) {
         throw new ConnectionFailure();
       }    
-      if (this.getStrictSequenceChecking()) {
-    	  return Message.decode(response, sequence, this.getStrictChecksumChecking());
-      } else {
-    	  return Message.decode(response, null, this.getStrictChecksumChecking());    	  
-      }
+      return responseMessage;
     }
     catch (RetriesExceeded e) {
       throw e;

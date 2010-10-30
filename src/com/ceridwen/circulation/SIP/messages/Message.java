@@ -30,6 +30,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 import org.apache.commons.logging.*;
 import java.io.*;
+
 import org.apache.commons.beanutils.*;
 import java.beans.*;
 import java.util.*;
@@ -45,7 +46,7 @@ public abstract class Message implements Serializable {
 
 private static Log log = LogFactory.getLog(Message.class);
 
-    private static Class<?>[] _messages = {
+    private static Class<?>[] _messages = {    	
         PatronStatusRequest.class,
         PatronStatusResponse.class,
         CheckOut.class,
@@ -74,8 +75,16 @@ private static Log log = LogFactory.getLog(Message.class);
         Renew.class,
         RenewResponse.class,
         RenewAll.class,
-        RenewAllResponse.class
+        RenewAllResponse.class,
+        ACSResend.class,
+        SCResend.class
     };
+    
+    private Character SequenceCharacter = null;
+    
+    public Character getSequenceCharacter() {
+    	return this.SequenceCharacter;
+    }
 
   private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
     ois.defaultReadObject();
@@ -200,10 +209,7 @@ private static Log log = LogFactory.getLog(Message.class);
         }
     }
 
-    if (sequence != null)
-      return AddChecksum(message.toString(), sequence.charValue());
-    else
-      return message.toString();
+    return this.AddChecksum(message.toString(), sequence);
   }
 
   private void setProp(PropertyDescriptor desc, String value) {
@@ -255,11 +261,13 @@ private static Log log = LogFactory.getLog(Message.class);
         throw new ChecksumError();
       }
     }
-    if (sequence != null) {
-        if (!CheckSequence(message, sequence.charValue())) {
-        	throw new SequenceError();
-        }
-    }
+    Character sequenceCharacter = GetSequenceCharacter(message);
+    
+    if (sequence != null)
+    	if (sequenceCharacter != null)
+    		if (!sequence.equals(sequenceCharacter))
+    			throw new SequenceError();
+
     String command = message.substring(0, 2);
     try {
       Message msg = (Message)((Class<?>) messages.get(command)).newInstance();
@@ -284,6 +292,8 @@ private static Log log = LogFactory.getLog(Message.class);
       }
 
       msg.parseVarFields(fixedFieldEnd + 1, message);
+      
+      msg.SequenceCharacter = sequenceCharacter;
 
       return msg;
     } catch (Exception ex) {
@@ -299,54 +309,54 @@ private static Log log = LogFactory.getLog(Message.class);
 		}
 		String truncated = message.substring(0, message.length()-4);
 		String check = tail.substring(2);
-		byte[] bytes = truncated.getBytes("ASCII");
-	    int checksum = 0;
-	    for (int n = 0; n < bytes.length; n++) {
-	        checksum += bytes[n];
-	    }
-        checksum = -checksum & 0xffff;
-	    
-        return (Integer.toHexString(checksum).toUpperCase().equals(check));
+		String checksum = CalculateChecksum(truncated);
+        return (checksum.equals(check));
 	} catch (Exception ex) {
 	}
 
     return true;
   }
 
-  private static boolean CheckSequence(String message, char sequence) {
+  private static Character GetSequenceCharacter(String message) {
 	try {
 		String tail = message.substring(message.length()-9);
 		if (!tail.startsWith("AY")) {
-			return true;
+			return null;
 		}
-		return tail.startsWith("AY" + sequence);
+		return tail.charAt(2);
 	} catch (Exception ex) {
 	}
 
-    return true;
+    return null;
   }
   
-  
-  private String AddChecksum(String command, char sequence) {
-    StringBuffer check = new StringBuffer();
-    int checksum = 0;
-
-    check.append("AY");
-    check.append(sequence);
-    check.append("AZ");
-    try {
-      String data = command + check.toString();
-      byte[] bytes = data.getBytes("ASCII");
-
+  protected static String CalculateChecksum(String data) throws UnsupportedEncodingException
+  {
+      int checksum = 0;
+      byte[] bytes = data.getBytes("ASCII");  	
       for (int n = 0; n < bytes.length; n++) {
         checksum += bytes[n];
       }
       checksum = -checksum & 0xffff;
-      check.append(Integer.toHexString(checksum).toUpperCase());
+	  return Integer.toHexString(checksum).toUpperCase();
+  }
+  
+  protected String AddChecksum(String command, Character sequence) {
+    StringBuffer check = new StringBuffer();
+    if (sequence != null) {
+	   	check.append("AY");
+	   	check.append(sequence);
+	    check.append("AZ");
+	    try {
+	      check.append(CalculateChecksum(command + check.toString()));
+	      return command + check.toString();
+	    }
+	    catch (Exception e) {
+	    	return command;
+	    }
+    } else {
+    	return command;
     }
-    catch (Exception e) {
-    }
-    return command + check.toString();
   }
 
   private void parseVarFields(int offset, String data) {
