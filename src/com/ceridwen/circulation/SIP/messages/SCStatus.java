@@ -39,7 +39,7 @@ public class SCStatus extends Message {
 	private static final long serialVersionUID = -6198644705404364776L;
   private StatusCode statusCode = StatusCode.OK;
   private String maxPrintWidth;
-  private String protocolVersion;
+  private String protocolVersion = "2.00";
 
   public String getCommand() {
     return "99";
