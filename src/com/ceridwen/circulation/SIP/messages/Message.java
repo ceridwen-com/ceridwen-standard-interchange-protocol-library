@@ -254,7 +254,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
   }
 
-  public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError {
+  public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError, MessageNotUnderstood {
 
     if (checksumCheck) {
       if (!CheckChecksum(message)) {
@@ -268,6 +268,12 @@ private static Log log = LogFactory.getLog(Message.class);
     		if (!sequence.equals(sequenceCharacter))
     			throw new SequenceError();
 
+    if (message == null) {
+    	throw new MessageNotUnderstood();
+    }
+    if (message.length() < 2) {
+    	throw new MessageNotUnderstood();    	
+    }
     String command = message.substring(0, 2);
     try {
       Message msg = (Message)((Class<?>) messages.get(command)).newInstance();
@@ -297,7 +303,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
       return msg;
     } catch (Exception ex) {
-      return null;
+      throw new MessageNotUnderstood();
     }
   }
 
