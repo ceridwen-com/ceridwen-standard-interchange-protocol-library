@@ -19,7 +19,7 @@ public enum CurrencyType implements AbstractEnumeration {
 	}
 	@Override
 	public AbstractEnumeration getKey(String code) {
-		for (AbstractEnumeration i: Languages.values()) {
+		for (AbstractEnumeration i: Language.values()) {
 			if (i.getCode().equals(code)) {
 				return i;
 			}

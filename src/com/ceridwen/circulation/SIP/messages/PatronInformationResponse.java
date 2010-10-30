@@ -22,6 +22,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
+import com.ceridwen.circulation.SIP.types.enumerations.Language;
 
 /**
  * <p>Title: RTSI</p>
@@ -38,7 +39,7 @@ public class PatronInformationResponse extends Message {
 	 */
 	private static final long serialVersionUID = 5284231102576474180L;
 private String patronStatus;
-  private String language = "000";
+  private Language language = Language.UNKNOWN;
   private Date transactionDate = new Date();
   private String holdItemsCount;
   private String overdueItemsCount;
@@ -117,7 +118,7 @@ private String patronStatus;
   public String getInstitutionId() {
     return institutionId;
   }
-  public String getLanguage() {
+  public Language getLanguage() {
     return language;
   }
   public String[] getOverdueItems() {
@@ -210,7 +211,7 @@ private String patronStatus;
   public void setOverdueItems(String[] overdueItems) {
     this.overdueItems = overdueItems;
   }
-  public void setLanguage(String language) {
+  public void setLanguage(Language language) {
     this.language = language;
   }
   public void setInstitutionId(String institutionId) {

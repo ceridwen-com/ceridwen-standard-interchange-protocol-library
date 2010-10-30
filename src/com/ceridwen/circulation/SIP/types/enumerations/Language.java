@@ -1,6 +1,6 @@
 package com.ceridwen.circulation.SIP.types.enumerations;
 
-public enum Languages implements AbstractEnumeration {
+public enum Language implements AbstractEnumeration {
 	UNKNOWN("000"),
 	ENGLISH("001"),
 	FRENCH("002"),
@@ -31,7 +31,7 @@ public enum Languages implements AbstractEnumeration {
 	TAIWANESE("027");
 	
 	private final String code;
-	private Languages(String code) {
+	private Language(String code) {
 		this.code = code;
 	}	
 	public String toString() {
@@ -43,7 +43,7 @@ public enum Languages implements AbstractEnumeration {
 	}
 	@Override
 	public final AbstractEnumeration getKey(String code) {
-		for (AbstractEnumeration i: Languages.values()) {
+		for (AbstractEnumeration i: Language.values()) {
 			if (i.getCode().equals(code)) {
 				return i;
 			}

@@ -115,7 +115,7 @@ src/com/ceridwen/circulation/SIP/types/enumerations/CurrencyType.java -text svne
 src/com/ceridwen/circulation/SIP/types/enumerations/FeeType.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/HoldMode.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/HoldType.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/types/enumerations/Languages.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/Language.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/MediaType.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/PaymentType.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/SecurityMarker.java -text svneol=unset#text/plain

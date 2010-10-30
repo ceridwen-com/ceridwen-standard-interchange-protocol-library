@@ -19,13 +19,15 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.types.enumerations.Language;
+
 public class PatronEnableResponse extends Message {
   /**
 	 * 
 	 */
 	private static final long serialVersionUID = 5941325479001778479L;
 private String patronStatus;
-  private String language = "000";
+  private Language language = Language.UNKNOWN;
   private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String patronIdentifier;
@@ -43,10 +45,10 @@ private String patronStatus;
   public void setPatronStatus(String patronStatus) {
     this.patronStatus = patronStatus;
   }
-  public String getLanguage() {
+  public Language getLanguage() {
     return language;
   }
-  public void setLanguage(String language) {
+  public void setLanguage(Language language) {
     this.language = language;
   }
   public java.util.Date getTransactionDate() {

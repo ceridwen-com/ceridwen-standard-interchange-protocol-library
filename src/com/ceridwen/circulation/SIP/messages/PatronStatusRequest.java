@@ -21,6 +21,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.Language;
+
 /**
  * <p>Title: RTSI</p>
  * <p>Description: Real Time Self Issue</p>
@@ -35,7 +37,7 @@ public class PatronStatusRequest extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -4867507215519281871L;
-private String language = "000";
+  private Language language = Language.UNKNOWN;
   private Date transactionDate = new Date();
   private String institutionId;
   private String patronIdentifier;
@@ -48,7 +50,7 @@ private String language = "000";
   public String getInstitutionId() {
     return institutionId;
   }
-  public String getLanguage() {
+  public Language getLanguage() {
     return language;
   }
   public String getPatronIdentifier() {
@@ -75,7 +77,7 @@ private String language = "000";
   public void setPatronIdentifier(String patronIdentifier) {
     this.patronIdentifier = patronIdentifier;
   }
-  public void setLanguage(String language) {
+  public void setLanguage(Language language) {
     this.language = language;
   }
   public void setInstitutionId(String institutionId) {
