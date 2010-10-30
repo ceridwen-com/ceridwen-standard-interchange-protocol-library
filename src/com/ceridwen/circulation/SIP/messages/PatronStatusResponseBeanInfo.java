@@ -20,7 +20,8 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.helpers.*;
+import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
 
 
 /**

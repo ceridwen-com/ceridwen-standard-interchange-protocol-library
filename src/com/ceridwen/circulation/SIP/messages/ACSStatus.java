@@ -30,6 +30,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
+
 public class ACSStatus extends Message {
   /**
 	 * 
@@ -47,7 +49,7 @@ private Boolean onLineStatus;
   private String protocolVersion;
   private String institutionId;
   private String libraryName;
-  private String supportedMessages;
+  private SupportedMessages supportedMessages = new SupportedMessages();
   private String terminalLocation;
   private String screenMessage;
   private String printLine;
@@ -94,7 +96,7 @@ private Boolean onLineStatus;
   public Boolean isStatusUpdateOk() {
     return statusUpdateOk;
   }
-  public String getSupportedMessages() {
+  public SupportedMessages getSupportedMessages() {
     return supportedMessages;
   }
   public String getTerminalLocation() {
@@ -109,7 +111,7 @@ private Boolean onLineStatus;
   public void setTerminalLocation(String terminalLocation) {
     this.terminalLocation = terminalLocation;
   }
-  public void setSupportedMessages(String supportedMessages) {
+  public void setSupportedMessages(SupportedMessages supportedMessages) {
     this.supportedMessages = supportedMessages;
   }
   public void setStatusUpdateOk(Boolean statusUpdateOk) {

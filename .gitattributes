@@ -110,3 +110,20 @@ src/com/ceridwen/circulation/SIP/testmessages.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/transport/Connection.java -text
 src/com/ceridwen/circulation/SIP/transport/SocketConnection.java -text
 src/com/ceridwen/circulation/SIP/transport/TelnetConnection.java -text
+src/com/ceridwen/circulation/SIP/types/descriptors/FixedFieldDescriptor.java -text
+src/com/ceridwen/circulation/SIP/types/descriptors/VariableFieldDescriptor.java -text
+src/com/ceridwen/circulation/SIP/types/enumerations/AbstractEnumeration.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/CirculationStatus.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/Currencies.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/FeeType.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/HoldMode.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/HoldType.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/Languages.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/MediaType.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/PaymentType.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/SecurityMarker.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/StatusCode.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/flagfields/AbstractFlagField.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/flagfields/PatronStatus.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/flagfields/Summary.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/flagfields/SupportedMessages.java -text svneol=unset#text/plain

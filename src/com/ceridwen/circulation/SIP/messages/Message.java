@@ -30,11 +30,16 @@ package com.ceridwen.circulation.SIP.messages;
 
 import org.apache.commons.logging.*;
 import java.io.*;
+import java.lang.reflect.Method;
 
 import org.apache.commons.beanutils.*;
 import java.beans.*;
 import java.util.*;
-import com.ceridwen.circulation.SIP.helpers.*;
+import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
+import com.ceridwen.circulation.SIP.types.flagfields.AbstractFlagField;
+
 import java.text.SimpleDateFormat;
 import com.ceridwen.circulation.SIP.exceptions.*;
 
@@ -93,6 +98,7 @@ private static Log log = LogFactory.getLog(Message.class);
   private void writeObject(ObjectOutputStream oos) throws IOException {
     oos.defaultWriteObject();
   }
+
   public abstract String getCommand();
 
   private String mangleDate(Date date) {
@@ -233,6 +239,20 @@ private static Log log = LogFactory.getLog(Message.class);
         desc.getWriteMethod().invoke(this,
                                      new Object[] {new String(value)});
       }
+      if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
+    	  Object data = desc.getPropertyType().getConstructor(new Class[]{String.class}).newInstance(new Object[]{new String(value)});
+          desc.getWriteMethod().invoke(this,
+                  new Object[] {data});    	  
+      }
+      if (desc.getPropertyType().getInterfaces()[0] == AbstractEnumeration.class) {
+      	Method mthd = desc.getPropertyType().getInterfaces()[0].getDeclaredMethod("getKey", 
+        		  new Class[]{String.class});
+      	Object data = mthd.invoke(desc.getReadMethod().invoke(this,new Object[]{}), 
+				  new Object[]{new String(value)});
+          desc.getWriteMethod().invoke(this,
+                new Object[] {data});
+  	  
+      }        
       if (desc.getPropertyType() == String[].class) {
     	  String[] current = (String[])desc.getReadMethod().invoke(this, new Object[0]);
     	  if (current == null) {
