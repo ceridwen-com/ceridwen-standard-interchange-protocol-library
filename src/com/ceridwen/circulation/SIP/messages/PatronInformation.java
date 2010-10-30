@@ -31,6 +31,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
+import com.ceridwen.circulation.SIP.types.flagfields.Summary;
 
 public class PatronInformation extends Message {
   /**
@@ -39,7 +40,7 @@ public class PatronInformation extends Message {
 	private static final long serialVersionUID = 4603960140773936894L;
   private Language language = Language.UNKNOWN;
   private Date transactionDate = new Date();
-  private String summary;
+  private Summary summary = new Summary();
   private String institutionId;
   private String patronIdentifier;
   private String terminalPassword;
@@ -68,7 +69,7 @@ public class PatronInformation extends Message {
   public String getStartItem() {
     return startItem;
   }
-  public String getSummary() {
+  public Summary getSummary() {
     return summary;
   }
   public String getTerminalPassword() {
@@ -83,7 +84,7 @@ public class PatronInformation extends Message {
   public void setTerminalPassword(String terminalPassword) {
     this.terminalPassword = terminalPassword;
   }
-  public void setSummary(String summary) {
+  public void setSummary(Summary summary) {
     this.summary = summary;
   }
   public void setStartItem(String startItem) {
