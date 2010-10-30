@@ -1,6 +1,6 @@
 * text=auto !eol
 /.classpath -text
-.externalToolBuilders/Build[!!-~]Number.launch -text
+.externalToolBuilders/Build[!!-~]Number[!!-~]-[!!-~]Message.launch -text svneol=unset#text/plain
 .externalToolBuilders/Package[!!-~]Circulation[!!-~]Jar.launch -text svneol=unset#text/plain
 /.project -text
 /buildnum.xml -text
@@ -10,15 +10,19 @@ lib/commons-beanutils-1.8.3/RELEASE-NOTES.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar -text
 lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar -text
 lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar -text
+/license.txt -text svneol=unset#text/plain
 /package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
 src/com/ceridwen/circulation/SIP/exceptions/MandatoryFieldOmitted.java -text
 src/com/ceridwen/circulation/SIP/exceptions/MessageNotUnderstood.java -text
 src/com/ceridwen/circulation/SIP/exceptions/RetriesExceeded.java -text
+src/com/ceridwen/circulation/SIP/exceptions/SequenceError.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/helpers/FixedFieldDescriptor.java -text
 src/com/ceridwen/circulation/SIP/helpers/FlagBitmap.java -text
 src/com/ceridwen/circulation/SIP/helpers/VariableFieldDescriptor.java -text
+src/com/ceridwen/circulation/SIP/messages/ACSResend.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/messages/ACSResendBeanInfo.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/messages/ACSStatus.java -text
 src/com/ceridwen/circulation/SIP/messages/ACSStatusBeanInfo.java -text
 src/com/ceridwen/circulation/SIP/messages/BlockPatron.java -text
@@ -94,8 +98,15 @@ src/com/ceridwen/circulation/SIP/messages/RenewBeanInfo.java -text
 src/com/ceridwen/circulation/SIP/messages/RenewResponse.java -text
 src/com/ceridwen/circulation/SIP/messages/RenewResponse.jbx -text
 src/com/ceridwen/circulation/SIP/messages/RenewResponseBeanInfo.java -text
+src/com/ceridwen/circulation/SIP/messages/SCResend.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/messages/SCResendBeanInfo.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/messages/SCStatus.java -text
 src/com/ceridwen/circulation/SIP/messages/SCStatusBeanInfo.java -text
+src/com/ceridwen/circulation/SIP/server/MessageBroker.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/server/MessageHandler.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/server/MessageHandlerDummyImpl.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/server/SocketDaemon.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/testmessages.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/transport/Connection.java -text
 src/com/ceridwen/circulation/SIP/transport/SocketConnection.java -text
 src/com/ceridwen/circulation/SIP/transport/TelnetConnection.java -text

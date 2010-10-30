@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Matthew J. Dovey.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * <http://www.gnu.org/licenses/>.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Contributors:
+ *     Matthew J. Dovey - initial API and implementation
+ ******************************************************************************/
 package com.ceridwen.circulation.SIP.transport;
 
 /**
@@ -14,9 +33,14 @@ import java.util.TimerTask;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
+import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.messages.SCResend;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 
 
@@ -31,7 +55,31 @@ public abstract class Connection {
   private int retryWait;
   private String host;
   private int port;
-
+  private boolean addSequenceAndChecksum = true;
+  private boolean strictSequenceChecking = false;
+  private boolean strictChecksumChecking = false;
+  
+  public void setAddSequenceAndChecksum(boolean flag)
+  {
+	  this.addSequenceAndChecksum = flag;
+  }
+  public boolean getAddSequenceAndChecksum() {
+	  return this.addSequenceAndChecksum;
+  }
+  public void setStrictChecksumChecking(boolean flag) {
+	  this.strictChecksumChecking = flag;
+  }
+  public boolean getStrictChecksumChecking() {
+	  return this.strictChecksumChecking;
+  }
+  public void setStrictSequenceChecking(boolean flag)
+  {
+	  this.strictSequenceChecking = flag;
+  }
+  public boolean getStrictSequenceChecking()
+  {
+	  return this.strictSequenceChecking;
+  }
   public void setHost(String host) {
     this.host = host;
   }
@@ -69,7 +117,7 @@ public abstract class Connection {
     return retryWait;
   }
 
-  private char getSequence() {
+  private char getNextSequence() {
     char ret = sequence;
     sequence++;
     if (sequence > '9') {
@@ -88,11 +136,11 @@ public abstract class Connection {
     return ret;
   }
 
-  public synchronized boolean connect() {
-    return connect(this.getRetryAttempts());
+  public synchronized void connect() throws Exception {
+    connect(this.getRetryAttempts());
   }
 
-  protected abstract boolean connect(int retryAttempts);
+  protected abstract void connect(int retryAttempts) throws Exception;
   public abstract boolean isConnected();
   public abstract void disconnect();
 
@@ -141,13 +189,9 @@ public abstract class Connection {
     return ret;
   }
 
-  /**@todo Add a new exception MessageNotUnderstood
-   *
-   */
-
-
-  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, MessageNotUnderstood {
+  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood, MandatoryFieldOmitted {
     String request, response = null;
+    Message responseMessage = null;
     if (msg == null) {
       throw new MessageNotUnderstood(); //This will signal a corrupted data
     }
@@ -158,13 +202,22 @@ public abstract class Connection {
       do {
         retry = false;
         try {
-          request = msg.encode(new Character(getSequence()));
+          if (this.getAddSequenceAndChecksum()) {
+        	  request = msg.encode(new Character(getNextSequence()));
+          } else {
+        	  request = msg.encode(null);        	  
+          }
           log.debug(">>> " + request);
           send(request);
           response = waitfor("\r");
           response = strim(response);
           log.debug("<<< " + response);
-          if (response.startsWith("96")) {
+          if (this.getStrictSequenceChecking()) {
+        	  responseMessage = Message.decode(response, sequence, this.getStrictChecksumChecking());
+          } else {
+        	  responseMessage=  Message.decode(response, null, this.getStrictChecksumChecking());    	  
+          }
+          if (responseMessage instanceof SCResend) {
             throw new ConnectionFailure();
           }
           understood = true;
@@ -188,19 +241,15 @@ public abstract class Connection {
         }
       }
       while (retry);
-      if (response == null) {
+      if (responseMessage == null) {
         throw new ConnectionFailure();
-      }
-      return Message.decode(response, null);
+      }    
+      return responseMessage;
     }
     catch (RetriesExceeded e) {
       throw e;
     }
-    catch (Exception e) {
-      throw new ConnectionFailure(e);
-    }
   }
-
 }
 
 class KillConnectionTask extends TimerTask {

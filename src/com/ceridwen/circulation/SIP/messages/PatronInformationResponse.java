@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Matthew J. Dovey.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * <http://www.gnu.org/licenses/>.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Contributors:
+ *     Matthew J. Dovey - initial API and implementation
+ ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
@@ -41,9 +60,7 @@ private String patronStatus;
   private String[] chargedItems;
   private String[] fineItems;
   private String[] recallItems;
-  private String[] unavilableHoldItems;
-  /**@todo: add array support
-   */
+  private String[] unavailableHoldItems;
   private String homeAddress;
   private String eMailAddress;
   private String homePhoneNumber;
@@ -137,8 +154,8 @@ private String patronStatus;
   public String getUnavailableHoldsCount() {
     return unavailableHoldsCount;
   }
-  public String[] getUnavilableHoldItems() {
-    return unavilableHoldItems;
+  public String[] getUnavailableHoldItems() {
+    return unavailableHoldItems;
   }
   public Boolean getValidPatron() {
     return validPatron;
@@ -152,8 +169,8 @@ private String patronStatus;
   public void setValidPatron(Boolean validPatron) {
     this.validPatron = validPatron;
   }
-  public void setUnavilableHoldItems(String[] unavilableHoldItems) {
-    this.unavilableHoldItems = unavilableHoldItems;
+  public void setUnavailableHoldItems(String[] unavailableHoldItems) {
+    this.unavailableHoldItems = unavailableHoldItems;
   }
   public void setUnavailableHoldsCount(String unavailableHoldsCount) {
     this.unavailableHoldsCount = unavailableHoldsCount;

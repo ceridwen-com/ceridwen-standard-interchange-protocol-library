@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Matthew J. Dovey.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * <http://www.gnu.org/licenses/>.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Contributors:
+ *     Matthew J. Dovey - initial API and implementation
+ ******************************************************************************/
 package com.ceridwen.circulation.SIP.transport;
 
 import java.io.BufferedReader;
@@ -46,7 +65,7 @@ public class TelnetConnection extends Connection {
     return client.isConnected();
   }
 
-  protected boolean connect(int retry) {
+  protected void connect(int retry) throws Exception {
     try {
       client.disconnect();
     } catch (Exception ex) {
@@ -67,10 +86,9 @@ public class TelnetConnection extends Connection {
         } catch (Exception ex) {
           log.debug("Thread sleep error", ex);
         }
-        return connect(retry - 1);
-      }
-      else {
-        return false;
+        connect(retry - 1);
+      } else {
+    	  throw e;
       }
     }
     try {
@@ -85,13 +103,11 @@ public class TelnetConnection extends Connection {
         } catch (Exception ex) {
           log.debug("Thread sleep error", ex);
         }
-        return connect(retry - 1);
-      }
-      else {
-        return false;
+        connect(retry - 1);
+      } else {
+        throw e;
       }
     }
-    return true;
   }
 
   private void login(String user, String pass) throws ConnectionFailure {

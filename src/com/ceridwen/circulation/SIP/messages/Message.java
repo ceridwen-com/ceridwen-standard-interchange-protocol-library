@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Matthew J. Dovey.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * <http://www.gnu.org/licenses/>.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Contributors:
+ *     Matthew J. Dovey - initial API and implementation
+ ******************************************************************************/
 /**
  * <p>Title: Self Issue</p>
  * <p>Description: Self Issue Client</p>
@@ -11,6 +30,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 import org.apache.commons.logging.*;
 import java.io.*;
+
 import org.apache.commons.beanutils.*;
 import java.beans.*;
 import java.util.*;
@@ -26,7 +46,7 @@ public abstract class Message implements Serializable {
 
 private static Log log = LogFactory.getLog(Message.class);
 
-    private static Class<?>[] _messages = {
+    private static Class<?>[] _messages = {    	
         PatronStatusRequest.class,
         PatronStatusResponse.class,
         CheckOut.class,
@@ -55,8 +75,16 @@ private static Log log = LogFactory.getLog(Message.class);
         Renew.class,
         RenewResponse.class,
         RenewAll.class,
-        RenewAllResponse.class
+        RenewAllResponse.class,
+        ACSResend.class,
+        SCResend.class
     };
+    
+    private Character SequenceCharacter = null;
+    
+    public Character getSequenceCharacter() {
+    	return this.SequenceCharacter;
+    }
 
   private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
     ois.defaultReadObject();
@@ -81,31 +109,39 @@ private static Log log = LogFactory.getLog(Message.class);
     }
   }
 
-  private String getProp(PropertyDescriptor desc) {
-    String ret = null;
+  private String[] getProp(PropertyDescriptor desc) {
+    String[] ret = null;
     try {
       Object value = desc.getReadMethod().invoke(this, new Object[0]);
       if (desc.getPropertyType() == Boolean.class) {
         if (value == null)
           if (desc.getName().equalsIgnoreCase("magneticMedia"))
-            ret = "U";
+            ret = new String[]{"U"};
           else
-            ret = "N";
+            ret = new String[]{"N"};
         else if (desc.getName().equalsIgnoreCase("ok")) {
-          ret = ((Boolean)value).booleanValue()?"1":"0";
+          ret = new String[]{((Boolean)value).booleanValue()?"1":"0"};
         } else {
-          ret = ((Boolean)value).booleanValue()?"Y":"N";
+          ret = new String[]{((Boolean)value).booleanValue()?"Y":"N"};
         }
       } else if (desc.getPropertyType() == Date.class) {
-        ret = mangleDate((Date)value);
+    	if (value != null) {
+    		ret = new String[]{mangleDate((Date)value)};
+    	}
+      } else if (desc.getPropertyType() == String[].class) {
+    	  if (value != null) {
+    		  ret = (String[])value;
+    	  }
       } else {
-        ret = value.toString();
+    	if (value != null) {  
+    		ret = new String[]{value.toString()};
+    	}
       }
     } catch (Exception ex) {
 
     }
 
-    return (ret != null)?ret:"";
+    return (ret != null)?ret:new String[]{""};
   }
 
   private String pad(String input, FixedFieldDescriptor field) {
@@ -122,7 +158,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
   public String encode(Character sequence) throws MandatoryFieldOmitted {
     TreeMap<Integer, String> fixed = new TreeMap<Integer, String>();
-    TreeMap<String, String> variable = new TreeMap<String, String>();
+    TreeMap<String, String[]> variable = new TreeMap<String, String[]>();
     StringBuffer message = new StringBuffer();
 
     PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
@@ -130,25 +166,27 @@ private static Log log = LogFactory.getLog(Message.class);
     for (int n = 0; n < descs.length; n++) {
       PropertyDescriptor desc = descs[n];
       Object SIPField = desc.getValue("SIPFieldDescriptor");
-      if (SIPField.getClass().equals(FixedFieldDescriptor.class)) {
-        FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
-        String value = getProp(desc);
-        if (value.length() == 0) {
-          if (!field.allowBlank) {
-            throw new MandatoryFieldOmitted();
-          }
-        }
-        fixed.put(new Integer(field.start), pad(value, field));
-      }
-      if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-        VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
-        String value = getProp(desc);
-        if (value.length() > 0) {
-          variable.put(field.ID, value);
-        }
-        else if (field.required) {
-          variable.put(field.ID, value);
-        }
+      if (SIPField != null) {
+	      if (SIPField.getClass().equals(FixedFieldDescriptor.class)) {
+	        FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
+	        String[] value = getProp(desc);
+	        if (value[0].length() == 0) {
+	          if (!field.allowBlank) {
+	            throw new MandatoryFieldOmitted();
+	          }
+	        }
+	        fixed.put(new Integer(field.start), pad(value[0], field));
+	      }
+	      if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
+	        VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
+	        String[] value = getProp(desc);
+	        if (value[0].length() > 0) {
+	          variable.put(field.ID, value);
+	        }
+	        else if (field.required) {
+	          variable.put(field.ID, value);
+	        }
+	      }
       }
     }
 
@@ -163,15 +201,15 @@ private static Log log = LogFactory.getLog(Message.class);
     Iterator<String> varIterate = variable.keySet().iterator();
     while (varIterate.hasNext()) {
         String key = (String)varIterate.next();
-        message.append(key);
-        message.append(variable.get(key));
-        message.append(VariableFieldDescriptor.TERMINATOR);
+        String[] values = (String[])variable.get(key);
+        for (String value : values) {
+	        message.append(key);
+	        message.append(value);
+	        message.append(VariableFieldDescriptor.TERMINATOR);
+        }
     }
 
-    if (sequence != null)
-      return AddChecksum(message.toString(), sequence.charValue());
-    else
-      return message.toString();
+    return this.AddChecksum(message.toString(), sequence);
   }
 
   private void setProp(PropertyDescriptor desc, String value) {
@@ -195,6 +233,20 @@ private static Log log = LogFactory.getLog(Message.class);
         desc.getWriteMethod().invoke(this,
                                      new Object[] {new String(value)});
       }
+      if (desc.getPropertyType() == String[].class) {
+    	  String[] current = (String[])desc.getReadMethod().invoke(this, new Object[0]);
+    	  if (current == null) {
+    	        desc.getWriteMethod().invoke(this,
+                        new Object[] {new String[]{new String(value)}});
+    	  } else {
+    		  List<String> l = new ArrayList<String>(current.length+1);
+    		  l.addAll(Arrays.asList(current));
+    		  l.add(new String(value));
+  	          desc.getWriteMethod().invoke(this,
+                    new Object[] {l.toArray(new String[l.size()])});
+    	  }
+      }
+      
     }
     catch (Exception ex) {
 
@@ -202,12 +254,25 @@ private static Log log = LogFactory.getLog(Message.class);
 
   }
 
-  public static Message decode(String message, Character sequence) throws ChecksumError, MandatoryFieldOmitted {
+  public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError, MessageNotUnderstood {
 
-    if (sequence != null) {
-      if (!CheckChecksum(message, sequence.charValue())) {
-        return null;
+    if (checksumCheck) {
+      if (!CheckChecksum(message)) {
+        throw new ChecksumError();
       }
+    }
+    Character sequenceCharacter = GetSequenceCharacter(message);
+    
+    if (sequence != null)
+    	if (sequenceCharacter != null)
+    		if (!sequence.equals(sequenceCharacter))
+    			throw new SequenceError();
+
+    if (message == null) {
+    	throw new MessageNotUnderstood();
+    }
+    if (message.length() < 2) {
+    	throw new MessageNotUnderstood();    	
     }
     String command = message.substring(0, 2);
     try {
@@ -232,60 +297,75 @@ private static Log log = LogFactory.getLog(Message.class);
         }
       }
 
-      Hashtable<String, String> fields = msg.parseVarFields(fixedFieldEnd + 1, message);
-
-      for (int n = 0; n < descs.length; n++) {
-        PropertyDescriptor desc = descs[n];
-        Object SIPField = desc.getValue("SIPFieldDescriptor");
-        String value = "";
-        if (SIPField != null) {
-          if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-            VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
-            value = (String) fields.get(field.ID);
-            msg.setProp(desc, value);
-          }
-        }
-      }
+      msg.parseVarFields(fixedFieldEnd + 1, message);
+      
+      msg.SequenceCharacter = sequenceCharacter;
 
       return msg;
     } catch (Exception ex) {
-      return null;
+      throw new MessageNotUnderstood();
     }
   }
 
-  private static boolean CheckChecksum(String message, char sequence) {
-    /**@todo add checksum checking
-     *
-     */
-
+  private static boolean CheckChecksum(String message) {
+	try {
+		String tail = message.substring(message.length()-6);
+		if (!tail.startsWith("AZ")) {
+			return true;
+		}
+		String truncated = message.substring(0, message.length()-4);
+		String check = tail.substring(2);
+		String checksum = CalculateChecksum(truncated);
+        return (checksum.equals(check));
+	} catch (Exception ex) {
+	}
 
     return true;
   }
 
-  private String AddChecksum(String command, char sequence) {
-    StringBuffer check = new StringBuffer();
-    int checksum = 0;
+  private static Character GetSequenceCharacter(String message) {
+	try {
+		String tail = message.substring(message.length()-9);
+		if (!tail.startsWith("AY")) {
+			return null;
+		}
+		return tail.charAt(2);
+	} catch (Exception ex) {
+	}
 
-    check.append("AY");
-    check.append(sequence);
-    check.append("AZ");
-    try {
-      String data = command + check.toString();
-      byte[] bytes = data.getBytes("ASCII");
-
+    return null;
+  }
+  
+  protected static String CalculateChecksum(String data) throws UnsupportedEncodingException
+  {
+      int checksum = 0;
+      byte[] bytes = data.getBytes("ASCII");  	
       for (int n = 0; n < bytes.length; n++) {
         checksum += bytes[n];
       }
       checksum = -checksum & 0xffff;
-      check.append(Integer.toHexString(checksum).toUpperCase());
+	  return Integer.toHexString(checksum).toUpperCase();
+  }
+  
+  protected String AddChecksum(String command, Character sequence) {
+    StringBuffer check = new StringBuffer();
+    if (sequence != null) {
+	   	check.append("AY");
+	   	check.append(sequence);
+	    check.append("AZ");
+	    try {
+	      check.append(CalculateChecksum(command + check.toString()));
+	      return command + check.toString();
+	    }
+	    catch (Exception e) {
+	    	return command;
+	    }
+    } else {
+    	return command;
     }
-    catch (Exception e) {
-    }
-    return command + check.toString();
   }
 
-  private Hashtable<String, String> parseVarFields(int offset, String data) {
-    Hashtable<String, String> fields = new Hashtable<String, String>();
+  private void parseVarFields(int offset, String data) {
     int status = 1;
     StringBuffer fieldtag = new StringBuffer();
     StringBuffer fielddata = new StringBuffer();
@@ -303,15 +383,32 @@ private static Log log = LogFactory.getLog(Message.class);
       }
       else if (status == 3) {
         if (data.charAt(n) == VariableFieldDescriptor.TERMINATOR) {
-          fields.put(fieldtag.toString(), fielddata.toString());
-          status = 1;
+        	this.setFieldProp(fieldtag.toString(), fielddata.toString());
+        	status = 1;
         }
         else {
           fielddata.append(data.charAt(n));
         }
       }
     }
-    return fields;
+    return;
+  }
+  
+  private void setFieldProp(String tag, String data)
+  {
+      PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
+      for (int n = 0; n < descs.length; n++) {
+          PropertyDescriptor desc = descs[n];
+          Object SIPField = desc.getValue("SIPFieldDescriptor");
+          if (SIPField != null) {
+            if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
+              VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
+              if (field.ID.equals(tag)) {
+            	  this.setProp(desc, data);
+              }
+            }
+          }
+        }
   }
 
   public void xmlEncode(OutputStream strm) {
