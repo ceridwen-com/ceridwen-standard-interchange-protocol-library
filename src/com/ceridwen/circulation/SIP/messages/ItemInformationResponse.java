@@ -33,6 +33,7 @@ import java.util.Date;
 import com.ceridwen.circulation.SIP.types.enumerations.CirculationStatus;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
+import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
 public class ItemInformationResponse extends Message {
   /**
@@ -52,7 +53,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   private String owner;
   private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
-  private String mediaType;
+  private MediaType mediaType = MediaType.OTHER;
   private String permanentLocation;
   private String currentLocation;
   private String itemProperties;
@@ -92,7 +93,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   public String getItemProperties() {
     return itemProperties;
   }
-  public String getMediaType() {
+  public MediaType getMediaType() {
     return mediaType;
   }
   public String getOwner() {
@@ -143,7 +144,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   public void setOwner(String owner) {
     this.owner = owner;
   }
-  public void setMediaType(String mediaType) {
+  public void setMediaType(MediaType mediaType) {
     this.mediaType = mediaType;
   }
   public void setItemProperties(String itemProperties) {

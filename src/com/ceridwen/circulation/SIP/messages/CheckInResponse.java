@@ -30,6 +30,8 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
+
 public class CheckInResponse extends Message {
   /**
 	 * 
@@ -46,7 +48,7 @@ private Boolean ok;
   private String titleIdentifier;
   private String sortBin;
   private String patronIdentifier;
-  private String mediaType;
+  private MediaType mediaType = MediaType.OTHER;
   private String itemProperties;
   private String screenMessage;
   private String printLine;
@@ -69,7 +71,7 @@ private Boolean ok;
   public Boolean getMagenticMedia() {
     return magenticMedia;
   }
-  public String getMediaType() {
+  public MediaType getMediaType() {
     return mediaType;
   }
   public Boolean getOk() {
@@ -126,7 +128,7 @@ private Boolean ok;
   public void setOk(Boolean ok) {
     this.ok = ok;
   }
-  public void setMediaType(String mediaType) {
+  public void setMediaType(MediaType mediaType) {
     this.mediaType = mediaType;
   }
   public void setMagenticMedia(Boolean magenticMedia) {

@@ -21,6 +21,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
+import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
 public class RenewResponse extends Message {
   /**
@@ -41,7 +42,7 @@ private Boolean ok;
   private Boolean securityInhibit;
   private CurrencyType currencyType = CurrencyType.USDOLLAR;
   private String feeAmount;
-  private String mediaType;
+  private MediaType mediaType = MediaType.OTHER;
   private String itemProperties;
   private String transactionId;
   private String screenMessage;
@@ -133,10 +134,10 @@ private Boolean ok;
   public void setFeeAmount(String feeAmount) {
     this.feeAmount = feeAmount;
   }
-  public String getMediaType() {
+  public MediaType getMediaType() {
     return mediaType;
   }
-  public void setMediaType(String mediaType) {
+  public void setMediaType(MediaType mediaType) {
     this.mediaType = mediaType;
   }
   public String getItemProperties() {
