@@ -2,22 +2,22 @@ package com.ceridwen.circulation.SIP.types.flagfields;
 
 public class SupportedMessages extends AbstractFlagField {
 	private static final long serialVersionUID = -7794339322282396820L;
-	public static final int PATRONSTATUSREQUEST = 0;
-	public static final int CHECKOUT = 1;
-	public static final int CHECKIN = 2;
-	public static final int BLOCKPATRON = 3;
-	public static final int SCACSSTATUS = 4;
-	public static final int REQUESTSCACSRESENT = 5;
+	public static final int PATRON_STATUS_REQUEST = 0;
+	public static final int CHECK_OUT = 1;
+	public static final int CHECK_IN = 2;
+	public static final int BLOCK_PATRON = 3;
+	public static final int SC_ACS_STATUS = 4;
+	public static final int REQUEST_SC_ACS_RESEND = 5;
 	public static final int LOGIN = 6;
-	public static final int PATRONINFORMATION = 7;
-	public static final int ENDPATRONSESSION = 8;
-	public static final int FEEPAID = 9;
-	public static final int ITEMINFORMATION = 10;
-	public static final int ITEMSTATUSUPDATE = 11;
-	public static final int PATRONENABLE = 12;
+	public static final int PATRON_INFORMATION = 7;
+	public static final int END_PATRON_SESSION = 8;
+	public static final int FEE_PAID = 9;
+	public static final int ITEM_INFORMATION = 10;
+	public static final int ITEM_STATUS_UPDATE = 11;
+	public static final int PATRON_ENABLE = 12;
 	public static final int HOLD = 13;
 	public static final int RENEW = 14;
-	public static final int RENEWALL = 15;
+	public static final int RENEW_ALL = 15;
 
 	public SupportedMessages(String flags) {
 		super(flags);
@@ -40,7 +40,7 @@ public class SupportedMessages extends AbstractFlagField {
 		
 		System.out.println("*012345678901234567890*");
 		System.out.println("*" + test.toString() + "*");
-		test.set(SupportedMessages.RENEWALL);
+		test.set(SupportedMessages.RENEW_ALL);
 		test.set(SupportedMessages.LOGIN);
 		System.out.println("*" + test.toString() + "*");
 		test.unset(SupportedMessages.LOGIN);

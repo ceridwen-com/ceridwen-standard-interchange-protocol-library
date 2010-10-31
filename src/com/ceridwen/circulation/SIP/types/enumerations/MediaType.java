@@ -4,14 +4,14 @@ public enum MediaType implements AbstractEnumeration {
 	OTHER("000"),
 	BOOK("001"),
 	MAGAZINE("002"),
-	BOUNDJOURNAL("003"),
-	AUDIOTAPE("004"),
-	VIDEOTAPE("005"),
+	BOUND_JOURNAL("003"),
+	AUDIO_TAPE("004"),
+	VIDEO_TAPE("005"),
 	CD("006"),
 	DISKETTE("007"),
-	BOOKWITHDISKETTE("008"),
-	BOOKWITHCD("009"),
-	BOOKWITHAUDIOTAPE("010");
+	BOOK_WITH_DISKETTE("008"),
+	BOOK_WITH_CD("009"),
+	BOOK_WITH_AUDIO_TAPE("010");
 		
 	private final String code;
 	private MediaType(String code) {

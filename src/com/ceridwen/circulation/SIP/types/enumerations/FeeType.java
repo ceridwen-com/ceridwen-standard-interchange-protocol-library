@@ -8,8 +8,8 @@ public enum FeeType implements AbstractEnumeration {
 	PROCESSING("05"),
 	RENTAL("06"),
 	REPLACEMENT("07"),
-	COMPUTERACCESSCHARGE("08"),
-	HOLDFEE("09");
+	COMPUTER_ACCESS_CHARGE("08"),
+	HOLD_FEE("09");
 		
 	private final String code;
 	private FeeType(String code) {

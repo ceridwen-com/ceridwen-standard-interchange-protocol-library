@@ -2,8 +2,8 @@ package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum StatusCode implements AbstractEnumeration {
 	OK("0"),
-	OUTOFPAPER("1"),
-	SHUTTINGDOWN("2");
+	OUT_OF_PAPER("1"),
+	SHUTTING_DOWN("2");
 
 	private final String code;
 	private StatusCode(String code) {

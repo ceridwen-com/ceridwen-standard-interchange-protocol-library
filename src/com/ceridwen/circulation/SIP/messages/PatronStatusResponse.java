@@ -47,7 +47,7 @@ public class PatronStatusResponse extends Message {
   private String personalName;
   private Boolean validPatron;
   private Boolean validPatronPassword;
-  private CurrencyType currencyType = CurrencyType.USDOLLAR;
+  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
   private String feeAmount;
   private String screenMessage;
   private String printLine;

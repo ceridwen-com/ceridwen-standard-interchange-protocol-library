@@ -2,9 +2,9 @@ package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum HoldType implements AbstractEnumeration {
 	OTHER("1"),
-	ANYCOPY("2"),
-	SPECIFICCOPY("3"),
-	SUBLOCATIONCOPY("4");
+	ANY_COPY("2"),
+	SPECIFIC_COPY("3"),
+	SUBLOCATION_COPY("4");
 	
 	private final String code;
 	private HoldType(String code) {

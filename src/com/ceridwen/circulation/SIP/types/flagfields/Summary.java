@@ -2,14 +2,14 @@ package com.ceridwen.circulation.SIP.types.flagfields;
 
 public class Summary extends AbstractFlagField {
 	private static final long serialVersionUID = 5874238608719119875L;
-	public static final int HOLDITEMS  = 0;
-	public static final int OVERDUEITEMS = 1;
-	public static final int CHARGEDITEMS = 2;
-	public static final int FINEITEMS = 3;
-	public static final int RECALLITEMS = 4;
-	public static final int UNAVAILABLEHOLDS = 5;
-	public static final int FEEITEMS = 6;
-	public static final int SUMMARIESONLY = -1;
+	public static final int HOLD_ITEMS  = 0;
+	public static final int OVERDUE_ITEMS = 1;
+	public static final int CHARGED_ITEMS = 2;
+	public static final int FINE_ITEMS = 3;
+	public static final int RECALL_ITEMS = 4;
+	public static final int UNAVAILABLE_HOLDS = 5;
+	public static final int FEE_ITEMS = 6;
+	public static final int SUMMARIES_ONLY = -1;
 	
 	public Summary(String flags) {
 		super(flags);
@@ -41,14 +41,14 @@ public class Summary extends AbstractFlagField {
 		
 		System.out.println("*012345678901234567890*");
 		System.out.println("*" + test.toString() + "*");
-		test.set(Summary.FEEITEMS);
-		test.set(Summary.RECALLITEMS);
+		test.set(Summary.FEE_ITEMS);
+		test.set(Summary.RECALL_ITEMS);
 		System.out.println("*" + test.toString() + "*");
-		test.unset(Summary.RECALLITEMS);
+		test.unset(Summary.RECALL_ITEMS);
 		System.out.println("*" + test.toString() + "*");
-		test.set(Summary.RECALLITEMS);
+		test.set(Summary.RECALL_ITEMS);
 		System.out.println("*" + test.toString() + "*");
-		test.set(Summary.SUMMARIESONLY);
+		test.set(Summary.SUMMARIES_ONLY);
 		System.out.println("*" + test.toString() + "*");
 	}
 }

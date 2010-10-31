@@ -3,8 +3,8 @@ package com.ceridwen.circulation.SIP.types.enumerations;
 public enum SecurityMarker implements AbstractEnumeration {
 	OTHER("00"),
 	NONE("01"),
-	TATTLETAPE("02"),
-	WHISPERTAPE("03");
+	TATTLE_TAPE("02"),
+	WHISPER_TAPE("03");
 	
 	private final String code;
 	private SecurityMarker(String code) {

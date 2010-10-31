@@ -2,16 +2,16 @@ package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum CirculationStatus implements AbstractEnumeration {
 	OTHER("01"),
-	ONORDER("02"),
+	ON_ORDER("02"),
 	AVAILABLE("03"),
 	CHARGED("04"),
-	CHARGEDUNTILRECALLDATE("05"),
-	INPROCESS("06"),
+	CHARGED_UNTIL_RECALL_DATE("05"),
+	IN_PROCESS("06"),
 	RECALLED("07"),
-	HOLDSHELF("08"),
-	AWAITINGRESHELVING("09"),
-	INTRANSIT("10"),
-	CLAIMEDRETURN("11"),
+	ON_HOLD_SHELF("08"),
+	AWAITING_RESHELVING("09"),
+	IN_TRANSIT("10"),
+	CLAIMED_RETURN("11"),
 	LOST("12"),
 	MISSING("13");
 	

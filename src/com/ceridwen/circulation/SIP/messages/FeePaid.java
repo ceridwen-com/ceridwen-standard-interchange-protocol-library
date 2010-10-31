@@ -31,7 +31,7 @@ public class FeePaid extends Message {
 private java.util.Date transactionDate = new java.util.Date();
   private FeeType feeType = FeeType.OTHER;
   private PaymentType paymentType = PaymentType.CASH;
-  private CurrencyType currencyType = CurrencyType.USDOLLAR;
+  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
   private String feeAmount;
   private String institutionId;
   private String patronIdentifier;

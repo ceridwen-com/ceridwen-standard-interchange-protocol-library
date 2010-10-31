@@ -56,7 +56,7 @@ public class PatronInformationResponse extends Message {
   private String chargedItemsLimit;
   private Boolean validPatron;
   private Boolean validPatronPassword;
-  private CurrencyType currencyType = CurrencyType.USDOLLAR;
+  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
   private String feeAmount;
   private String feeLimit;
   private String[] holdItems;

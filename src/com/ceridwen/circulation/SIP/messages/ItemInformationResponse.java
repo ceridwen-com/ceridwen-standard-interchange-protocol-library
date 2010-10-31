@@ -52,7 +52,7 @@ private CirculationStatus circulationStatus = CirculationStatus.OTHER;
   private String itemIdentifier;
   private String titleIdentifier;
   private String owner;
-  private CurrencyType currencyType = CurrencyType.USDOLLAR;
+  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
   private String feeAmount;
   private MediaType mediaType = MediaType.OTHER;
   private String permanentLocation;

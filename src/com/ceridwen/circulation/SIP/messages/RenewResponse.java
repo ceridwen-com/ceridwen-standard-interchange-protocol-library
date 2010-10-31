@@ -40,7 +40,7 @@ private Boolean ok;
   private String dueDate;
   private FeeType feeType = FeeType.OTHER;
   private Boolean securityInhibit;
-  private CurrencyType currencyType = CurrencyType.USDOLLAR;
+  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
   private String feeAmount;
   private MediaType mediaType = MediaType.OTHER;
   private String itemProperties;
