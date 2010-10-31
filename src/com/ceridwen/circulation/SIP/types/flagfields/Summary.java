@@ -9,7 +9,6 @@ public class Summary extends AbstractFlagField {
 	public static final int RECALL_ITEMS = 4;
 	public static final int UNAVAILABLE_HOLDS = 5;
 	public static final int FEE_ITEMS = 6;
-	public static final int SUMMARIES_ONLY = -1;
 	
 	public Summary(String flags) {
 		super(flags);
@@ -28,12 +27,8 @@ public class Summary extends AbstractFlagField {
 	}
 	
 	public void set(int field) {
-		this.flags = "";
-		if (field < 0) {
-			super.unsetAll();
-		} else {
-			super.set(field);
-		}
+		super.unsetAll();
+		super.set(field);
 	}
 
 	public static void main(String[] args) {
@@ -42,13 +37,14 @@ public class Summary extends AbstractFlagField {
 		System.out.println("*012345678901234567890*");
 		System.out.println("*" + test.toString() + "*");
 		test.set(Summary.FEE_ITEMS);
+		System.out.println("*" + test.toString() + "*");
 		test.set(Summary.RECALL_ITEMS);
 		System.out.println("*" + test.toString() + "*");
 		test.unset(Summary.RECALL_ITEMS);
 		System.out.println("*" + test.toString() + "*");
 		test.set(Summary.RECALL_ITEMS);
 		System.out.println("*" + test.toString() + "*");
-		test.set(Summary.SUMMARIES_ONLY);
+		test.unsetAll();
 		System.out.println("*" + test.toString() + "*");
 	}
 }
