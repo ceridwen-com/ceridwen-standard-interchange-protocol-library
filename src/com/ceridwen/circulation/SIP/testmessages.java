@@ -6,6 +6,8 @@ import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.ACSStatus;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.messages.PatronInformationResponse;
+import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class testmessages {
@@ -15,11 +17,11 @@ public class testmessages {
 	 */
 	public static void main(String[] args) {
 		
-		ACSStatus test = new ACSStatus();
+		PatronInformationResponse test = new PatronInformationResponse();
 				
 //		test.setEMailAddress("test@test");
-		test.getSupportedMessages().set(SupportedMessages.LOGIN);
-//		test.getLanguage().getLanguage() 
+//		test.getSupportedMessages().set(SupportedMessages.LOGIN);
+		test.setLanguage(Language.DUTCH); 
 //		test.setHoldItems(new String[]{"Test1", "Test2"});
 		try {
 			String msg = test.encode('0');

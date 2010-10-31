@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
+import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.messages.ACSResend;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.SCResend;
@@ -16,7 +16,7 @@ public class MessageBroker {
 	
 	private MessageHandler handler;
 	private boolean strictChecksumChecking = false;
-	private Message lastResponse;
+	private String lastResponse;
 	  	
 	public MessageBroker(MessageHandler handler)
 	{
@@ -29,7 +29,7 @@ public class MessageBroker {
 	  return this.strictChecksumChecking;
 	}
 	
-	public Message process(Message request) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+	public Message process(Message request) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, MessageNotUnderstood {
 		Class<MessageHandler> handlerInterface = MessageHandler.class;
 		
 		Method[] handlerMethods = handlerInterface.getMethods();
@@ -42,7 +42,7 @@ public class MessageBroker {
 				}				
 			}
 		}		
-		return null;
+		throw new MessageNotUnderstood();
 	}
 	
 	public String process(String request) {
@@ -52,17 +52,17 @@ public class MessageBroker {
 			if (requestMessage instanceof ACSResend) {
 				logger.info("Resending response");
 			} else {
-				lastResponse = process(requestMessage);
+				Message responseMessage = process(requestMessage);
+				lastResponse = responseMessage.encode(requestMessage.getSequenceCharacter());
 			}
-			String response = lastResponse.encode(requestMessage.getSequenceCharacter());
-			logger.info("Sending response: " + response);
-			return response;
+			logger.info("Sending response: " + lastResponse);
+			return lastResponse;
 		} catch (Exception e) {
 			logger.warn("Error trying to process message: " + request, e);
 			try {
 				return new SCResend().encode(null); // Do a resend properly
-			} catch (MandatoryFieldOmitted e1) {
-				logger.error("Error creating SCResend message", e);
+			} catch (Exception e1) {
+				logger.error("Error creating SCResend message", e1);
 				return "96AZFEF6"; // if all else fails hardcode!
 			}
 		}

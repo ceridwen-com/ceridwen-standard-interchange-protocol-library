@@ -226,52 +226,65 @@ private static Log log = LogFactory.getLog(Message.class);
                                      new Boolean(value.
                                                  equalsIgnoreCase("Y") ||
                                                  value.equalsIgnoreCase("1"))});
+        return;
       }
       if (desc.getPropertyType() == Date.class) {
         desc.getWriteMethod().invoke(this,
                                      new Object[] {demangleDate(value)});
+        return;
       }
       if (desc.getPropertyType() == Integer.class) {
         desc.getWriteMethod().invoke(this,
                                      new Object[] {new Integer(value)});
+        return;
       }
       if (desc.getPropertyType() == String.class) {
         desc.getWriteMethod().invoke(this,
                                      new Object[] {new String(value)});
+        return;
       }
       if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
     	  Object data = desc.getPropertyType().getConstructor(new Class[]{String.class}).newInstance(new Object[]{new String(value)});
           desc.getWriteMethod().invoke(this,
                   new Object[] {data});    	  
+          return;
       }
-      if (desc.getPropertyType().getInterfaces()[0] == AbstractEnumeration.class) {
-      	Method mthd = desc.getPropertyType().getInterfaces()[0].getDeclaredMethod("getKey", 
-        		  new Class[]{String.class});
-      	Object data = mthd.invoke(desc.getReadMethod().invoke(this,new Object[]{}), 
-				  new Object[]{new String(value)});
-          desc.getWriteMethod().invoke(this,
-                new Object[] {data});
-  	  
+      Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
+      for (Class<?> interfce: interfaces) {
+	      if (interfce == AbstractEnumeration.class) {
+	      	Method mthd = interfce.getDeclaredMethod("getKey", 
+	        		  new Class[]{String.class});
+	      	Method mthdInst = desc.getPropertyType().getDeclaredMethod("values", 
+	      		  new Class[]{});
+	      	Object[] values = (Object [])mthdInst.invoke(null, new Object[]{});
+	      	if (values.length > 0) {	      	
+		      	Object data = mthd.invoke(values[0], 
+						  new Object[]{new String(value)});
+		        desc.getWriteMethod().invoke(this,
+		                new Object[] {data});
+		        return;
+	      	}
+	    }  	  
       }        
       if (desc.getPropertyType() == String[].class) {
     	  String[] current = (String[])desc.getReadMethod().invoke(this, new Object[0]);
     	  if (current == null) {
     	        desc.getWriteMethod().invoke(this,
                         new Object[] {new String[]{new String(value)}});
+    	        return;
     	  } else {
     		  List<String> l = new ArrayList<String>(current.length+1);
     		  l.addAll(Arrays.asList(current));
     		  l.add(new String(value));
   	          desc.getWriteMethod().invoke(this,
                     new Object[] {l.toArray(new String[l.size()])});
+  	          return;
     	  }
-      }
-      
+      }      
     }
     catch (Exception ex) {
-
+    	log.error("Unexpected error setting " + desc.getDisplayName() + " to " + value, ex);
     }
-
   }
 
   public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError, MessageNotUnderstood {
