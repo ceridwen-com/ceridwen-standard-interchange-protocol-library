@@ -4,11 +4,8 @@ import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
-import com.ceridwen.circulation.SIP.messages.ACSStatus;
+import com.ceridwen.circulation.SIP.messages.CheckOutResponse;
 import com.ceridwen.circulation.SIP.messages.Message;
-import com.ceridwen.circulation.SIP.messages.PatronInformationResponse;
-import com.ceridwen.circulation.SIP.types.enumerations.Language;
-import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class testmessages {
 
@@ -17,17 +14,18 @@ public class testmessages {
 	 */
 	public static void main(String[] args) {
 		
-		PatronInformationResponse test = new PatronInformationResponse();
+		CheckOutResponse test = new CheckOutResponse();
 				
 //		test.setEMailAddress("test@test");
 //		test.getSupportedMessages().set(SupportedMessages.LOGIN);
-		test.setLanguage(Language.DUTCH); 
+//		test.setCurrencyType(CurrencyType.UK_POUNDS); 
 //		test.setHoldItems(new String[]{"Test1", "Test2"});
 		try {
 			String msg = test.encode('0');
 			System.out.println(msg);
 			test.xmlEncode(System.out);
 			Message resp = Message.decode(msg, '0', true);
+			System.out.println(((CheckOutResponse)resp).getCurrencyType());
 			resp.xmlEncode(System.out);
 			
 			
