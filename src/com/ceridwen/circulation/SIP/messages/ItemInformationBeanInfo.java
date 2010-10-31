@@ -48,7 +48,7 @@ public class ItemInformationBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(5,22));
+      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,19));
 
       _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
       _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
