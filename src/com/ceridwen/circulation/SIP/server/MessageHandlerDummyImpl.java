@@ -16,13 +16,30 @@ import com.ceridwen.circulation.SIP.messages.PatronStatusResponse;
 import com.ceridwen.circulation.SIP.messages.RenewAllResponse;
 import com.ceridwen.circulation.SIP.messages.RenewResponse;
 import com.ceridwen.circulation.SIP.messages.SCStatus;
+import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class MessageHandlerDummyImpl implements MessageHandler {
 
 	@Override
 	public ACSStatus Status(SCStatus msg) {
-		// TODO Auto-generated method stub
-		return new ACSStatus();
+		ACSStatus response = new ACSStatus();
+		response.getSupportedMessages().set(SupportedMessages.BLOCK_PATRON);
+		response.getSupportedMessages().set(SupportedMessages.CHECK_IN);
+		response.getSupportedMessages().set(SupportedMessages.CHECK_OUT);
+		response.getSupportedMessages().set(SupportedMessages.END_PATRON_SESSION);
+		response.getSupportedMessages().set(SupportedMessages.FEE_PAID);
+		response.getSupportedMessages().set(SupportedMessages.HOLD);
+		response.getSupportedMessages().set(SupportedMessages.ITEM_INFORMATION);
+		response.getSupportedMessages().set(SupportedMessages.ITEM_STATUS_UPDATE);
+		response.getSupportedMessages().set(SupportedMessages.LOGIN);
+		response.getSupportedMessages().set(SupportedMessages.PATRON_ENABLE);
+		response.getSupportedMessages().set(SupportedMessages.PATRON_INFORMATION);
+		response.getSupportedMessages().set(SupportedMessages.PATRON_STATUS_REQUEST);
+		response.getSupportedMessages().set(SupportedMessages.RENEW);
+		response.getSupportedMessages().set(SupportedMessages.RENEW_ALL);
+		response.getSupportedMessages().set(SupportedMessages.REQUEST_SC_ACS_RESEND);
+		response.getSupportedMessages().set(SupportedMessages.SC_ACS_STATUS);
+		return response;
 	}
 
 	@Override

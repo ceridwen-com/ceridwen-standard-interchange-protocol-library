@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +16,9 @@ public class SocketDaemon extends Thread{
 		
   private int port;
   private MessageBroker broker;
-
+  private boolean running;
+  private ServerSocket listener;
+  
   public SocketDaemon(int port, MessageHandler handler)
   {
 	  this.port = port;
@@ -32,20 +35,35 @@ public class SocketDaemon extends Thread{
   
   public void run () {
     try{
-      ServerSocket listener = new ServerSocket(port);
+      running = true;
+      listener = new ServerSocket(port);
       Socket server;
 
       logger.info("Server daemon listening on port " + port);
       
-      while(true){
-        server = listener.accept();
-        ConnectionThread thread = new ConnectionThread(server, broker);
-        thread.start();
+      while(running){
+    	try {  
+	        server = listener.accept();
+	        ConnectionThread thread = new ConnectionThread(server, broker);
+	        thread.start();
+    	} catch (SocketException ex) {
+    		// listener closed
+    	}
       }
+      
+      logger.info("Server daemon shut down complete");
     } catch (IOException ioe) {
-      System.out.println("IOException on socket listen: " + ioe);
-      ioe.printStackTrace();
+      logger.fatal("IOException on socket listen", ioe);	
     }
+  }
+  
+  public void shutdown() {
+      logger.info("Server daemon shutting down");
+	  running = false;
+      try {
+		listener.close();
+  	  } catch (IOException e) {
+	  }
   }
 }
 
