@@ -30,8 +30,8 @@ public abstract class AbstractFlagField implements Serializable {
 	abstract protected char[] getValid();
 	
 	private boolean isValid(char ch) {
-		for (int i=0; i < this.getValid().length; i++) {
-			if (ch == this.getValid()[i]) {
+		for (char valid: this.getValid()) {
+			if (ch == valid) {
 				return true;
 			}
 		}
