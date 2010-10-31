@@ -2,7 +2,7 @@
 <project default="create_jar" name="Create Jar">
     <target name="create_jar">
         <jar destfile="bin/ceridwen-circulation.jar">
-            <fileset dir="bin" excludes="**.jar"/>
+            <fileset dir="bin" excludes="**.jar com/ceridwen/circulation/SIP/test/** com/ceridwen/circulation/SIP/samples/**"/>
         </jar>
     </target>
 </project>

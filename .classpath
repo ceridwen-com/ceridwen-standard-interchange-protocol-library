@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
