@@ -32,14 +32,25 @@ public class VariableFieldDescriptor {
   public static final char TERMINATOR = '|';
   public String ID;
   public boolean required = true;
+//  public int version = 2;
 
   public VariableFieldDescriptor(String ID) {
     this.ID = ID;
     this.required = true;
+//    version = 2;
   }
 
   public VariableFieldDescriptor(String ID, boolean required) {
     this.ID = ID;
     this.required = required;
+//    version = 2;
   }
+
+/**  
+  public VariableFieldDescriptor(String ID, boolean required, int version) {
+    this.ID = ID;
+    this.required = required;
+    this.version = version;
+  }
+*/  
 }
