@@ -3,15 +3,20 @@ package com.ceridwen.circulation.SIP.server;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.messages.ACSResend;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.SCResend;
 
 public class MessageBroker {
+	private static Log logger = LogFactory.getLog(MessageBroker.class);
+	
 	private MessageHandler handler;
 	private boolean strictChecksumChecking = false;
-	private Message lastMessage;
+	private Message lastResponse;
 	  	
 	public MessageBroker(MessageHandler handler)
 	{
@@ -24,7 +29,7 @@ public class MessageBroker {
 	  return this.strictChecksumChecking;
 	}
 	
-	public Message process(Message request) {
+	public Message process(Message request) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Class<MessageHandler> handlerInterface = MessageHandler.class;
 		
 		Method[] handlerMethods = handlerInterface.getMethods();
@@ -33,18 +38,7 @@ public class MessageBroker {
 			Class<?> types[] = handlerMethods[i].getParameterTypes();
 			if (types.length == 1) {
 				if (request.getClass() == types[0]) {
-					try {
-						return (Message)handlerMethods[i].invoke(handler, new Object[]{request});
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					return (Message)handlerMethods[i].invoke(handler, new Object[]{request});
 				}				
 			}
 		}		
@@ -53,16 +47,22 @@ public class MessageBroker {
 	
 	public String process(String request) {
 		try {
+			logger.info("Processing message: " + request);
 			Message requestMessage = Message.decode(request, null, this.strictChecksumChecking); 
-			if (!(requestMessage instanceof ACSResend)) {
-				lastMessage = requestMessage;
+			if (requestMessage instanceof ACSResend) {
+				logger.info("Resending response");
+			} else {
+				lastResponse = process(requestMessage);
 			}
-			return process(lastMessage).encode(lastMessage.getSequenceCharacter());
+			String response = lastResponse.encode(requestMessage.getSequenceCharacter());
+			logger.info("Sending response: " + response);
+			return response;
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn("Error trying to process message: " + request, e);
 			try {
 				return new SCResend().encode(null); // Do a resend properly
 			} catch (MandatoryFieldOmitted e1) {
+				logger.error("Error creating SCResend message", e);
 				return "96AZFEF6"; // if all else fails hardcode!
 			}
 		}

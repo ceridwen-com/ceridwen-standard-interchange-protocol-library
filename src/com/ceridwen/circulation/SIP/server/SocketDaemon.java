@@ -6,7 +6,12 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class SocketDaemon extends Thread{
+  private static Log logger = LogFactory.getLog(SocketDaemon.class);
+		
   private int port;
   private MessageBroker broker;
 
@@ -29,6 +34,8 @@ public class SocketDaemon extends Thread{
       ServerSocket listener = new ServerSocket(port);
       Socket server;
 
+      logger.info("Server daemon listening on port " + port);
+      
       while(true){
         server = listener.accept();
         ConnectionThread thread = new ConnectionThread(server, broker);
@@ -42,7 +49,9 @@ public class SocketDaemon extends Thread{
 }
 
 class ConnectionThread extends Thread {
-    private Socket server;
+	private static Log logger = LogFactory.getLog(ConnectionThread.class);
+
+	private Socket server;
     private MessageBroker broker;
 
     ConnectionThread(Socket server, MessageBroker broker) {
@@ -52,6 +61,7 @@ class ConnectionThread extends Thread {
 
     public void run () {
       try {
+        logger.info("New connection from " + server.getInetAddress().toString());
         DataInputStream in = new DataInputStream (server.getInputStream());
         PrintStream out = new PrintStream(server.getOutputStream());
         String input = in.readLine();
