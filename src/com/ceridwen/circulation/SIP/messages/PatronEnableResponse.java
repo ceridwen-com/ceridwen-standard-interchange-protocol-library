@@ -43,6 +43,13 @@ private PatronStatus patronStatus = new PatronStatus();
   public PatronStatus getPatronStatus() {
     return patronStatus;
   }
+  /**
+   * Use getPatronStatus().set(PatronStatus.XXX)
+   *     getPatronStatus().unset(PatronStatus.XXX)
+   *     getPatronStatus().unsetAll()
+   *   
+   * @param summary
+   */  
   @Deprecated
   public void setPatronStatus(PatronStatus patronStatus) {
     this.patronStatus = patronStatus;

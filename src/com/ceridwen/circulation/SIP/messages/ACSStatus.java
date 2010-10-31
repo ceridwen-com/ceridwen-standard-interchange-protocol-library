@@ -111,6 +111,13 @@ private Boolean onLineStatus;
   public void setTerminalLocation(String terminalLocation) {
     this.terminalLocation = terminalLocation;
   }
+  /**
+   * Use getSupportedMessages().set(SupportedMessages.XXX)
+   *     getSupportedMessages().unset(SupportedMessages.XXX)
+   *     getSupportedMessages().unsetAll()
+   *   
+   * @param summary
+   */  
   @Deprecated  
   public void setSupportedMessages(SupportedMessages supportedMessages) {
     this.supportedMessages = supportedMessages;

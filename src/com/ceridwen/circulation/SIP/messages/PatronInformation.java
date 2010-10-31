@@ -84,7 +84,14 @@ public class PatronInformation extends Message {
   public void setTerminalPassword(String terminalPassword) {
     this.terminalPassword = terminalPassword;
   }
-  @Deprecated  
+/**
+ * Use getSummary().set(Summary.XXX)
+ *     getSummary().unset(Summary.XXX)
+ *     getSummary().unsetAll()
+ *   
+ * @param summary
+ */
+  @Deprecated
   public void setSummary(Summary summary) {
     this.summary = summary;
   }
