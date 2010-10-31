@@ -123,9 +123,13 @@ private static Log log = LogFactory.getLog(Message.class);
         if (value == null)
           if (desc.getName().equalsIgnoreCase("magneticMedia"))
             ret = new String[]{"U"};
-          else
-            ret = new String[]{"N"};
-        else if (desc.getName().equalsIgnoreCase("ok")) {
+          else {
+        	if (desc.getName().equalsIgnoreCase("ok")) {
+        		ret = new String[]{"0"};
+        	} else {
+        		ret = new String[]{"N"};
+        	}        
+         } else if (desc.getName().equalsIgnoreCase("ok")) {
           ret = new String[]{((Boolean)value).booleanValue()?"1":"0"};
         } else {
           ret = new String[]{((Boolean)value).booleanValue()?"Y":"N"};
