@@ -129,7 +129,7 @@ private static Log log = LogFactory.getLog(Message.class);
         	} else {
         		ret = new String[]{"N"};
         	}        
-         } else if (desc.getName().equalsIgnoreCase("ok")) {
+        } else if (desc.getName().equalsIgnoreCase("ok")) {
           ret = new String[]{((Boolean)value).booleanValue()?"1":"0"};
         } else {
           ret = new String[]{((Boolean)value).booleanValue()?"Y":"N"};

@@ -43,8 +43,8 @@ public class RenewBeanInfo extends SimpleBeanInfo {
   }
   public PropertyDescriptor[] getPropertyDescriptors() {
     try {
-      PropertyDescriptor _thirdPartyAllowed = new PropertyDescriptor("thirdPartyAllowed", beanClass, "isThirdPartyAllowed", "setThirdPartyAllowed");
-      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "isNoBlock", "setNoBlock");
+      PropertyDescriptor _thirdPartyAllowed = new PropertyDescriptor("thirdPartyAllowed", beanClass, "getThirdPartyAllowed", "setThirdPartyAllowed");
+      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "getNoBlock", "setNoBlock");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _noBlockDueDate = new PropertyDescriptor("noBlockDueDate", beanClass, "getNoBlockDueDate", "setNoBlockDueDate");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
