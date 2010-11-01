@@ -148,7 +148,7 @@ private static Log log = LogFactory.getLog(Message.class);
     	}
       }
     } catch (Exception ex) {
-
+    	log.error("Unexpected error getting " + desc.getDisplayName(), ex);
     }
 
     return (ret != null)?ret:new String[]{""};
@@ -158,7 +158,7 @@ private static Log log = LogFactory.getLog(Message.class);
     StringBuffer ret = new StringBuffer();
 
     ret.append(input);
-
+    
     while (ret.length() <= (field.end - field.start)) {
       ret.append(" ");
     }
@@ -166,7 +166,7 @@ private static Log log = LogFactory.getLog(Message.class);
     return ret.toString();
   }
 
-  public String encode(Character sequence) throws MandatoryFieldOmitted {
+  public String encode(Character sequence) throws MandatoryFieldOmitted, FixedFieldTooLong {
     TreeMap<Integer, String> fixed = new TreeMap<Integer, String>();
     TreeMap<String, String[]> variable = new TreeMap<String, String[]>();
     StringBuffer message = new StringBuffer();
@@ -182,8 +182,14 @@ private static Log log = LogFactory.getLog(Message.class);
 	        String[] value = getProp(desc);
 	        if (value[0].length() == 0) {
 	          if (!field.allowBlank) {
-	            throw new MandatoryFieldOmitted();
+/**
+ * TODO allow auto-padding option
+ */	        	  
+	            throw new MandatoryFieldOmitted(desc.getDisplayName());
 	          }
+	        }
+	        if (value[0].length() > (field.end - field.start + 1)) {
+	        	throw new FixedFieldTooLong(desc.getDisplayName(), (field.end - field.start + 1));
 	        }
 	        fixed.put(new Integer(field.start), pad(value[0], field));
 	      }
@@ -194,6 +200,9 @@ private static Log log = LogFactory.getLog(Message.class);
 	          variable.put(field.ID, value);
 	        }
 	        else if (field.required) {
+/**
+ * TODO allow auto-padding option to be off
+ */	        	  
 	          variable.put(field.ID, value);
 	        }
 	      }

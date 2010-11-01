@@ -34,7 +34,14 @@ public class MandatoryFieldOmitted extends Exception {
 	 */
 	private static final long serialVersionUID = -152536357897100116L;
 
-public MandatoryFieldOmitted() {
-  }
-
+	private String field;
+	
+	public MandatoryFieldOmitted(String field) {
+		this.field = field;
+	}
+	
+	public String getMessage()
+	{
+		return this.field + " cannot be empty";
+	}
 }

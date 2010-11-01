@@ -24,6 +24,7 @@ import java.util.Date;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.FixedFieldTooLong;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
@@ -117,7 +118,10 @@ public class Sample {
 	  	} catch (MandatoryFieldOmitted e) {
 	  		e.printStackTrace();
 	        return;
-	  	}
+	  	} catch (FixedFieldTooLong e) {
+			e.printStackTrace();
+			return;
+		}
 
 	      if (!(response instanceof ACSStatus)) {
 	        System.err.println("Error");
@@ -172,7 +176,10 @@ public class Sample {
 	  	} catch (MandatoryFieldOmitted e) {
 	  		e.printStackTrace();
 	        return;
-	  	}
+	  	} catch (FixedFieldTooLong e) {
+			e.printStackTrace();
+			return;
+		}
 
 	      if (!(response instanceof CheckOutResponse)) {
 	        System.err.println("Error");

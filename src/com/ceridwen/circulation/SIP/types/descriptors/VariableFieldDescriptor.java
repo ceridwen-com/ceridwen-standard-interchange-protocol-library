@@ -32,20 +32,34 @@ public class VariableFieldDescriptor {
   public static final char TERMINATOR = '|';
   public String ID;
   public boolean required = true;
+//  public int minLength;
+//  public int maxLength;
 //  public int version = 2;
 
   public VariableFieldDescriptor(String ID) {
     this.ID = ID;
     this.required = true;
+//    this.maxLength = -1;
 //    version = 2;
   }
 
   public VariableFieldDescriptor(String ID, boolean required) {
     this.ID = ID;
     this.required = required;
+//    this.maxLength = -1;
 //    version = 2;
   }
 
+/**
+ *   
+  public VariableFieldDescriptor(String ID, int minLength, int maxLength, boolean required) {
+	    this.ID = ID;
+	    this.required = required;
+	    this.minLength = minLength;
+	    this.maxLength = maxLength;
+//	    version = 2;
+	  }
+*/
 /**  
   public VariableFieldDescriptor(String ID, boolean required, int version) {
     this.ID = ID;
