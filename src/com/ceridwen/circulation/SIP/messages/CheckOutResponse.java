@@ -149,8 +149,8 @@ private Boolean ok;
   public void setMediaType(MediaType mediaType) {
     this.mediaType = mediaType;
   }
-  public void setMagneticMedia(Boolean magenticMedia) {
-    this.magneticMedia = magenticMedia;
+  public void setMagneticMedia(Boolean magneticMedia) {
+    this.magneticMedia = magneticMedia;
   }
   public void setItemProperties(String itemProperties) {
     this.itemProperties = itemProperties;
