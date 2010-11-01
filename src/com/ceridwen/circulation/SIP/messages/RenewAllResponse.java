@@ -73,7 +73,7 @@ private Boolean ok;
   public String getPrintLine() {
     return printLine;
   }
-  public void setPrintline(String printLine) {
+  public void setPrintLine(String printLine) {
     this.printLine = printLine;
   }
 }

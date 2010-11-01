@@ -49,7 +49,7 @@ public class RenewAllResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintline", "setPrintline");
+      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
 
       _ok.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
       _renewedCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,6));
