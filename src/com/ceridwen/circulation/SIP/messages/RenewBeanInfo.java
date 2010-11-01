@@ -59,7 +59,7 @@ public class RenewBeanInfo extends SimpleBeanInfo {
       _thirdPartyAllowed.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
       _noBlock.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,3));
       _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(4,21));
-      _noBlockDueDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,39));
+      _noBlockDueDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(22,39));
 
       _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
       _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
