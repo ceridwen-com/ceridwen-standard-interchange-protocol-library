@@ -27,7 +27,7 @@ public class Renew extends Message {
 private Boolean thirdPartyAllowed;
   private Boolean noBlock;
   private java.util.Date transactionDate = new java.util.Date();
-  private java.util.Date noBlockDueDate;
+  private java.util.Date nbDueDate;
   private String institutionId;
   private String patronIdentifier;
   private String patronPassword;
@@ -57,11 +57,11 @@ private Boolean thirdPartyAllowed;
   public void setTransactionDate(java.util.Date transactionDate) {
     this.transactionDate = transactionDate;
   }
-  public java.util.Date getNoBlockDueDate() {
-    return noBlockDueDate;
+  public java.util.Date getNbDueDate() {
+    return nbDueDate;
   }
-  public void setNoBlockDueDate(java.util.Date noBlockDueDate) {
-    this.noBlockDueDate = noBlockDueDate;
+  public void setNbDueDate(java.util.Date nbDueDate) {
+    this.nbDueDate = nbDueDate;
   }
   public String getInstitutionId() {
     return institutionId;
