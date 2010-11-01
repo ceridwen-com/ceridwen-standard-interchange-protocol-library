@@ -79,7 +79,7 @@ public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
       _language.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(16,18));
       _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(19,36));
       _holdItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(37,40));
-      _overdueItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(37,44));
+      _overdueItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(41,44));
       _chargedItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(45,48));
       _fineItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(49,52));
       _recallItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(53,56));
