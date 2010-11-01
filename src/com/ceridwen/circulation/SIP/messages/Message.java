@@ -191,6 +191,12 @@ private static Log log = LogFactory.getLog(Message.class);
 	        if (value[0].length() > (field.end - field.start + 1)) {
 	        	throw new FixedFieldTooLong(desc.getDisplayName(), (field.end - field.start + 1));
 	        }
+	        if (desc.getPropertyType() == Date.class || desc.getPropertyType() == Boolean.class) {
+	        	if (!(value[0].length() == 0 || value[0].length() == (field.end - field.start + 1))) {
+	        		throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName() + ", start/end (" + field.start + "," + field.end + ") invalid for type " +
+	    		desc.getPropertyType().getName());
+	        	}
+    		}
 	        fixed.put(new Integer(field.start), pad(value[0], field));
 	      }
 	      if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
