@@ -28,18 +28,18 @@
 
 package com.ceridwen.circulation.SIP.types.descriptors;
 
-public class FixedFieldDescriptor {
+public class PositionedFieldDescriptor {
   public int start;
   public int end;
   public boolean allowBlank = true;
 
-  public FixedFieldDescriptor(int start, int end, boolean allowBlank) {
-    this.start = start;
-    this.end = end;
-    this.allowBlank = allowBlank;
+  protected PositionedFieldDescriptor(int start, int end, FieldDescriptor d) {
+	  this.start = start;
+	  this.end = end;
+	  this.allowBlank = true;
   }
 
-  public FixedFieldDescriptor(int start, int end) {
+  public PositionedFieldDescriptor(int start, int end) {
     this.start = start;
     this.end = end;
     this.allowBlank = true;

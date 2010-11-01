@@ -20,8 +20,9 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
  * <p>Title: </p>
@@ -32,17 +33,11 @@ import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
  * @version 1.0
  */
 
-public class HoldBeanInfo extends SimpleBeanInfo {
+public class HoldBeanInfo extends MessageBeanInfo {
   Class<Hold> beanClass = Hold.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
-
   public HoldBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _holdMode = new PropertyDescriptor("holdMode", beanClass, "getHoldMode", "setHoldMode");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _expirationDate = new PropertyDescriptor("expirationDate", beanClass, "getExpirationDate", "setExpirationDate");
@@ -56,19 +51,10 @@ public class HoldBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "getFeeAcknowledged", "setFeeAcknowledged");
 
-      _holdMode.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,20));
-
-      _expirationDate.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BW"));
-      _pickupLocation.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BS"));
-      _holdType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BY"));
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
-      _patronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AD"));
-      _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
-      _titleIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AJ"));
-      _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
-      _feeAcknowledged.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BO"));
+      _holdMode.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
+      
+      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _holdMode,
@@ -84,23 +70,5 @@ public class HoldBeanInfo extends SimpleBeanInfo {
         _terminalPassword,
         _feeAcknowledged};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

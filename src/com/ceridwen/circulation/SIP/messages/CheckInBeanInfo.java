@@ -29,20 +29,16 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
 
-public class CheckInBeanInfo extends SimpleBeanInfo {
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
+
+public class CheckInBeanInfo extends MessageBeanInfo {
   Class<CheckIn> beanClass = CheckIn.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
 
   public CheckInBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _cancel = new PropertyDescriptor("cancel", beanClass, "getCancel", "setCancel");
       PropertyDescriptor _currentLocation = new PropertyDescriptor("currentLocation", beanClass, "getCurrentLocation", "setCurrentLocation");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
@@ -53,17 +49,12 @@ public class CheckInBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 
-      _noBlock.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,20));
-      _returnDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(21,38));
+      _noBlock.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
+      _returnDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(21,38));
 
-      _currentLocation.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AP"));
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
-      _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
-      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH", false));
-      _cancel.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BI", false));
-
+      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
+      
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _cancel,
         _currentLocation,
@@ -75,23 +66,5 @@ public class CheckInBeanInfo extends SimpleBeanInfo {
         _terminalPassword,
         _transactionDate};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

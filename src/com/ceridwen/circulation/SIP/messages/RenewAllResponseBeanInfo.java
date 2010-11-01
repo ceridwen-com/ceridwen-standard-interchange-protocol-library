@@ -20,8 +20,8 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
 /**
  * <p>Title: </p>
@@ -32,17 +32,11 @@ import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
  * @version 1.0
  */
 
-public class RenewAllResponseBeanInfo extends SimpleBeanInfo {
+public class RenewAllResponseBeanInfo extends MessageBeanInfo {
   Class<RenewAllResponse> beanClass = RenewAllResponse.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
-
   public RenewAllResponseBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
       PropertyDescriptor _renewedCount = new PropertyDescriptor("renewedCount", beanClass, "getRenewedCount", "setRenewedCount");
       PropertyDescriptor _unrenewedCount = new PropertyDescriptor("unrenewedCount", beanClass, "getUnrenewedCount", "setUnrenewedCount");
@@ -51,14 +45,10 @@ public class RenewAllResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
       PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
 
-      _ok.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
-      _renewedCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,6));
-      _unrenewedCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(7,10));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(11,28));
-
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF"));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG"));
+      _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
+      _renewedCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,6));
+      _unrenewedCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(7,10));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(11,28));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _ok,
@@ -69,23 +59,5 @@ public class RenewAllResponseBeanInfo extends SimpleBeanInfo {
         _screenMessage,
         _printLine};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

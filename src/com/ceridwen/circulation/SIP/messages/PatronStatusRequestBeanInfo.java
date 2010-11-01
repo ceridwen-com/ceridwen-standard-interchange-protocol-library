@@ -20,8 +20,9 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
  * <p>Title: RTSI</p>
@@ -32,17 +33,11 @@ import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
  * @version 1.0
  */
 
-public class PatronStatusRequestBeanInfo extends SimpleBeanInfo {
+public class PatronStatusRequestBeanInfo extends MessageBeanInfo {
   Class<PatronStatusRequest> beanClass = PatronStatusRequest.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
-
   public PatronStatusRequestBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _language = new PropertyDescriptor("language", beanClass, "getLanguage", "setLanguage");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
@@ -50,14 +45,11 @@ public class PatronStatusRequestBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 
-      _language.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,4));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(5,22));
-
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
-      _terminalPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AC"));
-      _patronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AD"));
-
+      _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,4));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,22));
+      
+      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
+      
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _institutionId,
         _language,
@@ -66,23 +58,5 @@ public class PatronStatusRequestBeanInfo extends SimpleBeanInfo {
         _terminalPassword,
         _transactionDate};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

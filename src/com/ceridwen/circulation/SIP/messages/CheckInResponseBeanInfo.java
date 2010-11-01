@@ -29,25 +29,20 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
 
-public class CheckInResponseBeanInfo extends SimpleBeanInfo {
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+
+public class CheckInResponseBeanInfo extends MessageBeanInfo {
   Class<CheckInResponse> beanClass = CheckInResponse.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
 
   public CheckInResponseBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _alert = new PropertyDescriptor("alert", beanClass, "getAlert", "setAlert");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _magenticMedia = new PropertyDescriptor("magenticMedia", beanClass, "getMagenticMedia", "setMagenticMedia");
+      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "getMagneticMedia", "setMagneticMedia");
       PropertyDescriptor _mediaType = new PropertyDescriptor("mediaType", beanClass, "getMediaType", "setMediaType");
       PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
@@ -59,30 +54,18 @@ public class CheckInResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 
-      _ok.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
-      _resensitize.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,3));
-      _magenticMedia.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(4,4));
-      _alert.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(5,5));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(6,23));
-
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _itemIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AB"));
-      _permanentLocation.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AQ"));
-      _titleIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AJ", true));
-      _sortBin.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CL", true));
-      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA", true));
-      _mediaType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CK", true));
-      _itemProperties.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CH", true));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF", true));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG", true));
-
+      _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
+      _resensitize.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));
+      _magneticMedia.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,4));
+      _alert.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,5));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,23));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _alert,
         _institutionId,
         _itemIdentifier,
         _itemProperties,
-        _magenticMedia,
+        _magneticMedia,
         _mediaType,
         _ok,
         _patronIdentifier,
@@ -94,23 +77,5 @@ public class CheckInResponseBeanInfo extends SimpleBeanInfo {
         _titleIdentifier,
         _transactionDate};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

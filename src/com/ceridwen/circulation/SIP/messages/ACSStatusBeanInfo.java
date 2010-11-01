@@ -29,20 +29,15 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
 
-public class ACSStatusBeanInfo extends SimpleBeanInfo {
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+
+public class ACSStatusBeanInfo extends MessageBeanInfo {
   Class<ACSStatus> beanClass = ACSStatus.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
 
   public ACSStatusBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal()  throws IntrospectionException {
       PropertyDescriptor _checkInOk = new PropertyDescriptor("checkInOk", beanClass, "isCheckInOk", "setCheckInOk");
       PropertyDescriptor _checkOutOk = new PropertyDescriptor("checkOutOk", beanClass, "isCheckOutOk", "setCheckOutOk");
       PropertyDescriptor _dateTimeSync = new PropertyDescriptor("dateTimeSync", beanClass, "getDateTimeSync", "setDateTimeSync");
@@ -60,23 +55,16 @@ public class ACSStatusBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _terminalLocation = new PropertyDescriptor("terminalLocation", beanClass, "getTerminalLocation", "setTerminalLocation");
       PropertyDescriptor _timeoutPeriod = new PropertyDescriptor("timeoutPeriod", beanClass, "getTimeoutPeriod", "setTimeoutPeriod");
 
-      _onLineStatus.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
-      _checkInOk.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,3));
-      _checkOutOk.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(4,4));
-      _renewalPolicy.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(5,5));
-      _statusUpdateOk.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(6,6));
-      _offlineOk.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(7,7));
-      _timeoutPeriod.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(8,10));
-      _retriesAllowed.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(11,13));
-      _dateTimeSync.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(14,31));
-      _protocolVersion.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(32,35));
-
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _libraryName.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AM"));
-      _supportedMessages.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BX"));
-      _terminalLocation.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AN"));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF"));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG"));
+      _onLineStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
+      _checkInOk.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));
+      _checkOutOk.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,4));
+      _renewalPolicy.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,5));
+      _statusUpdateOk.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,6));
+      _offlineOk.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(7,7));
+      _timeoutPeriod.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(8,10));
+      _retriesAllowed.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(11,13));
+      _dateTimeSync.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(14,31));
+      _protocolVersion.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(32,35));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _checkInOk,
@@ -96,23 +84,5 @@ public class ACSStatusBeanInfo extends SimpleBeanInfo {
         _terminalLocation,
         _timeoutPeriod};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

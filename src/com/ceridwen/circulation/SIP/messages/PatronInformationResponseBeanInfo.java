@@ -20,8 +20,8 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
 /**
  * <p>Title: RTSI</p>
@@ -32,17 +32,11 @@ import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
  * @version 1.0
  */
 
-public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
+public class PatronInformationResponseBeanInfo extends MessageBeanInfo {
   Class<PatronInformationResponse> beanClass = PatronInformationResponse.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
-
   public PatronInformationResponseBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _chargedItems = new PropertyDescriptor("chargedItems", beanClass, "getChargedItems", "setChargedItems");
       PropertyDescriptor _chargedItemsCount = new PropertyDescriptor("chargedItemsCount", beanClass, "getChargedItemsCount", "setChargedItemsCount");
       PropertyDescriptor _chargedItemsLimit = new PropertyDescriptor("chargedItemsLimit", beanClass, "getChargedItemsLimit", "setChargedItemsLimit");
@@ -75,39 +69,15 @@ public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _validPatron = new PropertyDescriptor("validPatron", beanClass, "getValidPatron", "setValidPatron");
       PropertyDescriptor _validPatronPassword = new PropertyDescriptor("validPatronPassword", beanClass, "getValidPatronPassword", "setValidPatronPassword");
 
-      _patronStatus.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,15));
-      _language.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(16,18));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(19,36));
-      _holdItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(37,40));
-      _overdueItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(41,44));
-      _chargedItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(45,48));
-      _fineItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(49,52));
-      _recallItemsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(53,56));
-      _unavailableHoldsCount.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(57,60));
-
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO") );
-      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
-      _personalName.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AE"));
-      _holdItemsLimit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BZ", true));
-      _overdueItemsLimit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CA", true));
-      _chargedItemsLimit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CB", true));
-      _validPatron.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BL", true));
-      _validPatronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CQ", true));
-      _currencyType.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BH", true));
-      _feeAmount.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BV", true));
-      _feeLimit.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CC", true));    
-      _holdItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AS", false));
-      _overdueItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AT", false));
-      _chargedItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AU", false));
-      _fineItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AV", false));
-      _recallItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BU", false));
-      _unavailableHoldItems.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CD", false));
-      _homeAddress.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BD", true));
-      _eMailAddress.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BE", true));
-      _homePhoneNumber.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BF", true));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF", true));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG", true));
-
+      _patronStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,15));
+      _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(16,18));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(19,36));
+      _holdItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(37,40));
+      _overdueItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(41,44));
+      _chargedItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(45,48));
+      _fineItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(49,52));
+      _recallItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(53,56));
+      _unavailableHoldsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(57,60));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _chargedItems,
@@ -142,23 +112,5 @@ public class PatronInformationResponseBeanInfo extends SimpleBeanInfo {
         _validPatron,
         _validPatronPassword};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }

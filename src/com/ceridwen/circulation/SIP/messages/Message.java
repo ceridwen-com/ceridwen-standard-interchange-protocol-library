@@ -35,8 +35,8 @@ import java.lang.reflect.Method;
 import org.apache.commons.beanutils.*;
 import java.beans.*;
 import java.util.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
 import com.ceridwen.circulation.SIP.types.flagfields.AbstractFlagField;
 
@@ -154,7 +154,7 @@ private static Log log = LogFactory.getLog(Message.class);
     return (ret != null)?ret:new String[]{""};
   }
 
-  private String pad(String input, FixedFieldDescriptor field) {
+  private String pad(String input, PositionedFieldDescriptor field) {
     StringBuffer ret = new StringBuffer();
 
     ret.append(input);
@@ -177,8 +177,8 @@ private static Log log = LogFactory.getLog(Message.class);
       PropertyDescriptor desc = descs[n];
       Object SIPField = desc.getValue("SIPFieldDescriptor");
       if (SIPField != null) {
-	      if (SIPField.getClass().equals(FixedFieldDescriptor.class)) {
-	        FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
+	      if (SIPField.getClass().equals(PositionedFieldDescriptor.class)) {
+	        PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
 	        String[] value = getProp(desc);
 	        if (value[0].length() == 0) {
 	          if (!field.allowBlank) {
@@ -199,8 +199,8 @@ private static Log log = LogFactory.getLog(Message.class);
     		}
 	        fixed.put(new Integer(field.start), pad(value[0], field));
 	      }
-	      if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-	        VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
+	      if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
+	        TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
 	        String[] value = getProp(desc);
 	        if (value[0].length() > 0) {
 	          variable.put(field.ID, value);
@@ -230,7 +230,7 @@ private static Log log = LogFactory.getLog(Message.class);
         for (String value : values) {
 	        message.append(key);
 	        message.append(value);
-	        message.append(VariableFieldDescriptor.TERMINATOR);
+	        message.append(TaggedFieldDescriptor.TERMINATOR);
         }
     }
 
@@ -338,8 +338,8 @@ private static Log log = LogFactory.getLog(Message.class);
         Object SIPField = desc.getValue("SIPFieldDescriptor");
         String value = "";
         if (SIPField != null) {
-          if (SIPField.getClass() == FixedFieldDescriptor.class) {
-            FixedFieldDescriptor field = (FixedFieldDescriptor) SIPField;
+          if (SIPField.getClass() == PositionedFieldDescriptor.class) {
+            PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
             value = message.substring(field.start, field.end + 1);
             msg.setProp(desc, value);
             if (fixedFieldEnd < field.end) {
@@ -434,7 +434,7 @@ private static Log log = LogFactory.getLog(Message.class);
         status = 3;
       }
       else if (status == 3) {
-        if (data.charAt(n) == VariableFieldDescriptor.TERMINATOR) {
+        if (data.charAt(n) == TaggedFieldDescriptor.TERMINATOR) {
         	this.setFieldProp(fieldtag.toString(), fielddata.toString());
         	status = 1;
         }
@@ -453,8 +453,8 @@ private static Log log = LogFactory.getLog(Message.class);
           PropertyDescriptor desc = descs[n];
           Object SIPField = desc.getValue("SIPFieldDescriptor");
           if (SIPField != null) {
-            if (SIPField.getClass().equals(VariableFieldDescriptor.class)) {
-              VariableFieldDescriptor field = (VariableFieldDescriptor) SIPField;
+            if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
+              TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
               if (field.ID.equals(tag)) {
             	  this.setProp(desc, data);
               }

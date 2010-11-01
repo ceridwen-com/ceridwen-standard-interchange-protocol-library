@@ -20,8 +20,8 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import java.beans.*;
-import com.ceridwen.circulation.SIP.types.descriptors.FixedFieldDescriptor;
-import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
+
+import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
 /**
  * <p>Title: </p>
@@ -32,17 +32,11 @@ import com.ceridwen.circulation.SIP.types.descriptors.VariableFieldDescriptor;
  * @version 1.0
  */
 
-public class PatronEnableResponseBeanInfo extends SimpleBeanInfo {
+public class PatronEnableResponseBeanInfo extends MessageBeanInfo {
   Class<PatronEnableResponse> beanClass = PatronEnableResponse.class;
-  String iconColor16x16Filename;
-  String iconColor32x32Filename;
-  String iconMono16x16Filename;
-  String iconMono32x32Filename;
-
   public PatronEnableResponseBeanInfo() {
   }
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
+  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _patronStatus = new PropertyDescriptor("patronStatus", beanClass, "getPatronStatus", "setPatronStatus");
       PropertyDescriptor _language = new PropertyDescriptor("language", beanClass, "getLanguage", "setLanguage");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
@@ -54,18 +48,9 @@ public class PatronEnableResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
       PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
 
-      _patronStatus.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,15));
-      _language.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(16,18));
-      _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(19,36));
-
-      _institutionId.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AO"));
-      _patronIdentifier.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AA"));
-      _personalName.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AE"));
-      _validPatron.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("BL"));
-      _validPatronPassword.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("CQ"));
-      _screenMessage.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AF"));
-      _printLine.setValue("SIPFieldDescriptor", new VariableFieldDescriptor("AG"));
-
+      _patronStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,15));
+      _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(16,18));
+      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(19,36));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _patronStatus,
@@ -79,23 +64,5 @@ public class PatronEnableResponseBeanInfo extends SimpleBeanInfo {
         _screenMessage,
         _printLine};
       return pds;
-    }
-    catch(IntrospectionException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-  }
-  public java.awt.Image getIcon(int iconKind) {
-    switch (iconKind) {
-      case BeanInfo.ICON_COLOR_16x16:
-        return iconColor16x16Filename != null ? loadImage(iconColor16x16Filename) : null;
-      case BeanInfo.ICON_COLOR_32x32:
-        return iconColor32x32Filename != null ? loadImage(iconColor32x32Filename) : null;
-      case BeanInfo.ICON_MONO_16x16:
-        return iconMono16x16Filename != null ? loadImage(iconMono16x16Filename) : null;
-      case BeanInfo.ICON_MONO_32x32:
-        return iconMono32x32Filename != null ? loadImage(iconMono32x32Filename) : null;
-    }
-    return null;
   }
 }
