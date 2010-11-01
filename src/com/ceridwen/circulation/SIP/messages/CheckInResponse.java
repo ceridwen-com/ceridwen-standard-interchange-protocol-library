@@ -39,7 +39,7 @@ public class CheckInResponse extends Message {
 	private static final long serialVersionUID = -3403534383487215711L;
 private Boolean ok;
   private Boolean resensitize;
-  private Boolean magenticMedia;
+  private Boolean magneticMedia;
   private Boolean alert;
   private Date transactionDate = new java.util.Date();
   private String institutionId;
@@ -68,8 +68,8 @@ private Boolean ok;
   public String getItemProperties() {
     return itemProperties;
   }
-  public Boolean getMagenticMedia() {
-    return magenticMedia;
+  public Boolean getMagneticMedia() {
+    return magneticMedia;
   }
   public MediaType getMediaType() {
     return mediaType;
@@ -131,8 +131,8 @@ private Boolean ok;
   public void setMediaType(MediaType mediaType) {
     this.mediaType = mediaType;
   }
-  public void setMagenticMedia(Boolean magenticMedia) {
-    this.magenticMedia = magenticMedia;
+  public void setMagneticMedia(Boolean magneticMedia) {
+    this.magneticMedia = magneticMedia;
   }
   public void setItemProperties(String itemProperties) {
     this.itemProperties = itemProperties;
