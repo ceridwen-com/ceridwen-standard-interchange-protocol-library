@@ -103,7 +103,6 @@ src/com/ceridwen/circulation/SIP/tests/EndPatronSessionTest.java -text svneol=un
 src/com/ceridwen/circulation/SIP/tests/EndSessionResponseTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/FeePaidResponseTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/FeePaidTest.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/tests/GenerateTemplates.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/HoldResponseTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/HoldTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/ItemInformationResponseTest.java -text svneol=unset#text/plain

@@ -6,12 +6,8 @@ import com.ceridwen.circulation.SIP.messages.Message;
 public class ItemStatusUpdateResponseTest extends AbstractMessageTest<ItemStatusUpdateResponse> {
 
 	@Override
-	public Message getMessage() {
+	public Message getDefaultMessage() {
 		ItemStatusUpdateResponse m = new ItemStatusUpdateResponse();
-
-		/**
-		 * TODO Populate properties. 		
-		 */
 
 		m.setTransactionDate(new java.util.Date(0));
 
@@ -19,8 +15,28 @@ public class ItemStatusUpdateResponseTest extends AbstractMessageTest<ItemStatus
 	}
 
 	@Override
-	public String getEncoding() {
+	public String getDefaultEncoding() {
 		return "20019700101    010000AB|AF|AG|AJ|CH|AY0AZF5C1";
+	}
+	
+	@Override
+	public Message getMessage() {
+		ItemStatusUpdateResponse m = new ItemStatusUpdateResponse();
+
+		m.setItemIdentifier("itemIdentifier");
+		m.setItemProperties("itemProperties");
+		m.setOk(true);
+		m.setPrintLine("printLine");
+		m.setScreenMessage("screenMessage");
+		m.setTitleIdentifier("titleIdentifier");
+		m.setTransactionDate(new java.util.Date(0));
+
+		return m;
+	}
+
+	@Override
+	public String getEncoding() {
+		return "20119700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|CHitemProperties|AY0AZDB13";
 	}
 }
 

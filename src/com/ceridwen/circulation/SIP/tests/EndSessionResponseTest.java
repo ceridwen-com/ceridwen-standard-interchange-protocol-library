@@ -6,13 +6,28 @@ import com.ceridwen.circulation.SIP.messages.Message;
 public class EndSessionResponseTest extends AbstractMessageTest<EndSessionResponse> {
 
 	@Override
+	public Message getDefaultMessage() {
+		EndSessionResponse m = new EndSessionResponse();
+		
+		m.setTransactionDate(new java.util.Date(0));
+
+		return m;
+	}
+
+	@Override
+	public String getDefaultEncoding() {
+		return "36N19700101    010000AA|AF|AG|AO|AY0AZF69F";
+	}
+
+	@Override
 	public Message getMessage() {
 		EndSessionResponse m = new EndSessionResponse();
-
-		/**
-		 * TODO Populate properties. 		
-		 */
-
+		
+		m.setEndSession(true);
+		m.setInstitutionId("institutionId");
+		m.setPatronIdentifier("patronIdentifier");
+		m.setPrintLine("printLine");
+		m.setScreenMessage("screenMessage");
 		m.setTransactionDate(new java.util.Date(0));
 
 		return m;
@@ -20,7 +35,8 @@ public class EndSessionResponseTest extends AbstractMessageTest<EndSessionRespon
 
 	@Override
 	public String getEncoding() {
-		return "36N19700101    010000AA|AF|AG|AO|AY0AZF69F";
+		return "36Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|AY0AZE18C";
 	}
+
 }
 

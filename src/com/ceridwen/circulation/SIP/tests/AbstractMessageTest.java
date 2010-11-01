@@ -1,6 +1,6 @@
 package com.ceridwen.circulation.SIP.tests;
 
-//import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayOutputStream;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.FixedFieldTooLong;
@@ -16,6 +16,8 @@ import junit.framework.TestCase;
 public abstract class AbstractMessageTest<MSG extends Message> extends TestCase {
 
 
+	public abstract Message getDefaultMessage();
+	public abstract String getDefaultEncoding();
 	public abstract Message getMessage();
 	public abstract String getEncoding();
 	
@@ -34,10 +36,18 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 		}
 	}
 
+	public void testDefaultEncode() {
+		try {
+			String t = this.getDefaultMessage().encode('0');
+			Assert.assertEquals(this.getDefaultEncoding(), t);
+		} catch (MandatoryFieldOmitted e) {
+			fail("Mandatory Field Omitted: " + e.getMessage());
+		} catch (FixedFieldTooLong e) {
+			fail("Fixed Field Too Long: " + e.getMessage());
+		}
+	}
+
 	public void testDecode() {
-		Assert.assertTrue(true);
-/**
- * until all tests populate this will fail:			 
 		try {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			Message m = MSG.decode(this.getEncoding(), '0', false);
@@ -57,7 +67,6 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 		} catch (MessageNotUnderstood e) {
 			fail("Message Not Understood");
 		}
-*/
 	}
 	
 	public void testRoundTrip() {

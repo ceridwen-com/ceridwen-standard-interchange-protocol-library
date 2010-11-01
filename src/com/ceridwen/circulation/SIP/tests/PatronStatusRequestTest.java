@@ -2,16 +2,13 @@ package com.ceridwen.circulation.SIP.tests;
 
 import com.ceridwen.circulation.SIP.messages.PatronStatusRequest;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.types.enumerations.Language;
 
 public class PatronStatusRequestTest extends AbstractMessageTest<PatronStatusRequest> {
 
 	@Override
-	public Message getMessage() {
+	public Message getDefaultMessage() {
 		PatronStatusRequest m = new PatronStatusRequest();
-
-		/**
-		 * TODO Populate properties. 		
-		 */
 
 		m.setTransactionDate(new java.util.Date(0));
 
@@ -19,8 +16,27 @@ public class PatronStatusRequestTest extends AbstractMessageTest<PatronStatusReq
 	}
 
 	@Override
-	public String getEncoding() {
+	public String getDefaultEncoding() {
 		return "2300019700101    010000AA|AC|AD|AO|AY0AZF667";
+	}
+
+	@Override
+	public Message getMessage() {
+		PatronStatusRequest m = new PatronStatusRequest();
+		
+		m.setInstitutionId("institutionId");
+		m.setLanguage(Language.UNITED_KINGDOM);
+		m.setPatronIdentifier("patronIdentifier");
+		m.setPatronPassword("patronPassword");
+		m.setTerminalPassword("terminalPassword");
+		m.setTransactionDate(new java.util.Date(0));
+
+		return m;
+	}
+
+	@Override
+	public String getEncoding() {
+		return "2302419700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|AY0AZDDBD";
 	}
 }
 
