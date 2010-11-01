@@ -41,7 +41,7 @@ public class CheckOutResponse extends Message {
 	private static final long serialVersionUID = 9222995766948881317L;
 private Boolean ok;
   private Boolean renewalOk;
-  private Boolean magenticMedia;
+  private Boolean magneticMedia;
   private Boolean desensitize;
   private Date transactionDate = new Date();
   private String institutionId;
@@ -86,8 +86,8 @@ private Boolean ok;
   public String getItemProperties() {
     return itemProperties;
   }
-  public Boolean getMagenticMedia() {
-    return magenticMedia;
+  public Boolean getMagneticMedia() {
+    return magneticMedia;
   }
   public MediaType getMediaType() {
     return mediaType;
@@ -149,8 +149,8 @@ private Boolean ok;
   public void setMediaType(MediaType mediaType) {
     this.mediaType = mediaType;
   }
-  public void setMagenticMedia(Boolean magenticMedia) {
-    this.magenticMedia = magenticMedia;
+  public void setMagneticMedia(Boolean magenticMedia) {
+    this.magneticMedia = magenticMedia;
   }
   public void setItemProperties(String itemProperties) {
     this.itemProperties = itemProperties;

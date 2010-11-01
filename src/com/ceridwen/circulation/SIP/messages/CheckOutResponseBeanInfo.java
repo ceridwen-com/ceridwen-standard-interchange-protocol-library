@@ -51,7 +51,7 @@ public class CheckOutResponseBeanInfo extends SimpleBeanInfo {
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _magenticMedia = new PropertyDescriptor("magenticMedia", beanClass, "getMagenticMedia", "setMagenticMedia");
+      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "getMagneticMedia", "setMagneticMedia");
       PropertyDescriptor _mediaType = new PropertyDescriptor("mediaType", beanClass, "getMediaType", "setMediaType");
       PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
@@ -65,7 +65,7 @@ public class CheckOutResponseBeanInfo extends SimpleBeanInfo {
 
       _ok.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(2,2));
       _renewalOk.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(3,3));
-      _magenticMedia.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(4,4));
+      _magneticMedia.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(4,4));
       _desensitize.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(5,5));
       _transactionDate.setValue("SIPFieldDescriptor", new FixedFieldDescriptor(6,23));
 
@@ -93,7 +93,7 @@ public class CheckOutResponseBeanInfo extends SimpleBeanInfo {
         _institutionId,
         _itemIdentifier,
         _itemProperties,
-        _magenticMedia,
+        _magneticMedia,
         _mediaType,
         _ok,
         _patronIdentifier,
