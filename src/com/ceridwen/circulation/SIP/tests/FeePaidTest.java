@@ -18,7 +18,7 @@ public class FeePaidTest extends AbstractMessageTest<FeePaid> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "3719700101    0100000100USDAA|AC|BV|CG|";
+		return "3719700101    0100000100USDAA|AO|BV|";
 	}
 
 	@Override
