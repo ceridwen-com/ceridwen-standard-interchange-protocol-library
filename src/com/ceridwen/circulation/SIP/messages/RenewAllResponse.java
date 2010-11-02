@@ -25,8 +25,8 @@ public class RenewAllResponse extends Message {
 	 */
 	private static final long serialVersionUID = 5428582577226346891L;
 private Boolean ok;
-  private String renewedCount;
-  private String unrenewedCount;
+  private Integer renewedCount;
+  private Integer unrenewedCount;
   private java.util.Date transactionDate = new java.util.Date();
   private String institutionId;
   private String screenMessage;
@@ -40,16 +40,16 @@ private Boolean ok;
   public void setOk(Boolean ok) {
     this.ok = ok;
   }
-  public String getRenewedCount() {
+  public Integer getRenewedCount() {
     return renewedCount;
   }
-  public void setRenewedCount(String renewedCount) {
+  public void setRenewedCount(Integer renewedCount) {
     this.renewedCount = renewedCount;
   }
-  public String getUnrenewedCount() {
+  public Integer getUnrenewedCount() {
     return unrenewedCount;
   }
-  public void setUnrenewedCount(String unrenewedCount) {
+  public void setUnrenewedCount(Integer unrenewedCount) {
     this.unrenewedCount = unrenewedCount;
   }
   public java.util.Date getTransactionDate() {

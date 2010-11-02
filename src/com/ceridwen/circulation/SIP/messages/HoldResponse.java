@@ -28,7 +28,7 @@ private Boolean ok;
   private Boolean available;
   private java.util.Date transactionDate = new java.util.Date();
   private java.util.Date expirationDate;
-  private String queuePosition;
+  private Integer queuePosition;
   private String pickupLocation;
   private String institutionId;
   private String patronIdentifier;
@@ -63,10 +63,10 @@ private Boolean ok;
   public void setExpirationDate(java.util.Date expirationDate) {
     this.expirationDate = expirationDate;
   }
-  public String getQueuePosition() {
+  public Integer getQueuePosition() {
     return queuePosition;
   }
-  public void setQueuePosition(String queuePosition) {
+  public void setQueuePosition(Integer queuePosition) {
     this.queuePosition = queuePosition;
   }
   public String getPickupLocation() {

@@ -42,18 +42,18 @@ public class PatronInformationResponse extends Message {
   private PatronStatus patronStatus = new PatronStatus();
   private Language language = Language.UNKNOWN;
   private Date transactionDate = new Date();
-  private String holdItemsCount;
-  private String overdueItemsCount;
-  private String chargedItemsCount;
-  private String fineItemsCount;
-  private String recallItemsCount;
-  private String unavailableHoldsCount;
+  private Integer holdItemsCount;
+  private Integer overdueItemsCount;
+  private Integer chargedItemsCount;
+  private Integer fineItemsCount;
+  private Integer recallItemsCount;
+  private Integer unavailableHoldsCount;
   private String institutionId;
   private String patronIdentifier;
   private String personalName;
-  private String holdItemsLimit;
-  private String overdueItemsLimit;
-  private String chargedItemsLimit;
+  private Integer holdItemsLimit;
+  private Integer overdueItemsLimit;
+  private Integer chargedItemsLimit;
   private Boolean validPatron;
   private Boolean validPatronPassword;
   private CurrencyType currencyType = CurrencyType.US_DOLLARS;
@@ -77,10 +77,10 @@ public class PatronInformationResponse extends Message {
   public String[] getChargedItems() {
     return chargedItems;
   }
-  public String getChargedItemsCount() {
+  public Integer getChargedItemsCount() {
     return chargedItemsCount;
   }
-  public String getChargedItemsLimit() {
+  public Integer getChargedItemsLimit() {
     return chargedItemsLimit;
   }
   public CurrencyType getCurrencyType() {
@@ -98,16 +98,16 @@ public class PatronInformationResponse extends Message {
   public String[] getFineItems() {
     return fineItems;
   }
-  public String getFineItemsCount() {
+  public Integer getFineItemsCount() {
     return fineItemsCount;
   }
   public String[] getHoldItems() {
     return holdItems;
   }
-  public String getHoldItemsCount() {
+  public Integer getHoldItemsCount() {
     return holdItemsCount;
   }
-  public String getHoldItemsLimit() {
+  public Integer getHoldItemsLimit() {
     return holdItemsLimit;
   }
   public String getHomeAddress() {
@@ -125,10 +125,10 @@ public class PatronInformationResponse extends Message {
   public String[] getOverdueItems() {
     return overdueItems;
   }
-  public String getOverdueItemsCount() {
+  public Integer getOverdueItemsCount() {
     return overdueItemsCount;
   }
-  public String getOverdueItemsLimit() {
+  public Integer getOverdueItemsLimit() {
     return overdueItemsLimit;
   }
   public String getPatronIdentifier() {
@@ -146,7 +146,7 @@ public class PatronInformationResponse extends Message {
   public String[] getRecallItems() {
     return recallItems;
   }
-  public String getRecallItemsCount() {
+  public Integer getRecallItemsCount() {
     return recallItemsCount;
   }
   public String getScreenMessage() {
@@ -155,7 +155,7 @@ public class PatronInformationResponse extends Message {
   public Date getTransactionDate() {
     return transactionDate;
   }
-  public String getUnavailableHoldsCount() {
+  public Integer getUnavailableHoldsCount() {
     return unavailableHoldsCount;
   }
   public String[] getUnavailableHoldItems() {
@@ -176,7 +176,7 @@ public class PatronInformationResponse extends Message {
   public void setUnavailableHoldItems(String[] unavailableHoldItems) {
     this.unavailableHoldItems = unavailableHoldItems;
   }
-  public void setUnavailableHoldsCount(String unavailableHoldsCount) {
+  public void setUnavailableHoldsCount(Integer unavailableHoldsCount) {
     this.unavailableHoldsCount = unavailableHoldsCount;
   }
   public void setTransactionDate(Date transactionDate) {
@@ -185,7 +185,7 @@ public class PatronInformationResponse extends Message {
   public void setScreenMessage(String screenMessage) {
     this.screenMessage = screenMessage;
   }
-  public void setRecallItemsCount(String recallItemsCount) {
+  public void setRecallItemsCount(Integer recallItemsCount) {
     this.recallItemsCount = recallItemsCount;
   }
   public void setRecallItems(String[] recallItems) {
@@ -204,10 +204,10 @@ public class PatronInformationResponse extends Message {
   public void setPatronIdentifier(String patronIdentifier) {
     this.patronIdentifier = patronIdentifier;
   }
-  public void setOverdueItemsLimit(String overdueItemsLimit) {
+  public void setOverdueItemsLimit(Integer overdueItemsLimit) {
     this.overdueItemsLimit = overdueItemsLimit;
   }
-  public void setOverdueItemsCount(String overdueItemsCount) {
+  public void setOverdueItemsCount(Integer overdueItemsCount) {
     this.overdueItemsCount = overdueItemsCount;
   }
   public void setOverdueItems(String[] overdueItems) {
@@ -225,16 +225,16 @@ public class PatronInformationResponse extends Message {
   public void setHomeAddress(String homeAddress) {
     this.homeAddress = homeAddress;
   }
-  public void setHoldItemsLimit(String holdItemsLimit) {
+  public void setHoldItemsLimit(Integer holdItemsLimit) {
     this.holdItemsLimit = holdItemsLimit;
   }
-  public void setHoldItemsCount(String holdItemsCount) {
+  public void setHoldItemsCount(Integer holdItemsCount) {
     this.holdItemsCount = holdItemsCount;
   }
   public void setHoldItems(String[] holdItems) {
     this.holdItems = holdItems;
   }
-  public void setFineItemsCount(String fineItemsCount) {
+  public void setFineItemsCount(Integer fineItemsCount) {
     this.fineItemsCount = fineItemsCount;
   }
   public void setFineItems(String[] fineItems) {
@@ -249,10 +249,10 @@ public class PatronInformationResponse extends Message {
   public void setChargedItems(String[] chargedItems) {
     this.chargedItems = chargedItems;
   }
-  public void setChargedItemsCount(String chargedItemsCount) {
+  public void setChargedItemsCount(Integer chargedItemsCount) {
     this.chargedItemsCount = chargedItemsCount;
   }
-  public void setChargedItemsLimit(String chargedItemsLimit) {
+  public void setChargedItemsLimit(Integer chargedItemsLimit) {
     this.chargedItemsLimit = chargedItemsLimit;
   }
   public void setCurrencyType(CurrencyType currencyType) {

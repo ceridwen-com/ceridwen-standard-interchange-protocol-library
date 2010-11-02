@@ -45,13 +45,13 @@ public class PatronInformation extends Message {
   private String patronIdentifier;
   private String terminalPassword;
   private String patronPassword;
-  private String startItem;
-  private String endItem;
+  private Integer startItem;
+  private Integer endItem;
 
   public String getCommand() {
     return "63";
   }
-  public String getEndItem() {
+  public Integer getEndItem() {
     return endItem;
   }
   public String getInstitutionId() {
@@ -66,7 +66,7 @@ public class PatronInformation extends Message {
   public String getPatronPassword() {
     return patronPassword;
   }
-  public String getStartItem() {
+  public Integer getStartItem() {
     return startItem;
   }
   public Summary getSummary() {
@@ -95,7 +95,7 @@ public class PatronInformation extends Message {
   public void setSummary(Summary summary) {
     this.summary = summary;
   }
-  public void setStartItem(String startItem) {
+  public void setStartItem(Integer startItem) {
     this.startItem = startItem;
   }
   public void setPatronPassword(String patronPassword) {
@@ -110,7 +110,7 @@ public class PatronInformation extends Message {
   public void setInstitutionId(String institutionId) {
     this.institutionId = institutionId;
   }
-  public void setEndItem(String endItem) {
+  public void setEndItem(Integer endItem) {
     this.endItem = endItem;
   }
 }

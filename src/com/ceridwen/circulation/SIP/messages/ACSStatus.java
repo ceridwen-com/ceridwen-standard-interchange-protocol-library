@@ -43,8 +43,8 @@ private Boolean onLineStatus;
   private Boolean renewalPolicy;
   private Boolean statusUpdateOk;
   private Boolean offlineOk;
-  private String timeoutPeriod;
-  private String retriesAllowed;
+  private Integer timeoutPeriod;
+  private Integer retriesAllowed;
   private Date dateTimeSync = new Date();
   private String protocolVersion;
   private String institutionId;
@@ -87,7 +87,7 @@ private Boolean onLineStatus;
   public Boolean isRenewalPolicy() {
     return renewalPolicy;
   }
-  public String getRetriesAllowed() {
+  public Integer getRetriesAllowed() {
     return retriesAllowed;
   }
   public String getScreenMessage() {
@@ -102,18 +102,18 @@ private Boolean onLineStatus;
   public String getTerminalLocation() {
     return terminalLocation;
   }
-  public String getTimeoutPeriod() {
+  public Integer getTimeoutPeriod() {
     return timeoutPeriod;
   }
-  public void setTimeoutPeriod(String timeoutPeriod) {
+  public void setTimeoutPeriod(Integer timeoutPeriod) {
     this.timeoutPeriod = timeoutPeriod;
   }
   public void setTerminalLocation(String terminalLocation) {
     this.terminalLocation = terminalLocation;
   }
   /**
-   * Use getSupportedMessages().set(SupportedMessages.XXX)
-   *     getSupportedMessages().unset(SupportedMessages.XXX)
+   * Use getSupportedMessages().set(SupportedMessages.VALUE)
+   *     getSupportedMessages().unset(SupportedMessages.VALUE)
    *     getSupportedMessages().unsetAll()
    *   
    * @param summary
@@ -128,7 +128,7 @@ private Boolean onLineStatus;
   public void setScreenMessage(String screenMessage) {
     this.screenMessage = screenMessage;
   }
-  public void setRetriesAllowed(String retriesAllowed) {
+  public void setRetriesAllowed(Integer retriesAllowed) {
     this.retriesAllowed = retriesAllowed;
   }
   public void setRenewalPolicy(Boolean renewalPolicy) {

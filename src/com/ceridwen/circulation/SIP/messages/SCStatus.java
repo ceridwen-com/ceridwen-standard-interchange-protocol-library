@@ -38,13 +38,13 @@ public class SCStatus extends Message {
 	 */
 	private static final long serialVersionUID = -6198644705404364776L;
   private StatusCode statusCode = StatusCode.OK;
-  private String maxPrintWidth;
+  private Integer maxPrintWidth;
   private String protocolVersion = "2.00";
 
   public String getCommand() {
     return "99";
   }
-  public String getMaxPrintWidth() {
+  public Integer getMaxPrintWidth() {
     return maxPrintWidth;
   }
   public String getProtocolVersion() {
@@ -59,7 +59,7 @@ public class SCStatus extends Message {
   public void setProtocolVersion(String protocolVersion) {
     this.protocolVersion = protocolVersion;
   }
-  public void setMaxPrintWidth(String maxPrintWidth) {
+  public void setMaxPrintWidth(Integer maxPrintWidth) {
     this.maxPrintWidth = maxPrintWidth;
   }
 }
