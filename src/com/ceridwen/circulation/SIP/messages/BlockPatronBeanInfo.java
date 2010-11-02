@@ -49,7 +49,8 @@ public class BlockPatronBeanInfo extends MessageBeanInfo {
 	
 	  _cardRetained.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
 	  _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
-	  
+
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
       _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      	  
 	
 	  PropertyDescriptor[] pds = new PropertyDescriptor[] {

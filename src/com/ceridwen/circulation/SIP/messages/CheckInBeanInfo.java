@@ -49,10 +49,13 @@ public class CheckInBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 
+      _currentLocation.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
       _noBlock.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
       _returnDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(21,38));
 
+      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
+      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
       _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
       
       PropertyDescriptor[] pds = new PropertyDescriptor[] {

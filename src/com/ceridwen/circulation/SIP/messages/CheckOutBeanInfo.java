@@ -56,6 +56,10 @@ public class CheckOutBeanInfo extends MessageBeanInfo {
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,21));
       _nbDueDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(22,39));
       
+      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
+      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
+      _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
       _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {

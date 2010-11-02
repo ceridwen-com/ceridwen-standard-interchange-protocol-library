@@ -22,6 +22,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.beans.*;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
  * <p>Title: </p>
@@ -46,6 +47,8 @@ public class EndSessionResponseBeanInfo extends MessageBeanInfo {
 
       _endSession.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
+
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _endSession,

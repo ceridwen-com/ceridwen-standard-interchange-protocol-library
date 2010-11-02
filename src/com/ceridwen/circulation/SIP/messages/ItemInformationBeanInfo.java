@@ -45,6 +45,7 @@ public class ItemInformationBeanInfo extends MessageBeanInfo {
 
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,19));
 
+      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
       _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {

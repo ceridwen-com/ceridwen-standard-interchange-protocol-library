@@ -31,6 +31,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.beans.*;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 public class CheckInResponseBeanInfo extends MessageBeanInfo {
   Class<CheckInResponse> beanClass = CheckInResponse.class;
@@ -59,6 +60,12 @@ public class CheckInResponseBeanInfo extends MessageBeanInfo {
       _magneticMedia.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,4));
       _alert.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,5));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,23));
+      
+      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
+      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _permanentLocation.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
+      _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _alert,

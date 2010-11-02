@@ -48,6 +48,8 @@ public class PatronStatusRequestBeanInfo extends MessageBeanInfo {
       _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,4));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,22));
       
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));            
+      _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
       _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
       
       PropertyDescriptor[] pds = new PropertyDescriptor[] {

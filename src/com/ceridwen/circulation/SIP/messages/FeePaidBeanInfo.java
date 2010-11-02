@@ -55,6 +55,9 @@ public class FeePaidBeanInfo extends MessageBeanInfo {
       _paymentType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(22,23));
       _currencyType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(24,26));
       
+      _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
+      _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {

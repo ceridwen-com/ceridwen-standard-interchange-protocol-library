@@ -55,8 +55,14 @@ public class RenewBeanInfo extends MessageBeanInfo {
       _noBlock.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,21));
       _nbDueDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(22,39));
+
+      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));   
+      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
+      _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
+      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));    
+      _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       
-      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));            
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _thirdPartyAllowed,

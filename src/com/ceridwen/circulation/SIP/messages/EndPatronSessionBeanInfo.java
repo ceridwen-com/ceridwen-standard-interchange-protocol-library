@@ -46,7 +46,9 @@ public class EndPatronSessionBeanInfo extends MessageBeanInfo {
 
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,19));
       
-      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));            
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));            
+      _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));            
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _transactionDate,

@@ -22,6 +22,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.beans.*;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
  * <p>Title: </p>
@@ -63,6 +64,13 @@ public class RenewResponseBeanInfo extends MessageBeanInfo {
       _magneticMedia.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,4));
       _desensitize.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,5));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,23));
+      
+      _dueDate.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+      _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
+      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+      _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _currencyType,

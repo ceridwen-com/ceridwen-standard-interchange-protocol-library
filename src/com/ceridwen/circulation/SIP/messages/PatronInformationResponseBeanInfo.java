@@ -22,6 +22,7 @@ package com.ceridwen.circulation.SIP.messages;
 import java.beans.*;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
+import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
  * <p>Title: RTSI</p>
@@ -78,6 +79,10 @@ public class PatronInformationResponseBeanInfo extends MessageBeanInfo {
       _fineItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(49,52));
       _recallItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(53,56));
       _unavailableHoldsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(57,60));
+      
+      _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+      
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _chargedItems,
