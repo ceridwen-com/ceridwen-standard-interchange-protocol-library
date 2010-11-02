@@ -14,7 +14,7 @@ public class LoginResponseTest extends AbstractMessageTest<LoginResponse> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "940AY0AZFDFE";
+		return "940";
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class LoginResponseTest extends AbstractMessageTest<LoginResponse> {
 
 	@Override
 	public String getEncoding() {
-		return "941AY0AZFDFD";
+		return "941";
 	}
 
 }

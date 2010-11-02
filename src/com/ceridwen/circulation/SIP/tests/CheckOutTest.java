@@ -15,7 +15,7 @@ public class CheckOutTest extends AbstractMessageTest<CheckOut> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "11NN19700101    010000                  AA|AB|AC|AO|BIN|BON|AY0AZF170";
+		return "11NN19700101    010000                  AA|AB|AC|AO|";
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CheckOutTest extends AbstractMessageTest<CheckOut> {
 
 	@Override
 	public String getEncoding() {
-		return "11YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BIY|BOY|CHitemProperties|AY0AZCA16";
+		return "11YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BIY|BOY|CHitemProperties|";
 	}
 }
 

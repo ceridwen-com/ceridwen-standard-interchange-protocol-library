@@ -16,7 +16,7 @@ public class RenewAllResponseTest extends AbstractMessageTest<RenewAllResponse> 
 
 	@Override
 	public String getDefaultEncoding() {
-		return "660        19700101    010000AF|AG|AO|AY0AZF6B8";
+		return "6600000000019700101    010000AO|";
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class RenewAllResponseTest extends AbstractMessageTest<RenewAllResponse> 
 		m.setInstitutionId("institutionId");
 		m.setOk(true);
 		m.setPrintLine("printLine");
-		m.setRenewedCount("item");
-		m.setUnrenewedCount("item");
+		m.setRenewedCount(1234);
+		m.setUnrenewedCount(1234);
 		m.setScreenMessage("screenMessage");
 		m.setTransactionDate(new java.util.Date(0));
 		
@@ -36,7 +36,7 @@ public class RenewAllResponseTest extends AbstractMessageTest<RenewAllResponse> 
 
 	@Override
 	public String getEncoding() {
-		return "661itemitem19700101    010000AFscreenMessage|AGprintLine|AOinstitutionId|AY0AZE5E8";
+		return "6611234123419700101    010000AFscreenMessage|AGprintLine|AOinstitutionId|";
 	}
 }
 

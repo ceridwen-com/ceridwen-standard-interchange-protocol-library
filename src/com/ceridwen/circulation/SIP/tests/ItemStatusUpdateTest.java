@@ -15,7 +15,7 @@ public class ItemStatusUpdateTest extends AbstractMessageTest<ItemStatusUpdate> 
 
 	@Override
 	public String getDefaultEncoding() {
-		return "1919700101    010000AB|AC|AO|CH|AY0AZF6EB";
+		return "1919700101    010000AB|AO|CH|";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ItemStatusUpdateTest extends AbstractMessageTest<ItemStatusUpdate> 
 
 	@Override
 	public String getEncoding() {
-		return "1919700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|CHitemProperties|AY0AZDF37";
+		return "1919700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|CHitemProperties|";
 	}
 }
 

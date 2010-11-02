@@ -15,7 +15,7 @@ public class CheckInTest extends AbstractMessageTest<CheckIn> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "09N19700101    010000                  AB|AC|AO|AP|BIN|AY0AZF303";
+		return "09N19700101    010000                  AB|AC|AO|AP|";
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class CheckInTest extends AbstractMessageTest<CheckIn> {
 
 	@Override
 	public String getEncoding() {
-		return "09Y19700101    01000019700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|APcurrentLocation|BIY|CHitemProperties|AY0AZD302";
+		return "09Y19700101    01000019700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|APcurrentLocation|BIY|CHitemProperties|";
 	}
 }
 

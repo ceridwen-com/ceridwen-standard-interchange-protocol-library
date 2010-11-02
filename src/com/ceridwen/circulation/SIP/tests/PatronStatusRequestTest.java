@@ -17,7 +17,7 @@ public class PatronStatusRequestTest extends AbstractMessageTest<PatronStatusReq
 
 	@Override
 	public String getDefaultEncoding() {
-		return "2300019700101    010000AA|AC|AD|AO|AY0AZF667";
+		return "2300019700101    010000AA|AC|AD|AO|";
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class PatronStatusRequestTest extends AbstractMessageTest<PatronStatusReq
 
 	@Override
 	public String getEncoding() {
-		return "2302419700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|AY0AZDDBD";
+		return "2302419700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|";
 	}
 }
 

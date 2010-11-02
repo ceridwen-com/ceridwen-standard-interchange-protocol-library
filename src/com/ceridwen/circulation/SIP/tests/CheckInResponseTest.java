@@ -16,7 +16,7 @@ public class CheckInResponseTest extends AbstractMessageTest<CheckInResponse> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "100NNN19700101    010000AA|AB|AF|AG|AJ|AO|AQ|CH|CK000|CL|AY0AZEF1B";
+		return "100NUN19700101    010000AB|AO|AQ|";
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class CheckInResponseTest extends AbstractMessageTest<CheckInResponse> {
 		m.setInstitutionId("institutionId");
 		m.setItemIdentifier("itemIdentifier");
 		m.setItemProperties("itemProperties");
-		m.setMagenticMedia(true);
+		m.setMagneticMedia(true);
 		m.setMediaType(MediaType.CD);
 		m.setOk(true);
 		m.setPatronIdentifier("patronIdentifier");
@@ -44,7 +44,7 @@ public class CheckInResponseTest extends AbstractMessageTest<CheckInResponse> {
 
 	@Override
 	public String getEncoding() {
-		return "101YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|AQpermanentLocation|CHitemProperties|CK006|CLsortBin|AY0AZBE54";
+		return "101YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|AQpermanentLocation|CHitemProperties|CK006|CLsortBin|";
 	}
 }
 

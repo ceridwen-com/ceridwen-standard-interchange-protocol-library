@@ -15,7 +15,7 @@ public class ItemInformationTest extends AbstractMessageTest<ItemInformation> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "1719700101    010000AB|AC|AO|AY0AZF7F4";
+		return "1719700101    010000AB|AO|";
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class ItemInformationTest extends AbstractMessageTest<ItemInformation> {
 
 	@Override
 	public String getEncoding() {		
-		return "1719700101    010000ABitem|ACpassword|AOinstitution|AY0AZEE08";
+		return "1719700101    010000ABitem|ACpassword|AOinstitution|";
 	}
 
 }

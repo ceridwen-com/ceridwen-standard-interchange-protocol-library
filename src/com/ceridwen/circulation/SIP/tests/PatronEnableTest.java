@@ -15,6 +15,11 @@ public class PatronEnableTest extends AbstractMessageTest<PatronEnable> {
 	}
 
 	@Override
+	public String getDefaultEncoding() {
+		return "2519700101    010000AA|AO|";
+	}
+
+	@Override
 	public Message getMessage() {
 		PatronEnable m = new PatronEnable();
 		
@@ -29,13 +34,7 @@ public class PatronEnableTest extends AbstractMessageTest<PatronEnable> {
 
 	@Override
 	public String getEncoding() {
-		return "2519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|AY0AZDE51";
-	}
-
-
-	@Override
-	public String getDefaultEncoding() {
-		return "2519700101    010000AA|AC|AD|AO|AY0AZF6F5";
+		return "2519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|";
 	}
 }
 

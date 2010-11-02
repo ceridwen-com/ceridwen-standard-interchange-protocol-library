@@ -3,7 +3,7 @@ package com.ceridwen.circulation.SIP.tests;
 import java.io.ByteArrayOutputStream;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
-import com.ceridwen.circulation.SIP.exceptions.FixedFieldTooLong;
+import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
@@ -27,22 +27,22 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 
 	public void testEncode() {
 		try {
-			String t = this.getMessage().encode('0');
+			String t = this.getMessage().encode(null);
 			Assert.assertEquals(this.getEncoding(), t);
 		} catch (MandatoryFieldOmitted e) {
 			fail("Mandatory Field Omitted: " + e.getMessage());
-		} catch (FixedFieldTooLong e) {
-			fail("Fixed Field Too Long: " + e.getMessage());
+		} catch (InvalidFieldLength e) {
+			fail("Field Wrong Size: " + e.getMessage());
 		}
 	}
 
 	public void testDefaultEncode() {
 		try {
-			String t = this.getDefaultMessage().encode('0');
+			String t = this.getDefaultMessage().encode(null);
 			Assert.assertEquals(this.getDefaultEncoding(), t);
 		} catch (MandatoryFieldOmitted e) {
 			fail("Mandatory Field Omitted: " + e.getMessage());
-		} catch (FixedFieldTooLong e) {
+		} catch (InvalidFieldLength e) {
 			fail("Fixed Field Too Long: " + e.getMessage());
 		}
 	}
@@ -50,7 +50,7 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 	public void testDecode() {
 		try {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			Message m = MSG.decode(this.getEncoding(), '0', false);
+			Message m = MSG.decode(this.getEncoding(), null, false);
 			m.xmlEncode(stream);
 			String r = stream.toString();
 			stream = new ByteArrayOutputStream();
@@ -73,11 +73,11 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 		try {
 			String t = this.getMessage().encode('0');
 			Message m;
-			m = MSG.decode(t, '0', false);
+			m = MSG.decode(t, '0', true);
 			Assert.assertEquals(t, m.encode('0'));
 		} catch (MandatoryFieldOmitted e) {
 			fail("Mandatory Field Omitted: " + e.getMessage());
-		} catch (FixedFieldTooLong e) {
+		} catch (InvalidFieldLength e) {
 			fail("Fixed Field Too Long: " + e.getMessage());
 		} catch (ChecksumError e) {
 			fail("Checksum Error");

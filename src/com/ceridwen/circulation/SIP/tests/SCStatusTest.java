@@ -14,14 +14,14 @@ public class SCStatusTest extends AbstractMessageTest<SCStatus> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "990   2.00AY0AZFCD9";
+		return "9900002.00";
 	}
 
 	@Override
 	public Message getMessage() {
 		SCStatus m = new SCStatus();
 		
-		m.setMaxPrintWidth("max");
+		m.setMaxPrintWidth(123);
 		m.setProtocolVersion("prot");
 		m.setStatusCode(StatusCode.OUT_OF_PAPER);
 
@@ -30,7 +30,7 @@ public class SCStatusTest extends AbstractMessageTest<SCStatus> {
 
 	@Override
 	public String getEncoding() {
-		return "991maxprotAY0AZFAED";
+		return "991123prot";
 	}
 }
 

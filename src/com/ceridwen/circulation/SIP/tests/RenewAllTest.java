@@ -16,7 +16,7 @@ public class RenewAllTest extends AbstractMessageTest<RenewAll> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "6519700101    010000AA|AC|AD|AO|BON|AY0AZF596";
+		return "6519700101    010000AA|AO|";
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class RenewAllTest extends AbstractMessageTest<RenewAll> {
 
 	@Override
 	public String getEncoding() {
-		return "6519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BOY|AY0AZDCE7";
+		return "6519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BOY|";
 	}
 }
 

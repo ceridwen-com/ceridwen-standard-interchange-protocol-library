@@ -17,7 +17,7 @@ public class PatronEnableResponseTest extends AbstractMessageTest<PatronEnableRe
 
 	@Override
 	public String getDefaultEncoding() {
-		return "26              00019700101    010000AA|AE|AF|AG|AO|BLN|CQN|AY0AZF0E6";
+		return "26              00019700101    010000AA|AE|AO|";
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class PatronEnableResponseTest extends AbstractMessageTest<PatronEnableRe
 
 	@Override
 	public String getEncoding() {
-		return "26YYYYYYYYYYYYYY02419700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BLY|CQY|AY0AZD3BF";
+		return "26YYYYYYYYYYYYYY02419700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BLY|CQY|";
 	}
 }
 

@@ -16,7 +16,7 @@ public class FeePaidResponseTest extends AbstractMessageTest<FeePaidResponse> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "38N19700101    010000AA|AF|AG|AO|BK|AY0AZF594";
+		return "38N19700101    010000AA|AO|";
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class FeePaidResponseTest extends AbstractMessageTest<FeePaidResponse> {
 
 	@Override
 	public String getEncoding() {
-		return "38Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|BKtransactionId|AY0AZDB2E";
+		return "38Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|BKtransactionId|";
 	}
 }
 

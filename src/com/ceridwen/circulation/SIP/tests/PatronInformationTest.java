@@ -18,18 +18,18 @@ public class PatronInformationTest extends AbstractMessageTest<PatronInformation
 
 	@Override
 	public String getDefaultEncoding() {
-		return "6300019700101    010000          AA|AC|AD|AO|AY0AZF523";
+		return "6300019700101    010000          AA|AO|";
 	}
 
 	@Override
 	public Message getMessage() {
 		PatronInformation m = new PatronInformation();		
-		m.setEndItem("endItem");
+		m.setEndItem(12345);
 		m.setInstitutionId("institutionId");
 		m.setLanguage(Language.UNITED_KINGDOM);
 		m.setPatronIdentifier("patronIdentifier");
 		m.setPatronPassword("patronPassword");
-		m.setStartItem("startItem");
+		m.setStartItem(12345);
 		m.getSummary().set(Summary.OVERDUE_ITEMS);
 		m.setTerminalPassword("terminalPassword");
 		m.setTransactionDate(new java.util.Date(0));
@@ -39,7 +39,7 @@ public class PatronInformationTest extends AbstractMessageTest<PatronInformation
 
 	@Override
 	public String getEncoding() {
-		return "6302419700101    010000 Y        AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BPstartItem|BQendItem|AY0AZD3A0";
+		return "6302419700101    010000 Y        AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BP12345|BQ12345|";
 	}
 
 }

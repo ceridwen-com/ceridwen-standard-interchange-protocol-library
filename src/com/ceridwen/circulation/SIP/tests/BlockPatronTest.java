@@ -16,7 +16,7 @@ public class BlockPatronTest extends AbstractMessageTest<BlockPatron> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "01N19700101    010000AA|AC|AL|AO|AY0AZF6A5";
+		return "01N19700101    010000AA|AC|AL|AO|";
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class BlockPatronTest extends AbstractMessageTest<BlockPatron> {
 
 	@Override
 	public String getEncoding() {
-		return "01Y19700101    010000AApatronIdentifier|ACterminalPassword|ALblockedCardMessage|AOinstitutionId|AY0AZDCCA";
+		return "01Y19700101    010000AApatronIdentifier|ACterminalPassword|ALblockedCardMessage|AOinstitutionId|";
 	}
 
 }

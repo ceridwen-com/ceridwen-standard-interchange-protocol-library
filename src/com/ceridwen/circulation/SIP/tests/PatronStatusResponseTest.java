@@ -19,7 +19,7 @@ public class PatronStatusResponseTest extends AbstractMessageTest<PatronStatusRe
 
 	@Override
 	public String getDefaultEncoding() {
-		return "24              00019700101    010000AA|AE|AF|AG|AO|BHUSD|BLN|BV|CQN|AY0AZEDE2";
+		return "24              00019700101    010000AA|AE|AO|";
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class PatronStatusResponseTest extends AbstractMessageTest<PatronStatusRe
 
 	@Override
 	public String getEncoding() {
-		return "24YYYYYYYYYYYYYY02419700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BHGBP|BLY|BVfeeAmount|CQY|AY0AZCD2A";
+		return "24YYYYYYYYYYYYYY02419700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BHGBP|BLY|BVfeeAmount|CQY|";
 	}
 }
 

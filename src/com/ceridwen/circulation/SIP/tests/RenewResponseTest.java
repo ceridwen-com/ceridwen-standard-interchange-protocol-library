@@ -18,7 +18,7 @@ public class RenewResponseTest extends AbstractMessageTest<RenewResponse> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "300NUN19700101    010000AA|AB|AF|AG|AH|AJ|AO|BHUSD|BK|BT01|BV|CH|CIN|CK000|AY0AZE94E";
+		return "300NUN19700101    010000AA|AB|AH|AJ|AO|";
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class RenewResponseTest extends AbstractMessageTest<RenewResponse> {
 
 	@Override
 	public String getEncoding() {
-		return "301YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|AOinstitutionId|BHGBP|BKtransactionId|BT07|BVfeeAmount|CHitemProperties|CIY|CK007|AY0AZB6C0";
+		return "301YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|AOinstitutionId|BHGBP|BKtransactionId|BT07|BVfeeAmount|CHitemProperties|CIY|CK007|";
 	}
 }
 

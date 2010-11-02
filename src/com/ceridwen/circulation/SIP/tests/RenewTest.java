@@ -15,7 +15,7 @@ public class RenewTest extends AbstractMessageTest<Renew> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "29NN19700101    010000                  AA|AB|AC|AD|AJ|AO|BON|CH|AY0AZEFAD";
+		return "29NN19700101    010000                  AA|AO|";
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class RenewTest extends AbstractMessageTest<Renew> {
 		m.setItemIdentifier("itemIdentifier");
 		m.setItemProperties("itemProperties");
 		m.setNoBlock(true);
-		m.setNoBlockDueDate(new java.util.Date(0));
+		m.setNbDueDate(new java.util.Date(0));
 		m.setPatronIdentifier("patronIdentifier");
 		m.setPatronPassword("patronPassword");
 		m.setTerminalPassword("terminalPassword");
@@ -40,7 +40,7 @@ public class RenewTest extends AbstractMessageTest<Renew> {
 
 	@Override
 	public String getEncoding() {
-		return "29YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AJtitleIdentifier|AOinstitutionId|BOY|CHitemProperties|AY0AZC441";
+		return "29YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AJtitleIdentifier|AOinstitutionId|BOY|CHitemProperties|";
 	}
 }
 

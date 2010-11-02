@@ -16,7 +16,7 @@ public class EndSessionResponseTest extends AbstractMessageTest<EndSessionRespon
 
 	@Override
 	public String getDefaultEncoding() {
-		return "36N19700101    010000AA|AF|AG|AO|AY0AZF69F";
+		return "36N19700101    010000AA|AO|";
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class EndSessionResponseTest extends AbstractMessageTest<EndSessionRespon
 
 	@Override
 	public String getEncoding() {
-		return "36Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|AY0AZE18C";
+		return "36Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|";
 	}
 
 }

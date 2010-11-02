@@ -16,7 +16,7 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "98NNNNNN      19700101    010000    AF|AG|AM|AN|AO|BXNNNNNNNNNNNNNNNN|AY0AZECC4";
+		return "98NNNNNN00000019700101    0100002.00AO|BXNNNNNNNNNNNNNNNN|";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 		m.setPrintLine("printLine");
 		m.setProtocolVersion("2.00");
 		m.setRenewalPolicy(true);
-		m.setRetriesAllowed("ret");
+		m.setRetriesAllowed(123);
 		m.setScreenMessage("screenMessage"); 
 		m.setStatusUpdateOk(true);
 		m.getSupportedMessages().set(SupportedMessages.BLOCK_PATRON);
@@ -53,14 +53,14 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 		m.getSupportedMessages().set(SupportedMessages.REQUEST_SC_ACS_RESEND);
 		m.getSupportedMessages().set(SupportedMessages.SC_ACS_STATUS);
 		m.setTerminalLocation("terminalLocation");
-		m.setTimeoutPeriod("tim");
+		m.setTimeoutPeriod(123);
 
 		return m;
 	}
 
 	@Override
 	public String getEncoding() {
-		return "98YYYYYYtimret19700101    0100002.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|AY0AZD041";
+		return "98YYYYYY12312319700101    0100002.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|";
 	}
 
 }

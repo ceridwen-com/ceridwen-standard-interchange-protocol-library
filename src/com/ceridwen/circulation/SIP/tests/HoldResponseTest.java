@@ -15,7 +15,7 @@ public class HoldResponseTest extends AbstractMessageTest<HoldResponse> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "160N19700101    010000                  AA|AB|AF|AG|AJ|AO|BR|BS|AY0AZF00A";
+		return "160N19700101    010000AA|AO|";
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class HoldResponseTest extends AbstractMessageTest<HoldResponse> {
 		m.setPatronIdentifier("patronIdentifier");
 		m.setPickupLocation("pickupLocation");
 		m.setPrintLine("printLine");
-		m.setQueuePosition("queuePosition");
+		m.setQueuePosition(12345);
 		m.setScreenMessage("screenMessage");
 		m.setTitleIdentifier("titleIdentifier");
 		m.setTransactionDate(new java.util.Date(0));
@@ -40,7 +40,7 @@ public class HoldResponseTest extends AbstractMessageTest<HoldResponse> {
 
 	@Override
 	public String getEncoding() {
-		return "161Y19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|BRqueuePosition|BSpickupLocation|AY0AZC2EC";
+		return "161Y19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|BR12345|BSpickupLocation|BW19700101    010000|";
 	}
 }
 

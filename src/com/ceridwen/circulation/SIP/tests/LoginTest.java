@@ -12,7 +12,7 @@ public class LoginTest extends AbstractMessageTest<Login> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "93  CN|CO|CP|AY0AZFAC5";
+		return "93  CN|CO|";
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class LoginTest extends AbstractMessageTest<Login> {
 
 	@Override
 	public String getEncoding() {
-		return "93UPCNloginUserId|COloginPassword|CPlocationCode|AY0AZEBBB";
+		return "93UPCNloginUserId|COloginPassword|CPlocationCode|";
 	}
 }
 

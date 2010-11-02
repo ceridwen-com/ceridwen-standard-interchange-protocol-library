@@ -17,7 +17,7 @@ public class HoldTest extends AbstractMessageTest<Hold> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "15*19700101    010000AA|AB|AC|AD|AJ|AO|BON|BS|BW|BY1|AY0AZEFFD";
+		return "15*19700101    010000AA|AO|";
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class HoldTest extends AbstractMessageTest<Hold> {
 
 	@Override
 	public String getEncoding() {
-		return "15-19700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AJtitleIdentifier|AOinstitutionId|BOY|BSpickupLocation|BW19700101    010000|BY4|AY0AZC278";
+		return "15-19700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AJtitleIdentifier|AOinstitutionId|BOY|BSpickupLocation|BW19700101    010000|BY4|";
 	}
 }
 

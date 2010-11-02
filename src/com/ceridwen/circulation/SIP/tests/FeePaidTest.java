@@ -18,7 +18,7 @@ public class FeePaidTest extends AbstractMessageTest<FeePaid> {
 
 	@Override
 	public String getDefaultEncoding() {
-		return "3719700101    0100000100USDAA|AC|AD|AO|BK|BV|CG|AY0AZF222";
+		return "3719700101    0100000100USDAA|AC|BV|CG|";
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class FeePaidTest extends AbstractMessageTest<FeePaid> {
 
 	@Override
 	public String getEncoding() {
-		return "3719700101    0100000701GBPAApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BKtransactionId|BVfeeAmount|CGfeeIdentifier|AY0AZCB60";
+		return "3719700101    0100000701GBPAApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BKtransactionId|BVfeeAmount|CGfeeIdentifier|";
 	}
 }
 

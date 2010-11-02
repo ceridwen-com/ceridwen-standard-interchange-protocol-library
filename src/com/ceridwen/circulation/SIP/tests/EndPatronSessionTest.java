@@ -16,7 +16,7 @@ public class EndPatronSessionTest extends AbstractMessageTest<EndPatronSession> 
 
 	@Override
 	public String getDefaultEncoding() {
-		return "3519700101    010000AA|AC|AD|AO|AY0AZF6F4";
+		return "3519700101    010000AA|AC|AD|AO|";
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class EndPatronSessionTest extends AbstractMessageTest<EndPatronSession> 
 
 	@Override
 	public String getEncoding() {
-		return "3519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|AY0AZDE50";
+		return "3519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|";
 	}
 
 }

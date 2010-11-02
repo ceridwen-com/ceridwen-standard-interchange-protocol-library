@@ -20,7 +20,7 @@ public class ItemInformationResponseTest extends AbstractMessageTest<ItemInforma
 
 	@Override
 	public String getDefaultEncoding() {
-		return "1801000119700101    010000AB|AF|AG|AH|AJ|AP|AQ|BG|BHUSD|BV|CF|CH|CJ|CK000|CM|AY0AZE8E9";
+		return "1801000119700101    010000AB|AJ|";
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class ItemInformationResponseTest extends AbstractMessageTest<ItemInforma
 
 	@Override
 	public String getEncoding() {
-		return "1812020719700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CFholdQueueLength|CHitemProperties|CJ19700101    010000|CK007|CM19700101    010000|AY0AZABFE";
+		return "1812020719700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CFholdQueueLength|CHitemProperties|CJ19700101    010000|CK007|CM19700101    010000|";
 	}
 }
 
