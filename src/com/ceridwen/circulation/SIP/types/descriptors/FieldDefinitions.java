@@ -141,7 +141,7 @@ public class FieldDefinitions {
 				throw new java.lang.AssertionError(messageName + " - Invalid type: " + name);				
 			}
 			
-			Object fd = pd.getValue("SIPFieldDescriptor");
+			FieldDescriptor fd = (FieldDescriptor)pd.getValue("SIPFieldDescriptor");
 			
 			if (fd != null) { 
 				if (fd.getClass() == PositionedFieldDescriptor.class) {
@@ -154,7 +154,7 @@ public class FieldDefinitions {
 					PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(((PositionedFieldDescriptor)fd).start, ((PositionedFieldDescriptor)fd).end, field);
 					pd.setValue("SIPFieldDescriptor", pfd);
 				} else if (fd.getClass() == TaggedFieldDescriptor.class) {
-					TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(field, ((TaggedFieldDescriptor)fd).required);
+					TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(field, fd.required);
 					pd.setValue("SIPFieldDescriptor", tfd);					
 				} else {
 					throw new java.lang.AssertionError(messageName + " - Unknown field descriptor: " + name);

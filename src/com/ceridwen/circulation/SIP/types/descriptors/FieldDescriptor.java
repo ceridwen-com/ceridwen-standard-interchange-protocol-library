@@ -6,6 +6,10 @@ public class FieldDescriptor {
 	public Integer length;
 	public Boolean required;
 	
+	protected FieldDescriptor()
+	{
+	}
+	
 	protected FieldDescriptor(String tag, Class<?> type, Integer length, Boolean required)
 	{
 		this.tag = tag;

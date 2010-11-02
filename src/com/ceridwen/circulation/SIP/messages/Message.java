@@ -35,6 +35,8 @@ import java.lang.reflect.Method;
 import org.apache.commons.beanutils.*;
 import java.beans.*;
 import java.util.*;
+
+import com.ceridwen.circulation.SIP.types.descriptors.FieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
@@ -144,17 +146,9 @@ private static Log log = LogFactory.getLog(Message.class);
     	  }
       } else if (desc.getPropertyType() == Integer.class) {
       	  if (value != null) {      		  
-	    	  Object SIPField = desc.getValue("SIPFieldDescriptor");
-	    	  Integer length = null;
-	          if (SIPField != null) {
-	    	      if (SIPField.getClass().equals(PositionedFieldDescriptor.class)) {
-	    	    	  length = ((PositionedFieldDescriptor)SIPField).length;  
-	    	      } else if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
-	    	    	  length = ((TaggedFieldDescriptor)SIPField).length;      	    	  
-	    	      }
-	          }
-		      if (length != null) {
-		    	  ret = new String[]{String.format("%0" + length + "d", value)};
+	    	  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
+		      if (SIPField.length != null) {
+		    	  ret = new String[]{String.format("%0" + SIPField.length + "d", value)};
 		      } else {
 		    	  ret = new String[]{value.toString()};
 		      }
@@ -194,13 +188,13 @@ private static Log log = LogFactory.getLog(Message.class);
 
     for (int n = 0; n < descs.length; n++) {
       PropertyDescriptor desc = descs[n];
-      Object SIPField = desc.getValue("SIPFieldDescriptor");
+      FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
       if (SIPField != null) {
 	      if (SIPField.getClass().equals(PositionedFieldDescriptor.class)) {
 	        PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
 	        String[] value = getProp(desc);
 	        if (value[0].length() == 0) {
-	          if (!field.allowBlank) {
+	          if (field.required) {
 /**
  * TODO allow auto-padding option
  */	        	  
@@ -233,12 +227,12 @@ private static Log log = LogFactory.getLog(Message.class);
 	        			}	        			
 	        		}
 	        	}		
-	        	variable.put(field.ID, value);
+	        	variable.put(field.tag, value);
 	        } else if (field.required) {
 /**
  * TODO allow auto-padding option to be off
  */	        	  
-	          variable.put(field.ID, value);
+	          variable.put(field.tag, value);
 	        }
 	      }
       }
@@ -364,7 +358,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
       for (int n = 0; n < descs.length; n++) {
         PropertyDescriptor desc = descs[n];
-        Object SIPField = desc.getValue("SIPFieldDescriptor");
+        FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
         String value = "";
         if (SIPField != null) {
           if (SIPField.getClass() == PositionedFieldDescriptor.class) {
@@ -480,11 +474,11 @@ private static Log log = LogFactory.getLog(Message.class);
       PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
       for (int n = 0; n < descs.length; n++) {
           PropertyDescriptor desc = descs[n];
-          Object SIPField = desc.getValue("SIPFieldDescriptor");
+          FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
           if (SIPField != null) {
             if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
               TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
-              if (field.ID.equals(tag)) {
+              if (field.tag.equals(tag)) {
             	  this.setProp(desc, data);
               }
             }

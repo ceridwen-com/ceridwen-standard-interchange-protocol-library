@@ -28,17 +28,12 @@
 
 package com.ceridwen.circulation.SIP.types.descriptors;
 
-public class TaggedFieldDescriptor {
+public class TaggedFieldDescriptor extends FieldDescriptor {
   public static final char TERMINATOR = '|';
-  public String ID;
-  public Boolean required;
-  public Integer length;
-
-
 
   protected TaggedFieldDescriptor(FieldDescriptor d, Boolean required)
   {
-	  this.ID = d.tag;
+	  this.tag = d.tag;
 	  this.length = d.length;
 	  if (d.required == null && required != null) {
 		  this.required = required;

@@ -28,22 +28,18 @@
 
 package com.ceridwen.circulation.SIP.types.descriptors;
 
-public class PositionedFieldDescriptor {
+public class PositionedFieldDescriptor extends FieldDescriptor{
   public int start;
   public int end;
-  public boolean allowBlank = true;
-  public Integer length;
 
   protected PositionedFieldDescriptor(int start, int end, FieldDescriptor d) {
 	  this.start = start;
 	  this.end = end;
-	  this.allowBlank = true;
 	  this.length = d.length;
   }
 
   public PositionedFieldDescriptor(int start, int end) {
     this.start = start;
     this.end = end;
-    this.allowBlank = true;
   }
 }
