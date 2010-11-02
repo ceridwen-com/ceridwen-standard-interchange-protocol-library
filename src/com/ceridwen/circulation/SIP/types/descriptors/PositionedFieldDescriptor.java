@@ -36,6 +36,7 @@ public class PositionedFieldDescriptor extends FieldDescriptor{
 	  this.start = start;
 	  this.end = end;
 	  this.length = d.length;
+	  this.required = d.required;
   }
 
   public PositionedFieldDescriptor(int start, int end) {

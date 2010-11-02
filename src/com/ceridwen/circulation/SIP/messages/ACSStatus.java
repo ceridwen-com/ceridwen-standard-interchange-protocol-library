@@ -37,22 +37,22 @@ public class ACSStatus extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -611426325284828647L;
-private Boolean onLineStatus;
-  private Boolean checkInOk;
-  private Boolean checkOutOk;
-  private Boolean renewalPolicy;
-  private Boolean statusUpdateOk;
-  private Boolean offlineOk;
-  private Integer timeoutPeriod;
-  private Integer retriesAllowed;
-  private Date dateTimeSync = new Date();
-  private String protocolVersion;
-  private String institutionId;
-  private String libraryName;
-  private SupportedMessages supportedMessages = new SupportedMessages();
-  private String terminalLocation;
-  private String screenMessage;
-  private String printLine;
+	private Boolean onLineStatus;
+	private Boolean checkInOk;
+	private Boolean checkOutOk;
+	private Boolean renewalPolicy;
+	private Boolean statusUpdateOk;
+	private Boolean offlineOk;
+	private Integer timeoutPeriod;
+	private Integer retriesAllowed;
+	private Date dateTimeSync;
+	private String protocolVersion = "2.00"; //TODO avoid hardcoding like this
+	private String institutionId;
+	private String libraryName;
+	private SupportedMessages supportedMessages = new SupportedMessages();
+	private String terminalLocation;
+	private String screenMessage;
+	private String printLine;
 
   public String getCommand() {
     return "98";

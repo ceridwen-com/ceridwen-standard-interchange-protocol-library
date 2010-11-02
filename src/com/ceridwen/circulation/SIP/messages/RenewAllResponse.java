@@ -24,14 +24,15 @@ public class RenewAllResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 5428582577226346891L;
-private Boolean ok;
-  private Integer renewedCount;
-  private Integer unrenewedCount;
-  private java.util.Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String screenMessage;
-  private String printLine;
-  public String getCommand() {
+	private Boolean ok;
+	private Integer renewedCount;
+	private Integer unrenewedCount;
+	private java.util.Date transactionDate;
+	private String institutionId;
+	private String screenMessage;
+	private String printLine;
+
+	public String getCommand() {
     return "66";
   }
   public Boolean getOk() {

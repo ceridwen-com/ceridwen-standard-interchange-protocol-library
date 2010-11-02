@@ -24,13 +24,14 @@ public class FeePaidResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 3684506970071368895L;
-private Boolean paymentAccepted;
-  private java.util.Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String transactionId;
-  private String screenMessage;
-  private String printLine;
+	private Boolean paymentAccepted;
+	private java.util.Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String transactionId;
+	private String screenMessage;
+	private String printLine;
+
   public String getCommand() {
     return "38";
   }

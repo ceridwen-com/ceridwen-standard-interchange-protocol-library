@@ -24,11 +24,12 @@ public class PatronEnable extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -5425998497345962069L;
-private java.util.Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String terminalPassword;
-  private String patronPassword;
+	private java.util.Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String terminalPassword;
+	private String patronPassword;
+
   public String getCommand() {
     return "25";
   }

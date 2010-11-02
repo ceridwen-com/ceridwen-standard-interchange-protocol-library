@@ -24,13 +24,14 @@ public class BlockPatron extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 7336173091305475737L;
-private Boolean cardRetained;
-  private java.util.Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String blockedCardMessage;
-  private String patronIdentifier;
-  private String terminalPassword;
-  public String getCommand() {
+	private Boolean cardRetained;
+	private java.util.Date transactionDate;
+	private String institutionId;
+	private String blockedCardMessage;
+	private String patronIdentifier;
+	private String terminalPassword;
+
+public String getCommand() {
     return "01";
   }
   public Boolean getCardRetained() {

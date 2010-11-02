@@ -28,17 +28,18 @@ public class FeePaid extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -5641260852799759246L;
-private java.util.Date transactionDate = new java.util.Date();
-  private FeeType feeType = FeeType.OTHER;
-  private PaymentType paymentType = PaymentType.CASH;
-  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
-  private String feeAmount;
-  private String institutionId;
-  private String patronIdentifier;
-  private String terminalPassword;
-  private String patronPassword;
-  private String feeIdentifier;
-  private String transactionId;
+	private java.util.Date transactionDate;
+	private FeeType feeType;
+	private PaymentType paymentType;
+	private CurrencyType currencyType;
+	private String feeAmount;
+	private String institutionId;
+	private String patronIdentifier;
+	private String terminalPassword;
+	private String patronPassword;
+	private String feeIdentifier;
+	private String transactionId;
+	
   public String getCommand() {
     return "37";
   }

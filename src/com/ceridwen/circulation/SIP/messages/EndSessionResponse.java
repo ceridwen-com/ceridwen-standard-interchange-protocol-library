@@ -24,12 +24,13 @@ public class EndSessionResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 8955079727656656773L;
-private Boolean endSession;
-  private String institutionId;
-  private String patronIdentifier;
-  private String screenMessage;
-  private String printLine;
-  private java.util.Date transactionDate = new java.util.Date();
+	private Boolean endSession;
+	private String institutionId;
+	private String patronIdentifier;
+	private String screenMessage;
+	private String printLine;
+	private java.util.Date transactionDate;
+	
   public String getCommand() {
     return "36";
   }

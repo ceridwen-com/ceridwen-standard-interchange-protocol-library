@@ -37,21 +37,21 @@ public class CheckInResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -3403534383487215711L;
-private Boolean ok;
-  private Boolean resensitize;
-  private Boolean magneticMedia;
-  private Boolean alert;
-  private Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String itemIdentifier;
-  private String permanentLocation;
-  private String titleIdentifier;
-  private String sortBin;
-  private String patronIdentifier;
-  private MediaType mediaType = MediaType.OTHER;
-  private String itemProperties;
-  private String screenMessage;
-  private String printLine;
+	private Boolean ok;
+	private Boolean resensitize;
+	private Boolean magneticMedia;
+	private Boolean alert;
+	private Date transactionDate;
+	private String institutionId;
+	private String itemIdentifier;
+	private String permanentLocation;
+	private String titleIdentifier;
+	private String sortBin;
+	private String patronIdentifier;
+	private MediaType mediaType;
+	private String itemProperties;
+	private String screenMessage;
+	private String printLine;
 
   public String getCommand() {
     return "10";

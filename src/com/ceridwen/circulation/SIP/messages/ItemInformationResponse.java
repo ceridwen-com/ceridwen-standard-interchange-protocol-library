@@ -41,25 +41,25 @@ public class ItemInformationResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 6408854778106704492L;
-private CirculationStatus circulationStatus = CirculationStatus.OTHER;
-  private SecurityMarker securityMarker = SecurityMarker.OTHER;
-  private FeeType feeType = FeeType.OTHER;
-  private Date transactionDate = new Date();
-  private String holdQueueLength;
-  private String dueDate;
-  private Date recallDate;
-  private Date holdPickupDate;
-  private String itemIdentifier;
-  private String titleIdentifier;
-  private String owner;
-  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
-  private String feeAmount;
-  private MediaType mediaType = MediaType.OTHER;
-  private String permanentLocation;
-  private String currentLocation;
-  private String itemProperties;
-  private String screenMessage;
-  private String printLine;
+	private CirculationStatus circulationStatus;
+	private SecurityMarker securityMarker;
+	private FeeType feeType;
+	private Date transactionDate;
+	private String holdQueueLength;
+	private String dueDate;
+	private Date recallDate;
+	private Date holdPickupDate;
+	private String itemIdentifier;
+	private String titleIdentifier;
+	private String owner;
+	private CurrencyType currencyType;
+	private String feeAmount;
+	private MediaType mediaType;
+	private String permanentLocation;
+	private String currentLocation;
+	private String itemProperties;
+	private String screenMessage;
+	private String printLine;
 
   public String getCommand() {
     return "18";

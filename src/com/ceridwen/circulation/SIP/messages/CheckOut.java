@@ -35,18 +35,18 @@ public class CheckOut extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 8454866593857815453L;
-private Boolean renewalPolicy;
-  private Boolean noBlock;
-  private Date transactionDate = new Date();
-  private Date nbDueDate;
-  private String institutionId;
-  private String patronIdentifier;
-  private String itemIdentifier;
-  private String terminalPassword;
-  private String itemProperties;
-  private String patronPassword;
-  private Boolean feeAcknowledged;
-  private Boolean cancel;
+	private Boolean renewalPolicy;
+	private Boolean noBlock;
+	private Date transactionDate;
+	private Date nbDueDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String itemIdentifier;
+	private String terminalPassword;
+	private String itemProperties;
+	private String patronPassword;
+	private Boolean feeAcknowledged;
+	private Boolean cancel;
 
   public String getCommand() {
     return "11";

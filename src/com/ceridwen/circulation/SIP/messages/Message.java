@@ -118,53 +118,81 @@ private static Log log = LogFactory.getLog(Message.class);
   }
 
   private String[] getProp(PropertyDescriptor desc) {
-    String[] ret = null;
-    try {
-      Object value = desc.getReadMethod().invoke(this, new Object[0]);
-      if (desc.getPropertyType() == Boolean.class) {
-        if (value == null)
-          if (desc.getName().equalsIgnoreCase("magneticMedia"))
-            ret = new String[]{"U"};
-          else {
-        	if (desc.getName().equalsIgnoreCase("ok")) {
-        		ret = new String[]{"0"};
-        	} else {
-        		ret = new String[]{"N"};
-        	}        
-        } else if (desc.getName().equalsIgnoreCase("ok")) {
-          ret = new String[]{((Boolean)value).booleanValue()?"1":"0"};
-        } else {
-          ret = new String[]{((Boolean)value).booleanValue()?"Y":"N"};
-        }
-      } else if (desc.getPropertyType() == Date.class) {
-    	if (value != null) {
-    		ret = new String[]{mangleDate((Date)value)};
-    	}
-      } else if (desc.getPropertyType() == String[].class) {
-    	  if (value != null) {
-    		  ret = (String[])value;
-    	  }
-      } else if (desc.getPropertyType() == Integer.class) {
-      	  if (value != null) {      		  
-	    	  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
-		      if (SIPField.length != null) {
-		    	  ret = new String[]{String.format("%0" + SIPField.length + "d", value)};
-		      } else {
-		    	  ret = new String[]{value.toString()};
-		      }
-      	  } else {
-      		  //TODO check if required (i.e. cannot be blank)
-      	  }
-      } else {
-    	if (value != null) {  
-    		ret = new String[]{value.toString()};
-    	}
-      }
-    } catch (Exception ex) {
-    	log.error("Unexpected error getting " + desc.getDisplayName(), ex);
-    }
+	  String[] ret = null;
+	  try {
+		  Object value = desc.getReadMethod().invoke(this, new Object[0]);
+		  if (desc.getPropertyType() == Boolean.class) {
+			  if (value == null) {
+				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
+				  if (SIPField != null) {
+					  if (SIPField.required != null) {
+						  if (SIPField.required) {
+							  if (desc.getName().equalsIgnoreCase("magneticMedia"))
+								  ret = new String[]{"U"};
+							  else {
+								  if (desc.getName().equalsIgnoreCase("ok")) {
+									  ret = new String[]{"0"};
+								  } else {
+									  ret = new String[]{"N"};
+								  }                		  
+							  }
+						  }
+					  }
+				  }
+			  } else if (desc.getName().equalsIgnoreCase("ok")) {
+				  ret = new String[]{((Boolean)value).booleanValue()?"1":"0"};
+			  } else {
+				  ret = new String[]{((Boolean)value).booleanValue()?"Y":"N"};
+			  }
+		  } else if (desc.getPropertyType() == Date.class) {
+			  if (value != null) {
+				  ret = new String[]{mangleDate((Date)value)};
+			  } else {
+				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
+				  if (SIPField != null) {
+					  if (SIPField.required != null) {
+						  if (SIPField.required) {
+							  ret = new String[]{mangleDate(new Date())};          		  
+						  }
+					  }
+				  }    		
+			  }
+		  } else if (desc.getPropertyType() == String[].class) {
+			  if (value != null) {
+				  ret = (String[])value;
+			  }
+		  } else if (desc.getPropertyType() == Integer.class) {
+			  if (value != null) {      		  
+				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
+				  if (SIPField.length != null) {
+					  ret = new String[]{String.format("%0" + SIPField.length + "d", value)};
+				  } else {
+					  ret = new String[]{value.toString()};
+				  }
+			  } else {
+				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
+				  if (SIPField != null) {
+					  if (SIPField.required != null) {
+						  if (SIPField.required) {
+							  if (SIPField.length != null) {
+								  ret = new String[]{String.format("%0" + SIPField.length + "d", 0)};
+							  } else {
+								  ret = new String[]{"0"};
+							  }
+						  }
+					  }
+				  }
+			  }
+		  } else {
+			  if (value != null) {  
+				  ret = new String[]{value.toString()};
+			  }
+		  }
+	  } catch (Exception ex) {
+		  log.error("Unexpected error getting " + desc.getDisplayName(), ex);
+	  }
 
-    return (ret != null)?ret:new String[]{""};
+	  return (ret != null)?ret:new String[]{""};
   }
 
   private String pad(String input, PositionedFieldDescriptor field) {

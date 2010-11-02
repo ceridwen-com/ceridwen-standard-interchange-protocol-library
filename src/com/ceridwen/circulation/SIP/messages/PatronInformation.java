@@ -38,15 +38,15 @@ public class PatronInformation extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 4603960140773936894L;
-  private Language language = Language.UNKNOWN;
-  private Date transactionDate = new Date();
-  private Summary summary = new Summary();
-  private String institutionId;
-  private String patronIdentifier;
-  private String terminalPassword;
-  private String patronPassword;
-  private Integer startItem;
-  private Integer endItem;
+	private Language language;
+	private Date transactionDate;
+	private Summary summary = new Summary();
+	private String institutionId;
+	private String patronIdentifier;
+	private String terminalPassword;
+	private String patronPassword;
+	private Integer startItem;
+	private Integer endItem;
 
   public String getCommand() {
     return "63";

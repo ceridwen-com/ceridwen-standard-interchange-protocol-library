@@ -27,18 +27,19 @@ public class Hold extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -6526613321625525740L;
-private HoldMode holdMode = HoldMode.CHANGE;
-  private java.util.Date transactionDate = new java.util.Date();
-  private java.util.Date expirationDate;
-  private String pickupLocation;
-  private HoldType holdType = HoldType.OTHER;
-  private String institutionId;
-  private String patronIdentifier;
-  private String patronPassword;
-  private String itemIdentifier;
-  private String titleIdentifier;
-  private String terminalPassword;
-  private Boolean feeAcknowledged;
+	private HoldMode holdMode;
+	private java.util.Date transactionDate;
+	private java.util.Date expirationDate;
+	private String pickupLocation;
+	private HoldType holdType;
+	private String institutionId;
+	private String patronIdentifier;
+	private String patronPassword;
+	private String itemIdentifier;
+	private String titleIdentifier;
+	private String terminalPassword;
+	private Boolean feeAcknowledged;
+
   public String getCommand() {
     return "15";
   }

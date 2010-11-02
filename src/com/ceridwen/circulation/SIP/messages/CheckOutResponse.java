@@ -39,25 +39,25 @@ public class CheckOutResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 9222995766948881317L;
-private Boolean ok;
-  private Boolean renewalOk;
-  private Boolean magneticMedia;
-  private Boolean desensitize;
-  private Date transactionDate = new Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String itemIdentifier;
-  private String titleIdentifier;
-  private String dueDate;
-  private FeeType feeType = FeeType.OTHER;
-  private Boolean securityInhibit;
-  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
-  private String feeAmount;
-  private MediaType mediaType = MediaType.OTHER;
-  private String itemProperties;
-  private String transactionId;
-  private String screenMessage;
-  private String printLine;
+	private Boolean ok;
+	private Boolean renewalOk;
+	private Boolean magneticMedia;
+	private Boolean desensitize;
+	private Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String itemIdentifier;
+	private String titleIdentifier;
+	private String dueDate;
+	private FeeType feeType;
+	private Boolean securityInhibit;
+	private CurrencyType currencyType;
+	private String feeAmount;
+	private MediaType mediaType;
+	private String itemProperties;
+	private String transactionId;
+	private String screenMessage;
+	private String printLine;
 
   public String getCommand() {
     return "12";

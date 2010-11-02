@@ -24,18 +24,19 @@ public class HoldResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 2267131763722749419L;
-private Boolean ok;
-  private Boolean available;
-  private java.util.Date transactionDate = new java.util.Date();
-  private java.util.Date expirationDate;
-  private Integer queuePosition;
-  private String pickupLocation;
-  private String institutionId;
-  private String patronIdentifier;
-  private String itemIdentifier;
-  private String titleIdentifier;
-  private String screenMessage;
-  private String printLine;
+	private Boolean ok;
+	private Boolean available;
+	private java.util.Date transactionDate;
+	private java.util.Date expirationDate;
+	private Integer queuePosition;
+	private String pickupLocation;
+	private String institutionId;
+	private String patronIdentifier;
+	private String itemIdentifier;
+	private String titleIdentifier;
+	private String screenMessage;
+	private String printLine;
+	
   public String getCommand() {
     return "16";
   }

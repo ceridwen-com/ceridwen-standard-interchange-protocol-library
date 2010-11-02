@@ -35,10 +35,10 @@ public class ItemInformation extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 7398126890693645623L;
-private Date transactionDate = new Date();
-  private String institutionId;
-  private String itemIdentifier;
-  private String terminalPassword;
+	private Date transactionDate;
+	private String institutionId;
+	private String itemIdentifier;
+	private String terminalPassword;
 
   public String getCommand() {
     return "17";

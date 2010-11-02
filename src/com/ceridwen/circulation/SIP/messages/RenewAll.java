@@ -24,12 +24,13 @@ public class RenewAll extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -7106820916482094784L;
-private java.util.Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String patronPassword;
-  private String terminalPassword;
-  private Boolean feeAcknowledged;
+	private java.util.Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String patronPassword;
+	private String terminalPassword;
+	private Boolean feeAcknowledged;
+	
   public String getCommand() {
     return "65";
   }

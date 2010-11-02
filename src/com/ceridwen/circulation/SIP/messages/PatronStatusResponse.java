@@ -39,18 +39,18 @@ public class PatronStatusResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 163945073911230183L;
-  private PatronStatus patronStatus = new PatronStatus();
-  private Language language = Language.UNKNOWN;
-  private Date transactionDate = new Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String personalName;
-  private Boolean validPatron;
-  private Boolean validPatronPassword;
-  private CurrencyType currencyType = CurrencyType.US_DOLLARS;
-  private String feeAmount;
-  private String screenMessage;
-  private String printLine;
+	private PatronStatus patronStatus = new PatronStatus();
+	private Language language;
+	private Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String personalName;
+	private Boolean validPatron;
+	private Boolean validPatronPassword;
+	private CurrencyType currencyType;
+	private String feeAmount;
+	private String screenMessage;
+	private String printLine;
 
   public String getCommand() {
     return "24";

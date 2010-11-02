@@ -24,19 +24,20 @@ public class Renew extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 158409818027250051L;
-private Boolean thirdPartyAllowed;
-  private Boolean noBlock;
-  private java.util.Date transactionDate = new java.util.Date();
-  private java.util.Date nbDueDate;
-  private String institutionId;
-  private String patronIdentifier;
-  private String patronPassword;
-  private String itemIdentifier;
-  private String titleIdentifier;
-  private String terminalPassword;
-  private String itemProperties;
-  private Boolean feeAcknowledged;
-  public String getCommand() {
+	private Boolean thirdPartyAllowed;
+	private Boolean noBlock;
+	private java.util.Date transactionDate;
+	private java.util.Date nbDueDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String patronPassword;
+	private String itemIdentifier;
+	private String titleIdentifier;
+	private String terminalPassword;
+	private String itemProperties;
+	private Boolean feeAcknowledged;
+
+	public String getCommand() {
     return "29";
   }
   public Boolean getThirdPartyAllowed() {

@@ -27,16 +27,17 @@ public class PatronEnableResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 5941325479001778479L;
-private PatronStatus patronStatus = new PatronStatus();
-  private Language language = Language.UNKNOWN;
-  private java.util.Date transactionDate = new java.util.Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String personalName;
-  private Boolean validPatronPassword;
-  private String screenMessage;
-  private String printLine;
-  private Boolean validPatron;
+	private PatronStatus patronStatus = new PatronStatus();
+	private Language language;
+	private java.util.Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String personalName;
+	private Boolean validPatronPassword;
+	private String screenMessage;
+	private String printLine;
+	private Boolean validPatron;
+	
   public String getCommand() {
     return "26";
   }

@@ -24,13 +24,14 @@ public class ItemStatusUpdateResponse extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 428496319623237121L;
-private Boolean ok;
-  private java.util.Date transactionDate = new java.util.Date();
-  private String itemIdentifier;
-  private String titleIdentifier;
-  private String itemProperties;
-  private String screenMessage;
-  private String printLine;
+	private Boolean ok;
+	private java.util.Date transactionDate;
+	private String itemIdentifier;
+	private String titleIdentifier;
+	private String itemProperties;
+	private String screenMessage;
+	private String printLine;
+
   public String getCommand() {
     return "20";
   }

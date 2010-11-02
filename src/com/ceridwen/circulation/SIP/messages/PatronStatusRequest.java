@@ -37,12 +37,12 @@ public class PatronStatusRequest extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -4867507215519281871L;
-  private Language language = Language.UNKNOWN;
-  private Date transactionDate = new Date();
-  private String institutionId;
-  private String patronIdentifier;
-  private String terminalPassword;
-  private String patronPassword;
+	private Language language;
+	private Date transactionDate;
+	private String institutionId;
+	private String patronIdentifier;
+	private String terminalPassword;
+	private String patronPassword;
 
   public String getCommand() {
     return "23";

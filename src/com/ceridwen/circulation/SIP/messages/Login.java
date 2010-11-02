@@ -24,11 +24,12 @@ public class Login extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -5732581787865741081L;
-private String UIDAlgorithm;
-  private String PWDAlgorithm;
-  private String loginUserId;
-  private String loginPassword;
-  private String locationCode;
+	private String UIDAlgorithm;
+	private String PWDAlgorithm;
+	private String loginUserId;
+	private String loginPassword;
+	private String locationCode;
+	
   public String getCommand() {
     return "93";
   }

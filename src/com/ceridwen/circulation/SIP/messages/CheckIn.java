@@ -35,15 +35,15 @@ public class CheckIn extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -7321140594135175919L;
-private Boolean noBlock;
-  private Date transactionDate = new Date();
-  private Date returnDate;
-  private String currentLocation;
-  private String institutionId;
-  private String itemIdentifier;
-  private String terminalPassword;
-  private String itemProperties;
-  private Boolean cancel;
+	private Boolean noBlock;
+	private Date transactionDate;
+	private Date returnDate;
+	private String currentLocation;
+	private String institutionId;
+	private String itemIdentifier;
+	private String terminalPassword;
+	private String itemProperties;
+	private Boolean cancel;
 
   public String getCommand() {
     return "09";
