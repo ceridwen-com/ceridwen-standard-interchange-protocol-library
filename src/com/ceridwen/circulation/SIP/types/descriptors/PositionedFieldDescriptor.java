@@ -32,15 +32,30 @@ public class PositionedFieldDescriptor extends FieldDescriptor{
   public int start;
   public int end;
 
-  protected PositionedFieldDescriptor(int start, int end, FieldDescriptor d) {
+  protected PositionedFieldDescriptor(int start, int end, FieldDescriptor d, Boolean required) {
 	  this.start = start;
 	  this.end = end;
 	  this.length = d.length;
-	  this.required = d.required;
+	  if (d.required == null && required != null) {
+		  this.required = required;
+  	  } else if (d.required == null && required == null) {
+		  throw new java.lang.AssertionError(d.tag + " mutable required state needs explicit value");																  
+  	  } else if  (d.required != null && required == null) {
+  		  this.required = d.required;
+  	  } else {
+		  throw new java.lang.AssertionError(d.tag + " immutable required state cannot be overriden");																  
+  	  }
   }
 
   public PositionedFieldDescriptor(int start, int end) {
     this.start = start;
     this.end = end;
+    this.required = null;
   }
+
+  public PositionedFieldDescriptor(int start, int end, Boolean required) {
+	    this.start = start;
+	    this.end = end;
+	    this.required = required;
+	  }
 }

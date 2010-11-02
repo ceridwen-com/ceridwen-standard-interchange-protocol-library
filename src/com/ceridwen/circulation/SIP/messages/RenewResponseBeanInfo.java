@@ -65,8 +65,10 @@ public class RenewResponseBeanInfo extends MessageBeanInfo {
       _desensitize.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,5));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,23));
       
+      _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _dueDate.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
       _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+      _feeType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
       _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
       _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));

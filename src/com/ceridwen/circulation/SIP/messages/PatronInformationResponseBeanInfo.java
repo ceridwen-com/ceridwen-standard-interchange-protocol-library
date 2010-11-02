@@ -80,6 +80,7 @@ public class PatronInformationResponseBeanInfo extends MessageBeanInfo {
       _recallItemsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(53,56));
       _unavailableHoldsCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(57,60));
       
+      _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
       

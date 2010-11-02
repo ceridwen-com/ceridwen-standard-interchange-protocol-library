@@ -57,6 +57,7 @@ public class PatronStatusResponseBeanInfo extends MessageBeanInfo {
       _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(16,18));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(19,36));
       
+      _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
 

@@ -51,9 +51,9 @@ public class FeePaidBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _transactionId = new PropertyDescriptor("transactionId", beanClass, "getTransactionId", "setTransactionId");
 
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,19));
-      _feeType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(20,21));
+      _feeType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(20,21,true));
       _paymentType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(22,23));
-      _currencyType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(24,26));
+      _currencyType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(24,26, true));
       
       _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
       _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      

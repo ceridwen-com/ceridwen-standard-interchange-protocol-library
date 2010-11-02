@@ -60,9 +60,10 @@ public class ItemInformationResponseBeanInfo extends MessageBeanInfo {
 
       _circulationStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,3));
       _securityMarker.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,5));
-      _feeType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,7));
+      _feeType.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,7,true));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(8,25));
       
+      _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _currentLocation.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _dueDate.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
       _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));

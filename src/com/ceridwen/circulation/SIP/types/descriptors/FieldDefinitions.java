@@ -31,13 +31,13 @@ public class FieldDefinitions {
 		fields.put("blockedCardMessage", new FieldDescriptor("AL", String.class, null, true));
 		fields.put("cancel", new FieldDescriptor("BI", Boolean.class, 1, false));
 		fields.put("cardRetained", new FieldDescriptor(null, Boolean.class, 1, true));
-		fields.put("circulationStatus", new FieldDescriptor(null, CirculationStatus.class, 2, false));
+		fields.put("circulationStatus", new FieldDescriptor(null, CirculationStatus.class, 2, true));
 		fields.put("chargedItems", new FieldDescriptor("AU", String[].class, null, false));
 		fields.put("chargedItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("chargedItemsLimit", new FieldDescriptor("CB", Integer.class, 4, false));
 		fields.put("checkInOk", new FieldDescriptor(null, Boolean.class, 1, true));
 	    fields.put("checkOutOk", new FieldDescriptor(null, Boolean.class, 1, true));
-		fields.put("currencyType", new FieldDescriptor("BH", CurrencyType.class, 3, false));
+		fields.put("currencyType", new FieldDescriptor("BH", CurrencyType.class, 3, null));
 		fields.put("currentLocation", new FieldDescriptor("AP", String.class, null, null));
 		fields.put("dateTimeSync", new FieldDescriptor(null, Date.class, 18, false));
 		fields.put("desensitize", new FieldDescriptor(null, Boolean.class, 1, true));
@@ -50,13 +50,13 @@ public class FieldDefinitions {
 		fields.put("feeAmount", new FieldDescriptor("BV", String.class, null, null));
 		fields.put("feeLimit", new FieldDescriptor("CC", String.class, null, false));
 		fields.put("feeIdentifier", new FieldDescriptor("CG", String.class, null, false));
-		fields.put("feeType", new FieldDescriptor("BT", FeeType.class, 2, false));
+		fields.put("feeType", new FieldDescriptor("BT", FeeType.class, 2, null));
 		fields.put("fineItems", new FieldDescriptor("AV", String[].class, null, false));
 		fields.put("fineItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("holdItems", new FieldDescriptor("AS", String[].class, null, false));
 		fields.put("holdItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("holdItemsLimit", new FieldDescriptor("BZ", Integer.class, 4, false));
-		fields.put("holdMode", new FieldDescriptor(null, HoldMode.class, 1, false));
+		fields.put("holdMode", new FieldDescriptor(null, HoldMode.class, 1, true));
 		fields.put("holdPickupDate", new FieldDescriptor("CM", Date.class, 18, false));
 		fields.put("holdQueueLength", new FieldDescriptor("CF", Integer.class, null, false));
 		fields.put("holdType", new FieldDescriptor("BY", HoldType.class, 1, false));
@@ -66,7 +66,7 @@ public class FieldDefinitions {
 		fields.put("institutionId", new FieldDescriptor("AO", String.class, null, true));
 		fields.put("itemIdentifier", new FieldDescriptor("AB", String.class, null, null));
 		fields.put("itemProperties", new FieldDescriptor("CH", String.class, null, null));
-		fields.put("language", new FieldDescriptor(null, Language.class, 3, false));
+		fields.put("language", new FieldDescriptor(null, Language.class, 3, true));
 		fields.put("libraryName", new FieldDescriptor("AM", String.class, null, false));
 		fields.put("locationCode", new FieldDescriptor("CP", String.class, null, false));
 		fields.put("loginUserId", new FieldDescriptor("CN", String.class, null, true));
@@ -87,7 +87,7 @@ public class FieldDefinitions {
 		fields.put("patronPassword", new FieldDescriptor("AD", String.class, null, null));
 		fields.put("patronStatus", new FieldDescriptor(null, PatronStatus.class, 14, false));
 		fields.put("paymentAccepted", new FieldDescriptor(null, Boolean.class, 1, true));
-		fields.put("paymentType", new FieldDescriptor(null, PaymentType.class, 2, false));
+		fields.put("paymentType", new FieldDescriptor(null, PaymentType.class, 2, true));
 		fields.put("permanentLocation", new FieldDescriptor("AQ", String.class, null, null));
         fields.put("personalName", new FieldDescriptor("AE", String.class, null, true));
 		fields.put("pickupLocation", new FieldDescriptor("BS", String.class, null, false));	
@@ -104,12 +104,12 @@ public class FieldDefinitions {
 		fields.put("resensitize", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("retriesAllowed", new FieldDescriptor(null, Integer.class, 3, true));
 		fields.put("returnDate", new FieldDescriptor(null, Date.class, 18, false));
-		fields.put("securityMarker", new FieldDescriptor(null, SecurityMarker.class, 2, false));
+		fields.put("securityMarker", new FieldDescriptor(null, SecurityMarker.class, 2, true));
 		fields.put("screenMessage", new FieldDescriptor("AF", String.class, null, false));
 		fields.put("securityInhibit", new FieldDescriptor("CI", Boolean.class, 1, false));
 		fields.put("sortBin", new FieldDescriptor("CL", String.class, null, false));
 		fields.put("startItem", new FieldDescriptor("BP", Integer.class, null, false));
-		fields.put("statusCode", new FieldDescriptor(null, StatusCode.class, 1, false));
+		fields.put("statusCode", new FieldDescriptor(null, StatusCode.class, 1, true));
 		fields.put("statusUpdateOk", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("summary", new FieldDescriptor(null, Summary.class, 10, false));
 		fields.put("supportedMessages", new FieldDescriptor("BX", SupportedMessages.class, 16, true));
@@ -151,7 +151,7 @@ public class FieldDefinitions {
 					if ((((PositionedFieldDescriptor)fd).end - ((PositionedFieldDescriptor)fd).start + 1) != field.length) {
 						throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptors length mismatch: " + name);														
 					}	
-					PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(((PositionedFieldDescriptor)fd).start, ((PositionedFieldDescriptor)fd).end, field);
+					PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(((PositionedFieldDescriptor)fd).start, ((PositionedFieldDescriptor)fd).end, field, ((PositionedFieldDescriptor)fd).required);
 					pd.setValue("SIPFieldDescriptor", pfd);
 				} else if (fd.getClass() == TaggedFieldDescriptor.class) {
 					TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(field, fd.required);

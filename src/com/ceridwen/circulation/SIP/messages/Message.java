@@ -119,11 +119,11 @@ private static Log log = LogFactory.getLog(Message.class);
 
   private String[] getProp(PropertyDescriptor desc) {
 	  String[] ret = null;
+	  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
 	  try {
 		  Object value = desc.getReadMethod().invoke(this, new Object[0]);
 		  if (desc.getPropertyType() == Boolean.class) {
 			  if (value == null) {
-				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
@@ -148,7 +148,6 @@ private static Log log = LogFactory.getLog(Message.class);
 			  if (value != null) {
 				  ret = new String[]{mangleDate((Date)value)};
 			  } else {
-				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
@@ -163,14 +162,12 @@ private static Log log = LogFactory.getLog(Message.class);
 			  }
 		  } else if (desc.getPropertyType() == Integer.class) {
 			  if (value != null) {      		  
-				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
 				  if (SIPField.length != null) {
 					  ret = new String[]{String.format("%0" + SIPField.length + "d", value)};
 				  } else {
 					  ret = new String[]{value.toString()};
 				  }
 			  } else {
-				  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
@@ -186,6 +183,24 @@ private static Log log = LogFactory.getLog(Message.class);
 		  } else {
 			  if (value != null) {  
 				  ret = new String[]{value.toString()};
+			  } else {
+				  if (SIPField != null) {
+					  if (SIPField.required != null) {
+						  if (SIPField.required) {
+						      Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
+						      for (Class<?> interfce: interfaces) {
+							      if (interfce == AbstractEnumeration.class) {
+							      	Method mthd = desc.getPropertyType().getDeclaredMethod("values", 
+							      		  new Class[]{});
+							      	Object[] values = (Object [])mthd.invoke(null, new Object[]{});
+							      	if (values.length > 0) {
+							      		ret = new String[]{values[0].toString()};
+							      	}
+							    }  	  
+						      }
+						  }
+					  }
+				  }
 			  }
 		  }
 	  } catch (Exception ex) {

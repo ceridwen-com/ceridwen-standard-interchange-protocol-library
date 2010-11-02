@@ -1,6 +1,8 @@
 package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum CurrencyType implements AbstractEnumeration {
+	US_DOLLARS("USD"),
+	UK_POUNDS("GBP"),
 	UNITED_ARAB_EMIRATES_DIRHAMS("AED"),
 	AFGHANISTAN_AFGHANIS("AFN"),
 	ALBANIA_LEKE("ALL"),
@@ -48,7 +50,6 @@ public enum CurrencyType implements AbstractEnumeration {
 	EURO_MEMBER_COUNTRIES_EURO("EUR"),
 	FIJI_DOLLARS("FJD"),
 	FALKLAND_ISLANDS_POUNDS("FKP"),
-	UK_POUNDS("GBP"),
 	GEORGIA_LARI("GEL"),
 	GUERNSEY_POUNDS("GGP"),
 	GHANA_CEDIS("GHS"),
@@ -151,7 +152,6 @@ public enum CurrencyType implements AbstractEnumeration {
 	TANZANIA_SHILLINGS("TZS"),
 	UKRAINE_HRYVNIA("UAH"),
 	UGANDA_SHILLINGS("UGX"),
-	US_DOLLARS("USD"),
 	URUGUAY_PESOS("UYU"),
 	UZBEKISTAN_SUMS("UZS"),
 	VENEZUELA_BOLIVARES("VEB"),

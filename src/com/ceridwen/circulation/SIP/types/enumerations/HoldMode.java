@@ -1,9 +1,9 @@
 package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum HoldMode implements AbstractEnumeration {
+	CHANGE("*"),
 	ADD("+"),
-	DELETE("-"),
-	CHANGE("*");
+	DELETE("-");
 	
 	private final String code;
 	private HoldMode(String code) {
