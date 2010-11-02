@@ -32,15 +32,14 @@ public class TaggedFieldDescriptor {
   public static final char TERMINATOR = '|';
   public String ID;
   public Boolean required;
-//  public int minLength;
-//  public int maxLength;
-//  public int version = 2;
+  public Integer length;
 
 
 
   protected TaggedFieldDescriptor(FieldDescriptor d, Boolean required)
   {
 	  this.ID = d.tag;
+	  this.length = d.length;
 	  if (d.required == null && required != null) {
 		  this.required = required;
   	  } else if (d.required == null && required == null) {

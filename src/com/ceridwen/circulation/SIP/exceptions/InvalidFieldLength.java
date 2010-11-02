@@ -1,6 +1,6 @@
 package com.ceridwen.circulation.SIP.exceptions;
 
-public class FixedFieldTooLong extends Exception {
+public class InvalidFieldLength extends Exception {
 
 	/**
 	 * 
@@ -9,13 +9,13 @@ public class FixedFieldTooLong extends Exception {
 	private String field;
 	private int maxLength;
 	
-	public FixedFieldTooLong(String field, int maxLength) {
+	public InvalidFieldLength(String field, int maxLength) {
 		this.field = field;
 		this.maxLength = maxLength;
 	}
 	
 	public String getMessage()
 	{
-		return this.field + " should be at most " + this.maxLength + " characters";
+		return this.field + " - Field Length: " + this.maxLength + " characters";
 	}	
 }

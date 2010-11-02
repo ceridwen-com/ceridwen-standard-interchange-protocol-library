@@ -14,7 +14,7 @@ lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar -text
 /package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
-src/com/ceridwen/circulation/SIP/exceptions/FixedFieldTooLong.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/exceptions/InvalidFieldLength.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/exceptions/MandatoryFieldOmitted.java -text
 src/com/ceridwen/circulation/SIP/exceptions/MessageNotUnderstood.java -text
 src/com/ceridwen/circulation/SIP/exceptions/RetriesExceeded.java -text

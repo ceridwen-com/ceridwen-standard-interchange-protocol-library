@@ -142,6 +142,25 @@ private static Log log = LogFactory.getLog(Message.class);
     	  if (value != null) {
     		  ret = (String[])value;
     	  }
+      } else if (desc.getPropertyType() == Integer.class) {
+      	  if (value != null) {      		  
+	    	  Object SIPField = desc.getValue("SIPFieldDescriptor");
+	    	  Integer length = null;
+	          if (SIPField != null) {
+	    	      if (SIPField.getClass().equals(PositionedFieldDescriptor.class)) {
+	    	    	  length = ((PositionedFieldDescriptor)SIPField).length;  
+	    	      } else if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
+	    	    	  length = ((TaggedFieldDescriptor)SIPField).length;      	    	  
+	    	      }
+	          }
+		      if (length != null) {
+		    	  ret = new String[]{String.format("%0" + length + "d", value)};
+		      } else {
+		    	  ret = new String[]{value.toString()};
+		      }
+      	  } else {
+      		  //TODO check if required (i.e. cannot be blank)
+      	  }
       } else {
     	if (value != null) {  
     		ret = new String[]{value.toString()};
@@ -166,7 +185,7 @@ private static Log log = LogFactory.getLog(Message.class);
     return ret.toString();
   }
 
-  public String encode(Character sequence) throws MandatoryFieldOmitted, FixedFieldTooLong {
+  public String encode(Character sequence) throws MandatoryFieldOmitted, InvalidFieldLength {
     TreeMap<Integer, String> fixed = new TreeMap<Integer, String>();
     TreeMap<String, String[]> variable = new TreeMap<String, String[]>();
     StringBuffer message = new StringBuffer();
@@ -189,9 +208,9 @@ private static Log log = LogFactory.getLog(Message.class);
 	          }
 	        }
 	        if (value[0].length() > (field.end - field.start + 1)) {
-	        	throw new FixedFieldTooLong(desc.getDisplayName(), (field.end - field.start + 1));
+	        	throw new InvalidFieldLength(desc.getDisplayName(), (field.end - field.start + 1));
 	        }
-	        if (desc.getPropertyType() == Date.class || desc.getPropertyType() == Boolean.class) {
+	        if (desc.getPropertyType() == Date.class || desc.getPropertyType() == Boolean.class || desc.getPropertyType() == Integer.class) {
 	        	if (!(value[0].length() == 0 || value[0].length() == (field.end - field.start + 1))) {
 	        		throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName() + ", start/end (" + field.start + "," + field.end + ") invalid for type " +
 	    		desc.getPropertyType().getName());
@@ -203,9 +222,19 @@ private static Log log = LogFactory.getLog(Message.class);
 	        TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
 	        String[] value = getProp(desc);
 	        if (value[0].length() > 0) {
-	          variable.put(field.ID, value);
-	        }
-	        else if (field.required) {
+	        	if (field.length != null) {
+	        		if (desc.getPropertyType() == String.class) {
+	        			if (value[0].length() > field.length) {
+	        	        	throw new InvalidFieldLength(desc.getDisplayName(), field.length);
+	        			}
+	        		} else {
+	        			if (value[0].length() != field.length) {
+	        	        	throw new InvalidFieldLength(desc.getDisplayName(), field.length);
+	        			}	        			
+	        		}
+	        	}		
+	        	variable.put(field.ID, value);
+	        } else if (field.required) {
 /**
  * TODO allow auto-padding option to be off
  */	        	  
@@ -254,7 +283,7 @@ private static Log log = LogFactory.getLog(Message.class);
       }
       if (desc.getPropertyType() == Integer.class) {
         desc.getWriteMethod().invoke(this,
-                                     new Object[] {new Integer(value)});
+                                     new Object[] {new Integer(value.trim())});
         return;
       }
       if (desc.getPropertyType() == String.class) {

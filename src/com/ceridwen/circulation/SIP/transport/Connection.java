@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
-import com.ceridwen.circulation.SIP.exceptions.FixedFieldTooLong;
+import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
@@ -190,7 +190,7 @@ public abstract class Connection {
     return ret;
   }
 
-  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood, MandatoryFieldOmitted, FixedFieldTooLong {
+  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood, MandatoryFieldOmitted, InvalidFieldLength {
     String request, response = null;
     Message responseMessage = null;
     if (msg == null) {
