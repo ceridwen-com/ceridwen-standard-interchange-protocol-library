@@ -1,6 +1,11 @@
 package com.ceridwen.circulation.SIP.tests;
 
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
@@ -9,22 +14,13 @@ import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.Message;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
-
-public abstract class AbstractMessageTest<MSG extends Message> extends TestCase {
-
-
+public abstract class AbstractMessageTest<MSG extends Message> {
 	public abstract Message getDefaultMessage();
 	public abstract String getDefaultEncoding();
 	public abstract Message getMessage();
 	public abstract String getEncoding();
 	
-	public AbstractMessageTest() {
-		super();
-	}
-
+	@Test
 	public void testEncode() {
 		try {
 			String t = this.getMessage().encode(null);
@@ -36,6 +32,7 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 		}
 	}
 
+	@Test
 	public void testDefaultEncode() {
 		try {
 			String t = this.getDefaultMessage().encode(null);
@@ -47,6 +44,7 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 		}
 	}
 
+	@Test
 	public void testDecode() {
 		try {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -69,6 +67,7 @@ public abstract class AbstractMessageTest<MSG extends Message> extends TestCase 
 		}
 	}
 	
+	@Test
 	public void testRoundTrip() {
 		try {
 			String t = this.getMessage().encode('0');

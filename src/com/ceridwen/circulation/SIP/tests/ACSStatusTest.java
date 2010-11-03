@@ -32,7 +32,7 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 		m.setOfflineOk(true);
 		m.setOnLineStatus(true);
 		m.setPrintLine("printLine");
-		m.setProtocolVersion(ProtocolVersion.VERSION_1_00);
+		m.setProtocolVersion(ProtocolVersion.VERSION_2_00);
 		m.setRenewalPolicy(true);
 		m.setRetriesAllowed(123);
 		m.setScreenMessage("screenMessage"); 
@@ -61,7 +61,7 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 
 	@Override
 	public String getEncoding() {
-		return "98YYYYYY12312319700101    0100001.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|";
+		return "98YYYYYY12312319700101    0100002.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|";
 	}
 
 }

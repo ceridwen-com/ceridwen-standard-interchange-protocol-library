@@ -23,7 +23,7 @@ public class SCStatusTest extends AbstractMessageTest<SCStatus> {
 		SCStatus m = new SCStatus();
 		
 		m.setMaxPrintWidth(123);
-		m.setProtocolVersion(ProtocolVersion.VERSION_1_00);
+		m.setProtocolVersion(ProtocolVersion.VERSION_2_00);
 		m.setStatusCode(StatusCode.OUT_OF_PAPER);
 
 		return m;
@@ -31,7 +31,7 @@ public class SCStatusTest extends AbstractMessageTest<SCStatus> {
 
 	@Override
 	public String getEncoding() {
-		return "9911231.00";
+		return "9911232.00";
 	}
 }
 

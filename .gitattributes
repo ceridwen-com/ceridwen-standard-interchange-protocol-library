@@ -93,7 +93,6 @@ src/com/ceridwen/circulation/SIP/server/SocketServer.java -text svneol=unset#tex
 src/com/ceridwen/circulation/SIP/tests/ACSResendTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/ACSStatusTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/AbstractMessageTest.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/tests/AllTests.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/BlockPatronTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/CheckInResponseTest.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/tests/CheckInTest.java -text svneol=unset#text/plain
