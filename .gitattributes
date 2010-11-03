@@ -139,6 +139,7 @@ src/com/ceridwen/circulation/SIP/types/enumerations/HoldType.java -text svneol=u
 src/com/ceridwen/circulation/SIP/types/enumerations/Language.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/MediaType.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/PaymentType.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/types/enumerations/ProtocolVersion.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/SecurityMarker.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/StatusCode.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/flagfields/AbstractFlagField.java -text svneol=unset#text/plain

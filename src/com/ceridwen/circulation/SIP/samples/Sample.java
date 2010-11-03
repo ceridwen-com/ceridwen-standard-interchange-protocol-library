@@ -37,6 +37,7 @@ import com.ceridwen.circulation.SIP.server.MessageHandlerDummyImpl;
 import com.ceridwen.circulation.SIP.server.SocketDaemon;
 import com.ceridwen.circulation.SIP.transport.Connection;
 import com.ceridwen.circulation.SIP.transport.SocketConnection;
+import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 
@@ -93,7 +94,7 @@ public class Sample {
 	       */
 
 	      request = new SCStatus();
-	      ( (SCStatus) request).setProtocolVersion("2.00");
+	      ( (SCStatus) request).setProtocolVersion(ProtocolVersion.VERSION_2_00);
 
 	      try {
 	        response = connection.send(request);

@@ -2,6 +2,7 @@ package com.ceridwen.circulation.SIP.tests;
 
 import com.ceridwen.circulation.SIP.messages.ACSStatus;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
@@ -31,7 +32,7 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 		m.setOfflineOk(true);
 		m.setOnLineStatus(true);
 		m.setPrintLine("printLine");
-		m.setProtocolVersion("2.00");
+		m.setProtocolVersion(ProtocolVersion.VERSION_1_00);
 		m.setRenewalPolicy(true);
 		m.setRetriesAllowed(123);
 		m.setScreenMessage("screenMessage"); 
@@ -60,7 +61,7 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 
 	@Override
 	public String getEncoding() {
-		return "98YYYYYY12312319700101    0100002.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|";
+		return "98YYYYYY12312319700101    0100001.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|";
 	}
 
 }

@@ -30,6 +30,7 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class ACSStatus extends Message {
@@ -46,7 +47,7 @@ public class ACSStatus extends Message {
 	private Integer timeoutPeriod;
 	private Integer retriesAllowed;
 	private Date dateTimeSync;
-	private String protocolVersion = "2.00"; //TODO avoid hardcoding like this
+	private ProtocolVersion protocolVersion;
 	private String institutionId;
 	private String libraryName;
 	private SupportedMessages supportedMessages = new SupportedMessages();
@@ -81,7 +82,7 @@ public class ACSStatus extends Message {
   public String getPrintLine() {
     return printLine;
   }
-  public String getProtocolVersion() {
+  public ProtocolVersion getProtocolVersion() {
     return protocolVersion;
   }
   public Boolean isRenewalPolicy() {
@@ -134,7 +135,7 @@ public class ACSStatus extends Message {
   public void setRenewalPolicy(Boolean renewalPolicy) {
     this.renewalPolicy = renewalPolicy;
   }
-  public void setProtocolVersion(String protocolVersion) {
+  public void setProtocolVersion(ProtocolVersion protocolVersion) {
     this.protocolVersion = protocolVersion;
   }
   public void setPrintLine(String printLine) {

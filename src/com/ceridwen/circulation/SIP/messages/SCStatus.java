@@ -19,6 +19,7 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.enumerations.StatusCode;
 
 
@@ -39,7 +40,7 @@ public class SCStatus extends Message {
 	private static final long serialVersionUID = -6198644705404364776L;
 	private StatusCode statusCode;
 	private Integer maxPrintWidth;
-	private String protocolVersion = "2.00"; //TODO avoid hardcoding like this
+	private ProtocolVersion protocolVersion;
 
   public String getCommand() {
     return "99";
@@ -47,7 +48,7 @@ public class SCStatus extends Message {
   public Integer getMaxPrintWidth() {
     return maxPrintWidth;
   }
-  public String getProtocolVersion() {
+  public ProtocolVersion getProtocolVersion() {
     return protocolVersion;
   }
   public StatusCode getStatusCode() {
@@ -56,7 +57,7 @@ public class SCStatus extends Message {
   public void setStatusCode(StatusCode statusCode) {
     this.statusCode = statusCode;
   }
-  public void setProtocolVersion(String protocolVersion) {
+  public void setProtocolVersion(ProtocolVersion protocolVersion) {
     this.protocolVersion = protocolVersion;
   }
   public void setMaxPrintWidth(Integer maxPrintWidth) {

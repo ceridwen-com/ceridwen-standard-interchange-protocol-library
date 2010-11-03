@@ -12,6 +12,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.HoldType;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 import com.ceridwen.circulation.SIP.types.enumerations.PaymentType;
+import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.enumerations.SecurityMarker;
 import com.ceridwen.circulation.SIP.types.enumerations.StatusCode;
 import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
@@ -92,7 +93,7 @@ public class FieldDefinitions {
         fields.put("personalName", new FieldDescriptor("AE", String.class, null, true));
 		fields.put("pickupLocation", new FieldDescriptor("BS", String.class, null, false));	
 		fields.put("printLine", new FieldDescriptor("AG", String.class, null, false));
-		fields.put("protocolVersion", new FieldDescriptor(null, String.class, 4, false));
+		fields.put("protocolVersion", new FieldDescriptor(null, ProtocolVersion.class, 4, true));
 		fields.put("PWDAlgorithm", new FieldDescriptor(null, String.class, 1, false));
 		fields.put("queuePosition", new FieldDescriptor("BR", Integer.class, null, false));
 		fields.put("recallDate", new FieldDescriptor("CJ", Date.class, 18, false));
