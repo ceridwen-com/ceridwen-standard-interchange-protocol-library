@@ -5,6 +5,7 @@
 .externalToolBuilders/Package[!!-~]Circulation[!!-~]zip.launch -text svneol=unset#text/plain
 /.project -text
 /Circulation-package.xml -text svneol=unset#text/plain
+/build.xml -text svneol=unset#text/plain
 /buildnum.xml -text
 lib/commons-beanutils-1.8.3/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/NOTICE.txt -text svneol=unset#text/plain

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="Circulation">
+    <property environment="env"/>
+    <property name="Utilities.location" value="../Utilities"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../Program Files/eclipse"/>
+    <property name="SelfIssue.location" value="../SelfIssue"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Utilities.classpath">
+        <pathelement location="${Utilities.location}/bin"/>
+        <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-1.1.1.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-net-2.0/commons-net-2.0.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-net-2.0/commons-net-ftp-2.0.jar"/>
+    </path>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
+    <path id="Circulation.classpath">
+        <pathelement location="bin"/>
+        <path refid="Utilities.classpath"/>
+        <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-1.1.1.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-net-2.0/commons-net-2.0.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-net-2.0/commons-net-ftp-2.0.jar"/>
+        <pathelement location="lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar"/>
+        <pathelement location="lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar"/>
+        <pathelement location="lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall">
+        <ant antfile="build.xml" dir="${Utilities.location}" inheritAll="false" target="clean"/>
+    </target>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects">
+        <ant antfile="build.xml" dir="${Utilities.location}" inheritAll="false" target="build-project">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Circulation.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="build.xml" dir="${SelfIssue.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${SelfIssue.location}" inheritAll="false" target="build">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="ACSResendTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ACSResendTest" todir="${junit.output.dir}"/>
+            <classpath refid="Circulation.classpath"/>
+        </junit>
+    </target>
+    <target name="AllTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ACSResendTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ACSStatusTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.BlockPatronTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.CheckInResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.CheckInTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.CheckOutResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.CheckOutTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.EndPatronSessionTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.EndSessionResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.FeePaidResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.FeePaidTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.HoldResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.HoldTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ItemInformationResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ItemInformationTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ItemStatusUpdateResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.ItemStatusUpdateTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.LoginResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.LoginTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.PatronEnableResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.PatronEnableTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.PatronInformationResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.PatronInformationTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.PatronStatusRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.PatronStatusResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.RenewAllResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.RenewAllTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.RenewResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.RenewTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.SCResendTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.tests.SCStatusTest" todir="${junit.output.dir}"/>
+            <classpath refid="Circulation.classpath"/>
+        </junit>
+    </target>
+    <target name="BlockPatronTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.ceridwen.circulation.SIP.tests.BlockPatronTest" todir="${junit.output.dir}"/>
+            <classpath refid="Circulation.classpath"/>
+        </junit>
+    </target>
+    <target name="Sample">
+        <java classname="com.ceridwen.circulation.SIP.samples.Sample" failonerror="true" fork="yes">
+            <classpath refid="Circulation.classpath"/>
+        </java>
+    </target>
+    <target name="Summary">
+        <java classname="com.ceridwen.circulation.SIP.types.flagfields.Summary" failonerror="true" fork="yes">
+            <classpath refid="Circulation.classpath"/>
+        </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>
