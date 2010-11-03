@@ -61,7 +61,6 @@ public class FieldDefinitions {
 		fields.put("holdPickupDate", new FieldDescriptor("CM", Date.class, 18, false));
 		fields.put("holdQueueLength", new FieldDescriptor("CF", Integer.class, null, false));
 		fields.put("holdType", new FieldDescriptor("BY", HoldType.class, 1, false));
-		fields.put("holdQueueLength", new FieldDescriptor("CF", String.class, null, true));
 		fields.put("homeAddress", new FieldDescriptor("BD", String.class, null, false));
 		fields.put("homePhoneNumber", new FieldDescriptor("BF", String.class, null, false));
 		fields.put("institutionId", new FieldDescriptor("AO", String.class, null, true));

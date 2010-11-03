@@ -45,7 +45,7 @@ public class ItemInformationResponse extends Message {
 	private SecurityMarker securityMarker;
 	private FeeType feeType;
 	private Date transactionDate;
-	private String holdQueueLength;
+	private Integer holdQueueLength;
 	private String dueDate;
 	private Date recallDate;
 	private Date holdPickupDate;
@@ -85,7 +85,7 @@ public class ItemInformationResponse extends Message {
   public Date getHoldPickupDate() {
     return holdPickupDate;
   }
-  public String getHoldQueueLength() {
+  public Integer getHoldQueueLength() {
     return holdQueueLength;
   }
   public String getItemIdentifier() {
@@ -154,7 +154,7 @@ public class ItemInformationResponse extends Message {
   public void setItemIdentifier(String itemIdentifier) {
     this.itemIdentifier = itemIdentifier;
   }
-  public void setHoldQueueLength(String holdQueueLength) {
+  public void setHoldQueueLength(Integer holdQueueLength) {
     this.holdQueueLength = holdQueueLength;
   }
   public void setHoldPickupDate(Date holdPickupDate) {

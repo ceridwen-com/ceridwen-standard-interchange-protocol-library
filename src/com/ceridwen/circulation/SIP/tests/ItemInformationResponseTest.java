@@ -34,7 +34,7 @@ public class ItemInformationResponseTest extends AbstractMessageTest<ItemInforma
 		m.setFeeAmount("feeAmount");
 		m.setFeeType(FeeType.REPLACEMENT);
 		m.setHoldPickupDate(new java.util.Date(0));
-		m.setHoldQueueLength("holdQueueLength");
+		m.setHoldQueueLength(100);
 		m.setItemIdentifier("itemIdentifier");
 		m.setItemProperties("itemProperties");
 		m.setMediaType(MediaType.DISKETTE);
@@ -52,7 +52,7 @@ public class ItemInformationResponseTest extends AbstractMessageTest<ItemInforma
 
 	@Override
 	public String getEncoding() {
-		return "1812020719700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CFholdQueueLength|CHitemProperties|CJ19700101    010000|CK007|CM19700101    010000|";
+		return "1812020719700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CF100|CHitemProperties|CJ19700101    010000|CK007|CM19700101    010000|";
 	}
 }
 
