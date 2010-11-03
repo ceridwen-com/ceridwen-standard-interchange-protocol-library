@@ -46,9 +46,10 @@ public class FeePaidResponseBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
       PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
 
-      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));            
       _paymentAccepted.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
+
+      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));            
 
       PropertyDescriptor[] pds = new PropertyDescriptor[] {
         _paymentAccepted,
