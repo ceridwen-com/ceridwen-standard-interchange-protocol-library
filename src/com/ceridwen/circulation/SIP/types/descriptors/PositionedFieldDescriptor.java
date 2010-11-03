@@ -31,20 +31,13 @@ package com.ceridwen.circulation.SIP.types.descriptors;
 public class PositionedFieldDescriptor extends FieldDescriptor{
   public int start;
   public int end;
+  @SuppressWarnings("unused")
+private final String tag = null;
 
-  protected PositionedFieldDescriptor(int start, int end, FieldDescriptor d, Boolean required) {
+  protected PositionedFieldDescriptor(String name, int start, int end, FieldDescriptor d, Boolean required) {
+	  super(name, d, required);
 	  this.start = start;
 	  this.end = end;
-	  this.length = d.length;
-	  if (d.required == null && required != null) {
-		  this.required = required;
-  	  } else if (d.required == null && required == null) {
-		  throw new java.lang.AssertionError(d.tag + " mutable required state needs explicit value");																  
-  	  } else if  (d.required != null && required == null) {
-  		  this.required = d.required;
-  	  } else {
-		  throw new java.lang.AssertionError(d.tag + " immutable required state cannot be overriden");																  
-  	  }
   }
 
   public PositionedFieldDescriptor(int start, int end) {
@@ -57,5 +50,5 @@ public class PositionedFieldDescriptor extends FieldDescriptor{
 	    this.start = start;
 	    this.end = end;
 	    this.required = required;
-	  }
+  }
 }

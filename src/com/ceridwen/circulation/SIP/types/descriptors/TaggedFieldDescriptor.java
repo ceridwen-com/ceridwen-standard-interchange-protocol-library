@@ -31,19 +31,9 @@ package com.ceridwen.circulation.SIP.types.descriptors;
 public class TaggedFieldDescriptor extends FieldDescriptor {
   public static final char TERMINATOR = '|';
 
-  protected TaggedFieldDescriptor(FieldDescriptor d, Boolean required)
+  protected TaggedFieldDescriptor(String name, FieldDescriptor d, Boolean required)
   {
-	  this.tag = d.tag;
-	  this.length = d.length;
-	  if (d.required == null && required != null) {
-		  this.required = required;
-  	  } else if (d.required == null && required == null) {
-		  throw new java.lang.AssertionError(d.tag + " mutable required state needs explicit value");																  
-  	  } else if  (d.required != null && required == null) {
-  		  this.required = d.required;
-  	  } else {
-		  throw new java.lang.AssertionError(d.tag + " immutable required state cannot be overriden");																  
-  	  }
+	  super(name, d, required);
   }
   
   public TaggedFieldDescriptor(Boolean required) {

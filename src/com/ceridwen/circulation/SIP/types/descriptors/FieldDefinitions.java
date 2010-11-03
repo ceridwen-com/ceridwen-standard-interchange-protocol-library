@@ -126,6 +126,8 @@ public class FieldDefinitions {
 		fields.put("unrenewedCount", new FieldDescriptor(null, Integer.class, 4, true));
 		fields.put("validPatron", new FieldDescriptor("BL", Boolean.class, 1, false));
 		fields.put("validPatronPassword", new FieldDescriptor("CQ", Boolean.class, 1, false));
+		
+//		FieldStatisticsGatherer.getFieldStatisticsGatherer().LoadFieldDefinitions(fields);
 	}
 
     static public void fixupFieldDescriptors(String messageName, PropertyDescriptor[] pds)
@@ -151,10 +153,10 @@ public class FieldDefinitions {
 					if ((((PositionedFieldDescriptor)fd).end - ((PositionedFieldDescriptor)fd).start + 1) != field.length) {
 						throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptors length mismatch: " + name);														
 					}	
-					PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(((PositionedFieldDescriptor)fd).start, ((PositionedFieldDescriptor)fd).end, field, ((PositionedFieldDescriptor)fd).required);
+					PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(name, ((PositionedFieldDescriptor)fd).start, ((PositionedFieldDescriptor)fd).end, field, ((PositionedFieldDescriptor)fd).required);
 					pd.setValue("SIPFieldDescriptor", pfd);
 				} else if (fd.getClass() == TaggedFieldDescriptor.class) {
-					TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(field, fd.required);
+					TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(name, field, fd.required);
 					pd.setValue("SIPFieldDescriptor", tfd);					
 				} else {
 					throw new java.lang.AssertionError(messageName + " - Unknown field descriptor: " + name);
@@ -163,7 +165,7 @@ public class FieldDefinitions {
 				if (field.tag == null) {
 					throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor must have explicit tag: " + name);					
 				}
-				TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(field, null);
+				TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(name, field, null);
 				pd.setValue("SIPFieldDescriptor", tfd);					
 			}
 		}
