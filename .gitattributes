@@ -4,6 +4,7 @@
 .externalToolBuilders/Package[!!-~]Circulation[!!-~]Jar.launch -text svneol=unset#text/plain
 .externalToolBuilders/Package[!!-~]Circulation[!!-~]zip.launch -text svneol=unset#text/plain
 /.project -text
+.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 /Circulation-package.xml -text svneol=unset#text/plain
 /build.xml -text svneol=unset#text/plain
 /buildnum.xml -text
