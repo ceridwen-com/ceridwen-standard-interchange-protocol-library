@@ -54,7 +54,6 @@ public class HoldResponseBeanInfo extends MessageBeanInfo {
       _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
       _available.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,21));
-      _expirationDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(22,39));
 
       _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
       _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));   
