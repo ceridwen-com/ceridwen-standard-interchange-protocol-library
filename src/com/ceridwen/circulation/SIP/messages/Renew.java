@@ -39,13 +39,13 @@ public class Renew extends Message {
 	public String getCommand() {
     return "29";
   }
-  public Boolean getThirdPartyAllowed() {
+  public Boolean isThirdPartyAllowed() {
     return thirdPartyAllowed;
   }
   public void setThirdPartyAllowed(Boolean thirdPartyAllowed) {
     this.thirdPartyAllowed = thirdPartyAllowed;
   }
-  public Boolean getNoBlock() {
+  public Boolean isNoBlock() {
     return noBlock;
   }
   public void setNoBlock(Boolean noBlock) {
@@ -105,7 +105,7 @@ public class Renew extends Message {
   public void setItemProperties(String itemProperties) {
     this.itemProperties = itemProperties;
   }
-  public Boolean getFeeAcknowledged() {
+  public Boolean isFeeAcknowledged() {
     return feeAcknowledged;
   }
   public void setFeeAcknowledged(Boolean feeAcknowledged) {

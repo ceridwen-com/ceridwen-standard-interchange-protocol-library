@@ -37,8 +37,8 @@ public class RenewBeanInfo extends MessageBeanInfo {
   public RenewBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _thirdPartyAllowed = new PropertyDescriptor("thirdPartyAllowed", beanClass, "getThirdPartyAllowed", "setThirdPartyAllowed");
-      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "getNoBlock", "setNoBlock");
+      PropertyDescriptor _thirdPartyAllowed = new PropertyDescriptor("thirdPartyAllowed", beanClass, "isThirdPartyAllowed", "setThirdPartyAllowed");
+      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "isNoBlock", "setNoBlock");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _nbDueDate = new PropertyDescriptor("nbDueDate", beanClass, "getNbDueDate", "setNbDueDate");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
@@ -48,7 +48,7 @@ public class RenewBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "getFeeAcknowledged", "setFeeAcknowledged");
+      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "isFeeAcknowledged", "setFeeAcknowledged");
 
       _thirdPartyAllowed.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
       _noBlock.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));

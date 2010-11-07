@@ -38,21 +38,21 @@ public class CheckOutResponseBeanInfo extends MessageBeanInfo {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
       PropertyDescriptor _currencyType = new PropertyDescriptor("currencyType", beanClass, "getCurrencyType", "setCurrencyType");
-      PropertyDescriptor _desensitize = new PropertyDescriptor("desensitize", beanClass, "getDesensitize", "setDesensitize");
+      PropertyDescriptor _desensitize = new PropertyDescriptor("desensitize", beanClass, "isDesensitize", "setDesensitize");
       PropertyDescriptor _dueDate = new PropertyDescriptor("dueDate", beanClass, "getDueDate", "setDueDate");
       PropertyDescriptor _feeAmount = new PropertyDescriptor("feeAmount", beanClass, "getFeeAmount", "setFeeAmount");
       PropertyDescriptor _feeType = new PropertyDescriptor("feeType", beanClass, "getFeeType", "setFeeType");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "getMagneticMedia", "setMagneticMedia");
+      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "isMagneticMedia", "setMagneticMedia");
       PropertyDescriptor _mediaType = new PropertyDescriptor("mediaType", beanClass, "getMediaType", "setMediaType");
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
+      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
       PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
-      PropertyDescriptor _renewalOk = new PropertyDescriptor("renewalOk", beanClass, "getRenewalOk", "setRenewalOk");
+      PropertyDescriptor _renewalOk = new PropertyDescriptor("renewalOk", beanClass, "isRenewalOk", "setRenewalOk");
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _securityInhibit = new PropertyDescriptor("securityInhibit", beanClass, "getSecurityInhibit", "setSecurityInhibit");
+      PropertyDescriptor _securityInhibit = new PropertyDescriptor("securityInhibit", beanClass, "isSecurityInhibit", "setSecurityInhibit");
       PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _transactionId = new PropertyDescriptor("transactionId", beanClass, "getTransactionId", "setTransactionId");

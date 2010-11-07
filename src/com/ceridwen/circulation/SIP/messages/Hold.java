@@ -108,7 +108,7 @@ public class Hold extends Message {
   public void setTerminalPassword(String terminalPassword) {
     this.terminalPassword = terminalPassword;
   }
-  public Boolean getFeeAcknowledged() {
+  public Boolean isFeeAcknowledged() {
     return feeAcknowledged;
   }
   public void setFeeAcknowledged(Boolean feeAcknowledged) {

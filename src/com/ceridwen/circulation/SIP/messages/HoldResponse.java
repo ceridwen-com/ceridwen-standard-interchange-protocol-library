@@ -39,13 +39,13 @@ public class HoldResponse extends Message {
   public String getCommand() {
     return "16";
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public void setOk(Boolean ok) {
     this.ok = ok;
   }
-  public Boolean getAvailable() {
+  public Boolean isAvailable() {
     return available;
   }
   public void setAvailable(Boolean available) {

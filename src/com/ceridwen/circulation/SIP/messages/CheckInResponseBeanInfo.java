@@ -38,17 +38,17 @@ public class CheckInResponseBeanInfo extends MessageBeanInfo {
   public CheckInResponseBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _alert = new PropertyDescriptor("alert", beanClass, "getAlert", "setAlert");
+      PropertyDescriptor _alert = new PropertyDescriptor("alert", beanClass, "isAlert", "setAlert");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "getMagneticMedia", "setMagneticMedia");
+      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "isMagneticMedia", "setMagneticMedia");
       PropertyDescriptor _mediaType = new PropertyDescriptor("mediaType", beanClass, "getMediaType", "setMediaType");
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
+      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
       PropertyDescriptor _permanentLocation = new PropertyDescriptor("permanentLocation", beanClass, "getPermanentLocation", "setPermanentLocation");
       PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
-      PropertyDescriptor _resensitize = new PropertyDescriptor("resensitize", beanClass, "getResensitize", "setResensitize");
+      PropertyDescriptor _resensitize = new PropertyDescriptor("resensitize", beanClass, "isResensitize", "setResensitize");
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
       PropertyDescriptor _sortBin = new PropertyDescriptor("sortBin", beanClass, "getSortBin", "setSortBin");
       PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");

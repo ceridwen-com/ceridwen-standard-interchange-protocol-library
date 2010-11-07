@@ -34,7 +34,7 @@ public class ItemStatusUpdateResponse extends Message {
   public String getCommand() {
     return "20";
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public void setOk(Boolean ok) {

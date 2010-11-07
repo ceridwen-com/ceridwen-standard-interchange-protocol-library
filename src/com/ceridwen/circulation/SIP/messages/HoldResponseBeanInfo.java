@@ -37,8 +37,8 @@ public class HoldResponseBeanInfo extends MessageBeanInfo {
   public HoldResponseBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
-      PropertyDescriptor _available = new PropertyDescriptor("available", beanClass, "getAvailable", "setAvailable");
+      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
+      PropertyDescriptor _available = new PropertyDescriptor("available", beanClass, "isAvailable", "setAvailable");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _expirationDate = new PropertyDescriptor("expirationDate", beanClass, "getExpirationDate", "setExpirationDate");
       PropertyDescriptor _queuePosition = new PropertyDescriptor("queuePosition", beanClass, "getQueuePosition", "setQueuePosition");

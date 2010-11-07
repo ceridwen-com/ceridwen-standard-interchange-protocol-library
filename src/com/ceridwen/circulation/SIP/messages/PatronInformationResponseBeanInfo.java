@@ -66,8 +66,8 @@ public class PatronInformationResponseBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _unavailableHoldsCount = new PropertyDescriptor("unavailableHoldsCount", beanClass, "getUnavailableHoldsCount", "setUnavailableHoldsCount");
       PropertyDescriptor _unavailableHoldItems = new PropertyDescriptor("unavailableHoldItems", beanClass, "getUnavailableHoldItems", "setUnavailableHoldItems");
-      PropertyDescriptor _validPatron = new PropertyDescriptor("validPatron", beanClass, "getValidPatron", "setValidPatron");
-      PropertyDescriptor _validPatronPassword = new PropertyDescriptor("validPatronPassword", beanClass, "getValidPatronPassword", "setValidPatronPassword");
+      PropertyDescriptor _validPatron = new PropertyDescriptor("validPatron", beanClass, "isValidPatron", "setValidPatron");
+      PropertyDescriptor _validPatronPassword = new PropertyDescriptor("validPatronPassword", beanClass, "isValidPatronPassword", "setValidPatronPassword");
 
       _patronStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,15));
       _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(16,18));

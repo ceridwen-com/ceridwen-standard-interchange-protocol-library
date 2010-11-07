@@ -33,7 +33,7 @@ public class BlockPatron extends Message {
 public String getCommand() {
     return "01";
   }
-  public Boolean getCardRetained() {
+  public Boolean isCardRetained() {
     return cardRetained;
   }
   public void setCardRetained(Boolean cardRetained) {

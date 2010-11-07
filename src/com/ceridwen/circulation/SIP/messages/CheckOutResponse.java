@@ -64,7 +64,7 @@ public class CheckOutResponse extends Message {
   public CurrencyType getCurrencyType() {
     return currencyType;
   }
-  public Boolean getDesensitize() {
+  public Boolean isDesensitize() {
     return desensitize;
   }
   public String getDueDate() {
@@ -85,13 +85,13 @@ public class CheckOutResponse extends Message {
   public String getItemProperties() {
     return itemProperties;
   }
-  public Boolean getMagneticMedia() {
+  public Boolean isMagneticMedia() {
     return magneticMedia;
   }
   public MediaType getMediaType() {
     return mediaType;
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public String getPatronIdentifier() {
@@ -100,13 +100,13 @@ public class CheckOutResponse extends Message {
   public String getPrintLine() {
     return printLine;
   }
-  public Boolean getRenewalOk() {
+  public Boolean isRenewalOk() {
     return renewalOk;
   }
   public String getScreenMessage() {
     return screenMessage;
   }
-  public Boolean getSecurityInhibit() {
+  public Boolean isSecurityInhibit() {
     return securityInhibit;
   }
   public String getTitleIdentifier() {

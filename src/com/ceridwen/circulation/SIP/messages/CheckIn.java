@@ -47,7 +47,7 @@ public class CheckIn extends Message {
   public String getCommand() {
     return "09";
   }
-  public Boolean getCancel() {
+  public Boolean isCancel() {
     return cancel;
   }
   public String getCurrentLocation() {
@@ -62,7 +62,7 @@ public class CheckIn extends Message {
   public String getItemProperties() {
     return itemProperties;
   }
-  public Boolean getNoBlock() {
+  public Boolean isNoBlock() {
     return noBlock;
   }
   public Date getReturnDate() {

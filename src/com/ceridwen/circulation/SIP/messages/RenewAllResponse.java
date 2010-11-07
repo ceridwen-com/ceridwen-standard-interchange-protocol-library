@@ -34,7 +34,7 @@ public class RenewAllResponse extends Message {
 	public String getCommand() {
     return "66";
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public void setOk(Boolean ok) {

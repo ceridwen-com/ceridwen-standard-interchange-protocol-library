@@ -84,10 +84,10 @@ public class PatronStatusResponse extends Message {
   public Date getTransactionDate() {
     return transactionDate;
   }
-  public Boolean getValidPatron() {
+  public Boolean isValidPatron() {
     return validPatron;
   }
-  public Boolean getValidPatronPassword() {
+  public Boolean isValidPatronPassword() {
     return validPatronPassword;
   }
   public void setValidPatronPassword(Boolean validPatronPassword) {

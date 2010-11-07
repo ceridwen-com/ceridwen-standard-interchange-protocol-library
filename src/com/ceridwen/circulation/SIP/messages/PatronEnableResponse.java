@@ -84,13 +84,13 @@ public class PatronEnableResponse extends Message {
   public void setPersonalName(String personalName) {
     this.personalName = personalName;
   }
-  public Boolean getValidPatron() {
+  public Boolean isValidPatron() {
     return validPatron;
   }
   public void setValidPatron(Boolean validPatron) {
     this.validPatron = validPatron;
   }
-  public Boolean getValidPatronPassword() {
+  public Boolean isValidPatronPassword() {
     return validPatronPassword;
   }
   public void setValidPatronPassword(Boolean validPatronPassword) {

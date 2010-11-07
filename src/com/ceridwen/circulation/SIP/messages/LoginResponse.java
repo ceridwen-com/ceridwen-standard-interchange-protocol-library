@@ -28,7 +28,7 @@ public class LoginResponse extends Message {
   public String getCommand() {
     return "94";
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public void setOk(Boolean ok) {

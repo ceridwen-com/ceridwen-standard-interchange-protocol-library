@@ -50,25 +50,25 @@ public class RenewResponse extends Message {
   public String getCommand() {
     return "30";
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public void setOk(Boolean ok) {
     this.ok = ok;
   }
-  public Boolean getRenewalOk() {
+  public Boolean isRenewalOk() {
     return renewalOk;
   }
   public void setRenewalOk(Boolean renewalOk) {
     this.renewalOk = renewalOk;
   }
-  public Boolean getMagneticMedia() {
+  public Boolean isMagneticMedia() {
     return magneticMedia;
   }
   public void setMagneticMedia(Boolean magneticMedia) {
     this.magneticMedia = magneticMedia;
   }
-  public Boolean getDesensitize() {
+  public Boolean isDesensitize() {
     return desensitize;
   }
   public void setDesensitize(Boolean desensitize) {
@@ -116,7 +116,7 @@ public class RenewResponse extends Message {
   public void setFeeType(FeeType feeType) {
     this.feeType = feeType;
   }
-  public Boolean getSecurityInhibit() {
+  public Boolean isSecurityInhibit() {
     return securityInhibit;
   }
   public void setSecurityInhibit(Boolean securityInhibit) {

@@ -37,7 +37,7 @@ public class EndSessionResponseBeanInfo extends MessageBeanInfo {
   public EndSessionResponseBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _endSession = new PropertyDescriptor("endSession", beanClass, "getEndSession", "setEndSession");
+      PropertyDescriptor _endSession = new PropertyDescriptor("endSession", beanClass, "isEndSession", "setEndSession");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");

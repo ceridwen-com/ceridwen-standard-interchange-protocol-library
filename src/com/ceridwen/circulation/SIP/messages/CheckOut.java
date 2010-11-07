@@ -50,10 +50,10 @@ public class CheckOut extends Message {
   public String getCommand() {
     return "11";
   }
-  public Boolean getCancel() {
+  public Boolean isCancel() {
     return cancel;
   }
-  public Boolean getFeeAcknowledged() {
+  public Boolean isFeeAcknowledged() {
     return feeAcknowledged;
   }
   public String getInstitutionId() {
@@ -68,7 +68,7 @@ public class CheckOut extends Message {
   public Date getNbDueDate() {
     return nbDueDate;
   }
-  public Boolean getNoBlock() {
+  public Boolean isNoBlock() {
     return noBlock;
   }
   public String getPatronIdentifier() {
@@ -77,7 +77,7 @@ public class CheckOut extends Message {
   public String getPatronPassword() {
     return patronPassword;
   }
-  public Boolean getSCRenewalPolicy() {
+  public Boolean isSCRenewalPolicy() {
     return SCRenewalPolicy;
   }
   public String getTerminalPassword() {

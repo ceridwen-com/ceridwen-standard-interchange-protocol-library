@@ -36,7 +36,7 @@ public class LoginResponseBeanInfo extends MessageBeanInfo {
   public LoginResponseBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
+      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
 
       _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
 

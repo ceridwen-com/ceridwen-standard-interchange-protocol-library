@@ -34,7 +34,7 @@ public class FeePaidResponse extends Message {
   public String getCommand() {
     return "38";
   }
-  public Boolean getPaymentAccepted() {
+  public Boolean isPaymentAccepted() {
     return paymentAccepted;
   }
   public void setPaymentAccepted(Boolean paymentAccepted) {

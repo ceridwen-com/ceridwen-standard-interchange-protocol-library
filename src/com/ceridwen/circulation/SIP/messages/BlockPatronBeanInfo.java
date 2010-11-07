@@ -39,7 +39,7 @@ public class BlockPatronBeanInfo extends MessageBeanInfo {
   }
 
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-	  PropertyDescriptor _cardRetained = new PropertyDescriptor("cardRetained", beanClass, "getCardRetained", "setCardRetained");
+	  PropertyDescriptor _cardRetained = new PropertyDescriptor("cardRetained", beanClass, "isCardRetained", "setCardRetained");
 	  PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 	  PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
 	  PropertyDescriptor _blockedCardMessage = new PropertyDescriptor("blockedCardMessage", beanClass, "getBlockedCardMessage", "setBlockedCardMessage");

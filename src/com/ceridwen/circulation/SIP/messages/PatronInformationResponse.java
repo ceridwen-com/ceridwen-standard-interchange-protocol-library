@@ -160,10 +160,10 @@ public class PatronInformationResponse extends Message {
   public String[] getUnavailableHoldItems() {
     return unavailableHoldItems;
   }
-  public Boolean getValidPatron() {
+  public Boolean isValidPatron() {
     return validPatron;
   }
-  public Boolean getValidPatronPassword() {
+  public Boolean isValidPatronPassword() {
     return validPatronPassword;
   }
   public void setValidPatronPassword(Boolean validPatronPassword) {

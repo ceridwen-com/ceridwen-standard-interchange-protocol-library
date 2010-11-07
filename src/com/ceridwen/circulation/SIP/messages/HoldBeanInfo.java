@@ -48,7 +48,7 @@ public class HoldBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
-      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "getFeeAcknowledged", "setFeeAcknowledged");
+      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "isFeeAcknowledged", "setFeeAcknowledged");
 
       _holdMode.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
       _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));

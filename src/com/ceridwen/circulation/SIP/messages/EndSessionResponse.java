@@ -33,7 +33,7 @@ public class EndSessionResponse extends Message {
   public String getCommand() {
     return "36";
   }
-  public Boolean getEndSession() {
+  public Boolean isEndSession() {
     return endSession;
   }
   public void setEndSession(Boolean endSession) {

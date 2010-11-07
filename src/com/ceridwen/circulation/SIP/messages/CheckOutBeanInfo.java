@@ -37,16 +37,16 @@ public class CheckOutBeanInfo extends MessageBeanInfo {
   public CheckOutBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _cancel = new PropertyDescriptor("cancel", beanClass, "getCancel", "setCancel");
-      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "getFeeAcknowledged", "setFeeAcknowledged");
+      PropertyDescriptor _cancel = new PropertyDescriptor("cancel", beanClass, "isCancel", "setCancel");
+      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "isFeeAcknowledged", "setFeeAcknowledged");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
       PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
       PropertyDescriptor _nbDueDate = new PropertyDescriptor("nbDueDate", beanClass, "getNbDueDate", "setNbDueDate");
-      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "getNoBlock", "setNoBlock");
+      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "isNoBlock", "setNoBlock");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
       PropertyDescriptor _patronPassword = new PropertyDescriptor("patronPassword", beanClass, "getPatronPassword", "setPatronPassword");
-      PropertyDescriptor _renewalPolicy = new PropertyDescriptor("SCRenewalPolicy", beanClass, "getSCRenewalPolicy", "setSCRenewalPolicy");
+      PropertyDescriptor _renewalPolicy = new PropertyDescriptor("SCRenewalPolicy", beanClass, "isSCRenewalPolicy", "setSCRenewalPolicy");
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 

@@ -37,7 +37,7 @@ public class FeePaidResponseBeanInfo extends MessageBeanInfo {
   public FeePaidResponseBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _paymentAccepted = new PropertyDescriptor("paymentAccepted", beanClass, "getPaymentAccepted", "setPaymentAccepted");
+      PropertyDescriptor _paymentAccepted = new PropertyDescriptor("paymentAccepted", beanClass, "isPaymentAccepted", "setPaymentAccepted");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");

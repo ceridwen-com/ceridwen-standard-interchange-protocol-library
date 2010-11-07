@@ -55,7 +55,7 @@ public class CheckInResponse extends Message {
   public String getCommand() {
     return "10";
   }
-  public Boolean getAlert() {
+  public Boolean isAlert() {
     return alert;
   }
   public String getInstitutionId() {
@@ -67,13 +67,13 @@ public class CheckInResponse extends Message {
   public String getItemProperties() {
     return itemProperties;
   }
-  public Boolean getMagneticMedia() {
+  public Boolean isMagneticMedia() {
     return magneticMedia;
   }
   public MediaType getMediaType() {
     return mediaType;
   }
-  public Boolean getOk() {
+  public Boolean isOk() {
     return ok;
   }
   public String getPatronIdentifier() {
@@ -85,7 +85,7 @@ public class CheckInResponse extends Message {
   public String getPrintLine() {
     return printLine;
   }
-  public Boolean getResensitize() {
+  public Boolean isResensitize() {
     return resensitize;
   }
   public String getScreenMessage() {

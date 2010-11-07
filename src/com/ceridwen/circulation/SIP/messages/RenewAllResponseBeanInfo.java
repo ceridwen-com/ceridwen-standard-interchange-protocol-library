@@ -36,7 +36,7 @@ public class RenewAllResponseBeanInfo extends MessageBeanInfo {
   public RenewAllResponseBeanInfo() {
   }
   public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "getOk", "setOk");
+      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
       PropertyDescriptor _renewedCount = new PropertyDescriptor("renewedCount", beanClass, "getRenewedCount", "setRenewedCount");
       PropertyDescriptor _unrenewedCount = new PropertyDescriptor("unrenewedCount", beanClass, "getUnrenewedCount", "setUnrenewedCount");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
