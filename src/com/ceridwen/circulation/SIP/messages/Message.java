@@ -49,7 +49,8 @@ public abstract class Message implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1609258005567594730L;
-  private static Log log = LogFactory.getLog(Message.class);
+	private static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
+	private static Log log = LogFactory.getLog(Message.class);
 
     private static Class<?>[] _messages = {    	
         PatronStatusRequest.class,
@@ -115,9 +116,14 @@ public abstract class Message implements Serializable {
     }
   }
 
-  private String[] getProp(PropertyDescriptor desc) {
+  private String[] getProp(PropertyDescriptor desc) throws MandatoryFieldOmitted {
 	  String[] ret = null;
 	  FieldDescriptor SIPField = (FieldDescriptor)desc.getValue("SIPFieldDescriptor");
+    String pop = System.getProperty(PROP_AUTOPOPULATE, "true");
+    boolean autoPop = false;
+    if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
+      autoPop = true;
+    }	  
 	  try {
 		  Object value = desc.getReadMethod().invoke(this, new Object[0]);
 		  if (desc.getPropertyType() == Boolean.class) {
@@ -125,6 +131,9 @@ public abstract class Message implements Serializable {
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
+						    if (!autoPop) {
+		              throw new MandatoryFieldOmitted(desc.getDisplayName());             
+						    }
 							  if (desc.getName().equalsIgnoreCase("magneticMedia"))
 								  ret = new String[]{"U"};
 							  else {
@@ -149,6 +158,9 @@ public abstract class Message implements Serializable {
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
+                if (!autoPop) {
+                  throw new MandatoryFieldOmitted(desc.getDisplayName());             
+                }
 							  ret = new String[]{mangleDate(new Date())};          		  
 						  }
 					  }
@@ -169,6 +181,9 @@ public abstract class Message implements Serializable {
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
+                if (!autoPop) {
+                  throw new MandatoryFieldOmitted(desc.getDisplayName());             
+                }
 							  if (SIPField.length != null) {
 								  ret = new String[]{String.format("%0" + SIPField.length + "d", 0)};
 							  } else {
@@ -185,6 +200,9 @@ public abstract class Message implements Serializable {
 				  if (SIPField != null) {
 					  if (SIPField.required != null) {
 						  if (SIPField.required) {
+                  if (!autoPop) {
+                    throw new MandatoryFieldOmitted(desc.getDisplayName());             
+                  }
 						      Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
 						      for (Class<?> interfce: interfaces) {
 							      if (interfce == AbstractEnumeration.class) {
@@ -201,6 +219,8 @@ public abstract class Message implements Serializable {
 				  }
 			  }
 		  }
+	  } catch (MandatoryFieldOmitted mfo) {
+		  throw mfo;
 	  } catch (Exception ex) {
 		  log.error("Unexpected error getting " + desc.getDisplayName(), ex);
 	  }
@@ -267,8 +287,8 @@ public abstract class Message implements Serializable {
 	        	}		
 	        	variable.put(field.tag, value);
 	        } else if (field.required) {
-	          String pad = System.getProperty("com.ceridwen.circulation.SIP.messages.AddEmptyRequiredTaggedFields", "true");
-	          if (pad.equalsIgnoreCase("true") || pad.equalsIgnoreCase("on") || pad.equalsIgnoreCase("1")) {
+	          String pop = System.getProperty(PROP_AUTOPOPULATE, "true");
+	          if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
 	            variable.put(field.tag, value);
 	          } else {
               throw new MandatoryFieldOmitted(desc.getDisplayName());	            

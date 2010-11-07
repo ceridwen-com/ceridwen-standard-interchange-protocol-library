@@ -1,8 +1,8 @@
 #Build Number: src/com/ceridwen/circulation/SIP/messages/Message.num
-#Sun Nov 07 01:43:45 GMT 2010
+#Sun Nov 07 11:06:30 GMT 2010
 version=2.60
-date=Sun Nov 07 01\:43\:45 GMT 2010
 name=3M SIP Protocol Engine
+date=Sun Nov 07 11\:06\:30 GMT 2010
 author=Matthew J. Dovey
 epoch=1140293090453
-build=1142
+build=1145
