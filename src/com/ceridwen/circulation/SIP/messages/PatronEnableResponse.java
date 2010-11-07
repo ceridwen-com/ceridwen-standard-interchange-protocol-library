@@ -44,8 +44,8 @@ public class PatronEnableResponse extends Message {
     return patronStatus;
   }
   /**
-   * Use getPatronStatus().set(PatronStatus.XXX)
-   *     getPatronStatus().unset(PatronStatus.XXX)
+   * Use getPatronStatus().set(PatronStatus.FIELD)
+   *     getPatronStatus().unset(PatronStatus.FIELD)
    *     getPatronStatus().unsetAll()
    *   
    * @param summary

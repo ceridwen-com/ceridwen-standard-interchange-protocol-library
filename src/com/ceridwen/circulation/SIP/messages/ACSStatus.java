@@ -37,10 +37,10 @@ public class ACSStatus extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = -611426325284828647L;
-	private Boolean onLineStatus;
+	private Boolean onlineStatus;
 	private Boolean checkInOk;
 	private Boolean checkOutOk;
-	private Boolean renewalPolicy;
+	private Boolean ACSRenewalPolicy;
 	private Boolean statusUpdateOk;
 	private Boolean offlineOk;
 	private Integer timeoutPeriod;
@@ -75,8 +75,8 @@ public class ACSStatus extends Message {
   public Boolean isOfflineOk() {
     return offlineOk;
   }
-  public Boolean isOnLineStatus() {
-    return onLineStatus;
+  public Boolean isOnlineStatus() {
+    return onlineStatus;
   }
   public String getPrintLine() {
     return printLine;
@@ -84,8 +84,8 @@ public class ACSStatus extends Message {
   public ProtocolVersion getProtocolVersion() {
     return protocolVersion;
   }
-  public Boolean isRenewalPolicy() {
-    return renewalPolicy;
+  public Boolean isACSRenewalPolicy() {
+    return ACSRenewalPolicy;
   }
   public Integer getRetriesAllowed() {
     return retriesAllowed;
@@ -131,8 +131,8 @@ public class ACSStatus extends Message {
   public void setRetriesAllowed(Integer retriesAllowed) {
     this.retriesAllowed = retriesAllowed;
   }
-  public void setRenewalPolicy(Boolean renewalPolicy) {
-    this.renewalPolicy = renewalPolicy;
+  public void setACSRenewalPolicy(Boolean ACSRenewalPolicy) {
+    this.ACSRenewalPolicy = ACSRenewalPolicy;
   }
   public void setProtocolVersion(ProtocolVersion protocolVersion) {
     this.protocolVersion = protocolVersion;
@@ -140,8 +140,8 @@ public class ACSStatus extends Message {
   public void setPrintLine(String printLine) {
     this.printLine = printLine;
   }
-  public void setOnLineStatus(Boolean onLineStatus) {
-    this.onLineStatus = onLineStatus;
+  public void setOnlineStatus(Boolean onlineStatus) {
+    this.onlineStatus = onlineStatus;
   }
   public void setOfflineOk(Boolean offlineOk) {
     this.offlineOk = offlineOk;

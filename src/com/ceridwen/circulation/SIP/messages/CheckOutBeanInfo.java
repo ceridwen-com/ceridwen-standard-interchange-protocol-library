@@ -46,7 +46,7 @@ public class CheckOutBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "getNoBlock", "setNoBlock");
       PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
       PropertyDescriptor _patronPassword = new PropertyDescriptor("patronPassword", beanClass, "getPatronPassword", "setPatronPassword");
-      PropertyDescriptor _renewalPolicy = new PropertyDescriptor("renewalPolicy", beanClass, "getRenewalPolicy", "setRenewalPolicy");
+      PropertyDescriptor _renewalPolicy = new PropertyDescriptor("SCRenewalPolicy", beanClass, "getSCRenewalPolicy", "setSCRenewalPolicy");
       PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
       PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
 

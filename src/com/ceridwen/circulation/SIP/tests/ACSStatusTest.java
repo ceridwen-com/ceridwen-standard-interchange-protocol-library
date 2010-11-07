@@ -48,10 +48,10 @@ public class ACSStatusTest extends AbstractMessageTest<ACSStatus> {
 		m.setInstitutionId("institutionId");
 		m.setLibraryName("libraryName");
 		m.setOfflineOk(true);
-		m.setOnLineStatus(true);
+		m.setOnlineStatus(true);
 		m.setPrintLine("printLine");
 		m.setProtocolVersion(ProtocolVersion.VERSION_2_00);
-		m.setRenewalPolicy(true);
+		m.setACSRenewalPolicy(true);
 		m.setRetriesAllowed(123);
 		m.setScreenMessage("screenMessage"); 
 		m.setStatusUpdateOk(true);

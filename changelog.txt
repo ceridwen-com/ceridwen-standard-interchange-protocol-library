@@ -1,0 +1,44 @@
+Version 2.50: Wed Nov 03 22:31:33 GMT 2010(255)
+Refactoring to consolidated the message fields definitions into FieldDefinitions class
+Changed ProtocolVersion to enumerated type
+Added handling of required Enumerated types when encoding
+Added code for handling required Integer, Date and Boolean fields during encoding
+Change relevant fields from String to Integer
+Added length checking, padding and trimming
+Added jUnit tests for message encoding/decoding
+Bugfix: Corrected HoldResponse definition (tagged field was defined as a positioned field)
+Bugfix: Corrected spelling of Magnetic
+Bugfix: Change noBlockDueDate to nbDueDate and printling to printLine for consistency
+Bugfix: Incorrect positionedfield definition for overdueItemsCount in PatronInformationResponose
+Bugfix: Incorrect positionedfield definition for nbDueDate in Renew
+
+Version 2.20: Sun Oct 31 22:33:00 GMT (209)
+Added enumerated fields
+Added flag fields
+Fixed default values for ok property if not explicitly set
+Bugfix: Change boolean to Boolean in Renew properties
+Bugfix: Fixed ItemInformationBeanInfo incorrect start/end for transaction date
+Bugfix: Corrected incorrect getter/setter in EndSessionResponseBeanInfo
+Bugfix: Fixed error in CurrencyType.getCode
+Bugfix: Tightened Message.setProp code
+
+Version 2.10: Fri Oct 29 13:22:23 BST 2010(148)
+Added basic socket server implementation
+Refactored SCResend and ACSResend as Message subclasses
+Added options to connection for checksum checking and checksum generation
+Added strictSequenceChecking option
+Connect now throws exceptions rather than true/false status
+Added repeated field support
+Updated commons logging from 1.1 to 1.1.1
+Updated commons net from 1.4.1 to 2.0
+Updated commons beanutils from 1.7.0 to 1.8.3
+Templated classes based on JDK 1.6 warnings
+
+Version 2.02: Jan 12 17:48 GMT 2007
+Added MessageNotUnderstood exception
+
+Version 2.01: May 11 20:17:00 BST 2005
+Modified so that required variable fields are always present even if blank, optional variable fields are omitted if blank.
+
+Version 2.00: Oct 31 23:08:00 GMT 2004 (38)
+Initial release

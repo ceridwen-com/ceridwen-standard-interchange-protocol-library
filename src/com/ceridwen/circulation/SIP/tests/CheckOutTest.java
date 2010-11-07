@@ -49,7 +49,7 @@ public class CheckOutTest extends AbstractMessageTest<CheckOut> {
 		m.setNoBlock(true);
 		m.setPatronIdentifier("patronIdentifier");
 		m.setPatronPassword("patronPassword");
-		m.setRenewalPolicy(true);
+		m.setSCRenewalPolicy(true);
 		m.setTerminalPassword("terminalPassword");
 		m.setTransactionDate(new java.util.Date(0));
 

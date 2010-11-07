@@ -34,7 +34,7 @@ public class CheckOut extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 8454866593857815453L;
-	private Boolean renewalPolicy;
+	private Boolean SCRenewalPolicy;
 	private Boolean noBlock;
 	private Date transactionDate;
 	private Date nbDueDate;
@@ -77,8 +77,8 @@ public class CheckOut extends Message {
   public String getPatronPassword() {
     return patronPassword;
   }
-  public Boolean getRenewalPolicy() {
-    return renewalPolicy;
+  public Boolean getSCRenewalPolicy() {
+    return SCRenewalPolicy;
   }
   public String getTerminalPassword() {
     return terminalPassword;
@@ -92,8 +92,8 @@ public class CheckOut extends Message {
   public void setTerminalPassword(String terminalPassword) {
     this.terminalPassword = terminalPassword;
   }
-  public void setRenewalPolicy(Boolean renewalPolicy) {
-    this.renewalPolicy = renewalPolicy;
+  public void setSCRenewalPolicy(Boolean SCRenewalPolicy) {
+    this.SCRenewalPolicy = SCRenewalPolicy;
   }
   public void setPatronPassword(String patronPassword) {
     this.patronPassword = patronPassword;

@@ -8,6 +8,20 @@
 /Circulation-package.xml -text svneol=unset#text/plain
 /build.xml -text svneol=unset#text/plain
 /buildnum.xml -text
+/changelog.txt -text svneol=unset#text/plain
+dist/Circulation.zip -text
+dist/Sample.java -text svneol=unset#text/plain
+dist/ceridwen-circulation.jar -text
+dist/ceridwen-utilities.jar -text
+dist/commons-beanutils-1.8.3.jar -text
+dist/commons-beanutils-bean-collections-1.8.3.jar -text
+dist/commons-beanutils-core-1.8.3.jar -text
+dist/commons-logging-1.1.1.jar -text
+dist/commons-logging-adapters-1.1.1.jar -text
+dist/commons-logging-api-1.1.1.jar -text
+dist/commons-net-2.0.jar -text
+dist/commons-net-ftp-2.0.jar -text
+dist/license.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/NOTICE.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/RELEASE-NOTES.txt -text svneol=unset#text/plain

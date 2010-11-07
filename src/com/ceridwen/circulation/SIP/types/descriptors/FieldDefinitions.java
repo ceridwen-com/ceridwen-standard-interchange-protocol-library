@@ -45,7 +45,8 @@ public class FieldDefinitions {
 /**
  * Static Fields		
  */
-	    fields.put("alert", new FieldDescriptor(null, Boolean.class, 1, true));
+    fields.put("ACSRenewalPolicy", new FieldDescriptor(null, Boolean.class, 1, true));
+	  fields.put("alert", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("available", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("blockedCardMessage", new FieldDescriptor("AL", String.class, null, true));
 		fields.put("cancel", new FieldDescriptor("BI", Boolean.class, 1, false));
@@ -55,7 +56,7 @@ public class FieldDefinitions {
 		fields.put("chargedItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("chargedItemsLimit", new FieldDescriptor("CB", Integer.class, 4, false));
 		fields.put("checkInOk", new FieldDescriptor(null, Boolean.class, 1, true));
-	    fields.put("checkOutOk", new FieldDescriptor(null, Boolean.class, 1, true));
+	  fields.put("checkOutOk", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("currencyType", new FieldDescriptor("BH", CurrencyType.class, 3, null));
 		fields.put("currentLocation", new FieldDescriptor("AP", String.class, null, null));
 		fields.put("dateTimeSync", new FieldDescriptor(null, Date.class, 18, false));
@@ -63,7 +64,7 @@ public class FieldDefinitions {
 		fields.put("dueDate", new FieldDescriptor("AH", String.class, null, null));
 		fields.put("eMailAddress", new FieldDescriptor("BE", String.class, null, false));
 		fields.put("endItem", new FieldDescriptor("BQ", Integer.class, null, false));
-	    fields.put("endSession", new FieldDescriptor(null, Boolean.class, 1, true));		
+	  fields.put("endSession", new FieldDescriptor(null, Boolean.class, 1, true));		
 		fields.put("expirationDate", new FieldDescriptor("BW", Date.class, 18, false));
 		fields.put("feeAcknowledged", new FieldDescriptor("BO", Boolean.class, 1,false));
 		fields.put("feeAmount", new FieldDescriptor("BV", String.class, null, null));
@@ -96,7 +97,7 @@ public class FieldDefinitions {
 		fields.put("noBlock", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("offlineOk", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("ok", new FieldDescriptor(null, Boolean.class, 1, true));
-		fields.put("onLineStatus", new FieldDescriptor(null, Boolean.class, 1, true)); //TODO consistency with offline
+		fields.put("onlineStatus", new FieldDescriptor(null, Boolean.class, 1, true)); //TODO consistency with offline
 		fields.put("overdueItems", new FieldDescriptor("AT", String[].class, null, false));
 		fields.put("overdueItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("overdueItemsLimit", new FieldDescriptor("CA", Integer.class, 4, false));
@@ -107,7 +108,7 @@ public class FieldDefinitions {
 		fields.put("paymentAccepted", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("paymentType", new FieldDescriptor(null, PaymentType.class, 2, true));
 		fields.put("permanentLocation", new FieldDescriptor("AQ", String.class, null, null));
-        fields.put("personalName", new FieldDescriptor("AE", String.class, null, true));
+    fields.put("personalName", new FieldDescriptor("AE", String.class, null, true));
 		fields.put("pickupLocation", new FieldDescriptor("BS", String.class, null, false));	
 		fields.put("printLine", new FieldDescriptor("AG", String.class, null, false));
 		fields.put("protocolVersion", new FieldDescriptor(null, ProtocolVersion.class, 4, true));
@@ -117,11 +118,11 @@ public class FieldDefinitions {
 		fields.put("recallItems", new FieldDescriptor("BU", String[].class, null, false));
 		fields.put("recallItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("renewalOk", new FieldDescriptor(null, Boolean.class, 1, true));
-		fields.put("renewalPolicy", new FieldDescriptor(null, Boolean.class, 1, true)); // TODO change to ACSRenewalPolicy
 		fields.put("renewedCount", new FieldDescriptor(null, Integer.class, 4, true));
 		fields.put("resensitize", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("retriesAllowed", new FieldDescriptor(null, Integer.class, 3, true));
 		fields.put("returnDate", new FieldDescriptor(null, Date.class, 18, false));
+    fields.put("SCRenewalPolicy", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("securityMarker", new FieldDescriptor(null, SecurityMarker.class, 2, true));
 		fields.put("screenMessage", new FieldDescriptor("AF", String.class, null, false));
 		fields.put("securityInhibit", new FieldDescriptor("CI", Boolean.class, 1, false));
@@ -132,7 +133,7 @@ public class FieldDefinitions {
 		fields.put("summary", new FieldDescriptor(null, Summary.class, 10, false));
 		fields.put("supportedMessages", new FieldDescriptor("BX", SupportedMessages.class, 16, true));
 		fields.put("terminalLocation", new FieldDescriptor("AN", String.class, null, false));
-	    fields.put("terminalPassword", new FieldDescriptor("AC", String.class, null, null));	
+	  fields.put("terminalPassword", new FieldDescriptor("AC", String.class, null, null));	
 		fields.put("thirdPartyAllowed", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("timeoutPeriod", new FieldDescriptor(null, Integer.class, 3, true));
 		fields.put("titleIdentifier", new FieldDescriptor("AJ", String.class, null, null));

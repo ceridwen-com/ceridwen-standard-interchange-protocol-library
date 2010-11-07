@@ -149,7 +149,7 @@ public class Sample {
 
 	      ((CheckOut)request).setPatronIdentifier("2000000");
 	      ((CheckOut)request).setItemIdentifier("300000000");
-	      ((CheckOut)request).setSCRenewalPolicy(Boolean.TRUE);
+	      ((CheckOut)request).setACSRenewalPolicy(Boolean.TRUE);
 	      ((CheckOut)request).setTransactionDate(new Date());
 
 	      try {

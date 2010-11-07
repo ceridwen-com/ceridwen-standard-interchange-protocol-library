@@ -84,8 +84,8 @@ public class PatronInformation extends Message {
     this.terminalPassword = terminalPassword;
   }
 /**
- * Use getSummary().set(Summary.XXX)
- *     getSummary().unset(Summary.XXX)
+ * Use getSummary().set(Summary.FIELD)
+ *     getSummary().unset(Summary.FIELD)
  *     getSummary().unsetAll()
  *   
  * @param summary

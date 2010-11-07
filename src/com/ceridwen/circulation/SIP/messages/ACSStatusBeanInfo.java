@@ -43,10 +43,10 @@ public class ACSStatusBeanInfo extends MessageBeanInfo {
       PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
       PropertyDescriptor _libraryName = new PropertyDescriptor("libraryName", beanClass, "getLibraryName", "setLibraryName");
       PropertyDescriptor _offlineOk = new PropertyDescriptor("offlineOk", beanClass, "isOfflineOk", "setOfflineOk");
-      PropertyDescriptor _onLineStatus = new PropertyDescriptor("onLineStatus", beanClass, "isOnLineStatus", "setOnLineStatus");
+      PropertyDescriptor _onLineStatus = new PropertyDescriptor("onlineStatus", beanClass, "isOnlineStatus", "setOnlineStatus");
       PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
       PropertyDescriptor _protocolVersion = new PropertyDescriptor("protocolVersion", beanClass, "getProtocolVersion", "setProtocolVersion");
-      PropertyDescriptor _renewalPolicy = new PropertyDescriptor("renewalPolicy", beanClass, "isRenewalPolicy", "setRenewalPolicy");
+      PropertyDescriptor _renewalPolicy = new PropertyDescriptor("ACSRenewalPolicy", beanClass, "isACSRenewalPolicy", "setACSRenewalPolicy");
       PropertyDescriptor _retriesAllowed = new PropertyDescriptor("retriesAllowed", beanClass, "getRetriesAllowed", "setRetriesAllowed");
       PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
       PropertyDescriptor _statusUpdateOk = new PropertyDescriptor("statusUpdateOk", beanClass, "isStatusUpdateOk", "setStatusUpdateOk");
