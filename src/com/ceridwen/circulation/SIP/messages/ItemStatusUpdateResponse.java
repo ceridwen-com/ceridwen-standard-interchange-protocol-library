@@ -19,61 +19,76 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class ItemStatusUpdateResponse extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 428496319623237121L;
-	private Boolean ok;
-	private java.util.Date transactionDate;
-	private String itemIdentifier;
-	private String titleIdentifier;
-	private String itemProperties;
-	private String screenMessage;
-	private String printLine;
+    private static final long serialVersionUID = 428496319623237121L;
+    private Boolean ok;
+    private java.util.Date transactionDate;
+    private String itemIdentifier;
+    private String titleIdentifier;
+    private String itemProperties;
+    private String screenMessage;
+    private String printLine;
 
-  public String getCommand() {
-    return "20";
-  }
-  public Boolean isOk() {
-    return ok;
-  }
-  public void setOk(Boolean ok) {
-    this.ok = ok;
-  }
-  public java.util.Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(java.util.Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public String getItemIdentifier() {
-    return itemIdentifier;
-  }
-  public void setItemIdentifier(String itemIdentifier) {
-    this.itemIdentifier = itemIdentifier;
-  }
-  public String getTitleIdentifier() {
-    return titleIdentifier;
-  }
-  public void setTitleIdentifier(String titleIdentifier) {
-    this.titleIdentifier = titleIdentifier;
-  }
-  public String getItemProperties() {
-    return itemProperties;
-  }
-  public void setItemProperties(String itemProperties) {
-    this.itemProperties = itemProperties;
-  }
-  public String getScreenMessage() {
-    return screenMessage;
-  }
-  public void setScreenMessage(String screenMessage) {
-    this.screenMessage = screenMessage;
-  }
-  public String getPrintLine() {
-    return printLine;
-  }
-  public void setPrintLine(String printLine) {
-    this.printLine = printLine;
-  }
+    @Override
+    public String getCommand() {
+        return "20";
+    }
+
+    public Boolean isOk() {
+        return this.ok;
+    }
+
+    public void setOk(Boolean ok) {
+        this.ok = ok;
+    }
+
+    public java.util.Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(java.util.Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getItemIdentifier() {
+        return this.itemIdentifier;
+    }
+
+    public void setItemIdentifier(String itemIdentifier) {
+        this.itemIdentifier = itemIdentifier;
+    }
+
+    public String getTitleIdentifier() {
+        return this.titleIdentifier;
+    }
+
+    public void setTitleIdentifier(String titleIdentifier) {
+        this.titleIdentifier = titleIdentifier;
+    }
+
+    public String getItemProperties() {
+        return this.itemProperties;
+    }
+
+    public void setItemProperties(String itemProperties) {
+        this.itemProperties = itemProperties;
+    }
+
+    public String getScreenMessage() {
+        return this.screenMessage;
+    }
+
+    public void setScreenMessage(String screenMessage) {
+        this.screenMessage = screenMessage;
+    }
+
+    public String getPrintLine() {
+        return this.printLine;
+    }
+
+    public void setPrintLine(String printLine) {
+        this.printLine = printLine;
+    }
 }

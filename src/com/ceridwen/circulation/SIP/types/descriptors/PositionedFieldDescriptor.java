@@ -27,27 +27,27 @@
 
 package com.ceridwen.circulation.SIP.types.descriptors;
 
-public class PositionedFieldDescriptor extends FieldDescriptor{
-  public int start;
-  public int end;
-  @SuppressWarnings("unused")
-private final String tag = null;
+public class PositionedFieldDescriptor extends FieldDescriptor {
+    public int start;
+    public int end;
+    @SuppressWarnings("unused")
+    private final String tag = null;
 
-  protected PositionedFieldDescriptor(String name, int start, int end, FieldDescriptor d, Boolean required) {
-	  super(name, d, required);
-	  this.start = start;
-	  this.end = end;
-  }
+    protected PositionedFieldDescriptor(String name, int start, int end, FieldDescriptor d, Boolean required) {
+        super(name, d, required);
+        this.start = start;
+        this.end = end;
+    }
 
-  public PositionedFieldDescriptor(int start, int end) {
-    this.start = start;
-    this.end = end;
-    this.required = null;
-  }
+    public PositionedFieldDescriptor(int start, int end) {
+        this.start = start;
+        this.end = end;
+        this.required = null;
+    }
 
-  public PositionedFieldDescriptor(int start, int end, Boolean required) {
-	    this.start = start;
-	    this.end = end;
-	    this.required = required;
-  }
+    public PositionedFieldDescriptor(int start, int end, Boolean required) {
+        this.start = start;
+        this.end = end;
+        this.required = required;
+    }
 }

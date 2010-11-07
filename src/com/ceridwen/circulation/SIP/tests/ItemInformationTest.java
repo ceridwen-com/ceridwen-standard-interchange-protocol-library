@@ -22,36 +22,35 @@ import com.ceridwen.circulation.SIP.messages.ItemInformation;
 import com.ceridwen.circulation.SIP.messages.Message;
 
 public class ItemInformationTest extends AbstractMessageTest<ItemInformation> {
-	@Override
-	public Message getDefaultMessage() {
-		ItemInformation m = new ItemInformation();
+    @Override
+    public Message getDefaultMessage() {
+        ItemInformation m = new ItemInformation();
 
-		m.setTransactionDate(new java.util.Date(0));
+        m.setTransactionDate(new java.util.Date(0));
 
-		return m;
-	}
+        return m;
+    }
 
-	@Override
-	public String getDefaultEncoding() {
-		return "1719700101    010000AB|AO|";
-	}
+    @Override
+    public String getDefaultEncoding() {
+        return "1719700101    010000AB|AO|";
+    }
 
-	@Override
-	public Message getMessage() {
-		ItemInformation m = new ItemInformation();
+    @Override
+    public Message getMessage() {
+        ItemInformation m = new ItemInformation();
 
-		m.setInstitutionId("institution");
-		m.setItemIdentifier("item");
-		m.setTerminalPassword("password");
-		m.setTransactionDate(new java.util.Date(0));
+        m.setInstitutionId("institution");
+        m.setItemIdentifier("item");
+        m.setTerminalPassword("password");
+        m.setTransactionDate(new java.util.Date(0));
 
-		return m;
-	}
+        return m;
+    }
 
-	@Override
-	public String getEncoding() {		
-		return "1719700101    010000ABitem|ACpassword|AOinstitution|";
-	}
+    @Override
+    public String getEncoding() {
+        return "1719700101    010000ABitem|ACpassword|AOinstitution|";
+    }
 
 }
-

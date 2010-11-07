@@ -18,30 +18,33 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003</p>
+ * <p>Title: </p> <p>Description: </p> <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class LoginResponseBeanInfo extends MessageBeanInfo {
-  Class<LoginResponse> beanClass = LoginResponse.class;
-  public LoginResponseBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
+    Class<LoginResponse> beanClass = LoginResponse.class;
 
-      _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
+    public LoginResponseBeanInfo() {
+    }
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _ok};
-      return pds;
-  }
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _ok = new PropertyDescriptor("ok", this.beanClass, "isOk", "setOk");
+
+        _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _ok };
+        return pds;
+    }
 }

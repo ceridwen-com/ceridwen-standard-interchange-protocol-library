@@ -22,90 +22,110 @@ import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
 public class PatronEnableResponse extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 5941325479001778479L;
-	private PatronStatus patronStatus = new PatronStatus();
-	private Language language;
-	private java.util.Date transactionDate;
-	private String institutionId;
-	private String patronIdentifier;
-	private String personalName;
-	private Boolean validPatronPassword;
-	private String screenMessage;
-	private String printLine;
-	private Boolean validPatron;
-	
-  public String getCommand() {
-    return "26";
-  }
-  public PatronStatus getPatronStatus() {
-    return patronStatus;
-  }
-  /**
-   * Use getPatronStatus().set(PatronStatus.FIELD)
-   *     getPatronStatus().unset(PatronStatus.FIELD)
-   *     getPatronStatus().unsetAll()
-   *   
-   * @param summary
-   */  
-  @Deprecated
-  public void setPatronStatus(PatronStatus patronStatus) {
-    this.patronStatus = patronStatus;
-  }
-  public Language getLanguage() {
-    return language;
-  }
-  public void setLanguage(Language language) {
-    this.language = language;
-  }
-  public java.util.Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(java.util.Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public String getPatronIdentifier() {
-    return patronIdentifier;
-  }
-  public void setPatronIdentifier(String patronIdentifier) {
-    this.patronIdentifier = patronIdentifier;
-  }
-  public String getPersonalName() {
-    return personalName;
-  }
-  public void setPersonalName(String personalName) {
-    this.personalName = personalName;
-  }
-  public Boolean isValidPatron() {
-    return validPatron;
-  }
-  public void setValidPatron(Boolean validPatron) {
-    this.validPatron = validPatron;
-  }
-  public Boolean isValidPatronPassword() {
-    return validPatronPassword;
-  }
-  public void setValidPatronPassword(Boolean validPatronPassword) {
-    this.validPatronPassword = validPatronPassword;
-  }
-  public String getScreenMessage() {
-    return screenMessage;
-  }
-  public void setScreenMessage(String screenMessage) {
-    this.screenMessage = screenMessage;
-  }
-  public String getPrintLine() {
-    return printLine;
-  }
-  public void setPrintLine(String printLine) {
-    this.printLine = printLine;
-  }
+    private static final long serialVersionUID = 5941325479001778479L;
+    private PatronStatus patronStatus = new PatronStatus();
+    private Language language;
+    private java.util.Date transactionDate;
+    private String institutionId;
+    private String patronIdentifier;
+    private String personalName;
+    private Boolean validPatronPassword;
+    private String screenMessage;
+    private String printLine;
+    private Boolean validPatron;
+
+    @Override
+    public String getCommand() {
+        return "26";
+    }
+
+    public PatronStatus getPatronStatus() {
+        return this.patronStatus;
+    }
+
+    /**
+     * Use getPatronStatus().set(PatronStatus.FIELD)
+     * getPatronStatus().unset(PatronStatus.FIELD) getPatronStatus().unsetAll()
+     * 
+     * @param summary
+     */
+    @Deprecated
+    public void setPatronStatus(PatronStatus patronStatus) {
+        this.patronStatus = patronStatus;
+    }
+
+    public Language getLanguage() {
+        return this.language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public java.util.Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(java.util.Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public String getPatronIdentifier() {
+        return this.patronIdentifier;
+    }
+
+    public void setPatronIdentifier(String patronIdentifier) {
+        this.patronIdentifier = patronIdentifier;
+    }
+
+    public String getPersonalName() {
+        return this.personalName;
+    }
+
+    public void setPersonalName(String personalName) {
+        this.personalName = personalName;
+    }
+
+    public Boolean isValidPatron() {
+        return this.validPatron;
+    }
+
+    public void setValidPatron(Boolean validPatron) {
+        this.validPatron = validPatron;
+    }
+
+    public Boolean isValidPatronPassword() {
+        return this.validPatronPassword;
+    }
+
+    public void setValidPatronPassword(Boolean validPatronPassword) {
+        this.validPatronPassword = validPatronPassword;
+    }
+
+    public String getScreenMessage() {
+        return this.screenMessage;
+    }
+
+    public void setScreenMessage(String screenMessage) {
+        this.screenMessage = screenMessage;
+    }
+
+    public String getPrintLine() {
+        return this.printLine;
+    }
+
+    public void setPrintLine(String printLine) {
+        this.printLine = printLine;
+    }
 }

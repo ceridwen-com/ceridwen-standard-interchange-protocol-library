@@ -28,11 +28,11 @@
 package com.ceridwen.circulation.SIP.exceptions;
 
 public class RetriesExceeded extends Exception {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1416841113916472161L;
+    private static final long serialVersionUID = 1416841113916472161L;
 
-public RetriesExceeded() {
-  }
+    public RetriesExceeded() {
+    }
 }

@@ -18,45 +18,48 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003</p>
+ * <p>Title: </p> <p>Description: </p> <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class RenewAllBeanInfo extends MessageBeanInfo {
-  Class<RenewAll> beanClass = RenewAll.class;
-  public RenewAllBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
-      PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
-      PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
-      PropertyDescriptor _patronPassword = new PropertyDescriptor("patronPassword", beanClass, "getPatronPassword", "setPatronPassword");
-      PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
-      PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", beanClass, "isFeeAcknowledged", "setFeeAcknowledged");
+    Class<RenewAll> beanClass = RenewAll.class;
 
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,19));
+    public RenewAllBeanInfo() {
+    }
 
-      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
-      _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
+        PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", this.beanClass, "getInstitutionId", "setInstitutionId");
+        PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", this.beanClass, "getPatronIdentifier", "setPatronIdentifier");
+        PropertyDescriptor _patronPassword = new PropertyDescriptor("patronPassword", this.beanClass, "getPatronPassword", "setPatronPassword");
+        PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", this.beanClass, "getTerminalPassword", "setTerminalPassword");
+        PropertyDescriptor _feeAcknowledged = new PropertyDescriptor("feeAcknowledged", this.beanClass, "isFeeAcknowledged", "setFeeAcknowledged");
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _transactionDate,
-        _institutionId,
-        _patronIdentifier,
-        _patronPassword,
-        _terminalPassword,
-        _feeAcknowledged};
-      return pds;
-  }
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 19));
+
+        _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _patronPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _transactionDate,
+                _institutionId,
+                _patronIdentifier,
+                _patronPassword,
+                _terminalPassword,
+                _feeAcknowledged };
+        return pds;
+    }
 }

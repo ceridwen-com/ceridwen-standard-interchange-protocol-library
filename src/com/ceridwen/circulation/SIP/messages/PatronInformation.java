@@ -33,83 +33,101 @@ import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.Summary;
 
 public class PatronInformation extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 4603960140773936894L;
-	private Language language;
-	private Date transactionDate;
-	private Summary summary = new Summary();
-	private String institutionId;
-	private String patronIdentifier;
-	private String terminalPassword;
-	private String patronPassword;
-	private Integer startItem;
-	private Integer endItem;
+    private static final long serialVersionUID = 4603960140773936894L;
+    private Language language;
+    private Date transactionDate;
+    private Summary summary = new Summary();
+    private String institutionId;
+    private String patronIdentifier;
+    private String terminalPassword;
+    private String patronPassword;
+    private Integer startItem;
+    private Integer endItem;
 
-  public String getCommand() {
-    return "63";
-  }
-  public Integer getEndItem() {
-    return endItem;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public Language getLanguage() {
-    return language;
-  }
-  public String getPatronIdentifier() {
-    return patronIdentifier;
-  }
-  public String getPatronPassword() {
-    return patronPassword;
-  }
-  public Integer getStartItem() {
-    return startItem;
-  }
-  public Summary getSummary() {
-    return summary;
-  }
-  public String getTerminalPassword() {
-    return terminalPassword;
-  }
-  public Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public void setTerminalPassword(String terminalPassword) {
-    this.terminalPassword = terminalPassword;
-  }
-/**
- * Use getSummary().set(Summary.FIELD)
- *     getSummary().unset(Summary.FIELD)
- *     getSummary().unsetAll()
- *   
- * @param summary
- */
-  @Deprecated
-  public void setSummary(Summary summary) {
-    this.summary = summary;
-  }
-  public void setStartItem(Integer startItem) {
-    this.startItem = startItem;
-  }
-  public void setPatronPassword(String patronPassword) {
-    this.patronPassword = patronPassword;
-  }
-  public void setPatronIdentifier(String patronIdentifier) {
-    this.patronIdentifier = patronIdentifier;
-  }
-  public void setLanguage(Language language) {
-    this.language = language;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public void setEndItem(Integer endItem) {
-    this.endItem = endItem;
-  }
+    @Override
+    public String getCommand() {
+        return "63";
+    }
+
+    public Integer getEndItem() {
+        return this.endItem;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public Language getLanguage() {
+        return this.language;
+    }
+
+    public String getPatronIdentifier() {
+        return this.patronIdentifier;
+    }
+
+    public String getPatronPassword() {
+        return this.patronPassword;
+    }
+
+    public Integer getStartItem() {
+        return this.startItem;
+    }
+
+    public Summary getSummary() {
+        return this.summary;
+    }
+
+    public String getTerminalPassword() {
+        return this.terminalPassword;
+    }
+
+    public Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public void setTerminalPassword(String terminalPassword) {
+        this.terminalPassword = terminalPassword;
+    }
+
+    /**
+     * Use getSummary().set(Summary.FIELD) getSummary().unset(Summary.FIELD)
+     * getSummary().unsetAll()
+     * 
+     * @param summary
+     */
+    @Deprecated
+    public void setSummary(Summary summary) {
+        this.summary = summary;
+    }
+
+    public void setStartItem(Integer startItem) {
+        this.startItem = startItem;
+    }
+
+    public void setPatronPassword(String patronPassword) {
+        this.patronPassword = patronPassword;
+    }
+
+    public void setPatronIdentifier(String patronIdentifier) {
+        this.patronIdentifier = patronIdentifier;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public void setEndItem(Integer endItem) {
+        this.endItem = endItem;
+    }
 }

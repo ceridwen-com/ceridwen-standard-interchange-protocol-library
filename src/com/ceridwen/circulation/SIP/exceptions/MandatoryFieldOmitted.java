@@ -28,19 +28,19 @@
 package com.ceridwen.circulation.SIP.exceptions;
 
 public class MandatoryFieldOmitted extends Exception {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -152536357897100116L;
+    private static final long serialVersionUID = -152536357897100116L;
 
-	private String field;
-	
-	public MandatoryFieldOmitted(String field) {
-		this.field = field;
-	}
-	
-	public String getMessage()
-	{
-		return this.field + " cannot be empty";
-	}
+    private String field;
+
+    public MandatoryFieldOmitted(String field) {
+        this.field = field;
+    }
+
+    @Override
+    public String getMessage() {
+        return this.field + " cannot be empty";
+    }
 }

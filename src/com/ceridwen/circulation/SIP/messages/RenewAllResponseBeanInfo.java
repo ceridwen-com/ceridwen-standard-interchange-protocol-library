@@ -18,45 +18,48 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003</p>
+ * <p>Title: </p> <p>Description: </p> <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class RenewAllResponseBeanInfo extends MessageBeanInfo {
-  Class<RenewAllResponse> beanClass = RenewAllResponse.class;
-  public RenewAllResponseBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
-      PropertyDescriptor _renewedCount = new PropertyDescriptor("renewedCount", beanClass, "getRenewedCount", "setRenewedCount");
-      PropertyDescriptor _unrenewedCount = new PropertyDescriptor("unrenewedCount", beanClass, "getUnrenewedCount", "setUnrenewedCount");
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
-      PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
-      PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
+    Class<RenewAllResponse> beanClass = RenewAllResponse.class;
 
-      _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _renewedCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,6));
-      _unrenewedCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(7,10));
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(11,28));
+    public RenewAllResponseBeanInfo() {
+    }
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _ok,
-        _renewedCount,
-        _unrenewedCount,
-        _transactionDate,
-        _institutionId,
-        _screenMessage,
-        _printLine};
-      return pds;
-  }
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _ok = new PropertyDescriptor("ok", this.beanClass, "isOk", "setOk");
+        PropertyDescriptor _renewedCount = new PropertyDescriptor("renewedCount", this.beanClass, "getRenewedCount", "setRenewedCount");
+        PropertyDescriptor _unrenewedCount = new PropertyDescriptor("unrenewedCount", this.beanClass, "getUnrenewedCount", "setUnrenewedCount");
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
+        PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", this.beanClass, "getInstitutionId", "setInstitutionId");
+        PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", this.beanClass, "getScreenMessage", "setScreenMessage");
+        PropertyDescriptor _printLine = new PropertyDescriptor("printLine", this.beanClass, "getPrintLine", "setPrintLine");
+
+        _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _renewedCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 6));
+        _unrenewedCount.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(7, 10));
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(11, 28));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _ok,
+                _renewedCount,
+                _unrenewedCount,
+                _transactionDate,
+                _institutionId,
+                _screenMessage,
+                _printLine };
+        return pds;
+    }
 }

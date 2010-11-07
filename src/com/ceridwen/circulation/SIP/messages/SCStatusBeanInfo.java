@@ -18,37 +18,39 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
-
 /**
- * <p>Title: RTSI</p>
- * <p>Description: Real Time Self Issue</p>
- * <p>Copyright: </p>
-
+ * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
+ * </p>
+ * 
  * @author Matthew J. Dovey
  * @version 1.0
  */
 
 public class SCStatusBeanInfo extends MessageBeanInfo {
-  Class<SCStatus> beanClass = SCStatus.class;
-  public SCStatusBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _maxPrintWidth = new PropertyDescriptor("maxPrintWidth", beanClass, "getMaxPrintWidth", "setMaxPrintWidth");
-      PropertyDescriptor _protocolVersion = new PropertyDescriptor("protocolVersion", beanClass, "getProtocolVersion", "setProtocolVersion");
-      PropertyDescriptor _statusCode = new PropertyDescriptor("statusCode", beanClass, "getStatusCode", "setStatusCode");
+    Class<SCStatus> beanClass = SCStatus.class;
 
-      _statusCode.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _maxPrintWidth.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,5));
-      _protocolVersion.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,9));
+    public SCStatusBeanInfo() {
+    }
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _maxPrintWidth,
-        _protocolVersion,
-        _statusCode};
-      return pds;
-  }
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _maxPrintWidth = new PropertyDescriptor("maxPrintWidth", this.beanClass, "getMaxPrintWidth", "setMaxPrintWidth");
+        PropertyDescriptor _protocolVersion = new PropertyDescriptor("protocolVersion", this.beanClass, "getProtocolVersion", "setProtocolVersion");
+        PropertyDescriptor _statusCode = new PropertyDescriptor("statusCode", this.beanClass, "getStatusCode", "setStatusCode");
+
+        _statusCode.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _maxPrintWidth.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 5));
+        _protocolVersion.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6, 9));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _maxPrintWidth,
+                _protocolVersion,
+                _statusCode };
+        return pds;
+    }
 }

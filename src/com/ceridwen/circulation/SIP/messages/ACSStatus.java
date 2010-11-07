@@ -33,132 +33,165 @@ import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public class ACSStatus extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -611426325284828647L;
-	private Boolean onlineStatus;
-	private Boolean checkInOk;
-	private Boolean checkOutOk;
-	private Boolean ACSRenewalPolicy;
-	private Boolean statusUpdateOk;
-	private Boolean offlineOk;
-	private Integer timeoutPeriod;
-	private Integer retriesAllowed;
-	private Date dateTimeSync;
-	private ProtocolVersion protocolVersion;
-	private String institutionId;
-	private String libraryName;
-	private SupportedMessages supportedMessages = new SupportedMessages();
-	private String terminalLocation;
-	private String screenMessage;
-	private String printLine;
+    private static final long serialVersionUID = -611426325284828647L;
+    private Boolean onlineStatus;
+    private Boolean checkInOk;
+    private Boolean checkOutOk;
+    private Boolean ACSRenewalPolicy;
+    private Boolean statusUpdateOk;
+    private Boolean offlineOk;
+    private Integer timeoutPeriod;
+    private Integer retriesAllowed;
+    private Date dateTimeSync;
+    private ProtocolVersion protocolVersion;
+    private String institutionId;
+    private String libraryName;
+    private SupportedMessages supportedMessages = new SupportedMessages();
+    private String terminalLocation;
+    private String screenMessage;
+    private String printLine;
 
-  public String getCommand() {
-    return "98";
-  }
-  public Boolean isCheckInOk() {
-    return checkInOk;
-  }
-  public Boolean isCheckOutOk() {
-    return checkOutOk;
-  }
-  public Date getDateTimeSync() {
-    return dateTimeSync;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public String getLibraryName() {
-    return libraryName;
-  }
-  public Boolean isOfflineOk() {
-    return offlineOk;
-  }
-  public Boolean isOnlineStatus() {
-    return onlineStatus;
-  }
-  public String getPrintLine() {
-    return printLine;
-  }
-  public ProtocolVersion getProtocolVersion() {
-    return protocolVersion;
-  }
-  public Boolean isACSRenewalPolicy() {
-    return ACSRenewalPolicy;
-  }
-  public Integer getRetriesAllowed() {
-    return retriesAllowed;
-  }
-  public String getScreenMessage() {
-    return screenMessage;
-  }
-  public Boolean isStatusUpdateOk() {
-    return statusUpdateOk;
-  }
-  public SupportedMessages getSupportedMessages() {
-    return supportedMessages;
-  }
-  public String getTerminalLocation() {
-    return terminalLocation;
-  }
-  public Integer getTimeoutPeriod() {
-    return timeoutPeriod;
-  }
-  public void setTimeoutPeriod(Integer timeoutPeriod) {
-    this.timeoutPeriod = timeoutPeriod;
-  }
-  public void setTerminalLocation(String terminalLocation) {
-    this.terminalLocation = terminalLocation;
-  }
-  /**
-   * Use getSupportedMessages().set(SupportedMessages.VALUE)
-   *     getSupportedMessages().unset(SupportedMessages.VALUE)
-   *     getSupportedMessages().unsetAll()
-   *   
-   * @param summary
-   */  
-  @Deprecated  
-  public void setSupportedMessages(SupportedMessages supportedMessages) {
-    this.supportedMessages = supportedMessages;
-  }
-  public void setStatusUpdateOk(Boolean statusUpdateOk) {
-    this.statusUpdateOk = statusUpdateOk;
-  }
-  public void setScreenMessage(String screenMessage) {
-    this.screenMessage = screenMessage;
-  }
-  public void setRetriesAllowed(Integer retriesAllowed) {
-    this.retriesAllowed = retriesAllowed;
-  }
-  public void setACSRenewalPolicy(Boolean ACSRenewalPolicy) {
-    this.ACSRenewalPolicy = ACSRenewalPolicy;
-  }
-  public void setProtocolVersion(ProtocolVersion protocolVersion) {
-    this.protocolVersion = protocolVersion;
-  }
-  public void setPrintLine(String printLine) {
-    this.printLine = printLine;
-  }
-  public void setOnlineStatus(Boolean onlineStatus) {
-    this.onlineStatus = onlineStatus;
-  }
-  public void setOfflineOk(Boolean offlineOk) {
-    this.offlineOk = offlineOk;
-  }
-  public void setLibraryName(String libraryName) {
-    this.libraryName = libraryName;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public void setDateTimeSync(Date dateTimeSync) {
-    this.dateTimeSync = dateTimeSync;
-  }
-  public void setCheckOutOk(Boolean checkOutOk) {
-    this.checkOutOk = checkOutOk;
-  }
-  public void setCheckInOk(Boolean checkInOk) {
-    this.checkInOk = checkInOk;
-  }
+    @Override
+    public String getCommand() {
+        return "98";
+    }
+
+    public Boolean isCheckInOk() {
+        return this.checkInOk;
+    }
+
+    public Boolean isCheckOutOk() {
+        return this.checkOutOk;
+    }
+
+    public Date getDateTimeSync() {
+        return this.dateTimeSync;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public String getLibraryName() {
+        return this.libraryName;
+    }
+
+    public Boolean isOfflineOk() {
+        return this.offlineOk;
+    }
+
+    public Boolean isOnlineStatus() {
+        return this.onlineStatus;
+    }
+
+    public String getPrintLine() {
+        return this.printLine;
+    }
+
+    public ProtocolVersion getProtocolVersion() {
+        return this.protocolVersion;
+    }
+
+    public Boolean isACSRenewalPolicy() {
+        return this.ACSRenewalPolicy;
+    }
+
+    public Integer getRetriesAllowed() {
+        return this.retriesAllowed;
+    }
+
+    public String getScreenMessage() {
+        return this.screenMessage;
+    }
+
+    public Boolean isStatusUpdateOk() {
+        return this.statusUpdateOk;
+    }
+
+    public SupportedMessages getSupportedMessages() {
+        return this.supportedMessages;
+    }
+
+    public String getTerminalLocation() {
+        return this.terminalLocation;
+    }
+
+    public Integer getTimeoutPeriod() {
+        return this.timeoutPeriod;
+    }
+
+    public void setTimeoutPeriod(Integer timeoutPeriod) {
+        this.timeoutPeriod = timeoutPeriod;
+    }
+
+    public void setTerminalLocation(String terminalLocation) {
+        this.terminalLocation = terminalLocation;
+    }
+
+    /**
+     * Use getSupportedMessages().set(SupportedMessages.VALUE)
+     * getSupportedMessages().unset(SupportedMessages.VALUE)
+     * getSupportedMessages().unsetAll()
+     * 
+     * @param summary
+     */
+    @Deprecated
+    public void setSupportedMessages(SupportedMessages supportedMessages) {
+        this.supportedMessages = supportedMessages;
+    }
+
+    public void setStatusUpdateOk(Boolean statusUpdateOk) {
+        this.statusUpdateOk = statusUpdateOk;
+    }
+
+    public void setScreenMessage(String screenMessage) {
+        this.screenMessage = screenMessage;
+    }
+
+    public void setRetriesAllowed(Integer retriesAllowed) {
+        this.retriesAllowed = retriesAllowed;
+    }
+
+    public void setACSRenewalPolicy(Boolean ACSRenewalPolicy) {
+        this.ACSRenewalPolicy = ACSRenewalPolicy;
+    }
+
+    public void setProtocolVersion(ProtocolVersion protocolVersion) {
+        this.protocolVersion = protocolVersion;
+    }
+
+    public void setPrintLine(String printLine) {
+        this.printLine = printLine;
+    }
+
+    public void setOnlineStatus(Boolean onlineStatus) {
+        this.onlineStatus = onlineStatus;
+    }
+
+    public void setOfflineOk(Boolean offlineOk) {
+        this.offlineOk = offlineOk;
+    }
+
+    public void setLibraryName(String libraryName) {
+        this.libraryName = libraryName;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public void setDateTimeSync(Date dateTimeSync) {
+        this.dateTimeSync = dateTimeSync;
+    }
+
+    public void setCheckOutOk(Boolean checkOutOk) {
+        this.checkOutOk = checkOutOk;
+    }
+
+    public void setCheckInOk(Boolean checkInOk) {
+        this.checkInOk = checkInOk;
+    }
 }

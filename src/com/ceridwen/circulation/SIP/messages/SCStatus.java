@@ -21,45 +21,49 @@ package com.ceridwen.circulation.SIP.messages;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.enumerations.StatusCode;
 
-
-
 /**
- * <p>Title: RTSI</p>
- * <p>Description: Real Time Self Issue</p>
- * <p>Copyright: </p>
-
+ * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
+ * </p>
+ * 
  * @author Matthew J. Dovey
  * @version 1.0
  */
 
 public class SCStatus extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -6198644705404364776L;
-	private StatusCode statusCode;
-	private Integer maxPrintWidth;
-	private ProtocolVersion protocolVersion;
+    private static final long serialVersionUID = -6198644705404364776L;
+    private StatusCode statusCode;
+    private Integer maxPrintWidth;
+    private ProtocolVersion protocolVersion;
 
-  public String getCommand() {
-    return "99";
-  }
-  public Integer getMaxPrintWidth() {
-    return maxPrintWidth;
-  }
-  public ProtocolVersion getProtocolVersion() {
-    return protocolVersion;
-  }
-  public StatusCode getStatusCode() {
-    return statusCode;
-  }
-  public void setStatusCode(StatusCode statusCode) {
-    this.statusCode = statusCode;
-  }
-  public void setProtocolVersion(ProtocolVersion protocolVersion) {
-    this.protocolVersion = protocolVersion;
-  }
-  public void setMaxPrintWidth(Integer maxPrintWidth) {
-    this.maxPrintWidth = maxPrintWidth;
-  }
+    @Override
+    public String getCommand() {
+        return "99";
+    }
+
+    public Integer getMaxPrintWidth() {
+        return this.maxPrintWidth;
+    }
+
+    public ProtocolVersion getProtocolVersion() {
+        return this.protocolVersion;
+    }
+
+    public StatusCode getStatusCode() {
+        return this.statusCode;
+    }
+
+    public void setStatusCode(StatusCode statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public void setProtocolVersion(ProtocolVersion protocolVersion) {
+        this.protocolVersion = protocolVersion;
+    }
+
+    public void setMaxPrintWidth(Integer maxPrintWidth) {
+        this.maxPrintWidth = maxPrintWidth;
+    }
 }

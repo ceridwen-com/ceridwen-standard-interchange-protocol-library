@@ -19,15 +19,15 @@
 package com.ceridwen.circulation.SIP.exceptions;
 
 public class SequenceError extends Exception {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 7965130185519794036L;
+    private static final long serialVersionUID = 7965130185519794036L;
 
-/**
+    /**
 	 * 
 	 */
 
-public SequenceError() {
-  }
+    public SequenceError() {
+    }
 }

@@ -18,62 +18,63 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
-
 /**
- * <p>Title: RTSI</p>
- * <p>Description: Real Time Self Issue</p>
- * <p>Copyright: </p>
-
+ * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
+ * </p>
+ * 
  * @author Matthew J. Dovey
  * @version 1.0
  */
 
 public class PatronStatusResponseBeanInfo extends MessageBeanInfo {
-  Class<PatronStatusResponse> beanClass = PatronStatusResponse.class;
-  public PatronStatusResponseBeanInfo() {
-  }
+    Class<PatronStatusResponse> beanClass = PatronStatusResponse.class;
 
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _currencyType = new PropertyDescriptor("currencyType", beanClass, "getCurrencyType", "setCurrencyType");
-      PropertyDescriptor _feeAmount = new PropertyDescriptor("feeAmount", beanClass, "getFeeAmount", "setFeeAmount");
-      PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
-      PropertyDescriptor _language = new PropertyDescriptor("language", beanClass, "getLanguage", "setLanguage");
-      PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
-      PropertyDescriptor _patronStatus = new PropertyDescriptor("patronStatus", beanClass, "getPatronStatus", "setPatronStatus");
-      PropertyDescriptor _personalName = new PropertyDescriptor("personalName", beanClass, "getPersonalName", "setPersonalName");
-      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
-      PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
-      PropertyDescriptor _validPatron = new PropertyDescriptor("validPatron", beanClass, "isValidPatron", "setValidPatron");
-      PropertyDescriptor _validPatronPassword = new PropertyDescriptor("validPatronPassword", beanClass, "isValidPatronPassword", "setValidPatronPassword");
+    public PatronStatusResponseBeanInfo() {
+    }
 
-      _patronStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 15));
-      _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(16,18));
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(19,36));
-      
-      _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _currencyType = new PropertyDescriptor("currencyType", this.beanClass, "getCurrencyType", "setCurrencyType");
+        PropertyDescriptor _feeAmount = new PropertyDescriptor("feeAmount", this.beanClass, "getFeeAmount", "setFeeAmount");
+        PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", this.beanClass, "getInstitutionId", "setInstitutionId");
+        PropertyDescriptor _language = new PropertyDescriptor("language", this.beanClass, "getLanguage", "setLanguage");
+        PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", this.beanClass, "getPatronIdentifier", "setPatronIdentifier");
+        PropertyDescriptor _patronStatus = new PropertyDescriptor("patronStatus", this.beanClass, "getPatronStatus", "setPatronStatus");
+        PropertyDescriptor _personalName = new PropertyDescriptor("personalName", this.beanClass, "getPersonalName", "setPersonalName");
+        PropertyDescriptor _printLine = new PropertyDescriptor("printLine", this.beanClass, "getPrintLine", "setPrintLine");
+        PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", this.beanClass, "getScreenMessage", "setScreenMessage");
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
+        PropertyDescriptor _validPatron = new PropertyDescriptor("validPatron", this.beanClass, "isValidPatron", "setValidPatron");
+        PropertyDescriptor _validPatronPassword = new PropertyDescriptor("validPatronPassword", this.beanClass, "isValidPatronPassword",
+                "setValidPatronPassword");
 
+        _patronStatus.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 15));
+        _language.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(16, 18));
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(19, 36));
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _currencyType,
-        _feeAmount,
-        _institutionId,
-        _language,
-        _patronIdentifier,
-        _patronStatus,
-        _personalName,
-        _printLine,
-        _screenMessage,
-        _transactionDate,
-        _validPatron,
-        _validPatronPassword};
-      return pds;
-  }
+        _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _currencyType,
+                _feeAmount,
+                _institutionId,
+                _language,
+                _patronIdentifier,
+                _patronStatus,
+                _personalName,
+                _printLine,
+                _screenMessage,
+                _transactionDate,
+                _validPatron,
+                _validPatronPassword };
+        return pds;
+    }
 }

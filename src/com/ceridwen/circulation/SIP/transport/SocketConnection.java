@@ -27,81 +27,81 @@ import java.net.Socket;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 
-
 public class SocketConnection extends Connection {
-  private static Log log = LogFactory.getLog(SocketConnection.class);
+    private static Log log = LogFactory.getLog(SocketConnection.class);
 
-  private Socket socket;
-  private BufferedReader in;
-  private BufferedWriter out;
+    private Socket socket;
+    private BufferedReader in;
+    private BufferedWriter out;
 
-  protected void connect(int retryAttempts) throws Exception {
-    try {
-      socket = new java.net.Socket();
-      socket.connect(new InetSocketAddress(this.getHost(), this.getPort()), this.getConnectionTimeout());
-      socket.setSoTimeout(this.getIdleTimeout());
-      out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    }
-    catch (Exception ex) {
-      if (retryAttempts > 0) {
+    @Override
+    protected void connect(int retryAttempts) throws Exception {
         try {
-          Thread.sleep(this.getRetryWait());
+            this.socket = new java.net.Socket();
+            this.socket.connect(new InetSocketAddress(this.getHost(), this.getPort()), this.getConnectionTimeout());
+            this.socket.setSoTimeout(this.getIdleTimeout());
+            this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
+            this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        } catch (Exception ex) {
+            if (retryAttempts > 0) {
+                try {
+                    Thread.sleep(this.getRetryWait());
+                } catch (Exception ex1) {
+                    SocketConnection.log.debug("Thread sleep error", ex1);
+                }
+                this.connect(retryAttempts - 1);
+            } else {
+                throw ex;
+            }
         }
-        catch (Exception ex1) {
-          log.debug("Thread sleep error", ex1);
+    }
+
+    @Override
+    public boolean isConnected() {
+        return this.socket.isConnected();
+    }
+
+    @Override
+    public void disconnect() {
+        try {
+            this.socket.close();
+        } catch (Exception ex) {
+
         }
-        connect(retryAttempts - 1);
-      }
-      else {
-        throw ex;
-      }
-    }
-  }
-
-  public boolean isConnected() {
-    return socket.isConnected();
-  }
-  public void disconnect() {
-    try {
-      socket.close();
-    } catch (Exception ex) {
-
-    }
-  }
-
-  protected void internalSend(String cmd) throws ConnectionFailure {
-    try {
-      out.write(cmd);
-      out.newLine();
-      out.flush();
-    }
-    catch (Exception ex) {
-      throw new ConnectionFailure(ex);
-    }
-  }
-
-  protected String internalWaitfor(String match) throws ConnectionFailure {
-    StringBuffer message = new StringBuffer();
-    char buffer[] = new char[2048];
-    int len;
-
-    try {
-      do {
-        len = in.read(buffer);
-        message.append(new String(buffer, 0, len));
-      }
-      while ( (message.toString()).lastIndexOf(match) < 0);
-    }
-    catch (Exception ex) {
-      throw new ConnectionFailure(ex);
     }
 
-    String msg = message.toString();
-    int cutoff = msg.lastIndexOf(match);
-    String ret = msg.substring(0, cutoff);
-    return ret;
-  }
+    @Override
+    protected void internalSend(String cmd) throws ConnectionFailure {
+        try {
+            this.out.write(cmd);
+            this.out.newLine();
+            this.out.flush();
+        } catch (Exception ex) {
+            throw new ConnectionFailure(ex);
+        }
+    }
+
+    @Override
+    protected String internalWaitfor(String match) throws ConnectionFailure {
+        StringBuffer message = new StringBuffer();
+        char buffer[] = new char[2048];
+        int len;
+
+        try {
+            do {
+                len = this.in.read(buffer);
+                message.append(new String(buffer, 0, len));
+            } while ((message.toString()).lastIndexOf(match) < 0);
+        } catch (Exception ex) {
+            throw new ConnectionFailure(ex);
+        }
+
+        String msg = message.toString();
+        int cutoff = msg.lastIndexOf(match);
+        String ret = msg.substring(0, cutoff);
+        return ret;
+    }
 }

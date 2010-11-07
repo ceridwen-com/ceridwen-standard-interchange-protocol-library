@@ -1,3 +1,12 @@
+Version 2.60:
+Changed boolean getter methods to is... from get...
+Added system property com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields
+ If true (default will generate default values for empty required fields, e.g. false for bool, 0 for integer, initial value for Enumerations etc.)
+ If false will generate MandatoryFieldOmmitted exception is require field not explicitly set
+ Previous behaviour equivalent to true
+ACS/SCRenevalPolicy and onlineStatus named to be consistent with spec
+
+
 Version 2.50: Wed Nov 03 22:31:33 GMT 2010(255)
 Refactoring to consolidated the message fields definitions into FieldDefinitions class
 Changed ProtocolVersion to enumerated type

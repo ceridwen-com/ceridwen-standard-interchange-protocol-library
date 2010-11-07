@@ -30,40 +30,49 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 public class ItemInformation extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 7398126890693645623L;
-	private Date transactionDate;
-	private String institutionId;
-	private String itemIdentifier;
-	private String terminalPassword;
+    private static final long serialVersionUID = 7398126890693645623L;
+    private Date transactionDate;
+    private String institutionId;
+    private String itemIdentifier;
+    private String terminalPassword;
 
-  public String getCommand() {
-    return "17";
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public String getItemIdentifier() {
-    return itemIdentifier;
-  }
-  public String getTerminalPassword() {
-    return terminalPassword;
-  }
-  public Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public void setTerminalPassword(String terminalPassword) {
-    this.terminalPassword = terminalPassword;
-  }
-  public void setItemIdentifier(String itemIdentifier) {
-    this.itemIdentifier = itemIdentifier;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
+    @Override
+    public String getCommand() {
+        return "17";
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public String getItemIdentifier() {
+        return this.itemIdentifier;
+    }
+
+    public String getTerminalPassword() {
+        return this.terminalPassword;
+    }
+
+    public Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public void setTerminalPassword(String terminalPassword) {
+        this.terminalPassword = terminalPassword;
+    }
+
+    public void setItemIdentifier(String itemIdentifier) {
+        this.itemIdentifier = itemIdentifier;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
 }

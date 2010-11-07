@@ -18,49 +18,51 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003</p>
+ * <p>Title: </p> <p>Description: </p> <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class ItemStatusUpdateResponseBeanInfo extends MessageBeanInfo {
-  Class<ItemStatusUpdateResponse> beanClass = ItemStatusUpdateResponse.class;
-  public ItemStatusUpdateResponseBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
-      PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
-      PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
-      PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
+    Class<ItemStatusUpdateResponse> beanClass = ItemStatusUpdateResponse.class;
 
-      _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
-      
-      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
-      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
-      
+    public ItemStatusUpdateResponseBeanInfo() {
+    }
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _ok,
-        _transactionDate,
-        _itemIdentifier,
-        _titleIdentifier,
-        _itemProperties,
-        _screenMessage,
-        _printLine};
-      return pds;
-  }
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _ok = new PropertyDescriptor("ok", this.beanClass, "isOk", "setOk");
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
+        PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", this.beanClass, "getItemIdentifier", "setItemIdentifier");
+        PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", this.beanClass, "getTitleIdentifier", "setTitleIdentifier");
+        PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", this.beanClass, "getItemProperties", "setItemProperties");
+        PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", this.beanClass, "getScreenMessage", "setScreenMessage");
+        PropertyDescriptor _printLine = new PropertyDescriptor("printLine", this.beanClass, "getPrintLine", "setPrintLine");
+
+        _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 20));
+
+        _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _ok,
+                _transactionDate,
+                _itemIdentifier,
+                _titleIdentifier,
+                _itemProperties,
+                _screenMessage,
+                _printLine };
+        return pds;
+    }
 }

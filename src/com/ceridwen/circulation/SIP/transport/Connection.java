@@ -37,236 +37,250 @@ import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
+import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.SCResend;
-import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
-
 
 public abstract class Connection {
-  private static Log log = LogFactory.getLog(Connection.class);
+    private static Log log = LogFactory.getLog(Connection.class);
 
-  private char sequence = '0';
+    private char sequence = '0';
 
-  private int connectionTimeout;
-  private int idleTimeout;
-  private int retryAttempts;
-  private int retryWait;
-  private String host;
-  private int port;
-  private boolean addSequenceAndChecksum = true;
-  private boolean strictSequenceChecking = false;
-  private boolean strictChecksumChecking = false;
-  
-  public void setAddSequenceAndChecksum(boolean flag)
-  {
-	  this.addSequenceAndChecksum = flag;
-  }
-  public boolean getAddSequenceAndChecksum() {
-	  return this.addSequenceAndChecksum;
-  }
-  public void setStrictChecksumChecking(boolean flag) {
-	  this.strictChecksumChecking = flag;
-  }
-  public boolean getStrictChecksumChecking() {
-	  return this.strictChecksumChecking;
-  }
-  public void setStrictSequenceChecking(boolean flag)
-  {
-	  this.strictSequenceChecking = flag;
-  }
-  public boolean getStrictSequenceChecking()
-  {
-	  return this.strictSequenceChecking;
-  }
-  public void setHost(String host) {
-    this.host = host;
-  }
-  public String getHost() {
-    return host;
-  }
-  public void setPort(int port) {
-    this.port = port;
-  }
-  public int getPort() {
-    return port;
-  }
-  public void setConnectionTimeout(int connectionTimeout) {
-    this.connectionTimeout = connectionTimeout;
-  }
-  public int getConnectionTimeout() {
-    return connectionTimeout;
-  }
-  public void setIdleTimeout(int idleTimeout) {
-    this.idleTimeout = idleTimeout;
-  }
-  public int getIdleTimeout() {
-    return idleTimeout;
-  }
-  public void setRetryAttempts(int retryAttempts) {
-    this.retryAttempts = retryAttempts;
-  }
-  public int getRetryAttempts() {
-    return retryAttempts;
-  }
-  public void setRetryWait(int retryWait) {
-    this.retryWait = retryWait;
-  }
-  public int getRetryWait() {
-    return retryWait;
-  }
+    private int connectionTimeout;
+    private int idleTimeout;
+    private int retryAttempts;
+    private int retryWait;
+    private String host;
+    private int port;
+    private boolean addSequenceAndChecksum = true;
+    private boolean strictSequenceChecking = false;
+    private boolean strictChecksumChecking = false;
 
-  private char getNextSequence() {
-    char ret = sequence;
-    sequence++;
-    if (sequence > '9') {
-      sequence = '0';
+    public void setAddSequenceAndChecksum(boolean flag) {
+        this.addSequenceAndChecksum = flag;
     }
-    return ret;
-  }
 
-  protected String strim(String input) {
-    String ret = input;
-
-    while (ret.charAt(0) == 0 && ret.length() > 0) {
-      ret = ret.substring(1);
-
+    public boolean getAddSequenceAndChecksum() {
+        return this.addSequenceAndChecksum;
     }
-    return ret;
-  }
 
-  public synchronized void connect() throws Exception {
-    connect(this.getRetryAttempts());
-  }
+    public void setStrictChecksumChecking(boolean flag) {
+        this.strictChecksumChecking = flag;
+    }
 
-  protected abstract void connect(int retryAttempts) throws Exception;
-  public abstract boolean isConnected();
-  public abstract void disconnect();
+    public boolean getStrictChecksumChecking() {
+        return this.strictChecksumChecking;
+    }
 
-  protected abstract void internalSend(String msg) throws ConnectionFailure;
-  protected abstract String internalWaitfor(String match) throws ConnectionFailure;
+    public void setStrictSequenceChecking(boolean flag) {
+        this.strictSequenceChecking = flag;
+    }
 
-  public void send(String msg) throws ConnectionFailure {
-    Timer timer = null;
-    long timeout = this.getIdleTimeout();
-    if (timeout > 0) {
-      timer = new Timer();
-      timer.schedule(new KillConnectionTask(this), timeout);
+    public boolean getStrictSequenceChecking() {
+        return this.strictSequenceChecking;
     }
-    try {
-      internalSend(msg);
-    } catch (ConnectionFailure ex) {
-      if (timer != null) {
-        timer.cancel();
-      }
-      throw ex;
-    }
-    if (timer != null) {
-      timer.cancel();
-    }
-  }
 
-  public String waitfor(String match) throws ConnectionFailure {
-    String ret = null;
-    Timer timer = null;
-    long timeout = this.getIdleTimeout();
-    if (timeout > 0) {
-      timer = new Timer();
-      timer.schedule(new KillConnectionTask(this), timeout);
+    public void setHost(String host) {
+        this.host = host;
     }
-    try {
-      ret = internalWaitfor(match);
-    } catch (ConnectionFailure ex) {
-      if (timer != null) {
-        timer.cancel();
-      }
-      throw ex;
-    }
-    if (timer != null) {
-      timer.cancel();
-    }
-    return ret;
-  }
 
-  public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood, MandatoryFieldOmitted, InvalidFieldLength {
-    String request, response = null;
-    Message responseMessage = null;
-    if (msg == null) {
-      throw new MessageNotUnderstood(); //This will signal a corrupted data
+    public String getHost() {
+        return this.host;
     }
-    try {
-      boolean retry;
-      boolean understood = false;
-      int retries = 0;
-      do {
-        retry = false;
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public int getPort() {
+        return this.port;
+    }
+
+    public void setConnectionTimeout(int connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public int getConnectionTimeout() {
+        return this.connectionTimeout;
+    }
+
+    public void setIdleTimeout(int idleTimeout) {
+        this.idleTimeout = idleTimeout;
+    }
+
+    public int getIdleTimeout() {
+        return this.idleTimeout;
+    }
+
+    public void setRetryAttempts(int retryAttempts) {
+        this.retryAttempts = retryAttempts;
+    }
+
+    public int getRetryAttempts() {
+        return this.retryAttempts;
+    }
+
+    public void setRetryWait(int retryWait) {
+        this.retryWait = retryWait;
+    }
+
+    public int getRetryWait() {
+        return this.retryWait;
+    }
+
+    private char getNextSequence() {
+        char ret = this.sequence;
+        this.sequence++;
+        if (this.sequence > '9') {
+            this.sequence = '0';
+        }
+        return ret;
+    }
+
+    protected String strim(String input) {
+        String ret = input;
+
+        while ((ret.charAt(0) == 0) && (ret.length() > 0)) {
+            ret = ret.substring(1);
+
+        }
+        return ret;
+    }
+
+    public synchronized void connect() throws Exception {
+        this.connect(this.getRetryAttempts());
+    }
+
+    protected abstract void connect(int retryAttempts) throws Exception;
+
+    public abstract boolean isConnected();
+
+    public abstract void disconnect();
+
+    protected abstract void internalSend(String msg) throws ConnectionFailure;
+
+    protected abstract String internalWaitfor(String match) throws ConnectionFailure;
+
+    public void send(String msg) throws ConnectionFailure {
+        Timer timer = null;
+        long timeout = this.getIdleTimeout();
+        if (timeout > 0) {
+            timer = new Timer();
+            timer.schedule(new KillConnectionTask(this), timeout);
+        }
         try {
-          if (this.getAddSequenceAndChecksum()) {
-        	  request = msg.encode(new Character(getNextSequence()));
-          } else {
-        	  request = msg.encode(null);        	  
-          }
-          log.debug(">>> " + request);
-          send(request);
-          response = waitfor("\r");
-          response = strim(response);
-          log.debug("<<< " + response);
-          if (this.getStrictSequenceChecking()) {
-        	  responseMessage = Message.decode(response, sequence, this.getStrictChecksumChecking());
-          } else {
-        	  responseMessage=  Message.decode(response, null, this.getStrictChecksumChecking());    	  
-          }
-          if (responseMessage instanceof SCResend) {
-            throw new ConnectionFailure();
-          }
-          understood = true;
-        }
-        catch (ConnectionFailure ex) {
-          try {
-            Thread.sleep(this.getRetryWait());
-          }
-          catch (Exception ex1) {
-            log.debug("Thread sleep error", ex1);
-          }
-          retry = true;
-          retries++;
-          if (retries > this.getRetryAttempts()) {
-            if (understood) {
-              throw new RetriesExceeded();
-            } else {
-              throw new MessageNotUnderstood();
+            this.internalSend(msg);
+        } catch (ConnectionFailure ex) {
+            if (timer != null) {
+                timer.cancel();
             }
-          }
+            throw ex;
         }
-      }
-      while (retry);
-      if (responseMessage == null) {
-        throw new ConnectionFailure();
-      }    
-      return responseMessage;
+        if (timer != null) {
+            timer.cancel();
+        }
     }
-    catch (RetriesExceeded e) {
-      throw e;
+
+    public String waitfor(String match) throws ConnectionFailure {
+        String ret = null;
+        Timer timer = null;
+        long timeout = this.getIdleTimeout();
+        if (timeout > 0) {
+            timer = new Timer();
+            timer.schedule(new KillConnectionTask(this), timeout);
+        }
+        try {
+            ret = this.internalWaitfor(match);
+        } catch (ConnectionFailure ex) {
+            if (timer != null) {
+                timer.cancel();
+            }
+            throw ex;
+        }
+        if (timer != null) {
+            timer.cancel();
+        }
+        return ret;
     }
-  }
+
+    public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood,
+            MandatoryFieldOmitted, InvalidFieldLength {
+        String request, response = null;
+        Message responseMessage = null;
+        if (msg == null) {
+            throw new MessageNotUnderstood(); // This will signal a corrupted
+                                              // data
+        }
+        try {
+            boolean retry;
+            boolean understood = false;
+            int retries = 0;
+            do {
+                retry = false;
+                try {
+                    if (this.getAddSequenceAndChecksum()) {
+                        request = msg.encode(new Character(this.getNextSequence()));
+                    } else {
+                        request = msg.encode(null);
+                    }
+                    Connection.log.debug(">>> " + request);
+                    this.send(request);
+                    response = this.waitfor("\r");
+                    response = this.strim(response);
+                    Connection.log.debug("<<< " + response);
+                    if (this.getStrictSequenceChecking()) {
+                        responseMessage = Message.decode(response, this.sequence, this.getStrictChecksumChecking());
+                    } else {
+                        responseMessage = Message.decode(response, null, this.getStrictChecksumChecking());
+                    }
+                    if (responseMessage instanceof SCResend) {
+                        throw new ConnectionFailure();
+                    }
+                    understood = true;
+                } catch (ConnectionFailure ex) {
+                    try {
+                        Thread.sleep(this.getRetryWait());
+                    } catch (Exception ex1) {
+                        Connection.log.debug("Thread sleep error", ex1);
+                    }
+                    retry = true;
+                    retries++;
+                    if (retries > this.getRetryAttempts()) {
+                        if (understood) {
+                            throw new RetriesExceeded();
+                        } else {
+                            throw new MessageNotUnderstood();
+                        }
+                    }
+                }
+            } while (retry);
+            if (responseMessage == null) {
+                throw new ConnectionFailure();
+            }
+            return responseMessage;
+        } catch (RetriesExceeded e) {
+            throw e;
+        }
+    }
 }
 
 class KillConnectionTask extends TimerTask {
-  private static Log log = LogFactory.getLog(TimerTask.class);
-  private Connection connection;
+    private static Log log = LogFactory.getLog(TimerTask.class);
+    private Connection connection;
 
-  public KillConnectionTask(Connection conn) {
-    this.connection = conn;
-  }
+    public KillConnectionTask(Connection conn) {
+        this.connection = conn;
+    }
 
-  public void run() {
-    try {
-      log.error("Attempting to force close timed out connection");
-      this.connection.disconnect();
+    @Override
+    public void run() {
+        try {
+            KillConnectionTask.log.error("Attempting to force close timed out connection");
+            this.connection.disconnect();
+        } catch (Exception ex) {
+            KillConnectionTask.log.error("Force closed timed out connection failed", ex);
+        }
     }
-    catch (Exception ex) {
-      log.error("Force closed timed out connection failed", ex);
-    }
-  }
 }

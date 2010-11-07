@@ -27,46 +27,49 @@
 
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 public class CheckInBeanInfo extends MessageBeanInfo {
-  Class<CheckIn> beanClass = CheckIn.class;
+    Class<CheckIn> beanClass = CheckIn.class;
 
-  public CheckInBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _cancel = new PropertyDescriptor("cancel", beanClass, "isCancel", "setCancel");
-      PropertyDescriptor _currentLocation = new PropertyDescriptor("currentLocation", beanClass, "getCurrentLocation", "setCurrentLocation");
-      PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
-      PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
-      PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", beanClass, "isNoBlock", "setNoBlock");
-      PropertyDescriptor _returnDate = new PropertyDescriptor("returnDate", beanClass, "getReturnDate", "setReturnDate");
-      PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", beanClass, "getTerminalPassword", "setTerminalPassword");
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
+    public CheckInBeanInfo() {
+    }
 
-      _currentLocation.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
-      _noBlock.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
-      _returnDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(21,38));
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _cancel = new PropertyDescriptor("cancel", this.beanClass, "isCancel", "setCancel");
+        PropertyDescriptor _currentLocation = new PropertyDescriptor("currentLocation", this.beanClass, "getCurrentLocation", "setCurrentLocation");
+        PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", this.beanClass, "getInstitutionId", "setInstitutionId");
+        PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", this.beanClass, "getItemIdentifier", "setItemIdentifier");
+        PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", this.beanClass, "getItemProperties", "setItemProperties");
+        PropertyDescriptor _noBlock = new PropertyDescriptor("noBlock", this.beanClass, "isNoBlock", "setNoBlock");
+        PropertyDescriptor _returnDate = new PropertyDescriptor("returnDate", this.beanClass, "getReturnDate", "setReturnDate");
+        PropertyDescriptor _terminalPassword = new PropertyDescriptor("terminalPassword", this.beanClass, "getTerminalPassword", "setTerminalPassword");
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
 
-      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
-      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
-      _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));      
-      
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _cancel,
-        _currentLocation,
-        _institutionId,
-        _itemIdentifier,
-        _itemProperties,
-        _noBlock,
-        _returnDate,
-        _terminalPassword,
-        _transactionDate};
-      return pds;
-  }
+        _currentLocation.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _noBlock.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 20));
+        _returnDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(21, 38));
+
+        _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _terminalPassword.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _cancel,
+                _currentLocation,
+                _institutionId,
+                _itemIdentifier,
+                _itemProperties,
+                _noBlock,
+                _returnDate,
+                _terminalPassword,
+                _transactionDate };
+        return pds;
+    }
 }

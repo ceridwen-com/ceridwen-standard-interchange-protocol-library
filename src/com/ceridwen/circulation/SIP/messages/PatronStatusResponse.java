@@ -25,106 +25,130 @@ import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
 /**
- * <p>Title: RTSI</p>
- * <p>Description: Real Time Self Issue</p>
- * <p>Copyright: </p>
-
+ * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
+ * </p>
+ * 
  * @author Matthew J. Dovey
  * @version 1.0
  */
 
 public class PatronStatusResponse extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 163945073911230183L;
-	private PatronStatus patronStatus = new PatronStatus();
-	private Language language;
-	private Date transactionDate;
-	private String institutionId;
-	private String patronIdentifier;
-	private String personalName;
-	private Boolean validPatron;
-	private Boolean validPatronPassword;
-	private CurrencyType currencyType;
-	private String feeAmount;
-	private String screenMessage;
-	private String printLine;
+    private static final long serialVersionUID = 163945073911230183L;
+    private PatronStatus patronStatus = new PatronStatus();
+    private Language language;
+    private Date transactionDate;
+    private String institutionId;
+    private String patronIdentifier;
+    private String personalName;
+    private Boolean validPatron;
+    private Boolean validPatronPassword;
+    private CurrencyType currencyType;
+    private String feeAmount;
+    private String screenMessage;
+    private String printLine;
 
-  public String getCommand() {
-    return "24";
-  }
-  public CurrencyType getCurrencyType() {
-    return currencyType;
-  }
-  public String getFeeAmount() {
-    return feeAmount;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public Language getLanguage() {
-    return language;
-  }
-  public String getPrintLine() {
-    return printLine;
-  }
-  public String getPatronIdentifier() {
-    return patronIdentifier;
-  }
-  public PatronStatus getPatronStatus() {
-    return patronStatus;
-  }
-  public String getPersonalName() {
-    return personalName;
-  }
-  public String getScreenMessage() {
-    return screenMessage;
-  }
-  public Date getTransactionDate() {
-    return transactionDate;
-  }
-  public Boolean isValidPatron() {
-    return validPatron;
-  }
-  public Boolean isValidPatronPassword() {
-    return validPatronPassword;
-  }
-  public void setValidPatronPassword(Boolean validPatronPassword) {
-    this.validPatronPassword = validPatronPassword;
-  }
-  public void setValidPatron(Boolean validPatron) {
-    this.validPatron = validPatron;
-  }
-  public void setTransactionDate(Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public void setScreenMessage(String screenMessage) {
-    this.screenMessage = screenMessage;
-  }
-  public void setPrintLine(String printLine) {
-    this.printLine = printLine;
-  }
-  public void setPersonalName(String personalName) {
-    this.personalName = personalName;
-  }
-  @Deprecated  
-  public void setPatronStatus(PatronStatus patronStatus) {
-    this.patronStatus = patronStatus;
-  }
-  public void setPatronIdentifier(String patronIdentifier) {
-    this.patronIdentifier = patronIdentifier;
-  }
-  public void setLanguage(Language language) {
-    this.language = language;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public void setFeeAmount(String feeAmount) {
-    this.feeAmount = feeAmount;
-  }
-  public void setCurrencyType(CurrencyType currencyType) {
-    this.currencyType = currencyType;
-  }
+    @Override
+    public String getCommand() {
+        return "24";
+    }
+
+    public CurrencyType getCurrencyType() {
+        return this.currencyType;
+    }
+
+    public String getFeeAmount() {
+        return this.feeAmount;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public Language getLanguage() {
+        return this.language;
+    }
+
+    public String getPrintLine() {
+        return this.printLine;
+    }
+
+    public String getPatronIdentifier() {
+        return this.patronIdentifier;
+    }
+
+    public PatronStatus getPatronStatus() {
+        return this.patronStatus;
+    }
+
+    public String getPersonalName() {
+        return this.personalName;
+    }
+
+    public String getScreenMessage() {
+        return this.screenMessage;
+    }
+
+    public Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public Boolean isValidPatron() {
+        return this.validPatron;
+    }
+
+    public Boolean isValidPatronPassword() {
+        return this.validPatronPassword;
+    }
+
+    public void setValidPatronPassword(Boolean validPatronPassword) {
+        this.validPatronPassword = validPatronPassword;
+    }
+
+    public void setValidPatron(Boolean validPatron) {
+        this.validPatron = validPatron;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public void setScreenMessage(String screenMessage) {
+        this.screenMessage = screenMessage;
+    }
+
+    public void setPrintLine(String printLine) {
+        this.printLine = printLine;
+    }
+
+    public void setPersonalName(String personalName) {
+        this.personalName = personalName;
+    }
+
+    @Deprecated
+    public void setPatronStatus(PatronStatus patronStatus) {
+        this.patronStatus = patronStatus;
+    }
+
+    public void setPatronIdentifier(String patronIdentifier) {
+        this.patronIdentifier = patronIdentifier;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public void setFeeAmount(String feeAmount) {
+        this.feeAmount = feeAmount;
+    }
+
+    public void setCurrencyType(CurrencyType currencyType) {
+        this.currencyType = currencyType;
+    }
 }

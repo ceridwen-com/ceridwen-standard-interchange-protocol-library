@@ -22,33 +22,33 @@ import com.ceridwen.circulation.SIP.messages.Login;
 import com.ceridwen.circulation.SIP.messages.Message;
 
 public class LoginTest extends AbstractMessageTest<Login> {
-	@Override
-	public Message getDefaultMessage() {
-		Login m = new Login();
-		
-		return m;	}
+    @Override
+    public Message getDefaultMessage() {
+        Login m = new Login();
 
-	@Override
-	public String getDefaultEncoding() {
-		return "93  CN|CO|";
-	}
+        return m;
+    }
 
-	@Override
-	public Message getMessage() {
-		Login m = new Login();
-		
-		m.setLocationCode("locationCode");
-		m.setLoginPassword("loginPassword");
-		m.setLoginUserId("loginUserId");
-		m.setPWDAlgorithm("P");
-		m.setUIDAlgorithm("U");
+    @Override
+    public String getDefaultEncoding() {
+        return "93  CN|CO|";
+    }
 
-		return m;
-	}
+    @Override
+    public Message getMessage() {
+        Login m = new Login();
 
-	@Override
-	public String getEncoding() {
-		return "93UPCNloginUserId|COloginPassword|CPlocationCode|";
-	}
+        m.setLocationCode("locationCode");
+        m.setLoginPassword("loginPassword");
+        m.setLoginUserId("loginUserId");
+        m.setPWDAlgorithm("P");
+        m.setUIDAlgorithm("U");
+
+        return m;
+    }
+
+    @Override
+    public String getEncoding() {
+        return "93UPCNloginUserId|COloginPassword|CPlocationCode|";
+    }
 }
-

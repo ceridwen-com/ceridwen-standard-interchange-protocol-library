@@ -18,39 +18,42 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003</p>
+ * <p>Title: </p> <p>Description: </p> <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class LoginBeanInfo extends MessageBeanInfo {
-  Class<Login> beanClass = Login.class;
-  public LoginBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _UIDAlgorithm = new PropertyDescriptor("UIDAlgorithm", beanClass, "getUIDAlgorithm", "setUIDAlgorithm");
-      PropertyDescriptor _PWDAlgorithm = new PropertyDescriptor("PWDAlgorithm", beanClass, "getPWDAlgorithm", "setPWDAlgorithm");
-      PropertyDescriptor _loginUserId = new PropertyDescriptor("loginUserId", beanClass, "getLoginUserId", "setLoginUserId");
-      PropertyDescriptor _loginPassword = new PropertyDescriptor("loginPassword", beanClass, "getLoginPassword", "setLoginPassword");
-      PropertyDescriptor _locationCode = new PropertyDescriptor("locationCode", beanClass, "getLocationCode", "setLocationCode");
+    Class<Login> beanClass = Login.class;
 
-      _UIDAlgorithm.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _PWDAlgorithm.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));
+    public LoginBeanInfo() {
+    }
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _UIDAlgorithm,
-        _PWDAlgorithm,
-        _loginUserId,
-        _loginPassword,
-        _locationCode};
-      return pds;
-  }
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _UIDAlgorithm = new PropertyDescriptor("UIDAlgorithm", this.beanClass, "getUIDAlgorithm", "setUIDAlgorithm");
+        PropertyDescriptor _PWDAlgorithm = new PropertyDescriptor("PWDAlgorithm", this.beanClass, "getPWDAlgorithm", "setPWDAlgorithm");
+        PropertyDescriptor _loginUserId = new PropertyDescriptor("loginUserId", this.beanClass, "getLoginUserId", "setLoginUserId");
+        PropertyDescriptor _loginPassword = new PropertyDescriptor("loginPassword", this.beanClass, "getLoginPassword", "setLoginPassword");
+        PropertyDescriptor _locationCode = new PropertyDescriptor("locationCode", this.beanClass, "getLocationCode", "setLocationCode");
+
+        _UIDAlgorithm.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _PWDAlgorithm.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 3));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _UIDAlgorithm,
+                _PWDAlgorithm,
+                _loginUserId,
+                _loginPassword,
+                _locationCode };
+        return pds;
+    }
 }

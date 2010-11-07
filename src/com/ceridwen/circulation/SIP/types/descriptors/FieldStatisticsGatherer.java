@@ -24,81 +24,78 @@ import java.util.NavigableSet;
 import java.util.TreeMap;
 
 public class FieldStatisticsGatherer extends Thread {
-	private static FieldStatisticsGatherer fieldStatisticsGatherer = null;	
-	private TreeMap<String, Usage>usages = new TreeMap<String, Usage>();
+    private static FieldStatisticsGatherer fieldStatisticsGatherer = null;
+    private TreeMap<String, Usage> usages = new TreeMap<String, Usage>();
 
-	public static FieldStatisticsGatherer getFieldStatisticsGatherer() {
-		if (fieldStatisticsGatherer == null) {
-			fieldStatisticsGatherer = new FieldStatisticsGatherer();
-		}
-		return fieldStatisticsGatherer;
-	}
-	
-	public void RecordUsage(String name, boolean required)
-	{
-		usages.put(name, new Usage(usages.get(name), required));		
-	}
-	
-	public void PrintUsageStatistics()
-	{
-		System.out.println("Usage stats");
-		NavigableSet<String> names = usages.navigableKeySet();
-		String name = names.first();
-		while (name != null) {
-			Usage usage = usages.get(name);
-			System.out.println(name + ": " + usage.uses + " " + (usage.mutable?"Mutable ":"") + (usage.required?"Required ":"") + (usage.optional?"Optional":""));
-			name = names.higher(name);
-		}
-	}	
-	
-	class Usage {
-		public boolean required;
-		public boolean optional;
-		public boolean mutable;
-		public int uses = 0;
-		
-		protected Usage()
-		{
-		}
+    public static FieldStatisticsGatherer getFieldStatisticsGatherer() {
+        if (FieldStatisticsGatherer.fieldStatisticsGatherer == null) {
+            FieldStatisticsGatherer.fieldStatisticsGatherer = new FieldStatisticsGatherer();
+        }
+        return FieldStatisticsGatherer.fieldStatisticsGatherer;
+    }
 
-		protected Usage(Usage u, String name, boolean mutable)
-		{
-			this.mutable = mutable;
-			if (u != null) {
-				this.required = u.required;
-				this.optional = u.optional;
-				this.uses = u.uses;
-			}
-		}
+    public void RecordUsage(String name, boolean required) {
+        this.usages.put(name, new Usage(this.usages.get(name), required));
+    }
 
-		protected Usage(Usage u, boolean required)
-		{		
-			if (u != null) {
-				this.required = required?true:u.required;
-				this.optional = (!required)?true:u.optional;
-				this.uses = u.uses + 1;
-				this.mutable = u.mutable;
-			} else {
-				this.required = required;
-				this.optional = !required;
-				this.uses = 1;			
-			}
-		}
-	}
-	
-	public void run() {
-		FieldStatisticsGatherer.getFieldStatisticsGatherer().PrintUsageStatistics();
-	}
-	
-	static {
-//	    Runtime.getRuntime().addShutdownHook(new FieldStatisticsGatherer());		
-	}
+    public void PrintUsageStatistics() {
+        System.out.println("Usage stats");
+        NavigableSet<String> names = this.usages.navigableKeySet();
+        String name = names.first();
+        while (name != null) {
+            Usage usage = this.usages.get(name);
+            System.out.println(name + ": " + usage.uses + " " + (usage.mutable ? "Mutable " : "") + (usage.required ? "Required " : "")
+                    + (usage.optional ? "Optional" : ""));
+            name = names.higher(name);
+        }
+    }
 
-	public void LoadFieldDefinitions(Hashtable<String, FieldDescriptor> fields) {
-		Enumeration<String> names = fields.keys();
-		while (names.hasMoreElements()) {
-			String name = names.nextElement();
-			usages.put(name, new Usage(usages.get(name), name, (((FieldDescriptor)fields.get(name)).required == null)));					
-		}
-	}
+    class Usage {
+        public boolean required;
+        public boolean optional;
+        public boolean mutable;
+        public int uses = 0;
+
+        protected Usage() {
+        }
+
+        protected Usage(Usage u, String name, boolean mutable) {
+            this.mutable = mutable;
+            if (u != null) {
+                this.required = u.required;
+                this.optional = u.optional;
+                this.uses = u.uses;
+            }
+        }
+
+        protected Usage(Usage u, boolean required) {
+            if (u != null) {
+                this.required = required ? true : u.required;
+                this.optional = (!required) ? true : u.optional;
+                this.uses = u.uses + 1;
+                this.mutable = u.mutable;
+            } else {
+                this.required = required;
+                this.optional = !required;
+                this.uses = 1;
+            }
+        }
+    }
+
+    @Override
+    public void run() {
+        FieldStatisticsGatherer.getFieldStatisticsGatherer().PrintUsageStatistics();
+    }
+
+    static {
+        // Runtime.getRuntime().addShutdownHook(new FieldStatisticsGatherer());
+    }
+
+    public void LoadFieldDefinitions(Hashtable<String, FieldDescriptor> fields) {
+        Enumeration<String> names = fields.keys();
+        while (names.hasMoreElements()) {
+            String name = names.nextElement();
+            this.usages.put(name, new Usage(this.usages.get(name), name, ((fields.get(name)).required == null)));
+        }
+    }
 }

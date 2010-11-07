@@ -18,32 +18,31 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.tests;
 
-import com.ceridwen.circulation.SIP.messages.SCResend;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.messages.SCResend;
 
 public class SCResendTest extends AbstractMessageTest<SCResend> {
-	@Override
-	public Message getDefaultMessage() {
-		SCResend m = new SCResend();
+    @Override
+    public Message getDefaultMessage() {
+        SCResend m = new SCResend();
 
-		return m;
-	}
+        return m;
+    }
 
-	@Override
-	public String getDefaultEncoding() {
-		return "96AZFEF6";
-	}
-	
-	@Override
-	public Message getMessage() {
-		SCResend m = new SCResend();
+    @Override
+    public String getDefaultEncoding() {
+        return "96AZFEF6";
+    }
 
-		return m;
-	}
+    @Override
+    public Message getMessage() {
+        SCResend m = new SCResend();
 
-	@Override
-	public String getEncoding() {
-		return "96AZFEF6";
-	}
+        return m;
+    }
+
+    @Override
+    public String getEncoding() {
+        return "96AZFEF6";
+    }
 }
-

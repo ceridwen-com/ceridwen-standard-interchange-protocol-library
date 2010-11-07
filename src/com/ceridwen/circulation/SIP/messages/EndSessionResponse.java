@@ -19,54 +19,67 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class EndSessionResponse extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 8955079727656656773L;
-	private Boolean endSession;
-	private String institutionId;
-	private String patronIdentifier;
-	private String screenMessage;
-	private String printLine;
-	private java.util.Date transactionDate;
-	
-  public String getCommand() {
-    return "36";
-  }
-  public Boolean isEndSession() {
-    return endSession;
-  }
-  public void setEndSession(Boolean endSession) {
-    this.endSession = endSession;
-  }
-  public java.util.Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(java.util.Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public String getPatronIdentifier() {
-    return patronIdentifier;
-  }
-  public void setPatronIdentifier(String patronIdentifier) {
-    this.patronIdentifier = patronIdentifier;
-  }
-  public String getScreenMessage() {
-    return screenMessage;
-  }
-  public void setScreenMessage(String screenMessage) {
-    this.screenMessage = screenMessage;
-  }
-  public String getPrintLine() {
-    return printLine;
-  }
-  public void setPrintLine(String printLine) {
-    this.printLine = printLine;
-  }
+    private static final long serialVersionUID = 8955079727656656773L;
+    private Boolean endSession;
+    private String institutionId;
+    private String patronIdentifier;
+    private String screenMessage;
+    private String printLine;
+    private java.util.Date transactionDate;
+
+    @Override
+    public String getCommand() {
+        return "36";
+    }
+
+    public Boolean isEndSession() {
+        return this.endSession;
+    }
+
+    public void setEndSession(Boolean endSession) {
+        this.endSession = endSession;
+    }
+
+    public java.util.Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(java.util.Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public String getPatronIdentifier() {
+        return this.patronIdentifier;
+    }
+
+    public void setPatronIdentifier(String patronIdentifier) {
+        this.patronIdentifier = patronIdentifier;
+    }
+
+    public String getScreenMessage() {
+        return this.screenMessage;
+    }
+
+    public void setScreenMessage(String screenMessage) {
+        this.screenMessage = screenMessage;
+    }
+
+    public String getPrintLine() {
+        return this.printLine;
+    }
+
+    public void setPrintLine(String printLine) {
+        this.printLine = printLine;
+    }
 }

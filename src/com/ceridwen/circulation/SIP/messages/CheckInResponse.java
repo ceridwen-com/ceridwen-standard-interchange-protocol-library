@@ -32,117 +32,148 @@ import java.util.Date;
 import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
 public class CheckInResponse extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -3403534383487215711L;
-	private Boolean ok;
-	private Boolean resensitize;
-	private Boolean magneticMedia;
-	private Boolean alert;
-	private Date transactionDate;
-	private String institutionId;
-	private String itemIdentifier;
-	private String permanentLocation;
-	private String titleIdentifier;
-	private String sortBin;
-	private String patronIdentifier;
-	private MediaType mediaType;
-	private String itemProperties;
-	private String screenMessage;
-	private String printLine;
+    private static final long serialVersionUID = -3403534383487215711L;
+    private Boolean ok;
+    private Boolean resensitize;
+    private Boolean magneticMedia;
+    private Boolean alert;
+    private Date transactionDate;
+    private String institutionId;
+    private String itemIdentifier;
+    private String permanentLocation;
+    private String titleIdentifier;
+    private String sortBin;
+    private String patronIdentifier;
+    private MediaType mediaType;
+    private String itemProperties;
+    private String screenMessage;
+    private String printLine;
 
-  public String getCommand() {
-    return "10";
-  }
-  public Boolean isAlert() {
-    return alert;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public String getItemIdentifier() {
-    return itemIdentifier;
-  }
-  public String getItemProperties() {
-    return itemProperties;
-  }
-  public Boolean isMagneticMedia() {
-    return magneticMedia;
-  }
-  public MediaType getMediaType() {
-    return mediaType;
-  }
-  public Boolean isOk() {
-    return ok;
-  }
-  public String getPatronIdentifier() {
-    return patronIdentifier;
-  }
-  public String getPermanentLocation() {
-    return permanentLocation;
-  }
-  public String getPrintLine() {
-    return printLine;
-  }
-  public Boolean isResensitize() {
-    return resensitize;
-  }
-  public String getScreenMessage() {
-    return screenMessage;
-  }
-  public String getSortBin() {
-    return sortBin;
-  }
-  public String getTitleIdentifier() {
-    return titleIdentifier;
-  }
-  public Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public void setTitleIdentifier(String titleIdentifier) {
-    this.titleIdentifier = titleIdentifier;
-  }
-  public void setSortBin(String sortBin) {
-    this.sortBin = sortBin;
-  }
-  public void setScreenMessage(String screenMessage) {
-    this.screenMessage = screenMessage;
-  }
-  public void setResensitize(Boolean resensitize) {
-    this.resensitize = resensitize;
-  }
-  public void setPrintLine(String printLine) {
-    this.printLine = printLine;
-  }
-  public void setPermanentLocation(String permanentLocation) {
-    this.permanentLocation = permanentLocation;
-  }
-  public void setPatronIdentifier(String patronIdentifier) {
-    this.patronIdentifier = patronIdentifier;
-  }
-  public void setOk(Boolean ok) {
-    this.ok = ok;
-  }
-  public void setMediaType(MediaType mediaType) {
-    this.mediaType = mediaType;
-  }
-  public void setMagneticMedia(Boolean magneticMedia) {
-    this.magneticMedia = magneticMedia;
-  }
-  public void setItemProperties(String itemProperties) {
-    this.itemProperties = itemProperties;
-  }
-  public void setItemIdentifier(String itemIdentifier) {
-    this.itemIdentifier = itemIdentifier;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public void setAlert(Boolean alert) {
-    this.alert = alert;
-  }
+    @Override
+    public String getCommand() {
+        return "10";
+    }
+
+    public Boolean isAlert() {
+        return this.alert;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public String getItemIdentifier() {
+        return this.itemIdentifier;
+    }
+
+    public String getItemProperties() {
+        return this.itemProperties;
+    }
+
+    public Boolean isMagneticMedia() {
+        return this.magneticMedia;
+    }
+
+    public MediaType getMediaType() {
+        return this.mediaType;
+    }
+
+    public Boolean isOk() {
+        return this.ok;
+    }
+
+    public String getPatronIdentifier() {
+        return this.patronIdentifier;
+    }
+
+    public String getPermanentLocation() {
+        return this.permanentLocation;
+    }
+
+    public String getPrintLine() {
+        return this.printLine;
+    }
+
+    public Boolean isResensitize() {
+        return this.resensitize;
+    }
+
+    public String getScreenMessage() {
+        return this.screenMessage;
+    }
+
+    public String getSortBin() {
+        return this.sortBin;
+    }
+
+    public String getTitleIdentifier() {
+        return this.titleIdentifier;
+    }
+
+    public Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public void setTitleIdentifier(String titleIdentifier) {
+        this.titleIdentifier = titleIdentifier;
+    }
+
+    public void setSortBin(String sortBin) {
+        this.sortBin = sortBin;
+    }
+
+    public void setScreenMessage(String screenMessage) {
+        this.screenMessage = screenMessage;
+    }
+
+    public void setResensitize(Boolean resensitize) {
+        this.resensitize = resensitize;
+    }
+
+    public void setPrintLine(String printLine) {
+        this.printLine = printLine;
+    }
+
+    public void setPermanentLocation(String permanentLocation) {
+        this.permanentLocation = permanentLocation;
+    }
+
+    public void setPatronIdentifier(String patronIdentifier) {
+        this.patronIdentifier = patronIdentifier;
+    }
+
+    public void setOk(Boolean ok) {
+        this.ok = ok;
+    }
+
+    public void setMediaType(MediaType mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public void setMagneticMedia(Boolean magneticMedia) {
+        this.magneticMedia = magneticMedia;
+    }
+
+    public void setItemProperties(String itemProperties) {
+        this.itemProperties = itemProperties;
+    }
+
+    public void setItemIdentifier(String itemIdentifier) {
+        this.itemIdentifier = itemIdentifier;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public void setAlert(Boolean alert) {
+        this.alert = alert;
+    }
 }

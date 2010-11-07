@@ -23,31 +23,30 @@ import com.ceridwen.circulation.SIP.messages.Message;
 
 public class LoginResponseTest extends AbstractMessageTest<LoginResponse> {
 
-	@Override
-	public Message getDefaultMessage() {
-		LoginResponse m = new LoginResponse();
-		
-		return m;
-	}
+    @Override
+    public Message getDefaultMessage() {
+        LoginResponse m = new LoginResponse();
 
-	@Override
-	public String getDefaultEncoding() {
-		return "940";
-	}
+        return m;
+    }
 
-	@Override
-	public Message getMessage() {
-		LoginResponse m = new LoginResponse();
-		
-		m.setOk(true);
+    @Override
+    public String getDefaultEncoding() {
+        return "940";
+    }
 
-		return m;
-	}
+    @Override
+    public Message getMessage() {
+        LoginResponse m = new LoginResponse();
 
-	@Override
-	public String getEncoding() {
-		return "941";
-	}
+        m.setOk(true);
+
+        return m;
+    }
+
+    @Override
+    public String getEncoding() {
+        return "941";
+    }
 
 }
-

@@ -19,96 +19,121 @@
 package com.ceridwen.circulation.SIP.messages;
 
 public class Renew extends Message {
-  /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 158409818027250051L;
-	private Boolean thirdPartyAllowed;
-	private Boolean noBlock;
-	private java.util.Date transactionDate;
-	private java.util.Date nbDueDate;
-	private String institutionId;
-	private String patronIdentifier;
-	private String patronPassword;
-	private String itemIdentifier;
-	private String titleIdentifier;
-	private String terminalPassword;
-	private String itemProperties;
-	private Boolean feeAcknowledged;
+    private static final long serialVersionUID = 158409818027250051L;
+    private Boolean thirdPartyAllowed;
+    private Boolean noBlock;
+    private java.util.Date transactionDate;
+    private java.util.Date nbDueDate;
+    private String institutionId;
+    private String patronIdentifier;
+    private String patronPassword;
+    private String itemIdentifier;
+    private String titleIdentifier;
+    private String terminalPassword;
+    private String itemProperties;
+    private Boolean feeAcknowledged;
 
-	public String getCommand() {
-    return "29";
-  }
-  public Boolean isThirdPartyAllowed() {
-    return thirdPartyAllowed;
-  }
-  public void setThirdPartyAllowed(Boolean thirdPartyAllowed) {
-    this.thirdPartyAllowed = thirdPartyAllowed;
-  }
-  public Boolean isNoBlock() {
-    return noBlock;
-  }
-  public void setNoBlock(Boolean noBlock) {
-    this.noBlock = noBlock;
-  }
-  public java.util.Date getTransactionDate() {
-    return transactionDate;
-  }
-  public void setTransactionDate(java.util.Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
-  public java.util.Date getNbDueDate() {
-    return nbDueDate;
-  }
-  public void setNbDueDate(java.util.Date nbDueDate) {
-    this.nbDueDate = nbDueDate;
-  }
-  public String getInstitutionId() {
-    return institutionId;
-  }
-  public void setInstitutionId(String institutionId) {
-    this.institutionId = institutionId;
-  }
-  public String getPatronIdentifier() {
-    return patronIdentifier;
-  }
-  public void setPatronIdentifier(String patronIdentifier) {
-    this.patronIdentifier = patronIdentifier;
-  }
-  public String getPatronPassword() {
-    return patronPassword;
-  }
-  public void setPatronPassword(String patronPassword) {
-    this.patronPassword = patronPassword;
-  }
-  public String getItemIdentifier() {
-    return itemIdentifier;
-  }
-  public void setItemIdentifier(String itemIdentifier) {
-    this.itemIdentifier = itemIdentifier;
-  }
-  public String getTitleIdentifier() {
-    return titleIdentifier;
-  }
-  public void setTitleIdentifier(String titleIdentifier) {
-    this.titleIdentifier = titleIdentifier;
-  }
-  public String getTerminalPassword() {
-    return terminalPassword;
-  }
-  public void setTerminalPassword(String terminalPassword) {
-    this.terminalPassword = terminalPassword;
-  }
-  public String getItemProperties() {
-    return itemProperties;
-  }
-  public void setItemProperties(String itemProperties) {
-    this.itemProperties = itemProperties;
-  }
-  public Boolean isFeeAcknowledged() {
-    return feeAcknowledged;
-  }
-  public void setFeeAcknowledged(Boolean feeAcknowledged) {
-    this.feeAcknowledged = feeAcknowledged;
-  }
+    @Override
+    public String getCommand() {
+        return "29";
+    }
+
+    public Boolean isThirdPartyAllowed() {
+        return this.thirdPartyAllowed;
+    }
+
+    public void setThirdPartyAllowed(Boolean thirdPartyAllowed) {
+        this.thirdPartyAllowed = thirdPartyAllowed;
+    }
+
+    public Boolean isNoBlock() {
+        return this.noBlock;
+    }
+
+    public void setNoBlock(Boolean noBlock) {
+        this.noBlock = noBlock;
+    }
+
+    public java.util.Date getTransactionDate() {
+        return this.transactionDate;
+    }
+
+    public void setTransactionDate(java.util.Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public java.util.Date getNbDueDate() {
+        return this.nbDueDate;
+    }
+
+    public void setNbDueDate(java.util.Date nbDueDate) {
+        this.nbDueDate = nbDueDate;
+    }
+
+    public String getInstitutionId() {
+        return this.institutionId;
+    }
+
+    public void setInstitutionId(String institutionId) {
+        this.institutionId = institutionId;
+    }
+
+    public String getPatronIdentifier() {
+        return this.patronIdentifier;
+    }
+
+    public void setPatronIdentifier(String patronIdentifier) {
+        this.patronIdentifier = patronIdentifier;
+    }
+
+    public String getPatronPassword() {
+        return this.patronPassword;
+    }
+
+    public void setPatronPassword(String patronPassword) {
+        this.patronPassword = patronPassword;
+    }
+
+    public String getItemIdentifier() {
+        return this.itemIdentifier;
+    }
+
+    public void setItemIdentifier(String itemIdentifier) {
+        this.itemIdentifier = itemIdentifier;
+    }
+
+    public String getTitleIdentifier() {
+        return this.titleIdentifier;
+    }
+
+    public void setTitleIdentifier(String titleIdentifier) {
+        this.titleIdentifier = titleIdentifier;
+    }
+
+    public String getTerminalPassword() {
+        return this.terminalPassword;
+    }
+
+    public void setTerminalPassword(String terminalPassword) {
+        this.terminalPassword = terminalPassword;
+    }
+
+    public String getItemProperties() {
+        return this.itemProperties;
+    }
+
+    public void setItemProperties(String itemProperties) {
+        this.itemProperties = itemProperties;
+    }
+
+    public Boolean isFeeAcknowledged() {
+        return this.feeAcknowledged;
+    }
+
+    public void setFeeAcknowledged(Boolean feeAcknowledged) {
+        this.feeAcknowledged = feeAcknowledged;
+    }
 }

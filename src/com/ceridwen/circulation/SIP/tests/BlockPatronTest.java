@@ -23,38 +23,37 @@ import com.ceridwen.circulation.SIP.messages.Message;
 
 public class BlockPatronTest extends AbstractMessageTest<BlockPatron> {
 
-	@Override
-	public Message getDefaultMessage() {
-		BlockPatron m = new BlockPatron();
+    @Override
+    public Message getDefaultMessage() {
+        BlockPatron m = new BlockPatron();
 
-		m.setTransactionDate(new java.util.Date(0));
-		
-		return m;
-	}
+        m.setTransactionDate(new java.util.Date(0));
 
-	@Override
-	public String getDefaultEncoding() {
-		return "01N19700101    010000AA|AC|AL|AO|";
-	}
+        return m;
+    }
 
-	@Override
-	public Message getMessage() {
-		BlockPatron m = new BlockPatron();
+    @Override
+    public String getDefaultEncoding() {
+        return "01N19700101    010000AA|AC|AL|AO|";
+    }
 
-		m.setBlockedCardMessage("blockedCardMessage");
-		m.setCardRetained(true);
-		m.setInstitutionId("institutionId");
-		m.setPatronIdentifier("patronIdentifier");
-		m.setTerminalPassword("terminalPassword");
-		m.setTransactionDate(new java.util.Date(0));
-		
-		return m;
-	}
+    @Override
+    public Message getMessage() {
+        BlockPatron m = new BlockPatron();
 
-	@Override
-	public String getEncoding() {
-		return "01Y19700101    010000AApatronIdentifier|ACterminalPassword|ALblockedCardMessage|AOinstitutionId|";
-	}
+        m.setBlockedCardMessage("blockedCardMessage");
+        m.setCardRetained(true);
+        m.setInstitutionId("institutionId");
+        m.setPatronIdentifier("patronIdentifier");
+        m.setTerminalPassword("terminalPassword");
+        m.setTransactionDate(new java.util.Date(0));
+
+        return m;
+    }
+
+    @Override
+    public String getEncoding() {
+        return "01Y19700101    010000AApatronIdentifier|ACterminalPassword|ALblockedCardMessage|AOinstitutionId|";
+    }
 
 }
-

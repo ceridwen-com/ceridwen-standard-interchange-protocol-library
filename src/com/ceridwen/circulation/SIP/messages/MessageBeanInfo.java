@@ -25,22 +25,23 @@ import java.beans.SimpleBeanInfo;
 import com.ceridwen.circulation.SIP.types.descriptors.FieldDefinitions;
 
 public abstract class MessageBeanInfo extends SimpleBeanInfo {
-	
-	protected abstract PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException;
 
-	public PropertyDescriptor[] getPropertyDescriptors() {
-		try {
-			PropertyDescriptor[] pds;
-			pds = this.getPropertyDescriptorsInternal();
-			FieldDefinitions.fixupFieldDescriptors(this.getClass().getSimpleName(), pds);
-			return pds;
-		} catch (IntrospectionException e) {
-			throw new java.lang.AssertionError(e);
-		}
-	}
+    protected abstract PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException;
 
-	public java.awt.Image getIcon(int iconKind) {
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptors() {
+        try {
+            PropertyDescriptor[] pds;
+            pds = this.getPropertyDescriptorsInternal();
+            FieldDefinitions.fixupFieldDescriptors(this.getClass().getSimpleName(), pds);
+            return pds;
+        } catch (IntrospectionException e) {
+            throw new java.lang.AssertionError(e);
+        }
+    }
+
+    @Override
+    public java.awt.Image getIcon(int iconKind) {
         return null;
-	}
+    }
 }
-

@@ -25,42 +25,41 @@ import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 import com.ceridwen.circulation.SIP.types.enumerations.PaymentType;
 
 public class FeePaidTest extends AbstractMessageTest<FeePaid> {
-	@Override
-	public Message getDefaultMessage() {
-		FeePaid m = new FeePaid();
+    @Override
+    public Message getDefaultMessage() {
+        FeePaid m = new FeePaid();
 
-		m.setTransactionDate(new java.util.Date(0));
+        m.setTransactionDate(new java.util.Date(0));
 
-		return m;
-	}
+        return m;
+    }
 
-	@Override
-	public String getDefaultEncoding() {
-		return "3719700101    0100000100USDAA|AO|BV|";
-	}
+    @Override
+    public String getDefaultEncoding() {
+        return "3719700101    0100000100USDAA|AO|BV|";
+    }
 
-	@Override
-	public Message getMessage() {
-		FeePaid m = new FeePaid();
-		
-		m.setCurrencyType(CurrencyType.UK_POUNDS);
-		m.setFeeAmount("feeAmount");
-		m.setFeeIdentifier("feeIdentifier");
-		m.setFeeType(FeeType.REPLACEMENT);
-		m.setInstitutionId("institutionId");
-		m.setPatronIdentifier("patronIdentifier");
-		m.setPatronPassword("patronPassword");
-		m.setPaymentType(PaymentType.VISA);
-		m.setTerminalPassword("terminalPassword");
-		m.setTransactionDate(new java.util.Date(0));
-		m.setTransactionId("transactionId");
+    @Override
+    public Message getMessage() {
+        FeePaid m = new FeePaid();
 
-		return m;
-	}
+        m.setCurrencyType(CurrencyType.UK_POUNDS);
+        m.setFeeAmount("feeAmount");
+        m.setFeeIdentifier("feeIdentifier");
+        m.setFeeType(FeeType.REPLACEMENT);
+        m.setInstitutionId("institutionId");
+        m.setPatronIdentifier("patronIdentifier");
+        m.setPatronPassword("patronPassword");
+        m.setPaymentType(PaymentType.VISA);
+        m.setTerminalPassword("terminalPassword");
+        m.setTransactionDate(new java.util.Date(0));
+        m.setTransactionId("transactionId");
 
-	@Override
-	public String getEncoding() {
-		return "3719700101    0100000701GBPAApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BKtransactionId|BVfeeAmount|CGfeeIdentifier|";
-	}
+        return m;
+    }
+
+    @Override
+    public String getEncoding() {
+        return "3719700101    0100000701GBPAApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BKtransactionId|BVfeeAmount|CGfeeIdentifier|";
+    }
 }
-

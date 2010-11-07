@@ -27,71 +27,75 @@
 
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 public class CheckOutResponseBeanInfo extends MessageBeanInfo {
-  Class<CheckOutResponse> beanClass = CheckOutResponse.class;
-  public CheckOutResponseBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _currencyType = new PropertyDescriptor("currencyType", beanClass, "getCurrencyType", "setCurrencyType");
-      PropertyDescriptor _desensitize = new PropertyDescriptor("desensitize", beanClass, "isDesensitize", "setDesensitize");
-      PropertyDescriptor _dueDate = new PropertyDescriptor("dueDate", beanClass, "getDueDate", "setDueDate");
-      PropertyDescriptor _feeAmount = new PropertyDescriptor("feeAmount", beanClass, "getFeeAmount", "setFeeAmount");
-      PropertyDescriptor _feeType = new PropertyDescriptor("feeType", beanClass, "getFeeType", "setFeeType");
-      PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
-      PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", beanClass, "getItemIdentifier", "setItemIdentifier");
-      PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", beanClass, "getItemProperties", "setItemProperties");
-      PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", beanClass, "isMagneticMedia", "setMagneticMedia");
-      PropertyDescriptor _mediaType = new PropertyDescriptor("mediaType", beanClass, "getMediaType", "setMediaType");
-      PropertyDescriptor _ok = new PropertyDescriptor("ok", beanClass, "isOk", "setOk");
-      PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
-      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
-      PropertyDescriptor _renewalOk = new PropertyDescriptor("renewalOk", beanClass, "isRenewalOk", "setRenewalOk");
-      PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _securityInhibit = new PropertyDescriptor("securityInhibit", beanClass, "isSecurityInhibit", "setSecurityInhibit");
-      PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", beanClass, "getTitleIdentifier", "setTitleIdentifier");
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
-      PropertyDescriptor _transactionId = new PropertyDescriptor("transactionId", beanClass, "getTransactionId", "setTransactionId");
+    Class<CheckOutResponse> beanClass = CheckOutResponse.class;
 
-      _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _renewalOk.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,3));
-      _magneticMedia.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4,4));
-      _desensitize.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5,5));
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6,23));
-      
-      _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _feeType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _dueDate.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
-      _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
-      _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));   
-      _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));      
-      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
-      _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+    public CheckOutResponseBeanInfo() {
+    }
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _currencyType,
-        _desensitize,
-        _dueDate,
-        _feeAmount,
-        _feeType,
-        _institutionId,
-        _itemIdentifier,
-        _itemProperties,
-        _magneticMedia,
-        _mediaType,
-        _ok,
-        _patronIdentifier,
-        _printLine,
-        _renewalOk,
-        _screenMessage,
-        _securityInhibit,
-        _titleIdentifier,
-        _transactionDate,
-        _transactionId};
-      return pds;
-  }
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _currencyType = new PropertyDescriptor("currencyType", this.beanClass, "getCurrencyType", "setCurrencyType");
+        PropertyDescriptor _desensitize = new PropertyDescriptor("desensitize", this.beanClass, "isDesensitize", "setDesensitize");
+        PropertyDescriptor _dueDate = new PropertyDescriptor("dueDate", this.beanClass, "getDueDate", "setDueDate");
+        PropertyDescriptor _feeAmount = new PropertyDescriptor("feeAmount", this.beanClass, "getFeeAmount", "setFeeAmount");
+        PropertyDescriptor _feeType = new PropertyDescriptor("feeType", this.beanClass, "getFeeType", "setFeeType");
+        PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", this.beanClass, "getInstitutionId", "setInstitutionId");
+        PropertyDescriptor _itemIdentifier = new PropertyDescriptor("itemIdentifier", this.beanClass, "getItemIdentifier", "setItemIdentifier");
+        PropertyDescriptor _itemProperties = new PropertyDescriptor("itemProperties", this.beanClass, "getItemProperties", "setItemProperties");
+        PropertyDescriptor _magneticMedia = new PropertyDescriptor("magneticMedia", this.beanClass, "isMagneticMedia", "setMagneticMedia");
+        PropertyDescriptor _mediaType = new PropertyDescriptor("mediaType", this.beanClass, "getMediaType", "setMediaType");
+        PropertyDescriptor _ok = new PropertyDescriptor("ok", this.beanClass, "isOk", "setOk");
+        PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", this.beanClass, "getPatronIdentifier", "setPatronIdentifier");
+        PropertyDescriptor _printLine = new PropertyDescriptor("printLine", this.beanClass, "getPrintLine", "setPrintLine");
+        PropertyDescriptor _renewalOk = new PropertyDescriptor("renewalOk", this.beanClass, "isRenewalOk", "setRenewalOk");
+        PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", this.beanClass, "getScreenMessage", "setScreenMessage");
+        PropertyDescriptor _securityInhibit = new PropertyDescriptor("securityInhibit", this.beanClass, "isSecurityInhibit", "setSecurityInhibit");
+        PropertyDescriptor _titleIdentifier = new PropertyDescriptor("titleIdentifier", this.beanClass, "getTitleIdentifier", "setTitleIdentifier");
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
+        PropertyDescriptor _transactionId = new PropertyDescriptor("transactionId", this.beanClass, "getTransactionId", "setTransactionId");
+
+        _ok.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _renewalOk.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 3));
+        _magneticMedia.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(4, 4));
+        _desensitize.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(5, 5));
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(6, 23));
+
+        _currencyType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _feeType.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _dueDate.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _feeAmount.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _itemIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _itemProperties.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(false));
+        _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+        _titleIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _currencyType,
+                _desensitize,
+                _dueDate,
+                _feeAmount,
+                _feeType,
+                _institutionId,
+                _itemIdentifier,
+                _itemProperties,
+                _magneticMedia,
+                _mediaType,
+                _ok,
+                _patronIdentifier,
+                _printLine,
+                _renewalOk,
+                _screenMessage,
+                _securityInhibit,
+                _titleIdentifier,
+                _transactionDate,
+                _transactionId };
+        return pds;
+    }
 }

@@ -18,46 +18,49 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-import java.beans.*;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003</p>
+ * <p>Title: </p> <p>Description: </p> <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class FeePaidResponseBeanInfo extends MessageBeanInfo {
-  Class<FeePaidResponse> beanClass = FeePaidResponse.class;
-  public FeePaidResponseBeanInfo() {
-  }
-  public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
-      PropertyDescriptor _paymentAccepted = new PropertyDescriptor("paymentAccepted", beanClass, "isPaymentAccepted", "setPaymentAccepted");
-      PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", beanClass, "getTransactionDate", "setTransactionDate");
-      PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", beanClass, "getInstitutionId", "setInstitutionId");
-      PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", beanClass, "getPatronIdentifier", "setPatronIdentifier");
-      PropertyDescriptor _transactionId = new PropertyDescriptor("transactionId", beanClass, "getTransactionId", "setTransactionId");
-      PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", beanClass, "getScreenMessage", "setScreenMessage");
-      PropertyDescriptor _printLine = new PropertyDescriptor("printLine", beanClass, "getPrintLine", "setPrintLine");
+    Class<FeePaidResponse> beanClass = FeePaidResponse.class;
 
-      _paymentAccepted.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2,2));
-      _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3,20));
+    public FeePaidResponseBeanInfo() {
+    }
 
-      _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));            
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptorsInternal() throws IntrospectionException {
+        PropertyDescriptor _paymentAccepted = new PropertyDescriptor("paymentAccepted", this.beanClass, "isPaymentAccepted", "setPaymentAccepted");
+        PropertyDescriptor _transactionDate = new PropertyDescriptor("transactionDate", this.beanClass, "getTransactionDate", "setTransactionDate");
+        PropertyDescriptor _institutionId = new PropertyDescriptor("institutionId", this.beanClass, "getInstitutionId", "setInstitutionId");
+        PropertyDescriptor _patronIdentifier = new PropertyDescriptor("patronIdentifier", this.beanClass, "getPatronIdentifier", "setPatronIdentifier");
+        PropertyDescriptor _transactionId = new PropertyDescriptor("transactionId", this.beanClass, "getTransactionId", "setTransactionId");
+        PropertyDescriptor _screenMessage = new PropertyDescriptor("screenMessage", this.beanClass, "getScreenMessage", "setScreenMessage");
+        PropertyDescriptor _printLine = new PropertyDescriptor("printLine", this.beanClass, "getPrintLine", "setPrintLine");
 
-      PropertyDescriptor[] pds = new PropertyDescriptor[] {
-        _paymentAccepted,
-        _transactionDate,
-        _institutionId,
-        _patronIdentifier,
-        _transactionId,
-        _screenMessage,
-        _printLine};
-      return pds;
-  }
+        _paymentAccepted.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(2, 2));
+        _transactionDate.setValue("SIPFieldDescriptor", new PositionedFieldDescriptor(3, 20));
+
+        _patronIdentifier.setValue("SIPFieldDescriptor", new TaggedFieldDescriptor(true));
+
+        PropertyDescriptor[] pds = new PropertyDescriptor[] {
+                _paymentAccepted,
+                _transactionDate,
+                _institutionId,
+                _patronIdentifier,
+                _transactionId,
+                _screenMessage,
+                _printLine };
+        return pds;
+    }
 }

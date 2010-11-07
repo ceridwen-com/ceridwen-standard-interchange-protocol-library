@@ -49,19 +49,33 @@ import com.ceridwen.circulation.SIP.messages.RenewResponse;
 import com.ceridwen.circulation.SIP.messages.SCStatus;
 
 public interface MessageHandler {
-	public ACSStatus Status(SCStatus msg);
-	public PatronStatusResponse BlockPatron(BlockPatron msg);
-	public CheckInResponse CheckIn(CheckIn msg);
-	public CheckOutResponse CheckOut(CheckOut msg);
-	public EndSessionResponse EndPatronSession(EndPatronSession msg);
-	public FeePaidResponse FeePaid(FeePaid msg);
-	public HoldResponse Hold(Hold msg);
-	public ItemInformationResponse ItemInformation(ItemInformation msg);
-	public ItemStatusUpdateResponse ItemStatusUpdate(ItemStatusUpdate msg);
-	public LoginResponse Login(Login msg);
-	public PatronEnableResponse PatronEnable(PatronEnable msg);
-	public PatronInformationResponse PatronInformation(PatronInformation msg);
-	public PatronStatusResponse PatronStatus(PatronStatusRequest msg);
-	public RenewResponse Renew(Renew msg);
-	public RenewAllResponse RenewAll(RenewAll msg);
+    public ACSStatus Status(SCStatus msg);
+
+    public PatronStatusResponse BlockPatron(BlockPatron msg);
+
+    public CheckInResponse CheckIn(CheckIn msg);
+
+    public CheckOutResponse CheckOut(CheckOut msg);
+
+    public EndSessionResponse EndPatronSession(EndPatronSession msg);
+
+    public FeePaidResponse FeePaid(FeePaid msg);
+
+    public HoldResponse Hold(Hold msg);
+
+    public ItemInformationResponse ItemInformation(ItemInformation msg);
+
+    public ItemStatusUpdateResponse ItemStatusUpdate(ItemStatusUpdate msg);
+
+    public LoginResponse Login(Login msg);
+
+    public PatronEnableResponse PatronEnable(PatronEnable msg);
+
+    public PatronInformationResponse PatronInformation(PatronInformation msg);
+
+    public PatronStatusResponse PatronStatus(PatronStatusRequest msg);
+
+    public RenewResponse Renew(Renew msg);
+
+    public RenewAllResponse RenewAll(RenewAll msg);
 }

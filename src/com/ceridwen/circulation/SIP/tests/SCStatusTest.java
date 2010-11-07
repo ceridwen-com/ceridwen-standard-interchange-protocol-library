@@ -18,38 +18,37 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.tests;
 
-import com.ceridwen.circulation.SIP.messages.SCStatus;
 import com.ceridwen.circulation.SIP.messages.Message;
+import com.ceridwen.circulation.SIP.messages.SCStatus;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.enumerations.StatusCode;
 
 public class SCStatusTest extends AbstractMessageTest<SCStatus> {
-	@Override
-	public Message getDefaultMessage() {
-		SCStatus m = new SCStatus();
+    @Override
+    public Message getDefaultMessage() {
+        SCStatus m = new SCStatus();
 
-		return m;
-	}
+        return m;
+    }
 
-	@Override
-	public String getDefaultEncoding() {
-		return "9900002.00";
-	}
+    @Override
+    public String getDefaultEncoding() {
+        return "9900002.00";
+    }
 
-	@Override
-	public Message getMessage() {
-		SCStatus m = new SCStatus();
-		
-		m.setMaxPrintWidth(123);
-		m.setProtocolVersion(ProtocolVersion.VERSION_2_00);
-		m.setStatusCode(StatusCode.OUT_OF_PAPER);
+    @Override
+    public Message getMessage() {
+        SCStatus m = new SCStatus();
 
-		return m;
-	}
+        m.setMaxPrintWidth(123);
+        m.setProtocolVersion(ProtocolVersion.VERSION_2_00);
+        m.setStatusCode(StatusCode.OUT_OF_PAPER);
 
-	@Override
-	public String getEncoding() {
-		return "9911232.00";
-	}
+        return m;
+    }
+
+    @Override
+    public String getEncoding() {
+        return "9911232.00";
+    }
 }
-

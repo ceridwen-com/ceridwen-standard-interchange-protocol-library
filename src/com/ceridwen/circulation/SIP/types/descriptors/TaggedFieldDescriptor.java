@@ -28,15 +28,14 @@
 package com.ceridwen.circulation.SIP.types.descriptors;
 
 public class TaggedFieldDescriptor extends FieldDescriptor {
-  public static final char TERMINATOR = '|';
+    public static final char TERMINATOR = '|';
 
-  protected TaggedFieldDescriptor(String name, FieldDescriptor d, Boolean required)
-  {
-	  super(name, d, required);
-  }
-  
-  public TaggedFieldDescriptor(Boolean required) {
-	  this.required = required;
-  }
-  
+    protected TaggedFieldDescriptor(String name, FieldDescriptor d, Boolean required) {
+        super(name, d, required);
+    }
+
+    public TaggedFieldDescriptor(Boolean required) {
+        this.required = required;
+    }
+
 }
