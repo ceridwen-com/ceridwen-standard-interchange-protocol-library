@@ -49,8 +49,7 @@ public abstract class Message implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1609258005567594730L;
-
-private static Log log = LogFactory.getLog(Message.class);
+  private static Log log = LogFactory.getLog(Message.class);
 
     private static Class<?>[] _messages = {    	
         PatronStatusRequest.class,
@@ -237,9 +236,6 @@ private static Log log = LogFactory.getLog(Message.class);
 	        String[] value = getProp(desc);
 	        if (value[0].length() == 0) {
 	          if (field.required) {
-/**
- * TODO allow auto-padding option
- */	        	  
 	            throw new MandatoryFieldOmitted(desc.getDisplayName());
 	          }
 	        }
@@ -271,10 +267,12 @@ private static Log log = LogFactory.getLog(Message.class);
 	        	}		
 	        	variable.put(field.tag, value);
 	        } else if (field.required) {
-/**
- * TODO allow auto-padding option to be off
- */	        	  
-	          variable.put(field.tag, value);
+	          String pad = System.getProperty("com.ceridwen.circulation.SIP.messages.AddEmptyRequiredTaggedFields", "true");
+	          if (pad.equalsIgnoreCase("true") || pad.equalsIgnoreCase("on") || pad.equalsIgnoreCase("1")) {
+	            variable.put(field.tag, value);
+	          } else {
+              throw new MandatoryFieldOmitted(desc.getDisplayName());	            
+	          }
 	        }
 	      }
       }
@@ -543,7 +541,7 @@ private static Log log = LogFactory.getLog(Message.class);
 
   static {
     com.ceridwen.util.versioning.ComponentRegistry.registerComponent(Message.class);
-
+    
     int n;
     for (n = 0; n < _messages.length; n++) {
       try {
