@@ -97,7 +97,7 @@ public class FieldDefinitions {
 		fields.put("noBlock", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("offlineOk", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("ok", new FieldDescriptor(null, Boolean.class, 1, true));
-		fields.put("onlineStatus", new FieldDescriptor(null, Boolean.class, 1, true)); //TODO consistency with offline
+		fields.put("onlineStatus", new FieldDescriptor(null, Boolean.class, 1, true));
 		fields.put("overdueItems", new FieldDescriptor("AT", String[].class, null, false));
 		fields.put("overdueItemsCount", new FieldDescriptor(null, Integer.class, 4, false));
 		fields.put("overdueItemsLimit", new FieldDescriptor("CA", Integer.class, 4, false));
