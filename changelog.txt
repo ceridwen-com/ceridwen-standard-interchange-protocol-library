@@ -6,7 +6,7 @@ Added system property com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyR
  Previous behaviour equivalent to true
 ACS/SCRenevalPolicy and onlineStatus named to be consistent with spec
 
-Version 2.50: 3/11/2010 (255)
+Version 2.50: 3/11/2010 (255) - Public Release
 Refactoring to consolidated the message fields definitions into FieldDefinitions class
 Changed ProtocolVersion to enumerated type
 Added handling of required Enumerated types when encoding
@@ -42,11 +42,14 @@ Updated commons net from 1.4.1 to 2.0
 Updated commons beanutils from 1.7.0 to 1.8.3
 Templated classes based on JDK 1.6 warnings
 
-Version 2.02: 12/1/2007 (82)
+Version 2.03: 12/1/2007 (82)
 Added MessageNotUnderstood exception
 
-Version 2.01: 11/5/2005 (42)
+Version 2.02: 11/5/2005 (42)
 Modified so that required variable fields are always present even if blank, optional variable fields are omitted if blank.
+
+Version 2.01 9/3/2005 (38) - Public Release
+Minor logging revisions
 
 Version 2.00: 25/10/2004 (36)
 Complete rewrite of initial library to use javabean and introspection
