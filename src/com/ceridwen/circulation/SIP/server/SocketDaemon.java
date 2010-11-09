@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -32,12 +33,14 @@ import org.apache.commons.logging.LogFactory;
 public class SocketDaemon extends Thread {
     private static Log logger = LogFactory.getLog(SocketDaemon.class);
 
+    private String ipaddress;
     private int port;
     private MessageBroker broker;
     private boolean running;
     private ServerSocket listener;
 
-    public SocketDaemon(int port, MessageHandler handler) {
+    public SocketDaemon(String ipAddress, int port, MessageHandler handler) {
+        this.ipaddress = ipAddress;
         this.port = port;
         this.broker = new MessageBroker(handler);
     }
@@ -54,7 +57,7 @@ public class SocketDaemon extends Thread {
     public void run() {
         try {
             this.running = true;
-            this.listener = new ServerSocket(this.port);
+            this.listener = new ServerSocket(this.port, 0, InetAddress.getByName(this.ipaddress));
             Socket server;
 
             SocketDaemon.logger.info("Server daemon listening on port " + this.port);
@@ -109,8 +112,7 @@ class ConnectionThread extends Thread {
             } while (input != null);
             this.server.close();
         } catch (IOException ioe) {
-            System.out.println("IOException on socket listen: " + ioe);
-            ioe.printStackTrace();
+            logger.info("IOException on socket listen: ", ioe);
         }
     }
 }

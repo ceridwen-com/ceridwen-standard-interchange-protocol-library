@@ -59,7 +59,7 @@ public class Sample {
          * Run simple socket server
          */
 
-        Sample.thread = new SocketDaemon(12345, new MessageHandlerDummyImpl());
+        Sample.thread = new SocketDaemon("localhost", 12345, new MessageHandlerDummyImpl());
         Sample.thread.setStrictChecksumChecking(true);
         Sample.thread.start();
     }

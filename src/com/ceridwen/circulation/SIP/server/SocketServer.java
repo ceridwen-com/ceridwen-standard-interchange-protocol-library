@@ -24,7 +24,7 @@ public class SocketServer {
      * @param args
      */
     public static void main(String[] args) {
-        SocketDaemon thread = new SocketDaemon(12345, new MessageHandlerDummyImpl());
+        SocketDaemon thread = new SocketDaemon("localhost", 12345, new MessageHandlerDummyImpl());
         thread.start();
     }
 

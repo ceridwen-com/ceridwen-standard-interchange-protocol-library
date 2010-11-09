@@ -66,7 +66,7 @@ public class MessageBroker {
 
     public String process(String request) {
         try {
-            MessageBroker.logger.info("Processing message: " + request);
+            MessageBroker.logger.debug("Processing message: " + request);
             Message requestMessage = Message.decode(request, null, this.strictChecksumChecking);
             if (requestMessage instanceof ACSResend) {
                 MessageBroker.logger.info("Resending response");
@@ -74,7 +74,7 @@ public class MessageBroker {
                 Message responseMessage = this.process(requestMessage);
                 this.lastResponse = responseMessage.encode(requestMessage.getSequenceCharacter());
             }
-            MessageBroker.logger.info("Sending response: " + this.lastResponse);
+            MessageBroker.logger.debug("Sending response: " + this.lastResponse);
             return this.lastResponse;
         } catch (Exception e) {
             MessageBroker.logger.warn("Error trying to process message: " + request, e);
