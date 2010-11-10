@@ -2,6 +2,7 @@
 <project default="create_run_jar" name="Create Runnable Jar for Project SelfIssue with libraries in sub-folder">
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
+    <property file="src/com/ceridwen/circulation/SIP/messages/Message.num" />
     <target name="create_run_jar">
         <mkdir dir="dist"/>
     	<delete>
@@ -17,10 +18,11 @@
         <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar" todir="dist"/>
         <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar" todir="dist"/>
         <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar" todir="dist"/>
+        <copy file="changelog.txt" todir="dist"/>
         <copy file="license.txt" todir="dist"/>
         <copy file="src/com/ceridwen/circulation/SIP/samples/Sample.java" todir="dist"/>
-    	<zip destfile="dist/Circulation.zip">
-    		<zipfileset dir ="dist/" />
-    	</zip>
+      	<zip destfile="dist/Circulation-${version}.zip">
+      		<zipfileset dir ="dist/" />
+      	</zip>
     </target>
 </project>

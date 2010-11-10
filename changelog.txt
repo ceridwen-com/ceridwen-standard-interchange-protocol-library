@@ -1,12 +1,13 @@
 Version 2.60:
 Changed boolean getter methods to is... from get...
 Added system property com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields
- If true (default will generate default values for empty required fields, e.g. false for bool, 0 for integer, initial value for Enumerations etc.)
- If false will generate MandatoryFieldOmmitted exception is require field not explicitly set
- Previous behaviour equivalent to true
-ACS/SCRenevalPolicy and onlineStatus named to be consistent with spec
+  If true (default will generate default values for empty required fields, e.g. false for bool, 0 for integer, initial value for Enumerations etc.)
+  If false will generate MandatoryFieldOmmitted exception is require field not explicitly set
+  Previous behaviour equivalent to true
+ACS/SCRenevalPolicy and onlineStatus named to be consistent with spec.
+Requires Ceridwen Utility Library 1.30
 
-Version 2.50: 3/11/2010 (255)
+Version 2.50: 3/11/2010 (255) - Public Release
 Refactoring to consolidated the message fields definitions into FieldDefinitions class
 Changed ProtocolVersion to enumerated type
 Added handling of required Enumerated types when encoding
@@ -19,6 +20,7 @@ Bugfix: Corrected spelling of Magnetic
 Bugfix: Change noBlockDueDate to nbDueDate and printling to printLine for consistency
 Bugfix: Incorrect positionedfield definition for overdueItemsCount in PatronInformationResponose
 Bugfix: Incorrect positionedfield definition for nbDueDate in Renew
+Requires Ceridwen Utility Library 1.20
 
 Version 2.20:31/10/2010 (209)
 Added enumerated fields
@@ -42,11 +44,14 @@ Updated commons net from 1.4.1 to 2.0
 Updated commons beanutils from 1.7.0 to 1.8.3
 Templated classes based on JDK 1.6 warnings
 
-Version 2.02: 12/1/2007 (82)
+Version 2.03: 12/1/2007 (82)
 Added MessageNotUnderstood exception
 
-Version 2.01: 11/5/2005 (42)
+Version 2.02: 11/5/2005 (42)
 Modified so that required variable fields are always present even if blank, optional variable fields are omitted if blank.
+
+Version 2.01 9/3/2005 (38) - Public Release
+Minor logging revisions
 
 Version 2.00: 25/10/2004 (36)
 Complete rewrite of initial library to use javabean and introspection
