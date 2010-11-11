@@ -71,11 +71,11 @@ public class ACSStatus extends Message {
     @TaggedField
     private String printLine;
 
-    public Boolean getCheckInOk() {
+    public Boolean isCheckInOk() {
         return this.checkInOk;
     }
 
-    public Boolean getCheckOutOk() {
+    public Boolean isCheckOutOk() {
         return this.checkOutOk;
     }
 
@@ -91,11 +91,11 @@ public class ACSStatus extends Message {
         return this.libraryName;
     }
 
-    public Boolean getOfflineOk() {
+    public Boolean isOfflineOk() {
         return this.offlineOk;
     }
 
-    public Boolean getOnlineStatus() {
+    public Boolean isOnlineStatus() {
         return this.onlineStatus;
     }
 
@@ -107,7 +107,7 @@ public class ACSStatus extends Message {
         return this.protocolVersion;
     }
 
-    public Boolean getACSRenewalPolicy() {
+    public Boolean isACSRenewalPolicy() {
         return this.ACSRenewalPolicy;
     }
 
@@ -119,7 +119,7 @@ public class ACSStatus extends Message {
         return this.screenMessage;
     }
 
-    public Boolean getStatusUpdateOk() {
+    public Boolean isStatusUpdateOk() {
         return this.statusUpdateOk;
     }
 

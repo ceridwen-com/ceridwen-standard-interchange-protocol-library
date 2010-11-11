@@ -25,7 +25,10 @@
  * @version 2.1
  */
 
+
 package com.ceridwen.circulation.SIP.messages;
+
+//TODO encoding of fixed fields where there is a gap!
 
 import java.beans.PropertyDescriptor;
 import java.beans.XMLDecoder;
@@ -147,7 +150,18 @@ public abstract class Message implements Serializable {
             autoPop = true;
         }
         try {
-            Object value = desc.getReadMethod().invoke(this, new Object[0]);
+            Method read = desc.getReadMethod();
+            Object value = null;
+            if (read != null) {
+                value = read.invoke(this, new Object[0]);
+            } else {
+                if (desc.getPropertyType() == Boolean.class) {
+                    read = this.getClass().getMethod("is" + desc.getName().substring(0, 1).toUpperCase() + desc.getName().substring(1), new Class[]{});
+                    if (read != null) {
+                        value = read.invoke(this, new Object[0]);                        
+                    }
+                }                
+            }
             if (desc.getPropertyType() == Boolean.class) {
                 if (value == null) {
                     if (SIPField != null) {
@@ -325,6 +339,7 @@ public abstract class Message implements Serializable {
             } catch (MandatoryFieldOmitted ex) {
                 throw ex;
             } catch (Exception ex) {
+                Message.log.error("Unexpected error during encode.", ex);
                 throw new MessageNotUnderstood();
             }
         }
@@ -332,6 +347,7 @@ public abstract class Message implements Serializable {
         if (this.getClass().isAnnotationPresent(Command.class)) {
             message.append(((Command)(this.getClass().getAnnotation(Command.class))).value());
         } else {
+            Message.log.error("Message has no command annotation");
             throw new MessageNotUnderstood();
         }
 
@@ -450,6 +466,9 @@ public abstract class Message implements Serializable {
         String command = message.substring(0, 2);
         try {
             Class<? extends Message> msgClass = Message.messages.get(command);
+            if (msgClass == null) {
+                throw new MessageNotUnderstood();                
+            }
             Message msg = msgClass.newInstance();
             Field[] fields = msg.getClass().getDeclaredFields();
 
@@ -475,6 +494,7 @@ public abstract class Message implements Serializable {
 
             return msg;
         } catch (Exception ex) {
+            Message.log.error("Unexpected error decoding " + message, ex);
             throw new MessageNotUnderstood();
         }
     }

@@ -39,7 +39,7 @@ public class BlockPatron extends Message {
     @TaggedField(FieldPolicy.REQUIRED)
     private String terminalPassword;
 
-    public Boolean getCardRetained() {
+    public Boolean isCardRetained() {
         return this.cardRetained;
     }
 

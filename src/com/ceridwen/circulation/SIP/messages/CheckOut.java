@@ -62,11 +62,11 @@ public class CheckOut extends Message {
     @TaggedField
     private Boolean cancel;
 
-    public Boolean getCancel() {
+    public Boolean isCancel() {
         return this.cancel;
     }
 
-    public Boolean getFeeAcknowledged() {
+    public Boolean isFeeAcknowledged() {
         return this.feeAcknowledged;
     }
 
@@ -86,7 +86,7 @@ public class CheckOut extends Message {
         return this.nbDueDate;
     }
 
-    public Boolean getNoBlock() {
+    public Boolean isNoBlock() {
         return this.noBlock;
     }
 
@@ -98,7 +98,7 @@ public class CheckOut extends Message {
         return this.patronPassword;
     }
 
-    public Boolean getSCRenewalPolicy() {
+    public Boolean isSCRenewalPolicy() {
         return this.SCRenewalPolicy;
     }
 

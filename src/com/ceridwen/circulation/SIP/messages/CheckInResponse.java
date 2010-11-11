@@ -29,33 +29,45 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
+@Command("10")
 public class CheckInResponse extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -3403534383487215711L;
+    @PositionedField(start = 2, end = 2)
     private Boolean ok;
+    @PositionedField(start = 3, end = 3)
     private Boolean resensitize;
+    @PositionedField(start = 4, end = 4)
     private Boolean magneticMedia;
+    @PositionedField(start = 5, end = 5)
     private Boolean alert;
+    @PositionedField(start = 6, end = 23)
     private Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String itemIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String permanentLocation;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String titleIdentifier;
+    @TaggedField
     private String sortBin;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String patronIdentifier;
+    @TaggedField
     private MediaType mediaType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String itemProperties;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
-
-    @Override
-    public String getCommand() {
-        return "10";
-    }
 
     public Boolean isAlert() {
         return this.alert;
