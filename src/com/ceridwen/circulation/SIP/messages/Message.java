@@ -28,8 +28,6 @@
 
 package com.ceridwen.circulation.SIP.messages;
 
-//TODO encoding of fixed fields where there is a gap!
-
 import java.beans.PropertyDescriptor;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
