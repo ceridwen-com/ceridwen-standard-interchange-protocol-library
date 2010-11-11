@@ -29,41 +29,56 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
+@Command(98)
 public class ACSStatus extends Message {
     /**
 	 * 
 	 */
     private static final long serialVersionUID = -611426325284828647L;
+    @PositionedField(start = 2, end = 2)
     private Boolean onlineStatus;
+    @PositionedField(start = 3, end = 3)
     private Boolean checkInOk;
+    @PositionedField(start = 4, end = 4)
     private Boolean checkOutOk;
+    @PositionedField(start = 5, end = 5)
     private Boolean ACSRenewalPolicy;
+    @PositionedField(start = 6, end = 6)
     private Boolean statusUpdateOk;
+    @PositionedField(start = 7, end = 7)
     private Boolean offlineOk;
+    @PositionedField(start = 8, end = 10)
     private Integer timeoutPeriod;
+    @PositionedField(start = 11, end = 13)
     private Integer retriesAllowed;
+    @PositionedField(start = 14, end = 31)
     private Date dateTimeSync;
+    @PositionedField(start = 32, end = 35)
     private ProtocolVersion protocolVersion;
+    @TaggedField
     private String institutionId;
+    @TaggedField
     private String libraryName;
+    @TaggedField
     private SupportedMessages supportedMessages = new SupportedMessages();
+    @TaggedField
     private String terminalLocation;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
 
-    @Override
-    public String getCommand() {
-        return "98";
-    }
-
-    public Boolean isCheckInOk() {
+    public Boolean getCheckInOk() {
         return this.checkInOk;
     }
 
-    public Boolean isCheckOutOk() {
+    public Boolean getCheckOutOk() {
         return this.checkOutOk;
     }
 
@@ -79,11 +94,11 @@ public class ACSStatus extends Message {
         return this.libraryName;
     }
 
-    public Boolean isOfflineOk() {
+    public Boolean getOfflineOk() {
         return this.offlineOk;
     }
 
-    public Boolean isOnlineStatus() {
+    public Boolean getOnlineStatus() {
         return this.onlineStatus;
     }
 
@@ -95,7 +110,7 @@ public class ACSStatus extends Message {
         return this.protocolVersion;
     }
 
-    public Boolean isACSRenewalPolicy() {
+    public Boolean getACSRenewalPolicy() {
         return this.ACSRenewalPolicy;
     }
 
@@ -107,7 +122,7 @@ public class ACSStatus extends Message {
         return this.screenMessage;
     }
 
-    public Boolean isStatusUpdateOk() {
+    public Boolean getStatusUpdateOk() {
         return this.statusUpdateOk;
     }
 

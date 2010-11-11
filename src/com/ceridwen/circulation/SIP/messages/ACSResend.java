@@ -18,17 +18,15 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+
+@Command(97)
 public class ACSResend extends Message {
 
     /**
 	 * 
 	 */
     private static final long serialVersionUID = 1455544775405713654L;
-
-    @Override
-    public String getCommand() {
-        return "97";
-    }
 
     @Override
     protected String AddChecksum(String command, Character sequence) {

@@ -22,6 +22,9 @@ import java.beans.PropertyDescriptor;
 import java.util.Date;
 import java.util.Hashtable;
 
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.types.enumerations.CirculationStatus;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
@@ -147,7 +150,44 @@ public class FieldDefinitions {
 
         // FieldStatisticsGatherer.getFieldStatisticsGatherer().LoadFieldDefinitions(fields);
     }
+    
+    static public PositionedFieldDescriptor getPositionedFieldDescriptor(String messageName, String fieldName, PositionedField annotation) {
+        FieldDescriptor field = FieldDefinitions.fields.get(fieldName);
+        if (field.length == null) {
+            throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor must explicit length: " + fieldName);
+        }
+        if ((annotation.end() - annotation.start() + 1) != field.length) {
+            throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptors length mismatch: " + fieldName);
+        }
+        FieldPolicy policy = annotation.policy();
+        Boolean required = null;
+        if (policy == FieldPolicy.REQUIRED) {
+            required = true;
+        }
+        if (policy == FieldPolicy.NOT_REQUIRED) {
+            required = false;
+        }
+        PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(fieldName, annotation.start(),
+                annotation.end(), field, required);
+        return pfd;
+        
+    }
 
+    static public TaggedFieldDescriptor getTaggedFieldDescriptor(String messageName, String fieldName, TaggedField annotation) {
+        FieldDescriptor field = FieldDefinitions.fields.get(fieldName);
+        FieldPolicy policy = annotation.value();
+        Boolean required = null;
+        if (policy == FieldPolicy.REQUIRED) {
+            required = true;
+        }
+        if (policy == FieldPolicy.NOT_REQUIRED) {
+            required = false;
+        }
+        TaggedFieldDescriptor tfd = new TaggedFieldDescriptor(fieldName, field, required);
+        return tfd;
+    }
+    
+    
     static public void fixupFieldDescriptors(String messageName, PropertyDescriptor[] pds) {
         for (PropertyDescriptor pd : pds) {
             String name = pd.getName();

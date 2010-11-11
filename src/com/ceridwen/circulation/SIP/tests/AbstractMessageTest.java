@@ -48,6 +48,8 @@ public abstract class AbstractMessageTest<MSG extends Message> {
             Assert.fail("Mandatory Field Omitted: " + e.getMessage());
         } catch (InvalidFieldLength e) {
             Assert.fail("Field Wrong Size: " + e.getMessage());
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
         }
     }
 
@@ -60,6 +62,8 @@ public abstract class AbstractMessageTest<MSG extends Message> {
             Assert.fail("Mandatory Field Omitted: " + e.getMessage());
         } catch (InvalidFieldLength e) {
             Assert.fail("Fixed Field Too Long: " + e.getMessage());
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
         }
     }
 

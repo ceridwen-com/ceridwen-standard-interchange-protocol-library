@@ -29,34 +29,47 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+
+@Command(11)
 public class CheckOut extends Message {
     /**
 	 * 
 	 */
     private static final long serialVersionUID = 8454866593857815453L;
+    @PositionedField(start = 2, end = 2)
     private Boolean SCRenewalPolicy;
+    @PositionedField(start = 3, end = 3)
     private Boolean noBlock;
+    @PositionedField(start = 4, end = 21)
     private Date transactionDate;
+    @PositionedField(start = 22, end = 39)
     private Date nbDueDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String itemIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String terminalPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String itemProperties;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String patronPassword;
+    @TaggedField
     private Boolean feeAcknowledged;
+    @TaggedField
     private Boolean cancel;
 
-    @Override
-    public String getCommand() {
-        return "11";
-    }
-
-    public Boolean isCancel() {
+    public Boolean getCancel() {
         return this.cancel;
     }
 
-    public Boolean isFeeAcknowledged() {
+    public Boolean getFeeAcknowledged() {
         return this.feeAcknowledged;
     }
 
@@ -76,7 +89,7 @@ public class CheckOut extends Message {
         return this.nbDueDate;
     }
 
-    public Boolean isNoBlock() {
+    public Boolean getNoBlock() {
         return this.noBlock;
     }
 
@@ -88,7 +101,7 @@ public class CheckOut extends Message {
         return this.patronPassword;
     }
 
-    public Boolean isSCRenewalPolicy() {
+    public Boolean getSCRenewalPolicy() {
         return this.SCRenewalPolicy;
     }
 

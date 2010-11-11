@@ -38,6 +38,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,17 +53,22 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
+import com.ceridwen.circulation.SIP.types.descriptors.FieldDefinitions;
 import com.ceridwen.circulation.SIP.types.descriptors.FieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.PositionedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.descriptors.TaggedFieldDescriptor;
 import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
 import com.ceridwen.circulation.SIP.types.flagfields.AbstractFlagField;
 
+@SuppressWarnings("unchecked")
 public abstract class Message implements Serializable {
     /**
 	 * 
@@ -119,8 +125,6 @@ public abstract class Message implements Serializable {
         oos.defaultWriteObject();
     }
 
-    public abstract String getCommand();
-
     private String mangleDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd    HHmmss");
         return sdf.format(date);
@@ -135,9 +139,8 @@ public abstract class Message implements Serializable {
         }
     }
 
-    private String[] getProp(PropertyDescriptor desc) throws MandatoryFieldOmitted {
+    private String[] getProp(PropertyDescriptor desc, FieldDescriptor SIPField) throws MandatoryFieldOmitted {
         String[] ret = null;
-        FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
         String pop = System.getProperty(Message.PROP_AUTOPOPULATE, "true");
         boolean autoPop = false;
         if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
@@ -259,19 +262,20 @@ public abstract class Message implements Serializable {
         return ret.toString();
     }
 
-    public String encode(Character sequence) throws MandatoryFieldOmitted, InvalidFieldLength {
+    public String encode(Character sequence) throws MandatoryFieldOmitted, InvalidFieldLength, MessageNotUnderstood {
         TreeMap<Integer, String> fixed = new TreeMap<Integer, String>();
         TreeMap<String, String[]> variable = new TreeMap<String, String[]>();
         StringBuffer message = new StringBuffer();
 
-        PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
+        Field[] fields = this.getClass().getDeclaredFields(); 
 
-        for (PropertyDescriptor desc : descs) {
-            FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
-            if (SIPField != null) {
-                if (SIPField.getClass().equals(PositionedFieldDescriptor.class)) {
-                    PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
-                    String[] value = this.getProp(desc);
+        for (Field fld : fields) {
+            try {
+                if (fld.isAnnotationPresent(PositionedField.class)) {
+                    PositionedField annotation = (PositionedField)fld.getAnnotation(PositionedField.class);               
+                    PositionedFieldDescriptor field = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+                    String[] value = this.getProp(desc, field);
                     if (value[0].length() == 0) {
                         if (field.required) {
                             throw new MandatoryFieldOmitted(desc.getDisplayName());
@@ -289,9 +293,11 @@ public abstract class Message implements Serializable {
                     }
                     fixed.put(new Integer(field.start), this.pad(value[0], field));
                 }
-                if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
-                    TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
-                    String[] value = this.getProp(desc);
+                if (fld.isAnnotationPresent(TaggedField.class)) {
+                    TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
+                    TaggedFieldDescriptor field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+                    String[] value = this.getProp(desc, field);
                     if (value[0].length() > 0) {
                         if (field.length != null) {
                             if (desc.getPropertyType() == String.class) {
@@ -314,10 +320,20 @@ public abstract class Message implements Serializable {
                         }
                     }
                 }
+            } catch (InvalidFieldLength ex) {
+                throw ex;
+            } catch (MandatoryFieldOmitted ex) {
+                throw ex;
+            } catch (Exception ex) {
+                throw new MessageNotUnderstood();
             }
         }
 
-        message.append(this.getCommand());
+        if (this.getClass().isAnnotationPresent(Command.class)) {
+            message.append(((Command)(this.getClass().getAnnotation(Command.class))).value());
+        } else {
+            throw new MessageNotUnderstood();
+        }
 
         Iterator<Integer> fixedIterate = fixed.keySet().iterator();
         while (fixedIterate.hasNext()) {
@@ -433,22 +449,22 @@ public abstract class Message implements Serializable {
         }
         String command = message.substring(0, 2);
         try {
-            Message msg = (Message) ((Class<?>) Message.messages.get(command)).newInstance();
-            PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(msg);
+            Class<? extends Message> msgClass = Message.messages.get(command);
+            Message msg = msgClass.newInstance();
+            Field[] fields = msg.getClass().getDeclaredFields();
 
             int fixedFieldEnd = 2;
 
-            for (PropertyDescriptor desc : descs) {
-                FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
-                String value = "";
-                if (SIPField != null) {
-                    if (SIPField.getClass() == PositionedFieldDescriptor.class) {
-                        PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
-                        value = message.substring(field.start, field.end + 1);
-                        msg.setProp(desc, value);
-                        if (fixedFieldEnd < field.end) {
-                            fixedFieldEnd = field.end;
-                        }
+            for (Field fld : fields) {
+                if (fld.isAnnotationPresent(PositionedField.class)) {
+                    PositionedField annotation = fld.getAnnotation(PositionedField.class);
+                    PositionedFieldDescriptor field = FieldDefinitions.getPositionedFieldDescriptor(msg.getClass().getName(), fld.getName(), annotation);
+                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(msg, fld.getName());
+                    String value = "";
+                    value = message.substring(field.start, field.end + 1);
+                    msg.setProp(desc, value);
+                    if (fixedFieldEnd < field.end) {
+                        fixedFieldEnd = field.end;
                     }
                 }
             }
@@ -546,16 +562,20 @@ public abstract class Message implements Serializable {
     }
 
     private void setFieldProp(String tag, String data) {
-        PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(this);
-        for (PropertyDescriptor desc : descs) {
-            FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
-            if (SIPField != null) {
-                if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
-                    TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
+        Field[] fields = this.getClass().getDeclaredFields();
+
+        for (Field fld : fields) {
+            try {
+                if (fld.isAnnotationPresent(TaggedField.class)) {
+                    TaggedField annotation = fld.getAnnotation(TaggedField.class);
+                    TaggedFieldDescriptor field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                    PropertyDescriptor desc;
+                    desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
                     if (field.tag.equals(tag)) {
                         this.setProp(desc, data);
                     }
                 }
+            } catch (Exception ex) {
             }
         }
     }
@@ -571,7 +591,7 @@ public abstract class Message implements Serializable {
         return (Message) in.readObject();
     }
 
-    private static Hashtable<Object, Class<?>> messages = new Hashtable<Object, Class<?>>();
+    private static Hashtable<String, Class<? extends Message>> messages = new Hashtable<String, Class<? extends Message>>();
 
     static {
         com.ceridwen.util.versioning.ComponentRegistry.registerComponent(Message.class);
@@ -579,9 +599,10 @@ public abstract class Message implements Serializable {
         int n;
         for (n = 0; n < Message._messages.length; n++) {
             try {
-                Message.messages.put(Message._messages[n].getMethod("getCommand", new Class[] {}).
-                        invoke(Message._messages[n].newInstance(), new Object[] {}),
-                        Message._messages[n]);
+                if (Message._messages[n].isAnnotationPresent(Command.class)) {
+                    Message.messages.put(Integer.toString(Message._messages[n].getAnnotation(Command.class).value()),
+                        (Class<? extends Message>)Message._messages[n]);
+                }
             } catch (Exception ex) {
                 Message.log.warn(Message._messages[n].getName() + " not yet implemented.");
             }
