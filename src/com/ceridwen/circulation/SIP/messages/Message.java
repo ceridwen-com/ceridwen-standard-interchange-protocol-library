@@ -40,7 +40,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
@@ -288,79 +287,81 @@ public abstract class Message implements Serializable {
         Field[] fields = this.getClass().getDeclaredFields(); 
 
         for (Field fld : fields) {
-            try {
-                if (fld.isAnnotationPresent(PositionedField.class)) {
-                    PositionedField annotation = (PositionedField)fld.getAnnotation(PositionedField.class);               
-                    PositionedFieldDescriptor field = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
-                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-                    String[] value = this.getProp(desc, field);
-                    if (value[0].length() == 0) {
-                        if (field.required) {
-                            throw new MandatoryFieldOmitted(desc.getDisplayName());
-                        }
-                    }
-                    if (value[0].length() > (field.end - field.start + 1)) {
-                        throw new InvalidFieldLength(desc.getDisplayName(), (field.end - field.start + 1));
-                    }
-                    if ((desc.getPropertyType() == Date.class) || (desc.getPropertyType() == Boolean.class) || (desc.getPropertyType() == Integer.class)) {
-                        if (!((value[0].length() == 0) || (value[0].length() == (field.end - field.start + 1)))) {
-                            throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName()
-                                    + ", start/end (" + field.start + "," + field.end + ") invalid for type " +
-                                    desc.getPropertyType().getName());
-                        }
-                    }
-                    fixed.put(new Integer(field.start), this.pad(value[0], field));
+            if (fld.isAnnotationPresent(PositionedField.class)) {
+                PositionedField annotation = (PositionedField)fld.getAnnotation(PositionedField.class);               
+                PositionedFieldDescriptor field = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                PropertyDescriptor desc;
+                try {
+                    desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+                } catch (Exception ex) {
+                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
                 }
-                if (fld.isAnnotationPresent(TaggedField.class)) {
-                    TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
-                    TaggedFieldDescriptor field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
-                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-                    String[] value = this.getProp(desc, field);
-                    if (value[0].length() > 0) {
-                        if (field.length != null) {
-                            if (desc.getPropertyType() == String.class) {
-                                if (value[0].length() > field.length) {
-                                    throw new InvalidFieldLength(desc.getDisplayName(), field.length);
-                                }
-                            } else {
-                                if (value[0].length() != field.length) {
-                                    throw new InvalidFieldLength(desc.getDisplayName(), field.length);
-                                }
+                String[] value = this.getProp(desc, field);
+                if (value[0].length() == 0) {
+                    if (field.required) {
+                        throw new MandatoryFieldOmitted(desc.getDisplayName());
+                    }
+                }
+                if (value[0].length() > (field.end - field.start + 1)) {
+                    throw new InvalidFieldLength(desc.getDisplayName(), (field.end - field.start + 1));
+                }
+                if ((desc.getPropertyType() == Date.class) || (desc.getPropertyType() == Boolean.class) || (desc.getPropertyType() == Integer.class)) {
+                    if (!((value[0].length() == 0) || (value[0].length() == (field.end - field.start + 1)))) {
+                        throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName()
+                                + ", start/end (" + field.start + "," + field.end + ") invalid for type " +
+                                desc.getPropertyType().getName());
+                    }
+                }
+                if (fixed.containsKey(new Integer(field.start))) {
+                    throw new java.lang.AssertionError("Positioning error inserting field at " + field.start + " for class " + this.getClass().getName());                    
+                }
+                fixed.put(new Integer(field.start), this.pad(value[0], field));
+            }
+            if (fld.isAnnotationPresent(TaggedField.class)) {
+                TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
+                TaggedFieldDescriptor field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                PropertyDescriptor desc;
+                try {
+                    desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+                } catch (Exception ex) {
+                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
+                }
+                String[] value = this.getProp(desc, field);
+                if (value[0].length() > 0) {
+                    if (field.length != null) {
+                        if (desc.getPropertyType() == String.class) {
+                            if (value[0].length() > field.length) {
+                                throw new InvalidFieldLength(desc.getDisplayName(), field.length);
+                            }
+                        } else {
+                            if (value[0].length() != field.length) {
+                                throw new InvalidFieldLength(desc.getDisplayName(), field.length);
                             }
                         }
+                    }
+                    variable.put(field.tag, value);
+                } else if (field.required) {
+                    String pop = System.getProperty(Message.PROP_AUTOPOPULATE, "true");
+                    if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
                         variable.put(field.tag, value);
-                    } else if (field.required) {
-                        String pop = System.getProperty(Message.PROP_AUTOPOPULATE, "true");
-                        if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
-                            variable.put(field.tag, value);
-                        } else {
-                            throw new MandatoryFieldOmitted(desc.getDisplayName());
-                        }
+                    } else {
+                        throw new MandatoryFieldOmitted(desc.getDisplayName());
                     }
                 }
-            } catch (InvalidFieldLength ex) {
-                throw ex;
-            } catch (MandatoryFieldOmitted ex) {
-                throw ex;
-            } catch (Exception ex) {
-                Message.log.error("Unexpected error during encode.", ex);
-                throw new MessageNotUnderstood(); //TODO force assert fail
             }
         }
 
         if (this.getClass().isAnnotationPresent(Command.class)) {
             message.append(((Command)(this.getClass().getAnnotation(Command.class))).value());
         } else {
-            Message.log.error("Message has no command annotation");
-            throw new MessageNotUnderstood(); //TODO force assert fail
+            throw new java.lang.AssertionError("No command annotation present for class " + this.getClass().getName());
         }
 
         Iterator<Integer> fixedIterate = fixed.keySet().iterator();
         while (fixedIterate.hasNext()) {
             Integer key = fixedIterate.next();
             if (message.length() != key.intValue()) {
-                Message.log.error("Positioning error inserting field at " + key);
-                throw new MessageNotUnderstood(); //TODO force assert fail                
+                throw new java.lang.AssertionError("Positioning error inserting field at " + key + " for class " + this.getClass().getName());
             }            
             message.append(fixed.get(key));
         }
@@ -448,7 +449,7 @@ public abstract class Message implements Serializable {
     }
 
     public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError,
-            MessageNotUnderstood {
+    MessageNotUnderstood {
 
         if (checksumCheck) {
             if (!Message.CheckChecksum(message)) {
@@ -472,39 +473,44 @@ public abstract class Message implements Serializable {
             throw new MessageNotUnderstood();
         }
         String command = message.substring(0, 2);
+        Class<? extends Message> msgClass = Message.messages.get(command);
+        if (msgClass == null) {
+            throw new MessageNotUnderstood();                
+        }
+        Message msg;
         try {
-            Class<? extends Message> msgClass = Message.messages.get(command);
-            if (msgClass == null) {
-                throw new MessageNotUnderstood();                
-            }
-            Message msg = msgClass.newInstance();
-            Field[] fields = msg.getClass().getDeclaredFields();
+            msg = msgClass.newInstance();
+        } catch (Exception ex) {
+            throw new java.lang.AssertionError("Instantiation problem creating new " + msgClass.getName());
+        }
+        Field[] fields = msg.getClass().getDeclaredFields();
 
-            int fixedFieldEnd = 2;
+        int fixedFieldEnd = 2;
 
-            for (Field fld : fields) {
-                if (fld.isAnnotationPresent(PositionedField.class)) {
-                    PositionedField annotation = fld.getAnnotation(PositionedField.class);
-                    PositionedFieldDescriptor field = FieldDefinitions.getPositionedFieldDescriptor(msg.getClass().getName(), fld.getName(), annotation);
-                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(msg, fld.getName());
-                    String value = "";
-                    value = message.substring(field.start, field.end + 1);
-                    msg.setProp(desc, value);
-                    if (fixedFieldEnd < field.end) {
-                        fixedFieldEnd = field.end;
-                    }
+        for (Field fld : fields) {
+            if (fld.isAnnotationPresent(PositionedField.class)) {
+                PositionedField annotation = fld.getAnnotation(PositionedField.class);
+                PositionedFieldDescriptor field = FieldDefinitions.getPositionedFieldDescriptor(msg.getClass().getName(), fld.getName(), annotation);
+                PropertyDescriptor desc;
+                try {
+                    desc = PropertyUtils.getPropertyDescriptor(msg, fld.getName());
+                } catch (Exception ex) {
+                    throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + msg.getClass().getName());
+                }
+                String value = "";
+                value = message.substring(field.start, field.end + 1);
+                msg.setProp(desc, value);
+                if (fixedFieldEnd < field.end) {
+                    fixedFieldEnd = field.end;
                 }
             }
-
-            msg.parseVarFields(fixedFieldEnd + 1, message);
-
-            msg.SequenceCharacter = sequenceCharacter;
-
-            return msg;
-        } catch (Exception ex) {
-            Message.log.error("Unexpected error decoding " + message, ex);
-            throw new MessageNotUnderstood();
         }
+
+        msg.parseVarFields(fixedFieldEnd + 1, message);
+
+        msg.SequenceCharacter = sequenceCharacter;
+
+        return msg;
     }
 
     private static boolean CheckChecksum(String message) {
@@ -679,21 +685,10 @@ public abstract class Message implements Serializable {
                 }
             }
             return msg;
-        } catch (InstantiationException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        } catch (IllegalAccessException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        } catch (InvocationTargetException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        } catch (NoSuchMethodException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            Assert.fail("Exception getting default message: " + ex.getMessage());
+            return null;
         }
-
-        return null;
     }
 
     private Message getPopulatedMessage() {
@@ -738,7 +733,6 @@ public abstract class Message implements Serializable {
                         }
                         if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
                             Class<?> tp = field.getType();
-                            System.out.println(tp.getName());
                             Field[] fds = tp.getDeclaredFields();
                             for (Field fd: fds) {
                               if ((fd.getModifiers() & (Modifier.PUBLIC | Modifier.FINAL | Modifier.STATIC)) == (Modifier.PUBLIC | Modifier.FINAL | Modifier.STATIC)) {
@@ -771,21 +765,10 @@ public abstract class Message implements Serializable {
                 }
             }
             return msg;
-        } catch (InstantiationException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        } catch (IllegalAccessException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        } catch (InvocationTargetException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        } catch (NoSuchMethodException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            Assert.fail("Exception getting populated message: " + ex.getMessage());
+            return null;
         }
-
-        return null;
     }
     
     @Test
@@ -796,8 +779,7 @@ public abstract class Message implements Serializable {
                 String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
                 Assert.assertEquals(v, t);
             } else {
-                Message.log.error("Message has no test annotation");
-                throw new MessageNotUnderstood(); //TODO force assert fail
+                Assert.fail("Message has no TestCasePopulated annotation");
             }            
         } catch (MandatoryFieldOmitted e) {
             Assert.fail("Mandatory Field Omitted: " + e.getMessage());
@@ -816,8 +798,7 @@ public abstract class Message implements Serializable {
                 String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
                 Assert.assertEquals(v, t);
             } else {
-                Message.log.error("Message has no test annotation");
-                throw new MessageNotUnderstood(); //TODO force assert fail
+                Assert.fail("Message has no TestCaseDefault annotation");
             }            
         } catch (MandatoryFieldOmitted e) {
             Assert.fail("Mandatory Field Omitted: " + e.getMessage());
@@ -843,8 +824,7 @@ public abstract class Message implements Serializable {
                 String t = stream.toString();
                 Assert.assertEquals(t, r);
             } else {
-                Message.log.error("Message has no test annotation");
-                throw new MessageNotUnderstood(); //TODO force assert fail
+                Assert.fail("Message has no TestCasePopulated annotation");
             }            
         } catch (MandatoryFieldOmitted e) {
             Assert.fail("Mandatory Field Omitted");
