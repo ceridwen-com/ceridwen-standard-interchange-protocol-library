@@ -600,7 +600,7 @@ public abstract class Message implements Serializable {
         for (n = 0; n < Message._messages.length; n++) {
             try {
                 if (Message._messages[n].isAnnotationPresent(Command.class)) {
-                    Message.messages.put(Integer.toString(Message._messages[n].getAnnotation(Command.class).value()),
+                    Message.messages.put(Message._messages[n].getAnnotation(Command.class).value(),
                         (Class<? extends Message>)Message._messages[n]);
                 }
             } catch (Exception ex) {

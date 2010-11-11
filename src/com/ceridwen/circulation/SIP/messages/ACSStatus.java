@@ -35,11 +35,8 @@ import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
-@Command(98)
+@Command("98")
 public class ACSStatus extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -611426325284828647L;
     @PositionedField(start = 2, end = 2)
     private Boolean onlineStatus;

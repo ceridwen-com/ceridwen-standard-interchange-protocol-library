@@ -18,24 +18,28 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+
+@Command("01")
 public class BlockPatron extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 7336173091305475737L;
+    @PositionedField(start = 2, end = 2)
     private Boolean cardRetained;
+    @PositionedField(start = 3, end = 20)
     private java.util.Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField
     private String blockedCardMessage;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String terminalPassword;
 
-    @Override
-    public String getCommand() {
-        return "01";
-    }
-
-    public Boolean isCardRetained() {
+    public Boolean getCardRetained() {
         return this.cardRetained;
     }
 

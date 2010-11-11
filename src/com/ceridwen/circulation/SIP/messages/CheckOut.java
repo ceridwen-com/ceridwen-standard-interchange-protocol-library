@@ -34,11 +34,8 @@ import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
 
-@Command(11)
+@Command("11")
 public class CheckOut extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 8454866593857815453L;
     @PositionedField(start = 2, end = 2)
     private Boolean SCRenewalPolicy;
