@@ -22,8 +22,12 @@ import com.ceridwen.circulation.SIP.annotations.Command;
 import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
 @Command("01")
+@TestCaseDefault("01N19700101    010000AA|AC|AL|AO|")
+@TestCasePopulated("01Y19700101    010000AApatronIdentifier|ACterminalPassword|ALblockedCardMessage|AOinstitutionId|")
 public class BlockPatron extends Message {
     private static final long serialVersionUID = 7336173091305475737L;
     @PositionedField(start = 2, end = 2)

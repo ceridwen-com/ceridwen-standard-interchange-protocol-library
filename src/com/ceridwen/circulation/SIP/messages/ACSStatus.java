@@ -32,10 +32,14 @@ import java.util.Date;
 import com.ceridwen.circulation.SIP.annotations.Command;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 @Command("98")
+@TestCaseDefault("98NNNNNN00000019700101    0100001.00AO|BXNNNNNNNNNNNNNNNN|")
+@TestCasePopulated("98YYYYYY12312319700101    0100002.00AFscreenMessage|AGprintLine|AMlibraryName|ANterminalLocation|AOinstitutionId|BXYYYYYYYYYYYYYYYY|")
 public class ACSStatus extends Message {
     private static final long serialVersionUID = -611426325284828647L;
     @PositionedField(start = 2, end = 2)

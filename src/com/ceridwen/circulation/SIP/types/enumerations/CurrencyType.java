@@ -20,7 +20,6 @@ package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum CurrencyType implements AbstractEnumeration {
     US_DOLLARS("USD"),
-    UK_POUNDS("GBP"),
     UNITED_ARAB_EMIRATES_DIRHAMS("AED"),
     AFGHANISTAN_AFGHANIS("AFN"),
     ALBANIA_LEKE("ALL"),
@@ -189,7 +188,8 @@ public enum CurrencyType implements AbstractEnumeration {
     YEMEN_RIALS("YER"),
     SOUTH_AFRICA_RAND("ZAR"),
     ZAMBIA_KWACHA("ZMK"),
-    ZIMBABWE_DOLLARS("ZWD");
+    ZIMBABWE_DOLLARS("ZWD"),
+    UK_POUNDS("GBP");
 
     private final String code;
 

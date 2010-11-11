@@ -21,6 +21,8 @@ src/com/ceridwen/circulation/SIP/annotations/Command.java -text svneol=unset#tex
 src/com/ceridwen/circulation/SIP/annotations/FieldPolicy.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/PositionedField.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/TaggedField.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/annotations/TestCaseDefault.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/annotations/TestCasePopulated.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/exceptions/ChecksumError.java -text
 src/com/ceridwen/circulation/SIP/exceptions/ConnectionFailure.java -text
 src/com/ceridwen/circulation/SIP/exceptions/InvalidFieldLength.java -text svneol=unset#text/plain

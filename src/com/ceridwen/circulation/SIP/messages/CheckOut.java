@@ -33,8 +33,12 @@ import com.ceridwen.circulation.SIP.annotations.Command;
 import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
 @Command("11")
+@TestCaseDefault("11NN19700101    010000                  AA|AB|AC|AO|")
+@TestCasePopulated("11YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BIY|BOY|CHitemProperties|")
 public class CheckOut extends Message {
     private static final long serialVersionUID = 8454866593857815453L;
     @PositionedField(start = 2, end = 2)

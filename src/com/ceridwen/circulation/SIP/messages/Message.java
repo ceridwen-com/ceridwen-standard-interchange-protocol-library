@@ -42,7 +42,9 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,10 +57,14 @@ import java.util.TreeMap;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.ceridwen.circulation.SIP.annotations.Command;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
@@ -340,7 +346,7 @@ public abstract class Message implements Serializable {
                 throw ex;
             } catch (Exception ex) {
                 Message.log.error("Unexpected error during encode.", ex);
-                throw new MessageNotUnderstood();
+                throw new MessageNotUnderstood(); //TODO force assert fail
             }
         }
 
@@ -348,12 +354,16 @@ public abstract class Message implements Serializable {
             message.append(((Command)(this.getClass().getAnnotation(Command.class))).value());
         } else {
             Message.log.error("Message has no command annotation");
-            throw new MessageNotUnderstood();
+            throw new MessageNotUnderstood(); //TODO force assert fail
         }
 
         Iterator<Integer> fixedIterate = fixed.keySet().iterator();
         while (fixedIterate.hasNext()) {
             Integer key = fixedIterate.next();
+            if (message.length() != key.intValue()) {
+                Message.log.error("Positioning error inserting field at " + key);
+                throw new MessageNotUnderstood(); //TODO force assert fail                
+            }            
             message.append(fixed.get(key));
         }
 
@@ -635,4 +645,237 @@ public abstract class Message implements Serializable {
         this.xmlEncode(buffer);
         return new String(buffer.toByteArray());
     }
+    
+    /**
+     * Test Case Implementation    
+     */
+    private Message getEmptyMessage() {
+        try {
+            Message msg = (Message)this.getClass().newInstance();
+            for (Field field: this.getClass().getDeclaredFields()) {
+                if (field.getType() == Date.class) {
+                    PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(msg, field.getName());
+                    if (desc != null) {
+                        if (field.isAnnotationPresent(PositionedField.class)) {
+                            PositionedField annotation = (PositionedField)field.getAnnotation(PositionedField.class);               
+                            PositionedFieldDescriptor fld = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                            if (fld.required) {
+                                Method method = desc.getWriteMethod();
+                                if (method != null) {
+                                    method.invoke(msg, new Object[]{new Date(0)});
+                                }                                                
+                            }
+                        }
+
+                        if (field.isAnnotationPresent(TaggedField.class)) {
+                            TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
+                            TaggedFieldDescriptor fld = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                            if (fld.required) {
+                                Method method = desc.getWriteMethod();
+                                if (method != null) {
+                                    method.invoke(msg, new Object[]{new Date(0)});
+                                }                                                
+                            }
+                        }
+                    }
+                }
+            }
+            return msg;
+        } catch (InstantiationException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        } catch (InvocationTargetException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        } catch (NoSuchMethodException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private Message getPopulatedMessage() {
+        try {
+            Message msg = (Message)this.getClass().newInstance();
+            for (Field field: this.getClass().getDeclaredFields()) {
+                PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(msg, field.getName());
+                if (desc != null) {
+                    Integer length = null;
+                    if (field.isAnnotationPresent(PositionedField.class)) {
+                        PositionedField annotation = (PositionedField)field.getAnnotation(PositionedField.class);               
+                        PositionedFieldDescriptor fld = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                        length = fld.length;
+                    }
+                    if (field.isAnnotationPresent(TaggedField.class)) {
+                        TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
+                        TaggedFieldDescriptor fld = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                        length = fld.length;
+                    }
+                    Method method = desc.getWriteMethod();
+                    if (method != null) {
+                        Class<?> type = desc.getPropertyType();
+                        if (type == Date.class) {
+                            method.invoke(msg, new Object[]{new Date(0)});
+                        }                    
+                        if (type == Boolean.class) {
+                            method.invoke(msg, new Object[]{new Boolean(true)});
+                        }                    
+                        if (type == Integer.class) {
+                            String value = "123456789";
+                            if (length != null) {
+                                value = value.substring(0, length);
+                            }
+                            method.invoke(msg, new Object[]{new Integer(value)});
+                        }                    
+                        if (type == String.class) {
+                            String value = field.getName();
+                            if (length != null) {
+                                value = value.substring(0, length);
+                            }
+                            method.invoke(msg, new Object[]{new String(value)});
+                        }
+                        if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
+                            Class<?> tp = field.getType();
+                            System.out.println(tp.getName());
+                            Field[] fds = tp.getDeclaredFields();
+                            for (Field fd: fds) {
+                              if ((fd.getModifiers() & (Modifier.PUBLIC | Modifier.FINAL | Modifier.STATIC)) == (Modifier.PUBLIC | Modifier.FINAL | Modifier.STATIC)) {
+                                  AbstractFlagField aff = (AbstractFlagField)desc.getReadMethod().invoke(msg, new Object[]{});
+                                  aff.set(fd.getInt(null));
+                              }
+                            }
+                        }
+                        Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
+                        for (Class<?> interfce : interfaces) {
+                            if (interfce == AbstractEnumeration.class) {
+                                Method mthdInst = desc.getPropertyType().getDeclaredMethod("values",
+                                        new Class[] {});
+                                Object[] values = (Object[]) mthdInst.invoke(null, new Object[] {});
+                                if (values.length > 0) {
+                                    desc.getWriteMethod().invoke(msg,
+                                            new Object[] { values[values.length - 1] });
+                                }
+                            }
+                        }
+                        if (desc.getPropertyType() == String[].class) {
+                            String value = field.getName();
+                            if (length != null) {
+                                value = value.substring(0, length-1);
+                            }
+                            method.invoke(msg, new Object[]{new String[]{new String(value + "1"), new String(value + "2")}});                            
+                        }
+                        
+                    }
+                }
+            }
+            return msg;
+        } catch (InstantiationException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        } catch (InvocationTargetException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        } catch (NoSuchMethodException ex) {
+            // TODO Auto-generated catch block
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+    
+    @Test
+    public void TestCaseEncode() {
+        try {
+            if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
+                String t = this.getPopulatedMessage().encode(null);
+                String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
+                Assert.assertEquals(v, t);
+            } else {
+                Message.log.error("Message has no test annotation");
+                throw new MessageNotUnderstood(); //TODO force assert fail
+            }            
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        } catch (InvalidFieldLength e) {
+            Assert.fail("Field Wrong Size: " + e.getMessage());
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void TestCaseDefaultEncode() {
+        try {
+            if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
+                String t = this.getEmptyMessage().encode(null);
+                String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
+                Assert.assertEquals(v, t);
+            } else {
+                Message.log.error("Message has no test annotation");
+                throw new MessageNotUnderstood(); //TODO force assert fail
+            }            
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        } catch (InvalidFieldLength e) {
+            Assert.fail("Fixed Field Too Long: " + e.getMessage());
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void TestCaseDecode() {
+        try {
+            if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
+                String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Message m = Message.decode(v, null, false);
+                m.xmlEncode(stream);
+                String r = stream.toString();
+                stream = new ByteArrayOutputStream();
+                m = this.getPopulatedMessage();
+                m.xmlEncode(stream);
+                String t = stream.toString();
+                Assert.assertEquals(t, r);
+            } else {
+                Message.log.error("Message has no test annotation");
+                throw new MessageNotUnderstood(); //TODO force assert fail
+            }            
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted");
+        } catch (ChecksumError e) {
+            Assert.fail("Checksum Error");
+        } catch (SequenceError e) {
+            Assert.fail("Sequence Error");
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message Not Understood");
+        }
+    }
+
+    @Test
+    public void TestCaseRoundTrip() {
+        try {
+            String t = this.getPopulatedMessage().encode('0');
+            Message m;
+            m = Message.decode(t, '0', true);
+            Assert.assertEquals(t, m.encode('0'));
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        } catch (InvalidFieldLength e) {
+            Assert.fail("Fixed Field Too Long: " + e.getMessage());
+        } catch (ChecksumError e) {
+            Assert.fail("Checksum Error");
+        } catch (SequenceError e) {
+            Assert.fail("Sequence Error");
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message Not Understood");
+        }
+    }    
 }

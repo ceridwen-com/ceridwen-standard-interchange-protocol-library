@@ -61,7 +61,7 @@ public class FieldDefinitions {
         FieldDefinitions.fields.put("checkOutOk", new FieldDescriptor(null, Boolean.class, 1, true));
         FieldDefinitions.fields.put("currencyType", new FieldDescriptor("BH", CurrencyType.class, 3, null));
         FieldDefinitions.fields.put("currentLocation", new FieldDescriptor("AP", String.class, null, null));
-        FieldDefinitions.fields.put("dateTimeSync", new FieldDescriptor(null, Date.class, 18, false));
+        FieldDefinitions.fields.put("dateTimeSync", new FieldDescriptor(null, Date.class, 18, true));
         FieldDefinitions.fields.put("desensitize", new FieldDescriptor(null, Boolean.class, 1, true));
         FieldDefinitions.fields.put("dueDate", new FieldDescriptor("AH", String.class, null, null));
         FieldDefinitions.fields.put("eMailAddress", new FieldDescriptor("BE", String.class, null, false));
