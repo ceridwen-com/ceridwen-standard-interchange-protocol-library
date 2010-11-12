@@ -90,7 +90,7 @@ public class PatronInformationResponse extends Message {
     @TaggedField
     private String homeAddress;
     @TaggedField
-    private String eMailAddress;
+    private String emailAddress;
     @TaggedField
     private String homePhoneNumber;
     @TaggedField
@@ -114,8 +114,8 @@ public class PatronInformationResponse extends Message {
         return this.currencyType;
     }
 
-    public String getEMailAddress() {
-        return this.eMailAddress;
+    public String getEmailAddress() {
+        return this.emailAddress;
     }
 
     public String getFeeAmount() {
@@ -343,7 +343,7 @@ public class PatronInformationResponse extends Message {
         this.currencyType = currencyType;
     }
 
-    public void setEMailAddress(String eMailAddress) {
-        this.eMailAddress = eMailAddress;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 }

@@ -48,7 +48,7 @@ public class PatronInformationResponseTest extends AbstractMessageTest<PatronInf
         m.setChargedItemsCount(1234);
         m.setChargedItemsLimit(12);
         m.setCurrencyType(CurrencyType.UK_POUNDS);
-        m.setEMailAddress("eMailAddress");
+        m.setEmailAddress("eMailAddress");
         m.setFeeAmount("feeAmount");
         m.setFeeLimit("feeLimit");
         m.setFineItems(new String[] { "fineItems1", "fineItems2" });

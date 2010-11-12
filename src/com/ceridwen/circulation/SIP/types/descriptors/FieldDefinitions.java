@@ -64,7 +64,7 @@ public class FieldDefinitions {
         FieldDefinitions.fields.put("dateTimeSync", new FieldDescriptor(null, Date.class, 18, true));
         FieldDefinitions.fields.put("desensitize", new FieldDescriptor(null, Boolean.class, 1, true));
         FieldDefinitions.fields.put("dueDate", new FieldDescriptor("AH", String.class, null, null));
-        FieldDefinitions.fields.put("eMailAddress", new FieldDescriptor("BE", String.class, null, false));
+        FieldDefinitions.fields.put("emailAddress", new FieldDescriptor("BE", String.class, null, false));
         FieldDefinitions.fields.put("endItem", new FieldDescriptor("BQ", Integer.class, null, false));
         FieldDefinitions.fields.put("endSession", new FieldDescriptor(null, Boolean.class, 1, true));
         FieldDefinitions.fields.put("expirationDate", new FieldDescriptor("BW", Date.class, 18, false));
@@ -172,8 +172,7 @@ public class FieldDefinitions {
         }
         PositionedFieldDescriptor pfd = new PositionedFieldDescriptor(fieldName, annotation.start(),
                 annotation.end(), field, required);
-        return pfd;
-        
+        return pfd;        
     }
 
     static public TaggedFieldDescriptor getTaggedFieldDescriptor(String messageName, String fieldName, TaggedField annotation) {
