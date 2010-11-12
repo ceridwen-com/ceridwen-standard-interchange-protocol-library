@@ -33,6 +33,7 @@ src/com/ceridwen/circulation/SIP/exceptions/SequenceError.java -text svneol=unse
 src/com/ceridwen/circulation/SIP/fields/FieldDefinition.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/FieldPolicy.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/FieldStatisticsGatherer.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/fields/Fields.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/PositionedFieldDefinition.java -text
 src/com/ceridwen/circulation/SIP/fields/TaggedFieldDefinition.java -text
 src/com/ceridwen/circulation/SIP/messages/ACSResend.java -text svneol=unset#text/plain

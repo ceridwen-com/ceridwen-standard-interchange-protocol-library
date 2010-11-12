@@ -18,6 +18,10 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.fields;
 
+import java.util.Date;
+
+import com.ceridwen.circulation.SIP.annotations.Field;
+
 public class FieldDefinition {
     public String tag;
     public Class<?> type;
@@ -43,11 +47,19 @@ public class FieldDefinition {
         // this.required);
     }
 
-    protected FieldDefinition(String tag, Class<?> type, Integer length, FieldPolicy policy) {
-        this.tag = tag;
+    public FieldDefinition(Field field, Class<?> type) {
+        this.tag = field.tag();
         this.type = type;
-        this.length = length;
-        this.policy = policy;
+        this.length = field.length();
+        this.policy = field.policy();
+        if (this.length == 0) {
+            if (this.type == Boolean.class) {
+                this.length = 1;
+            }
+            if (this.type == Date.class) {
+                this.length = 18;
+            }
+        }
         if (this.tag == null) {
             this.tag = "";
         }            
