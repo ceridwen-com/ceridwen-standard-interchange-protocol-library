@@ -296,6 +296,9 @@ public abstract class Message implements Serializable {
                 } catch (Exception ex) {
                     throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
                 }
+                if (desc == null) {
+                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
+                }
                 String[] value = this.getProp(desc, field);
                 if (value[0].length() == 0) {
                     if (field.required) {
@@ -325,6 +328,9 @@ public abstract class Message implements Serializable {
                     desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
                 } catch (Exception ex) {
                     throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
+                }
+                if (desc == null) {
+                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
                 }
                 String[] value = this.getProp(desc, field);
                 if (value[0].length() > 0) {
@@ -497,6 +503,9 @@ public abstract class Message implements Serializable {
                 } catch (Exception ex) {
                     throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + msg.getClass().getName());
                 }
+                if (desc == null) {
+                    throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + msg.getClass().getName());                    
+                }
                 String value = "";
                 value = message.substring(field.start, field.end + 1);
                 msg.setProp(desc, value);
@@ -599,18 +608,22 @@ public abstract class Message implements Serializable {
         Field[] fields = this.getClass().getDeclaredFields();
 
         for (Field fld : fields) {
-            try {
                 if (fld.isAnnotationPresent(TaggedField.class)) {
                     TaggedField annotation = fld.getAnnotation(TaggedField.class);
                     TaggedFieldDescriptor field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
                     PropertyDescriptor desc;
-                    desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+                    try {
+                        desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+                    } catch (Exception ex) {
+                        throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + this.getClass().getName());                                            
+                    }
+                    if (desc == null) {
+                        throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + this.getClass().getName());                    
+                    }
                     if (field.tag.equals(tag)) {
                         this.setProp(desc, data);
                     }
                 }
-            } catch (Exception ex) {
-            }
         }
     }
 
