@@ -75,7 +75,6 @@ import com.ceridwen.circulation.SIP.fields.TaggedFieldDefinition;
 import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
 import com.ceridwen.circulation.SIP.types.flagfields.AbstractFlagField;
 
-@SuppressWarnings("unchecked")
 public abstract class Message implements Serializable {
     /**
 	 * 
@@ -83,40 +82,6 @@ public abstract class Message implements Serializable {
     private static final long serialVersionUID = 1609258005567594730L;
     private static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
     private static Log log = LogFactory.getLog(Message.class);
-
-    private static Class<?>[] _messages = {
-            PatronStatusRequest.class,
-            PatronStatusResponse.class,
-            CheckOut.class,
-            CheckOutResponse.class,
-            CheckIn.class,
-            CheckInResponse.class,
-            BlockPatron.class,
-            SCStatus.class,
-            ACSStatus.class,
-            Login.class,
-            LoginResponse.class,
-            PatronInformation.class,
-            PatronInformationResponse.class,
-            EndPatronSession.class,
-            EndSessionResponse.class,
-            FeePaid.class,
-            FeePaidResponse.class,
-            ItemInformation.class,
-            ItemInformationResponse.class,
-            ItemStatusUpdate.class,
-            ItemStatusUpdateResponse.class,
-            PatronEnable.class,
-            PatronEnableResponse.class,
-            Hold.class,
-            HoldResponse.class,
-            Renew.class,
-            RenewResponse.class,
-            RenewAll.class,
-            RenewAllResponse.class,
-            ACSResend.class,
-            SCResend.class
-    };
 
     private Character SequenceCharacter = null;
 
@@ -644,15 +609,18 @@ public abstract class Message implements Serializable {
     static {
         com.ceridwen.util.versioning.ComponentRegistry.registerComponent(Message.class);
 
-        int n;
-        for (n = 0; n < Message._messages.length; n++) {
+        for (Messages m: Messages.values()) {
             try {
-                if (Message._messages[n].isAnnotationPresent(Command.class)) {
-                    Message.messages.put(Message._messages[n].getAnnotation(Command.class).value(),
-                        (Class<? extends Message>)Message._messages[n]);
+                @SuppressWarnings("unchecked")
+                Class<? extends Message> message = (Class<? extends Message>)Class.forName("com.ceridwen.circulation.SIP.messages." + m.name());
+                if (message != null) {
+                    if (message.isAnnotationPresent(Command.class)) {
+                        Message.messages.put(((Command)message.getAnnotation(Command.class)).value(),
+                                (Class<? extends Message>)message);
+                    }
                 }
             } catch (Exception ex) {
-                Message.log.warn(Message._messages[n].getName() + " not yet implemented.");
+                Message.log.warn(m.name() + " not yet implemented.");
             }
         }
     }
