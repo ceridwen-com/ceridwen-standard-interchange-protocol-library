@@ -18,7 +18,6 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.fields;
 
-import java.beans.PropertyDescriptor;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -190,47 +189,5 @@ public class FieldDefinitions {
         }
         TaggedFieldDefinition tfd = new TaggedFieldDefinition(fieldName, field, required);
         return tfd;
-    }
-    
-    
-    static public void fixupFieldDescriptors(String messageName, PropertyDescriptor[] pds) {
-        for (PropertyDescriptor pd : pds) {
-            String name = pd.getName();
-            FieldDefinition field = FieldDefinitions.fields.get(name);
-            if (field == null) {
-                throw new java.lang.AssertionError(messageName + " - Unknown field: " + name);
-            }
-
-            if (field.type != pd.getPropertyType()) {
-                throw new java.lang.AssertionError(messageName + " - Invalid type: " + name);
-            }
-
-            FieldDefinition fd = (FieldDefinition) pd.getValue("SIPFieldDescriptor");
-
-            if (fd != null) {
-                if (fd.getClass() == PositionedFieldDefinition.class) {
-                    if (field.length == null) {
-                        throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor must explicit length: " + name);
-                    }
-                    if ((((PositionedFieldDefinition) fd).end - ((PositionedFieldDefinition) fd).start + 1) != field.length) {
-                        throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptors length mismatch: " + name);
-                    }
-                    PositionedFieldDefinition pfd = new PositionedFieldDefinition(name, ((PositionedFieldDefinition) fd).start,
-                            ((PositionedFieldDefinition) fd).end, field, ((PositionedFieldDefinition) fd).required);
-                    pd.setValue("SIPFieldDescriptor", pfd);
-                } else if (fd.getClass() == TaggedFieldDefinition.class) {
-                    TaggedFieldDefinition tfd = new TaggedFieldDefinition(name, field, fd.required);
-                    pd.setValue("SIPFieldDescriptor", tfd);
-                } else {
-                    throw new java.lang.AssertionError(messageName + " - Unknown field descriptor: " + name);
-                }
-            } else {
-                if (field.tag == null) {
-                    throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor must have explicit tag: " + name);
-                }
-                TaggedFieldDefinition tfd = new TaggedFieldDefinition(name, field, null);
-                pd.setValue("SIPFieldDescriptor", tfd);
-            }
-        }
-    }
+    }    
 }
