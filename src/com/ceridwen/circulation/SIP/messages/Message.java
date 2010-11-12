@@ -615,8 +615,14 @@ public abstract class Message implements Serializable {
                 Class<? extends Message> message = (Class<? extends Message>)Class.forName(Messages.class.getPackage().getName() +  "." + m.name());
                 if (message != null) {
                     if (message.isAnnotationPresent(Command.class)) {
-                        Message.messages.put(((Command)message.getAnnotation(Command.class)).value(),
-                                (Class<? extends Message>)message);
+                        String cmd = ((Command)message.getAnnotation(Command.class)).value();
+                        if (cmd.isEmpty()) {
+                            throw new java.lang.AssertionError(m.name() + " has empty command string.");                                        
+                        }
+                        if (Message.messages.containsKey(cmd)) {
+                            throw new java.lang.AssertionError(m.name() + " duplicates command string.");                                                                    
+                        }
+                        Message.messages.put(cmd, (Class<? extends Message>)message);
                     }
                 }
             } catch (Exception ex) {
