@@ -30,6 +30,11 @@ src/com/ceridwen/circulation/SIP/exceptions/MandatoryFieldOmitted.java -text
 src/com/ceridwen/circulation/SIP/exceptions/MessageNotUnderstood.java -text
 src/com/ceridwen/circulation/SIP/exceptions/RetriesExceeded.java -text
 src/com/ceridwen/circulation/SIP/exceptions/SequenceError.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/fields/FieldDefinition.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/fields/FieldDefinitions.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/fields/FieldStatisticsGatherer.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/fields/PositionedFieldDefinition.java -text
+src/com/ceridwen/circulation/SIP/fields/TaggedFieldDefinition.java -text
 src/com/ceridwen/circulation/SIP/messages/ACSResend.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/messages/ACSStatus.java -text
 src/com/ceridwen/circulation/SIP/messages/BlockPatron.java -text
