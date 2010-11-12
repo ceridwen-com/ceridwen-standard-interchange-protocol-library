@@ -30,7 +30,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
 @Command("30")
 @TestCaseDefault("300NUN19700101    010000AA|AB|AH|AJ|AO|")
-@TestCasePopulated("301YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|AOinstitutionId|BHGBP|BKtransactionId|BT07|BVfeeAmount|CHitemProperties|CIY|CK007|")
+@TestCasePopulated("301YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|AOinstitutionId|BHGBP|BKtransactionId|BT09|BVfeeAmount|CHitemProperties|CIY|CK010|")
 public class RenewResponse extends Message {
     private static final long serialVersionUID = 434658072913047721L;
     @PositionedField(start = 2, end = 2)

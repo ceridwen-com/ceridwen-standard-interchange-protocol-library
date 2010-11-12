@@ -32,7 +32,7 @@ import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
 @Command("64")
 @TestCaseDefault("64              00019700101    010000                        AA|AE|AO|")
-@TestCasePopulated("64YYYYYYYYYYYYYY02419700101    010000001212341234001212341234AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|ASholdItems1|ASholdItems2|AToverdueItems1|AToverdueItems2|AUchargedItems1|AUchargedItems2|AVfineItems1|AVfineItems2|BDhomeAddress|BEeMailAddress|BFhomePhoneNumber|BHGBP|BLY|BUrecallItems1|BUrecallItems2|BVfeeAmount|BZ0123|CA1234|CB0012|CCfeeLimit|CDunavailableHoldItems1|CDunavailableHoldItems2|CQY|")
+@TestCasePopulated("64YYYYYYYYYYYYYY02719700101    010000123412341234123412341234AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|ASholdItems1|ASholdItems2|AToverdueItems1|AToverdueItems2|AUchargedItems1|AUchargedItems2|AVfineItems1|AVfineItems2|BDhomeAddress|BEemailAddress|BFhomePhoneNumber|BHGBP|BLY|BUrecallItems1|BUrecallItems2|BVfeeAmount|BZ1234|CA1234|CB1234|CCfeeLimit|CDunavailableHoldItems1|CDunavailableHoldItems2|CQY|")
 public class PatronInformationResponse extends Message {
     private static final long serialVersionUID = 5284231102576474180L;
     @PositionedField(start = 2, end = 15)

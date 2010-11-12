@@ -39,7 +39,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
 @Command("10")
 @TestCaseDefault("100NUN19700101    010000AB|AO|AQ|")
-@TestCasePopulated("101YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|AQpermanentLocation|CHitemProperties|CK006|CLsortBin|")
+@TestCasePopulated("101YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|AQpermanentLocation|CHitemProperties|CK010|CLsortBin|")
 public class CheckInResponse extends Message {
     private static final long serialVersionUID = -3403534383487215711L;
     @PositionedField(start = 2, end = 2)

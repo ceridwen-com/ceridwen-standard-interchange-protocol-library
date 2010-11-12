@@ -43,7 +43,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.SecurityMarker;
 
 @Command("18")
 @TestCaseDefault("1801000119700101    010000AB|AJ|")
-@TestCasePopulated("1812020719700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CF100|CHitemProperties|CJ19700101    010000|CK007|CM19700101    010000|")
+@TestCasePopulated("1813030919700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CF123456789|CHitemProperties|CJ19700101    010000|CK010|CM19700101    010000|")
 public class ItemInformationResponse extends Message {
     private static final long serialVersionUID = 6408854778106704492L;
     @PositionedField(start = 2, end = 3)

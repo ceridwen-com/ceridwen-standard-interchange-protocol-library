@@ -32,7 +32,7 @@ import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
 @Command("24")
 @TestCaseDefault("24              00019700101    010000AA|AE|AO|")
-@TestCasePopulated("24YYYYYYYYYYYYYY02419700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BHGBP|BLY|BVfeeAmount|CQY|")
+@TestCasePopulated("24YYYYYYYYYYYYYY02719700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BHGBP|BLY|BVfeeAmount|CQY|")
 public class PatronStatusResponse extends Message {
     private static final long serialVersionUID = 163945073911230183L;
     @PositionedField(start = 2, end = 15)

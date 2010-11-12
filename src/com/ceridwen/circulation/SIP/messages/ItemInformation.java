@@ -38,7 +38,7 @@ import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
 @Command("17")
 @TestCaseDefault("1719700101    010000AB|AO|")
-@TestCasePopulated("1719700101    010000ABitem|ACpassword|AOinstitution|")
+@TestCasePopulated("1719700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|")
 public class ItemInformation extends Message {
     private static final long serialVersionUID = 7398126890693645623L;
     @PositionedField(start = 2, end = 19)

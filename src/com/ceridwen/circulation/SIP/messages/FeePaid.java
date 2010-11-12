@@ -30,7 +30,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.PaymentType;
 
 @Command("37")
 @TestCaseDefault("3719700101    0100000100USDAA|AO|BV|")
-@TestCasePopulated("3719700101    0100000701GBPAApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BKtransactionId|BVfeeAmount|CGfeeIdentifier|")
+@TestCasePopulated("3719700101    0100000902GBPAApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BKtransactionId|BVfeeAmount|CGfeeIdentifier|")
 public class FeePaid extends Message {
     private static final long serialVersionUID = -5641260852799759246L;
     @PositionedField(start = 2, end = 19)

@@ -30,7 +30,7 @@ import com.ceridwen.circulation.SIP.types.enumerations.Language;
 
 @Command("23")
 @TestCaseDefault("2300019700101    010000AA|AC|AD|AO|")
-@TestCasePopulated("2302419700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|")
+@TestCasePopulated("2302719700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|")
 public class PatronStatusRequest extends Message {
     private static final long serialVersionUID = -4867507215519281871L;
     @PositionedField(start = 2, end = 4)

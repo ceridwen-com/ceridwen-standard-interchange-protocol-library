@@ -27,7 +27,7 @@ import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
 @Command("16")
 @TestCaseDefault("160N19700101    010000AA|AO|")
-@TestCasePopulated("161Y19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|BR12345|BSpickupLocation|BW19700101    010000|")
+@TestCasePopulated("161Y19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|BR123456789|BSpickupLocation|BW19700101    010000|")
 public class HoldResponse extends Message {
     private static final long serialVersionUID = 2267131763722749419L;
     @PositionedField(start = 2, end = 2)
