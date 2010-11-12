@@ -641,7 +641,7 @@ public abstract class Message implements Serializable {
     /**
      * Test Case Implementation    
      */
-    private Message getEmptyMessage() {
+    private Message getDefaultMessage() {
         try {
             Message msg = (Message)this.getClass().newInstance();
             for (Field field: this.getClass().getDeclaredFields()) {
@@ -757,10 +757,57 @@ public abstract class Message implements Serializable {
             Assert.fail("Exception getting populated message: " + ex.getMessage());
             return null;
         }
-    }
-    
+    }    
+
     @Test
-    public void TestCaseEncode() {
+    public void TestCaseDefaultEncode() {
+        try {
+            if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
+                String t = this.getDefaultMessage().encode(null);
+                String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
+                Assert.assertEquals(v, t);
+            } else {
+                Assert.fail("Message has no TestCaseDefault annotation");
+            }            
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        } catch (InvalidFieldLength e) {
+            Assert.fail("Fixed Field Too Long: " + e.getMessage());
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void TestCaseDefaultDecode() {
+        try {
+            if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
+                String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Message m = Message.decode(v, null, false);
+                m.xmlEncode(stream);
+                String r = stream.toString();
+                stream = new ByteArrayOutputStream();
+                m = this.getDefaultMessage();
+                m.xmlEncode(stream);
+                String t = stream.toString();
+                Assert.assertEquals(t, r);
+            } else {
+                Assert.fail("Message has no TestCaseDefault annotation");
+            }            
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted");
+        } catch (ChecksumError e) {
+            Assert.fail("Checksum Error");
+        } catch (SequenceError e) {
+            Assert.fail("Sequence Error");
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message Not Understood");
+        }
+    }
+
+    @Test
+    public void TestCasePopulatedEncode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
                 String t = this.getPopulatedMessage().encode(null);
@@ -779,26 +826,7 @@ public abstract class Message implements Serializable {
     }
 
     @Test
-    public void TestCaseDefaultEncode() {
-        try {
-            if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
-                String t = this.getEmptyMessage().encode(null);
-                String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
-                Assert.assertEquals(v, t);
-            } else {
-                Assert.fail("Message has no TestCaseDefault annotation");
-            }            
-        } catch (MandatoryFieldOmitted e) {
-            Assert.fail("Mandatory Field Omitted: " + e.getMessage());
-        } catch (InvalidFieldLength e) {
-            Assert.fail("Fixed Field Too Long: " + e.getMessage());
-        } catch (MessageNotUnderstood e) {
-            Assert.fail("Message not understood: " + e.getMessage());
-        }
-    }
-
-    @Test
-    public void TestCaseDecode() {
+    public void TestCasePopulatedDecode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
                 String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
@@ -826,7 +854,27 @@ public abstract class Message implements Serializable {
     }
 
     @Test
-    public void TestCaseRoundTrip() {
+    public void TestCaseDefaultRoundTrip() {
+        try {
+            String t = this.getDefaultMessage().encode('0');
+            Message m;
+            m = Message.decode(t, '0', true);
+            Assert.assertEquals(t, m.encode('0'));
+        } catch (MandatoryFieldOmitted e) {
+            Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        } catch (InvalidFieldLength e) {
+            Assert.fail("Fixed Field Too Long: " + e.getMessage());
+        } catch (ChecksumError e) {
+            Assert.fail("Checksum Error");
+        } catch (SequenceError e) {
+            Assert.fail("Sequence Error");
+        } catch (MessageNotUnderstood e) {
+            Assert.fail("Message Not Understood");
+        }
+    }    
+
+    @Test
+    public void TestCasePopulatedRoundTrip() {
         try {
             String t = this.getPopulatedMessage().encode('0');
             Message m;
