@@ -18,29 +18,40 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
+@Command("26")
+@TestCaseDefault("26              00019700101    010000AA|AE|AO|")
+@TestCasePopulated("26YYYYYYYYYYYYYY02419700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BLY|CQY|")
 public class PatronEnableResponse extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 5941325479001778479L;
+    @PositionedField(start = 2, end = 15)
     private PatronStatus patronStatus = new PatronStatus();
+    @PositionedField(start = 16, end = 18)
     private Language language;
+    @PositionedField(start = 19, end = 36)
     private java.util.Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField
     private String personalName;
+    @TaggedField
     private Boolean validPatronPassword;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
+    @TaggedField
     private Boolean validPatron;
-
-    @Override
-    public String getCommand() {
-        return "26";
-    }
 
     public PatronStatus getPatronStatus() {
         return this.patronStatus;

@@ -19,8 +19,8 @@
 package com.ceridwen.circulation.SIP.types.enumerations;
 
 public enum ProtocolVersion implements AbstractEnumeration {
-    VERSION_1_00("1.00"),
-    VERSION_2_00("2.00");
+    VERSION_2_00("2.00"),
+    VERSION_1_00("1.00");
 
     private final String code;
 

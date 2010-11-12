@@ -29,20 +29,26 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
-public class ItemInformation extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 7398126890693645623L;
-    private Date transactionDate;
-    private String institutionId;
-    private String itemIdentifier;
-    private String terminalPassword;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "17";
-    }
+@Command("17")
+@TestCaseDefault("1719700101    010000AB|AO|")
+@TestCasePopulated("1719700101    010000ABitem|ACpassword|AOinstitution|")
+public class ItemInformation extends Message {
+    private static final long serialVersionUID = 7398126890693645623L;
+    @PositionedField(start = 2, end = 19)
+    private Date transactionDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String itemIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String terminalPassword;
 
     public String getInstitutionId() {
         return this.institutionId;

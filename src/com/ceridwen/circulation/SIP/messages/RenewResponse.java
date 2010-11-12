@@ -18,39 +18,59 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 
+@Command("30")
+@TestCaseDefault("300NUN19700101    010000AA|AB|AH|AJ|AO|")
+@TestCasePopulated("301YYY19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|AOinstitutionId|BHGBP|BKtransactionId|BT07|BVfeeAmount|CHitemProperties|CIY|CK007|")
 public class RenewResponse extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 434658072913047721L;
+    @PositionedField(start = 2, end = 2)
     private Boolean ok;
+    @PositionedField(start = 3, end = 3)
     private Boolean renewalOk;
+    @PositionedField(start = 4, end = 4)
     private Boolean magneticMedia;
+    @PositionedField(start = 5, end = 5)
     private Boolean desensitize;
+    @PositionedField(start = 6, end = 23)
     private java.util.Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String itemIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String titleIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String dueDate;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private FeeType feeType;
+    @TaggedField
     private Boolean securityInhibit;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private CurrencyType currencyType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String feeAmount;
+    @TaggedField
     private MediaType mediaType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String itemProperties;
+    @TaggedField
     private String transactionId;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
-
-    @Override
-    public String getCommand() {
-        return "30";
-    }
 
     public Boolean isOk() {
         return this.ok;

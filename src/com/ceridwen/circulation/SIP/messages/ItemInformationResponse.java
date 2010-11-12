@@ -29,41 +29,61 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.CirculationStatus;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.FeeType;
 import com.ceridwen.circulation.SIP.types.enumerations.MediaType;
 import com.ceridwen.circulation.SIP.types.enumerations.SecurityMarker;
 
+@Command("18")
+@TestCaseDefault("1801000119700101    010000AB|AJ|")
+@TestCasePopulated("1812020719700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AHdueDate|AJtitleIdentifier|APcurrentLocation|AQpermanentLocation|BGowner|BHGBP|BVfeeAmount|CF100|CHitemProperties|CJ19700101    010000|CK007|CM19700101    010000|")
 public class ItemInformationResponse extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 6408854778106704492L;
+    @PositionedField(start = 2, end = 3)
     private CirculationStatus circulationStatus;
+    @PositionedField(start = 4, end = 5)
     private SecurityMarker securityMarker;
+    @PositionedField(start = 6, end = 7, policy=FieldPolicy.REQUIRED)
     private FeeType feeType;
+    @PositionedField(start = 8, end = 25)
     private Date transactionDate;
+    @TaggedField
     private Integer holdQueueLength;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String dueDate;
+    @TaggedField
     private Date recallDate;
+    @TaggedField
     private Date holdPickupDate;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String itemIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String titleIdentifier;
+    @TaggedField
     private String owner;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private CurrencyType currencyType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String feeAmount;
+    @TaggedField
     private MediaType mediaType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String permanentLocation;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String currentLocation;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String itemProperties;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
-
-    @Override
-    public String getCommand() {
-        return "18";
-    }
 
     public CirculationStatus getCirculationStatus() {
         return this.circulationStatus;

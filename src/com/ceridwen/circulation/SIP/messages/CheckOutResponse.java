@@ -68,13 +68,13 @@ public class CheckOutResponse extends Message {
     private FeeType feeType;
     @TaggedField
     private Boolean securityInhibit;
-    @TaggedField(FieldPolicy.REQUIRED)
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private CurrencyType currencyType;
-    @TaggedField(FieldPolicy.REQUIRED)
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String feeAmount;
     @TaggedField
     private MediaType mediaType;
-    @TaggedField(FieldPolicy.REQUIRED)
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String itemProperties;
     @TaggedField
     private String transactionId;

@@ -18,28 +18,42 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class Renew extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 158409818027250051L;
-    private Boolean thirdPartyAllowed;
-    private Boolean noBlock;
-    private java.util.Date transactionDate;
-    private java.util.Date nbDueDate;
-    private String institutionId;
-    private String patronIdentifier;
-    private String patronPassword;
-    private String itemIdentifier;
-    private String titleIdentifier;
-    private String terminalPassword;
-    private String itemProperties;
-    private Boolean feeAcknowledged;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "29";
-    }
+@Command("29")
+@TestCaseDefault("29NN19700101    010000                  AA|AO|")
+@TestCasePopulated("29YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AJtitleIdentifier|AOinstitutionId|BOY|CHitemProperties|")
+public class Renew extends Message {
+    private static final long serialVersionUID = 158409818027250051L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean thirdPartyAllowed;
+    @PositionedField(start = 3, end = 3)
+    private Boolean noBlock;
+    @PositionedField(start = 4, end = 21)
+    private java.util.Date transactionDate;
+    @PositionedField(start = 22, end = 39)
+    private java.util.Date nbDueDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String patronPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String itemIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String titleIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String terminalPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String itemProperties;
+    @TaggedField
+    private Boolean feeAcknowledged;
 
     public Boolean isThirdPartyAllowed() {
         return this.thirdPartyAllowed;

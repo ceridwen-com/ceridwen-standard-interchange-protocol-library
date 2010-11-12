@@ -20,59 +20,83 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
-/**
- * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
- * </p>
- * 
- * @author Matthew J. Dovey
- * @version 1.0
- */
-
+@Command("64")
+@TestCaseDefault("64              00019700101    010000                        AA|AE|AO|")
+@TestCasePopulated("64YYYYYYYYYYYYYY02419700101    010000001212341234001212341234AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|ASholdItems1|ASholdItems2|AToverdueItems1|AToverdueItems2|AUchargedItems1|AUchargedItems2|AVfineItems1|AVfineItems2|BDhomeAddress|BEeMailAddress|BFhomePhoneNumber|BHGBP|BLY|BUrecallItems1|BUrecallItems2|BVfeeAmount|BZ0123|CA1234|CB0012|CCfeeLimit|CDunavailableHoldItems1|CDunavailableHoldItems2|CQY|")
 public class PatronInformationResponse extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 5284231102576474180L;
+    @PositionedField(start = 2, end = 15)
     private PatronStatus patronStatus = new PatronStatus();
+    @PositionedField(start = 16, end = 18)
     private Language language;
+    @PositionedField(start = 19, end = 36)
     private Date transactionDate;
+    @PositionedField(start = 37, end = 40)
     private Integer holdItemsCount;
+    @PositionedField(start = 41, end = 44)
     private Integer overdueItemsCount;
+    @PositionedField(start = 45, end = 48)
     private Integer chargedItemsCount;
+    @PositionedField(start = 49, end = 52)
     private Integer fineItemsCount;
+    @PositionedField(start = 53, end = 56)
     private Integer recallItemsCount;
+    @PositionedField(start = 57, end = 60)
     private Integer unavailableHoldsCount;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField
     private String personalName;
+    @TaggedField
     private Integer holdItemsLimit;
+    @TaggedField
     private Integer overdueItemsLimit;
+    @TaggedField
     private Integer chargedItemsLimit;
+    @TaggedField
     private Boolean validPatron;
+    @TaggedField
     private Boolean validPatronPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private CurrencyType currencyType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String feeAmount;
+    @TaggedField
     private String feeLimit;
+    @TaggedField
     private String[] holdItems;
+    @TaggedField
     private String[] overdueItems;
+    @TaggedField
     private String[] chargedItems;
+    @TaggedField
     private String[] fineItems;
+    @TaggedField
     private String[] recallItems;
+    @TaggedField
     private String[] unavailableHoldItems;
+    @TaggedField
     private String homeAddress;
+    @TaggedField
     private String eMailAddress;
+    @TaggedField
     private String homePhoneNumber;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
-
-    @Override
-    public String getCommand() {
-        return "64";
-    }
 
     public String[] getChargedItems() {
         return this.chargedItems;

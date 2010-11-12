@@ -18,23 +18,33 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class ItemStatusUpdateResponse extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 428496319623237121L;
-    private Boolean ok;
-    private java.util.Date transactionDate;
-    private String itemIdentifier;
-    private String titleIdentifier;
-    private String itemProperties;
-    private String screenMessage;
-    private String printLine;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "20";
-    }
+@Command("20")
+@TestCaseDefault("20019700101    010000AB|")
+@TestCasePopulated("20119700101    010000ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|CHitemProperties|")
+public class ItemStatusUpdateResponse extends Message {
+
+    private static final long serialVersionUID = 428496319623237121L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean ok;
+    @PositionedField(start = 3, end = 20)
+    private java.util.Date transactionDate;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String itemIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String titleIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String itemProperties;
+    @TaggedField
+    private String screenMessage;
+    @TaggedField
+    private String printLine;
 
     public Boolean isOk() {
         return this.ok;

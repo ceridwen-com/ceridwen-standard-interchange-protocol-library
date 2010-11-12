@@ -18,21 +18,27 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class Login extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = -5732581787865741081L;
-    private String UIDAlgorithm;
-    private String PWDAlgorithm;
-    private String loginUserId;
-    private String loginPassword;
-    private String locationCode;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "93";
-    }
+@Command("93")
+@TestCaseDefault("93  CN|CO|")
+@TestCasePopulated("93UPCNloginUserId|COloginPassword|CPlocationCode|")
+public class Login extends Message {
+    private static final long serialVersionUID = -5732581787865741081L;
+    @PositionedField(start = 2, end = 2)
+    private String UIDAlgorithm;
+    @PositionedField(start = 3, end = 3)
+    private String PWDAlgorithm;
+    @TaggedField
+    private String loginUserId;
+    @TaggedField
+    private String loginPassword;
+    @TaggedField
+    private String locationCode;
 
     public String getUIDAlgorithm() {
         return this.UIDAlgorithm;

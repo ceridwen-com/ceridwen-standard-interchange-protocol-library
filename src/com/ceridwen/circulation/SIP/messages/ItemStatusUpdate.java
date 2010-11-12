@@ -18,21 +18,29 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+
+@Command("19")
+@TestCaseDefault("1919700101    010000AB|AO|CH|")
+@TestCasePopulated("1919700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|CHitemProperties|")
 public class ItemStatusUpdate extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -2127793191374183987L;
+    @PositionedField(start = 2, end = 19)
     private java.util.Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String itemIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String terminalPassword;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String itemProperties;
 
-    @Override
-    public String getCommand() {
-        return "19";
-    }
 
     public java.util.Date getTransactionDate() {
         return this.transactionDate;

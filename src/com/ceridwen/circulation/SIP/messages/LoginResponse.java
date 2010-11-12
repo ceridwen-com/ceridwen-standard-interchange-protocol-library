@@ -18,17 +18,18 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class LoginResponse extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = -7739633345494042411L;
-    private Boolean ok;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "94";
-    }
+@Command("94")
+@TestCaseDefault("940")
+@TestCasePopulated("941")
+public class LoginResponse extends Message {
+    private static final long serialVersionUID = -7739633345494042411L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean ok;
 
     public Boolean isOk() {
         return this.ok;

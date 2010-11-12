@@ -18,31 +18,44 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.HoldMode;
 import com.ceridwen.circulation.SIP.types.enumerations.HoldType;
 
+@Command("15")
+@TestCaseDefault("15*19700101    010000AA|AO|")
+@TestCasePopulated("15-19700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AJtitleIdentifier|AOinstitutionId|BOY|BSpickupLocation|BW19700101    010000|BY4|")
 public class Hold extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -6526613321625525740L;
+    @PositionedField(start = 2, end = 2)
     private HoldMode holdMode;
+    @PositionedField(start = 3, end = 20)
     private java.util.Date transactionDate;
+    @TaggedField
     private java.util.Date expirationDate;
+    @TaggedField
     private String pickupLocation;
+    @TaggedField
     private HoldType holdType;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String patronPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String itemIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String titleIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String terminalPassword;
+    @TaggedField
     private Boolean feeAcknowledged;
-
-    @Override
-    public String getCommand() {
-        return "15";
-    }
 
     public HoldMode getHoldMode() {
         return this.holdMode;

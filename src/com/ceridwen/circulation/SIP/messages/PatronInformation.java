@@ -29,28 +29,41 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.Summary;
 
+@Command("63")
+@TestCaseDefault("6300019700101    010000          AA|AO|")
+@TestCasePopulated("6302419700101    010000 Y        AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BP12345|BQ12345|")
 public class PatronInformation extends Message {
     /**
 	 * 
 	 */
     private static final long serialVersionUID = 4603960140773936894L;
+    @PositionedField(start = 2, end = 4)
     private Language language;
+    @PositionedField(start = 5, end = 22)
     private Date transactionDate;
+    @PositionedField(start = 23, end = 32)
     private Summary summary = new Summary();
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String terminalPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String patronPassword;
+    @TaggedField
     private Integer startItem;
+    @TaggedField
     private Integer endItem;
-
-    @Override
-    public String getCommand() {
-        return "63";
-    }
 
     public Integer getEndItem() {
         return this.endItem;

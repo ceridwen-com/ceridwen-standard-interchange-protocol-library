@@ -18,23 +18,32 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class FeePaidResponse extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 3684506970071368895L;
-    private Boolean paymentAccepted;
-    private java.util.Date transactionDate;
-    private String institutionId;
-    private String patronIdentifier;
-    private String transactionId;
-    private String screenMessage;
-    private String printLine;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "38";
-    }
+@Command("38")
+@TestCaseDefault("38N19700101    010000AA|AO|")
+@TestCasePopulated("38Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|BKtransactionId|")
+public class FeePaidResponse extends Message {
+    private static final long serialVersionUID = 3684506970071368895L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean paymentAccepted;
+    @PositionedField(start = 3, end = 20)
+    private java.util.Date transactionDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField
+    private String transactionId;
+    @TaggedField
+    private String screenMessage;
+    @TaggedField
+    private String printLine;
 
     public Boolean isPaymentAccepted() {
         return this.paymentAccepted;

@@ -18,23 +18,31 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class RenewAllResponse extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 5428582577226346891L;
-    private Boolean ok;
-    private Integer renewedCount;
-    private Integer unrenewedCount;
-    private java.util.Date transactionDate;
-    private String institutionId;
-    private String screenMessage;
-    private String printLine;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 
-    @Override
-    public String getCommand() {
-        return "66";
-    }
+@Command("66")
+@TestCaseDefault("6600000000019700101    010000AO|")
+@TestCasePopulated("6611234123419700101    010000AFscreenMessage|AGprintLine|AOinstitutionId|")
+public class RenewAllResponse extends Message {
+    private static final long serialVersionUID = 5428582577226346891L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean ok;
+    @PositionedField(start = 3, end = 6)
+    private Integer renewedCount;
+    @PositionedField(start = 7, end = 10)
+    private Integer unrenewedCount;
+    @PositionedField(start = 11, end = 28)
+    private java.util.Date transactionDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField
+    private String screenMessage;
+    @TaggedField
+    private String printLine;
 
     public Boolean isOk() {
         return this.ok;

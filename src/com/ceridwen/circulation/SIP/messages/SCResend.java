@@ -18,17 +18,15 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+
+@Command("96")
+@TestCaseDefault("96AZFEF6")
+@TestCasePopulated("96AZFEF6")
 public class SCResend extends Message {
-
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 7077005327500597112L;
-
-    @Override
-    public String getCommand() {
-        return "96";
-    }
 
     @Override
     protected String AddChecksum(String command, Character sequence) {
