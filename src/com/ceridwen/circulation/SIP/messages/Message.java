@@ -290,7 +290,7 @@ public abstract class Message implements Serializable {
         for (Field fld : fields) {
             if (fld.isAnnotationPresent(PositionedField.class)) {
                 PositionedField annotation = (PositionedField)fld.getAnnotation(PositionedField.class);               
-                PositionedFieldDefinition field = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                PositionedFieldDefinition field = FieldDefinitions.getPositionedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
                 PropertyDescriptor desc;
                 try {
                     desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
@@ -323,7 +323,7 @@ public abstract class Message implements Serializable {
             }
             if (fld.isAnnotationPresent(TaggedField.class)) {
                 TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
-                TaggedFieldDefinition field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                TaggedFieldDefinition field = FieldDefinitions.getTaggedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
                 PropertyDescriptor desc;
                 try {
                     desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
@@ -497,7 +497,7 @@ public abstract class Message implements Serializable {
         for (Field fld : fields) {
             if (fld.isAnnotationPresent(PositionedField.class)) {
                 PositionedField annotation = fld.getAnnotation(PositionedField.class);
-                PositionedFieldDefinition field = FieldDefinitions.getPositionedFieldDescriptor(msg.getClass().getName(), fld.getName(), annotation);
+                PositionedFieldDefinition field = FieldDefinitions.getPositionedFieldDefinition(msg.getClass().getName(), fld.getName(), annotation);
                 PropertyDescriptor desc;
                 try {
                     desc = PropertyUtils.getPropertyDescriptor(msg, fld.getName());
@@ -611,7 +611,7 @@ public abstract class Message implements Serializable {
         for (Field fld : fields) {
                 if (fld.isAnnotationPresent(TaggedField.class)) {
                     TaggedField annotation = fld.getAnnotation(TaggedField.class);
-                    TaggedFieldDefinition field = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), fld.getName(), annotation);
+                    TaggedFieldDefinition field = FieldDefinitions.getTaggedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
                     PropertyDescriptor desc;
                     try {
                         desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
@@ -676,7 +676,7 @@ public abstract class Message implements Serializable {
                     if (desc != null) {
                         if (field.isAnnotationPresent(PositionedField.class)) {
                             PositionedField annotation = (PositionedField)field.getAnnotation(PositionedField.class);               
-                            PositionedFieldDefinition fld = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                            PositionedFieldDefinition fld = FieldDefinitions.getPositionedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
                             if (fld.policy == FieldPolicy.REQUIRED) {
                                 Method method = desc.getWriteMethod();
                                 if (method != null) {
@@ -687,7 +687,7 @@ public abstract class Message implements Serializable {
 
                         if (field.isAnnotationPresent(TaggedField.class)) {
                             TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
-                            TaggedFieldDefinition fld = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                            TaggedFieldDefinition fld = FieldDefinitions.getTaggedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
                             if (fld.policy == FieldPolicy.REQUIRED) {
                                 Method method = desc.getWriteMethod();
                                 if (method != null) {
@@ -714,12 +714,12 @@ public abstract class Message implements Serializable {
                     Integer length = null;
                     if (field.isAnnotationPresent(PositionedField.class)) {
                         PositionedField annotation = (PositionedField)field.getAnnotation(PositionedField.class);               
-                        PositionedFieldDefinition fld = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                        PositionedFieldDefinition fld = FieldDefinitions.getPositionedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
                         length = fld.length;
                     }
                     if (field.isAnnotationPresent(TaggedField.class)) {
                         TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
-                        TaggedFieldDefinition fld = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
+                        TaggedFieldDefinition fld = FieldDefinitions.getTaggedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
                         length = fld.length;
                     }
                     Method method = desc.getWriteMethod();

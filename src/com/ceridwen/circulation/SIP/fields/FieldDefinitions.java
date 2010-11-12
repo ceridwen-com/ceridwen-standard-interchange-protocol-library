@@ -149,7 +149,7 @@ public class FieldDefinitions {
         // FieldStatisticsGatherer.getFieldStatisticsGatherer().LoadFieldDefinitions(fields);
     }
     
-    static public PositionedFieldDefinition getPositionedFieldDescriptor(String messageName, String fieldName, PositionedField annotation) {
+    static public PositionedFieldDefinition getPositionedFieldDefinition(String messageName, String fieldName, PositionedField annotation) {
         FieldDefinition field = FieldDefinitions.fields.get(fieldName);
         if (field == null) {
             throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor not defined: " + fieldName);            
@@ -165,7 +165,7 @@ public class FieldDefinitions {
         return pfd;        
     }
 
-    static public TaggedFieldDefinition getTaggedFieldDescriptor(String messageName, String fieldName, TaggedField annotation) {
+    static public TaggedFieldDefinition getTaggedFieldDefinition(String messageName, String fieldName, TaggedField annotation) {
         FieldDefinition field = FieldDefinitions.fields.get(fieldName);
         if (field == null) {
             throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor not defined: " + fieldName);            
