@@ -153,6 +153,9 @@ public class FieldDefinitions {
     
     static public PositionedFieldDescriptor getPositionedFieldDescriptor(String messageName, String fieldName, PositionedField annotation) {
         FieldDescriptor field = FieldDefinitions.fields.get(fieldName);
+        if (field == null) {
+            throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor not defined: " + fieldName);            
+        }
         if (field.length == null) {
             throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor must explicit length: " + fieldName);
         }
@@ -175,6 +178,9 @@ public class FieldDefinitions {
 
     static public TaggedFieldDescriptor getTaggedFieldDescriptor(String messageName, String fieldName, TaggedField annotation) {
         FieldDescriptor field = FieldDefinitions.fields.get(fieldName);
+        if (field == null) {
+            throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor not defined: " + fieldName);            
+        }
         FieldPolicy policy = annotation.value();
         Boolean required = null;
         if (policy == FieldPolicy.REQUIRED) {
