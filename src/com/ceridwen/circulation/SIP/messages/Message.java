@@ -354,67 +354,71 @@ public abstract class Message implements Serializable {
 
     private void setProp(PropertyDescriptor desc, String value) {
         try {
-            if (desc.getPropertyType() == Boolean.class) {
-                desc.getWriteMethod().invoke(this,
-                                     new Object[] { value.equalsIgnoreCase("U") ? null :
-                                             new Boolean(value.
-                                                     equalsIgnoreCase("Y") ||
-                                                     value.equalsIgnoreCase("1")) });
-                return;
-            }
-            if (desc.getPropertyType() == Date.class) {
-                desc.getWriteMethod().invoke(this,
-                                     new Object[] { this.demangleDate(value) });
-                return;
-            }
-            if (desc.getPropertyType() == Integer.class) {
-                desc.getWriteMethod().invoke(this,
-                                     new Object[] { new Integer(value.trim()) });
-                return;
-            }
-            if (desc.getPropertyType() == String.class) {
-                desc.getWriteMethod().invoke(this,
-                                     new Object[] { new String(value) });
-                return;
-            }
-            if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
-                Object data = desc.getPropertyType().getConstructor(new Class[] { String.class }).newInstance(new Object[] { new String(value) });
-                desc.getWriteMethod().invoke(this,
-                        new Object[] { data });
-                return;
-            }
-            Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
-            for (Class<?> interfce : interfaces) {
-                if (interfce == AbstractEnumeration.class) {
-                    Method mthd = interfce.getDeclaredMethod("getKey",
-                            new Class[] { String.class });
-                    Method mthdInst = desc.getPropertyType().getDeclaredMethod("values",
-                            new Class[] {});
-                    Object[] values = (Object[]) mthdInst.invoke(null, new Object[] {});
-                    if (values.length > 0) {
-                        Object data = mthd.invoke(values[0],
-                                new Object[] { new String(value) });
+                if (desc.getPropertyType() == Boolean.class) {
+                    desc.getWriteMethod().invoke(this,
+                                         new Object[] { value.equalsIgnoreCase("U") ? null :
+                                                 new Boolean(value.
+                                                         equalsIgnoreCase("Y") ||
+                                                         value.equalsIgnoreCase("1")) });
+                    return;
+                }
+                if (desc.getPropertyType() == Date.class) {
+                    desc.getWriteMethod().invoke(this,
+                                         new Object[] { this.demangleDate(value) });
+                    return;
+                }
+                if (desc.getPropertyType() == Integer.class) {
+                    if (!value.trim().isEmpty()) {
                         desc.getWriteMethod().invoke(this,
-                                new Object[] { data });
+                                             new Object[] { new Integer(value.trim()) });
+                    }
+                    return;
+                }
+                if (desc.getPropertyType() == String.class) {
+                    desc.getWriteMethod().invoke(this,
+                                         new Object[] { new String(value) });
+                    return;
+                }
+                if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
+                    Object data = desc.getPropertyType().getConstructor(new Class[] { String.class }).newInstance(new Object[] { new String(value) });
+                    if (data != null) {
+                        desc.getWriteMethod().invoke(this,
+                            new Object[] { data });
+                    }
+                    return;
+                }
+                Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
+                for (Class<?> interfce : interfaces) {
+                    if (interfce == AbstractEnumeration.class) {
+                        Method mthd = interfce.getDeclaredMethod("getKey",
+                                new Class[] { String.class });
+                        Method mthdInst = desc.getPropertyType().getDeclaredMethod("values",
+                                new Class[] {});
+                        Object[] values = (Object[]) mthdInst.invoke(null, new Object[] {});
+                        if (values.length > 0) {
+                            Object data = mthd.invoke(values[0],
+                                    new Object[] { new String(value) });
+                            desc.getWriteMethod().invoke(this,
+                                    new Object[] { data });
+                            return;
+                        }
+                    }
+                }
+                if (desc.getPropertyType() == String[].class) {
+                    String[] current = (String[]) desc.getReadMethod().invoke(this, new Object[0]);
+                    if (current == null) {
+                        desc.getWriteMethod().invoke(this,
+                                new Object[] { new String[] { new String(value) } });
+                        return;
+                    } else {
+                        List<String> l = new ArrayList<String>(current.length + 1);
+                        l.addAll(Arrays.asList(current));
+                        l.add(new String(value));
+                        desc.getWriteMethod().invoke(this,
+                                new Object[] { l.toArray(new String[l.size()]) });
                         return;
                     }
                 }
-            }
-            if (desc.getPropertyType() == String[].class) {
-                String[] current = (String[]) desc.getReadMethod().invoke(this, new Object[0]);
-                if (current == null) {
-                    desc.getWriteMethod().invoke(this,
-                            new Object[] { new String[] { new String(value) } });
-                    return;
-                } else {
-                    List<String> l = new ArrayList<String>(current.length + 1);
-                    l.addAll(Arrays.asList(current));
-                    l.add(new String(value));
-                    desc.getWriteMethod().invoke(this,
-                            new Object[] { l.toArray(new String[l.size()]) });
-                    return;
-                }
-            }
         } catch (Exception ex) {
             Message.log.error("Unexpected error setting " + desc.getDisplayName() + " to " + value, ex);
         }
@@ -641,7 +645,7 @@ public abstract class Message implements Serializable {
     /**
      * Test Case Implementation    
      */
-    private Message getDefaultMessage() {
+    private Message getEmptyMessage() {
         try {
             Message msg = (Message)this.getClass().newInstance();
             for (Field field: this.getClass().getDeclaredFields()) {
@@ -667,6 +671,86 @@ public abstract class Message implements Serializable {
                                 if (method != null) {
                                     method.invoke(msg, new Object[]{new Date(0)});
                                 }                                                
+                            }
+                        }
+                    }
+                }
+            }
+            return msg;
+        } catch (Exception ex) {
+            Assert.fail("Exception getting default message: " + ex.getMessage());
+            return null;
+        }
+    }
+
+    private Message getDefaultMessage() {
+        try {
+            Message msg = (Message)this.getClass().newInstance();
+            for (Field field: this.getClass().getDeclaredFields()) {
+                boolean required = false;
+                int length = 0;
+                PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(msg, field.getName());
+                if (desc != null) {
+                    if (field.isAnnotationPresent(PositionedField.class)) {
+                        PositionedField annotation = (PositionedField)field.getAnnotation(PositionedField.class);               
+                        PositionedFieldDefinition fld = Fields.getPositionedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
+                        required = (fld.policy == FieldPolicy.REQUIRED);
+                        length = fld.end - fld.start + 1;
+                    }
+                    if (field.isAnnotationPresent(TaggedField.class)) {
+                        TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
+                        TaggedFieldDefinition fld = Fields.getTaggedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
+                        if (fld.policy == FieldPolicy.REQUIRED) {
+                            required = (fld.policy == FieldPolicy.REQUIRED);
+                        }
+                    }
+                    if (field.getType() == String.class) {
+                        Method method = desc.getWriteMethod();
+                        if (method != null) {
+                            if (length > 0) {
+                                method.invoke(msg, new Object[]{String.format("%0$" + length + "c", ' ')});
+                            }
+                        }
+                    }
+                    if (required) {
+                        if (field.getType() == String.class) {
+                            Method method = desc.getWriteMethod();
+                            if (method != null) {
+                                if (length == 0) {
+                                    method.invoke(msg, new Object[]{new String()});
+                                }
+                            }
+                        }
+                        if (field.getType() == Integer.class) {
+                            Method method = desc.getWriteMethod();
+                            if (method != null) {
+                                method.invoke(msg, new Object[]{new Integer(0)});
+                            }
+                        }
+                        if (field.getType() == Boolean.class) {
+                            Method method = desc.getWriteMethod();
+                            if (method != null) {
+                                method.invoke(msg, new Object[]{new Boolean(false)});
+                            }
+                        }
+                        if (field.getType() == Date.class) {
+                            Method method = desc.getWriteMethod();
+                            if (method != null) {
+                                method.invoke(msg, new Object[]{new Date(0)});
+                            }
+                        }
+                        Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
+                        for (Class<?> interfce : interfaces) {
+                            if (interfce == AbstractEnumeration.class) {
+                                if (field.isAnnotationPresent(PositionedField.class)) {
+                                    Method mthdInst = desc.getPropertyType().getDeclaredMethod("values",
+                                            new Class[] {});
+                                    Object[] values = (Object[]) mthdInst.invoke(null, new Object[] {});
+                                    if (values.length > 0) {
+                                        desc.getWriteMethod().invoke(msg,
+                                                new Object[] { values[0] });
+                                    }                                    
+                                }
                             }
                         }
                     }
@@ -763,7 +847,7 @@ public abstract class Message implements Serializable {
     public void TestCaseDefaultEncode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
-                String t = this.getDefaultMessage().encode(null);
+                String t = this.getEmptyMessage().encode(null);
                 String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
                 Assert.assertEquals(v, t);
             } else {
@@ -856,7 +940,7 @@ public abstract class Message implements Serializable {
     @Test
     public void TestCaseDefaultRoundTrip() {
         try {
-            String t = this.getDefaultMessage().encode('0');
+            String t = this.getEmptyMessage().encode('0');
             Message m;
             m = Message.decode(t, '0', true);
             Assert.assertEquals(t, m.encode('0'));
