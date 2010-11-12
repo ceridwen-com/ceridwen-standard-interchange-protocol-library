@@ -18,6 +18,7 @@ lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar -text
 /license.txt -text svneol=unset#text/plain
 /package-jar.xml -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/Command.java -text svneol=unset#text/plain
+src/com/ceridwen/circulation/SIP/annotations/Field.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/PositionedField.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/TaggedField.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/TestCaseDefault.java -text svneol=unset#text/plain
@@ -30,7 +31,6 @@ src/com/ceridwen/circulation/SIP/exceptions/MessageNotUnderstood.java -text
 src/com/ceridwen/circulation/SIP/exceptions/RetriesExceeded.java -text
 src/com/ceridwen/circulation/SIP/exceptions/SequenceError.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/FieldDefinition.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/fields/FieldDefinitions.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/FieldPolicy.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/FieldStatisticsGatherer.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/fields/PositionedFieldDefinition.java -text

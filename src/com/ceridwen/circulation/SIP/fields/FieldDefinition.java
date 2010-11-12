@@ -21,7 +21,7 @@ package com.ceridwen.circulation.SIP.fields;
 public class FieldDefinition {
     public String tag;
     public Class<?> type;
-    public Integer length;
+    public int length;
     public FieldPolicy policy = FieldPolicy.DEFAULT;
 
     protected FieldDefinition() {
@@ -48,6 +48,9 @@ public class FieldDefinition {
         this.type = type;
         this.length = length;
         this.policy = policy;
+        if (this.tag == null) {
+            this.tag = "";
+        }            
         if (this.policy == null) {
             this.policy = FieldPolicy.DEFAULT;
         }
