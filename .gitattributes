@@ -104,11 +104,6 @@ src/com/ceridwen/circulation/SIP/tests/SCStatusTest.java -text svneol=unset#text
 src/com/ceridwen/circulation/SIP/transport/Connection.java -text
 src/com/ceridwen/circulation/SIP/transport/SocketConnection.java -text
 src/com/ceridwen/circulation/SIP/transport/TelnetConnection.java -text
-src/com/ceridwen/circulation/SIP/types/descriptors/FieldDefinitions.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/types/descriptors/FieldDescriptor.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/types/descriptors/FieldStatisticsGatherer.java -text svneol=unset#text/plain
-src/com/ceridwen/circulation/SIP/types/descriptors/PositionedFieldDescriptor.java -text
-src/com/ceridwen/circulation/SIP/types/descriptors/TaggedFieldDescriptor.java -text
 src/com/ceridwen/circulation/SIP/types/enumerations/AbstractEnumeration.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/CirculationStatus.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/CurrencyType.java -text svneol=unset#text/plain
