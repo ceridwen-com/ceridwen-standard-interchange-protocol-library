@@ -612,7 +612,7 @@ public abstract class Message implements Serializable {
         for (Messages m: Messages.values()) {
             try {
                 @SuppressWarnings("unchecked")
-                Class<? extends Message> message = (Class<? extends Message>)Class.forName("com.ceridwen.circulation.SIP.messages." + m.name());
+                Class<? extends Message> message = (Class<? extends Message>)Class.forName(Messages.class.getPackage().getName() +  "." + m.name());
                 if (message != null) {
                     if (message.isAnnotationPresent(Command.class)) {
                         Message.messages.put(((Command)message.getAnnotation(Command.class)).value(),
