@@ -22,20 +22,20 @@ public class FieldDefinition {
     public String tag;
     public Class<?> type;
     public Integer length;
-    public Boolean required;
+    public FieldPolicy policy = FieldPolicy.DEFAULT;
 
     protected FieldDefinition() {
     }
 
-    protected FieldDefinition(String name, FieldDefinition d, Boolean required) {
+    protected FieldDefinition(String name, FieldDefinition d, FieldPolicy policy) {
         this.tag = d.tag;
         this.length = d.length;
-        if ((d.required == null) && (required != null)) {
-            this.required = required;
-        } else if ((d.required == null) && (required == null)) {
+        if ((d.policy == FieldPolicy.DEFAULT) && (policy != FieldPolicy.DEFAULT)) {
+            this.policy = policy;
+        } else if ((d.policy == FieldPolicy.DEFAULT) && (policy == FieldPolicy.DEFAULT)) {
             throw new java.lang.AssertionError(name + " mutable required state needs explicit value");
-        } else if ((d.required != null) && (required == null)) {
-            this.required = d.required;
+        } else if ((d.policy != FieldPolicy.DEFAULT) && (policy == FieldPolicy.DEFAULT)) {
+            this.policy = d.policy;
         } else {
             throw new java.lang.AssertionError(name + " immutable required state cannot be overriden");
         }
@@ -43,10 +43,13 @@ public class FieldDefinition {
         // this.required);
     }
 
-    protected FieldDefinition(String tag, Class<?> type, Integer length, Boolean required) {
+    protected FieldDefinition(String tag, Class<?> type, Integer length, FieldPolicy policy) {
         this.tag = tag;
         this.type = type;
         this.length = length;
-        this.required = required;
+        this.policy = policy;
+        if (this.policy == null) {
+            this.policy = FieldPolicy.DEFAULT;
+        }
     }
 }

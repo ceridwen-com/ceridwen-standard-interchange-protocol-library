@@ -1,4 +1,4 @@
-package com.ceridwen.circulation.SIP.annotations;
+package com.ceridwen.circulation.SIP.fields;
 
 public enum FieldPolicy {
         REQUIRED,

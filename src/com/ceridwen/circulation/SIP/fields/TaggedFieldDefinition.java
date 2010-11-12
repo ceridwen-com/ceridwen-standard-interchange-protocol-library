@@ -30,12 +30,11 @@ package com.ceridwen.circulation.SIP.fields;
 public class TaggedFieldDefinition extends FieldDefinition {
     public static final char TERMINATOR = '|';
 
-    protected TaggedFieldDefinition(String name, FieldDefinition d, Boolean required) {
-        super(name, d, required);
+    protected TaggedFieldDefinition(String name, FieldDefinition d, FieldPolicy policy) {
+        super(name, d, policy);
     }
 
-    public TaggedFieldDefinition(Boolean required) {
-        this.required = required;
+    public TaggedFieldDefinition(FieldPolicy policy) {
+        this.policy = policy;
     }
-
 }

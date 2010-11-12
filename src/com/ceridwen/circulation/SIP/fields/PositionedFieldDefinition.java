@@ -33,8 +33,8 @@ public class PositionedFieldDefinition extends FieldDefinition {
     @SuppressWarnings("unused")
     private final String tag = null;
 
-    protected PositionedFieldDefinition(String name, int start, int end, FieldDefinition d, Boolean required) {
-        super(name, d, required);
+    protected PositionedFieldDefinition(String name, int start, int end, FieldDefinition d, FieldPolicy policy) {
+        super(name, d, policy);
         this.start = start;
         this.end = end;
     }
@@ -42,12 +42,12 @@ public class PositionedFieldDefinition extends FieldDefinition {
     public PositionedFieldDefinition(int start, int end) {
         this.start = start;
         this.end = end;
-        this.required = null;
+        this.policy = FieldPolicy.DEFAULT;
     }
 
-    public PositionedFieldDefinition(int start, int end, Boolean required) {
+    public PositionedFieldDefinition(int start, int end, FieldPolicy policy) {
         this.start = start;
         this.end = end;
-        this.required = required;
+        this.policy = policy;
     }
 }

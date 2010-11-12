@@ -19,11 +19,11 @@
 package com.ceridwen.circulation.SIP.messages;
 
 import com.ceridwen.circulation.SIP.annotations.Command;
-import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
 import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
 @Command("16")
 @TestCaseDefault("160N19700101    010000AA|AO|")

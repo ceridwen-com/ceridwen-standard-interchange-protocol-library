@@ -69,6 +69,7 @@ import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
 import com.ceridwen.circulation.SIP.exceptions.SequenceError;
 import com.ceridwen.circulation.SIP.fields.FieldDefinition;
 import com.ceridwen.circulation.SIP.fields.FieldDefinitions;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 import com.ceridwen.circulation.SIP.fields.PositionedFieldDefinition;
 import com.ceridwen.circulation.SIP.fields.TaggedFieldDefinition;
 import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
@@ -168,8 +169,8 @@ public abstract class Message implements Serializable {
             if (desc.getPropertyType() == Boolean.class) {
                 if (value == null) {
                     if (SIPField != null) {
-                        if (SIPField.required != null) {
-                            if (SIPField.required) {
+                        if (SIPField.policy != null) {
+                            if (SIPField.policy == FieldPolicy.REQUIRED) {
                                 if (!autoPop) {
                                     throw new MandatoryFieldOmitted(desc.getDisplayName());
                                 }
@@ -195,8 +196,8 @@ public abstract class Message implements Serializable {
                     ret = new String[] { this.mangleDate((Date) value) };
                 } else {
                     if (SIPField != null) {
-                        if (SIPField.required != null) {
-                            if (SIPField.required) {
+                        if (SIPField.policy != null) {
+                            if (SIPField.policy == FieldPolicy.REQUIRED) {
                                 if (!autoPop) {
                                     throw new MandatoryFieldOmitted(desc.getDisplayName());
                                 }
@@ -218,8 +219,8 @@ public abstract class Message implements Serializable {
                     }
                 } else {
                     if (SIPField != null) {
-                        if (SIPField.required != null) {
-                            if (SIPField.required) {
+                        if (SIPField.policy != null) {
+                            if (SIPField.policy == FieldPolicy.REQUIRED) {
                                 if (!autoPop) {
                                     throw new MandatoryFieldOmitted(desc.getDisplayName());
                                 }
@@ -237,8 +238,8 @@ public abstract class Message implements Serializable {
                     ret = new String[] { value.toString() };
                 } else {
                     if (SIPField != null) {
-                        if (SIPField.required != null) {
-                            if (SIPField.required) {
+                        if (SIPField.policy != null) {
+                            if (SIPField.policy == FieldPolicy.REQUIRED) {
                                 if (!autoPop) {
                                     throw new MandatoryFieldOmitted(desc.getDisplayName());
                                 }
@@ -301,7 +302,7 @@ public abstract class Message implements Serializable {
                 }
                 String[] value = this.getProp(desc, field);
                 if (value[0].length() == 0) {
-                    if (field.required) {
+                    if (field.policy == FieldPolicy.REQUIRED) {
                         throw new MandatoryFieldOmitted(desc.getDisplayName());
                     }
                 }
@@ -346,7 +347,7 @@ public abstract class Message implements Serializable {
                         }
                     }
                     variable.put(field.tag, value);
-                } else if (field.required) {
+                } else if (field.policy == FieldPolicy.REQUIRED) {
                     String pop = System.getProperty(Message.PROP_AUTOPOPULATE, "true");
                     if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
                         variable.put(field.tag, value);
@@ -676,7 +677,7 @@ public abstract class Message implements Serializable {
                         if (field.isAnnotationPresent(PositionedField.class)) {
                             PositionedField annotation = (PositionedField)field.getAnnotation(PositionedField.class);               
                             PositionedFieldDefinition fld = FieldDefinitions.getPositionedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
-                            if (fld.required) {
+                            if (fld.policy == FieldPolicy.REQUIRED) {
                                 Method method = desc.getWriteMethod();
                                 if (method != null) {
                                     method.invoke(msg, new Object[]{new Date(0)});
@@ -687,7 +688,7 @@ public abstract class Message implements Serializable {
                         if (field.isAnnotationPresent(TaggedField.class)) {
                             TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
                             TaggedFieldDefinition fld = FieldDefinitions.getTaggedFieldDescriptor(this.getClass().getName(), field.getName(), annotation);
-                            if (fld.required) {
+                            if (fld.policy == FieldPolicy.REQUIRED) {
                                 Method method = desc.getWriteMethod();
                                 if (method != null) {
                                     method.invoke(msg, new Object[]{new Date(0)});

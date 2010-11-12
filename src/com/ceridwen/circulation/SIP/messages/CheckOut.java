@@ -30,11 +30,11 @@ package com.ceridwen.circulation.SIP.messages;
 import java.util.Date;
 
 import com.ceridwen.circulation.SIP.annotations.Command;
-import com.ceridwen.circulation.SIP.annotations.FieldPolicy;
 import com.ceridwen.circulation.SIP.annotations.PositionedField;
 import com.ceridwen.circulation.SIP.annotations.TaggedField;
 import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
 import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
 @Command("11")
 @TestCaseDefault("11NN19700101    010000                  AA|AB|AC|AO|")

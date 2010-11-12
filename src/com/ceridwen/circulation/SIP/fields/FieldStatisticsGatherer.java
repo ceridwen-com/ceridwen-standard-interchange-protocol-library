@@ -95,7 +95,7 @@ public class FieldStatisticsGatherer extends Thread {
         Enumeration<String> names = fields.keys();
         while (names.hasMoreElements()) {
             String name = names.nextElement();
-            this.usages.put(name, new Usage(this.usages.get(name), name, ((fields.get(name)).required == null)));
+            this.usages.put(name, new Usage(this.usages.get(name), name, ((fields.get(name)).policy == null)));
         }
     }
 }
