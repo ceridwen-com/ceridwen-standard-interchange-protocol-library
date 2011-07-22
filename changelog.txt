@@ -1,4 +1,4 @@
-Version 2.60: 22/7/2011 (362)
+Version 2.60: 22/7/2011 (363)
 AutoPopulationEmptyRequiredFields can now be set to off, decode, encode or bidirectional (default)
 Refactored to use StringUtils.isEmpty
 Changed boolean getter methods to is... from get...
@@ -7,7 +7,7 @@ Added system property com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyR
   If false will generate MandatoryFieldOmmitted exception is require field not explicitly set
   Previous behaviour equivalent to true
 ACS/SCRenevalPolicy and onlineStatus named to be consistent with spec.
-Requires Ceridwen Utility Library 1.40
+Requires Ceridwen Utilities Library 1.40
 
 Version 2.50: 3/11/2010 (255) - Public Release
 Refactoring to consolidated the message fields definitions into FieldDefinitions class
