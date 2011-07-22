@@ -1,9 +1,9 @@
 #Build Number: src/com/ceridwen/circulation/SIP/messages/Message.num
-#Fri, 22 Jul 2011 14:58:55 +0100
+#Fri, 22 Jul 2011 15:34:56 +0100
 #Fri Nov 12 20:29:27 GMT 2010
 version=3.00
-date=Fri Jul 22 14\:58\:55 BST 2011
+date=Fri Jul 22 15\:34\:56 BST 2011
 name=Ceridwen 3M SIP Circulation Protocol Library
 author=Matthew J. Dovey (http\://www.ceridwen.com)
 epoch=1140293090453
-build=1355
+build=1356

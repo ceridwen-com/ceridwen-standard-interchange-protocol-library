@@ -70,6 +70,11 @@ public abstract class Message implements Serializable {
 	 */
     private static final long serialVersionUID = 1609258005567594730L;
     private static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
+    private static final String PROP_AUTOPOPULATE_OFF = "off";
+    private static final String PROP_AUTOPOPULATE_DECODE = "decode";
+    private static final String PROP_AUTOPOPULATE_ENCODE = "encode";
+    private static final String PROP_AUTOPOPULATE_BIDIRECTIONAL = "bidirectional";
+    private static final String PROP_AUTOPOPULATE_DEFAULT = PROP_AUTOPOPULATE_BIDIRECTIONAL;
     private static Log log = LogFactory.getLog(Message.class);
 
     private static Class<?>[] _messages = {
@@ -139,9 +144,9 @@ public abstract class Message implements Serializable {
     private String[] getProp(PropertyDescriptor desc) throws MandatoryFieldOmitted {
         String[] ret = null;
         FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
-        String pop = System.getProperty(Message.PROP_AUTOPOPULATE, "true");
+        String pop = System.getProperty(Message.PROP_AUTOPOPULATE, PROP_AUTOPOPULATE_BIDIRECTIONAL);
         boolean autoPop = false;
-        if (pop.equalsIgnoreCase("true") || pop.equalsIgnoreCase("on") || pop.equalsIgnoreCase("1")) {
+        if (pop.equalsIgnoreCase(PROP_AUTOPOPULATE_ENCODE) || pop.equalsIgnoreCase(PROP_AUTOPOPULATE_BIDIRECTIONAL)) {
             autoPop = true;
         }
         try {
@@ -408,8 +413,13 @@ public abstract class Message implements Serializable {
         }
     }
 
-    public static Message decode(String message, Character sequence, boolean checksumCheck) throws ChecksumError, MandatoryFieldOmitted, SequenceError,
+    public static Message decode(String message, Character sequence, boolean checksumCheck) throws MandatoryFieldOmitted, ChecksumError, SequenceError,
             MessageNotUnderstood {
+        String pop = System.getProperty(Message.PROP_AUTOPOPULATE, PROP_AUTOPOPULATE_BIDIRECTIONAL);
+        boolean autoPop = false;
+        if (pop.equalsIgnoreCase(PROP_AUTOPOPULATE_DECODE) || pop.equalsIgnoreCase(PROP_AUTOPOPULATE_BIDIRECTIONAL)) {
+            autoPop = true;
+        }
 
         if (checksumCheck) {
             if (!Message.CheckChecksum(message)) {
@@ -433,35 +443,57 @@ public abstract class Message implements Serializable {
             throw new MessageNotUnderstood();
         }
         String command = message.substring(0, 2);
-        try {
-            Message msg = (Message) ((Class<?>) Message.messages.get(command)).newInstance();
-            PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(msg);
+        Message msg;
+		try {
+			msg = (Message) ((Class<?>) Message.messages.get(command)).newInstance();
+		} catch (Exception e) {
+            throw new MessageNotUnderstood();				
+		}
+        PropertyDescriptor[] descs = PropertyUtils.getPropertyDescriptors(msg);
 
-            int fixedFieldEnd = 2;
+        int fixedFieldEnd = 2;
 
-            for (PropertyDescriptor desc : descs) {
-                FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
-                String value = "";
-                if (SIPField != null) {
-                    if (SIPField.getClass() == PositionedFieldDescriptor.class) {
-                        PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
-                        value = message.substring(field.start, field.end + 1);
-                        msg.setProp(desc, value);
-                        if (fixedFieldEnd < field.end) {
-                            fixedFieldEnd = field.end;
-                        }
+        for (PropertyDescriptor desc : descs) {
+            FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
+            String value = "";
+            if (SIPField != null) {
+                if (SIPField.getClass() == PositionedFieldDescriptor.class) {
+                    PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
+                    value = message.substring(field.start, field.end + 1);
+                    msg.setProp(desc, value);
+                    if (fixedFieldEnd < field.end) {
+                        fixedFieldEnd = field.end;
                     }
                 }
             }
-
-            msg.parseVarFields(fixedFieldEnd + 1, message);
-
-            msg.SequenceCharacter = sequenceCharacter;
-
-            return msg;
-        } catch (Exception ex) {
-            throw new MessageNotUnderstood();
         }
+
+        msg.parseVarFields(fixedFieldEnd + 1, message);
+        
+        msg.SequenceCharacter = sequenceCharacter;
+
+        for (PropertyDescriptor desc : descs) {
+            FieldDescriptor SIPField = (FieldDescriptor) desc.getValue("SIPFieldDescriptor");
+            String value = "";
+            if (SIPField != null) {
+                if (SIPField.getClass() == TaggedFieldDescriptor.class) {
+                    TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
+                    if (field.required != null) { //Should never be null
+                    	if (field.required && msg.getProp(desc) == null) {
+                    		if (autoPop) {
+                    			msg.setProp(desc, "");
+                    		} else {
+                    			throw new MandatoryFieldOmitted(desc.getDisplayName());
+                    		}
+                    	}                    	
+                    } else {
+                        Message.log.error("Required field descriptor not set " + desc.getDisplayName());                    	
+                    }
+                }
+            }
+        }
+
+        return msg;
     }
 
     private static boolean CheckChecksum(String message) {
