@@ -51,6 +51,7 @@ import java.util.TreeMap;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.lang3.StringUtils;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
@@ -272,7 +273,7 @@ public abstract class Message implements Serializable {
                 if (SIPField.getClass().equals(PositionedFieldDescriptor.class)) {
                     PositionedFieldDescriptor field = (PositionedFieldDescriptor) SIPField;
                     String[] value = this.getProp(desc);
-                    if (value[0].length() == 0) {
+                    if (StringUtils.isEmpty(value[0])) {
                         if (field.required) {
                             throw new MandatoryFieldOmitted(desc.getDisplayName());
                         }
@@ -281,7 +282,7 @@ public abstract class Message implements Serializable {
                         throw new InvalidFieldLength(desc.getDisplayName(), (field.end - field.start + 1));
                     }
                     if ((desc.getPropertyType() == Date.class) || (desc.getPropertyType() == Boolean.class) || (desc.getPropertyType() == Integer.class)) {
-                        if (!((value[0].length() == 0) || (value[0].length() == (field.end - field.start + 1)))) {
+                        if (!(StringUtils.isEmpty(value[0]) || (value[0].length() == (field.end - field.start + 1)))) {
                             throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName()
                                     + ", start/end (" + field.start + "," + field.end + ") invalid for type " +
                                     desc.getPropertyType().getName());
@@ -292,7 +293,7 @@ public abstract class Message implements Serializable {
                 if (SIPField.getClass().equals(TaggedFieldDescriptor.class)) {
                     TaggedFieldDescriptor field = (TaggedFieldDescriptor) SIPField;
                     String[] value = this.getProp(desc);
-                    if (value[0].length() > 0) {
+                    if (StringUtils.isNotEmpty(value[0])) {
                         if (field.length != null) {
                             if (desc.getPropertyType() == String.class) {
                                 if (value[0].length() > field.length) {

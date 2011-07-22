@@ -30,6 +30,7 @@ package com.ceridwen.circulation.SIP.transport;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -142,7 +143,7 @@ public abstract class Connection {
     protected String strim(String input) {
         String ret = input;
 
-        while ((ret.charAt(0) == 0) && (ret.length() > 0)) {
+        while ((ret.charAt(0) == 0) && (StringUtils.isNotEmpty(ret))) {
             ret = ret.substring(1);
 
         }
