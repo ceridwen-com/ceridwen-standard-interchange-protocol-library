@@ -1,4 +1,4 @@
-Version 2.60: 22/7/2011 ()
+Version 2.60: 22/7/2011 (352)
 AutoPopulationEmptyRequiredFields can now be set to off, decode, encode or bidirectional (default)
 Refactored to use StringUtils.isEmpty
 Changed boolean getter methods to is... from get...
