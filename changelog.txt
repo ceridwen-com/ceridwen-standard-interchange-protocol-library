@@ -1,4 +1,5 @@
 Version 2.60:
+AutoPopulationEmptyRequiredFields can now be set to off, decode, encode or bidirectional (default)
 Refactored to use StringUtils.isEmpty
 Changed boolean getter methods to is... from get...
 Added system property com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields
