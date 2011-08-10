@@ -1,4 +1,4 @@
-Version 2.70:
+Version 2.70: 10/08/2011 (371)
 Merge with annotation refactoring
 Fixed bugs when autopopulation is not bidirectional 
 
