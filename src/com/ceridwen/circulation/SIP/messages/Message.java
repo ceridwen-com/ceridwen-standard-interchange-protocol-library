@@ -137,12 +137,12 @@ public abstract class Message implements Serializable {
                     if (SIPField != null) {
                         if (SIPField.policy != null) {
                             if (SIPField.policy == FieldPolicy.REQUIRED) {
-                                if (!autoPop) {
-                                    throw new MandatoryFieldOmitted(desc.getDisplayName());
-                                }
                                 if (desc.getName().equalsIgnoreCase("magneticMedia")) {
                                     ret = new String[] { "U" };
                                 } else {
+                                    if (!autoPop) {
+                                        throw new MandatoryFieldOmitted(desc.getDisplayName());
+                                    }
                                     if (desc.getName().equalsIgnoreCase("ok")) {
                                         ret = new String[] { "0" };
                                     } else {
@@ -263,74 +263,70 @@ public abstract class Message implements Serializable {
         Field[] fields = this.getClass().getDeclaredFields(); 
 
         for (Field fld : fields) {
-            if (fld.isAnnotationPresent(PositionedField.class)) {
-                PositionedField annotation = (PositionedField)fld.getAnnotation(PositionedField.class);               
-                PositionedFieldDefinition field = Fields.getPositionedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
-                PropertyDescriptor desc;
-                try {
-                    desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-                } catch (Exception ex) {
-                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
-                }
-                if (desc == null) {
-                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
-                }
-                String[] value = this.getProp(desc, field, autoPop);
-                    if (StringUtils.isEmpty(value[0])) {
-                    	if (field.policy == FieldPolicy.REQUIRED) {
-                            throw new MandatoryFieldOmitted(desc.getDisplayName());
-                        }
-                    }
-                    if (value[0].length() > (field.end - field.start + 1)) {
-                        throw new InvalidFieldLength(desc.getDisplayName(), (field.end - field.start + 1));
-                    }
-                    if ((desc.getPropertyType() == Date.class) || (desc.getPropertyType() == Boolean.class) || (desc.getPropertyType() == Integer.class)) {
-                        if (!(StringUtils.isEmpty(value[0]) || (value[0].length() == (field.end - field.start + 1)))) {
-                            throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName()
-                                    + ", start/end (" + field.start + "," + field.end + ") invalid for type " +
-                                    desc.getPropertyType().getName());
-                        }
-                    }
-                if (fixed.containsKey(new Integer(field.start))) {
-                    throw new java.lang.AssertionError("Positioning error inserting field at " + field.start + " for class " + this.getClass().getName());                    
-                }
-                    fixed.put(new Integer(field.start), this.pad(value[0], field));
-                }
-            if (fld.isAnnotationPresent(TaggedField.class)) {
-                TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
-                TaggedFieldDefinition field = Fields.getTaggedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
-                PropertyDescriptor desc;
-                try {
-                    desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-                } catch (Exception ex) {
-                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
-                }
-                if (desc == null) {
-                    throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
-                }
-                String[] value = this.getProp(desc, field, autoPop);
-               if (StringUtils.isNotEmpty(value[0])) {
-                    if (field.length != 0) {
-                        if (desc.getPropertyType() == String.class) {
-                            if (value[0].length() > field.length) {
-                                throw new InvalidFieldLength(desc.getDisplayName(), field.length);
-                            }
-                        } else {
-                            if (value[0].length() != field.length) {
-                                throw new InvalidFieldLength(desc.getDisplayName(), field.length);
-                            }
-                        }
-                    }
-                    variable.put(field.tag, value);
-                } else if (field.policy == FieldPolicy.REQUIRED) {
-                        if (autoPop) {
-                            variable.put(field.tag, new String[]{""});
-                        } else {
-                            throw new MandatoryFieldOmitted(desc.getDisplayName());
-                        }
-                    }
-                }
-            }
+        	if (fld.isAnnotationPresent(PositionedField.class)) {
+        		PositionedField annotation = (PositionedField)fld.getAnnotation(PositionedField.class);               
+        		PositionedFieldDefinition field = Fields.getPositionedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
+        		PropertyDescriptor desc;
+        		try {
+        			desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+        		} catch (Exception ex) {
+        			throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
+        		}
+        		if (desc == null) {
+        			throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
+        		}
+        		String[] value = this.getProp(desc, field, autoPop);
+//                    if (StringUtils.isEmpty(value[0])) {
+//                    	if (field.policy == FieldPolicy.REQUIRED) {
+//                            throw new MandatoryFieldOmitted(desc.getDisplayName());
+//                        }
+//                    }
+        		if (value[0].length() > (field.end - field.start + 1)) {
+        			throw new InvalidFieldLength(desc.getDisplayName(), (field.end - field.start + 1));
+        		}
+        		if ((desc.getPropertyType() == Date.class) || (desc.getPropertyType() == Boolean.class) || (desc.getPropertyType() == Integer.class)) {
+        			if (!(StringUtils.isEmpty(value[0]) || (value[0].length() == (field.end - field.start + 1)))) {
+        				throw new java.lang.AssertionError("FixedFieldDescriptor for " + desc.getDisplayName() + " in " + this.getClass().getSimpleName()
+        						+ ", start/end (" + field.start + "," + field.end + ") invalid for type " +
+        						desc.getPropertyType().getName());
+        			}
+        		}
+        		if (fixed.containsKey(new Integer(field.start))) {
+        			throw new java.lang.AssertionError("Positioning error inserting field at " + field.start + " for class " + this.getClass().getName());                    
+        		}
+        		fixed.put(new Integer(field.start), this.pad(value[0], field));
+        	}
+        	if (fld.isAnnotationPresent(TaggedField.class)) {
+        		TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
+        		TaggedFieldDefinition field = Fields.getTaggedFieldDefinition(this.getClass().getName(), fld.getName(), annotation);
+        		PropertyDescriptor desc;
+        		try {
+        			desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
+        		} catch (Exception ex) {
+        			throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
+        		}
+        		if (desc == null) {
+        			throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
+        		}
+        		String[] value = this.getProp(desc, field, autoPop);
+        		if (StringUtils.isNotEmpty(value[0])) {
+        			if (field.length != 0) {
+        				if (desc.getPropertyType() == String.class) {
+        					if (value[0].length() > field.length) {
+        						throw new InvalidFieldLength(desc.getDisplayName(), field.length);
+        					}
+        				} else {
+        					if (value[0].length() != field.length) {
+        						throw new InvalidFieldLength(desc.getDisplayName(), field.length);
+        					}
+        				}
+        			}
+        			variable.put(field.tag, value);
+        		} else if (field.policy == FieldPolicy.REQUIRED) {
+        			variable.put(field.tag, new String[]{""});
+        		}
+        	}
+        }
 
         if (this.getClass().isAnnotationPresent(Command.class)) {
             message.append(((Command)(this.getClass().getAnnotation(Command.class))).value());
@@ -495,7 +491,13 @@ public abstract class Message implements Serializable {
                     throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + msg.getClass().getName());                    
                 }
                 String value = "";
-                value = message.substring(field.start, field.end + 1);
+                if (message.length() > field.end) {
+                	value = message.substring(field.start, field.end + 1);
+                } else {
+                	if (!autoPop) {
+                		throw new MandatoryFieldOmitted(desc.getDisplayName());                		
+                	}
+                }
                 msg.setProp(desc, value);
                 if (fixedFieldEnd < field.end) {
                     fixedFieldEnd = field.end;
@@ -885,12 +887,54 @@ public abstract class Message implements Serializable {
             return null;
         }
     }    
-
+    
+    @Test 
+    public void TestCaseDisableEncodeAutoPopulate() {
+    	try {
+    		if (this instanceof SCResend || this instanceof ACSResend) { // have no mandatory fields
+    			return;
+    		}
+			this.getEmptyMessage().encode(null, false);
+	    	Assert.fail("Missing mandatory fields not caught");
+		} catch (MandatoryFieldOmitted e) {
+			Assert.assertTrue("Caught missing mandatory field: " + e.getMessage(), true);
+		} catch (InvalidFieldLength e) {
+            Assert.fail("Fixed Field Too Long: " + e.getMessage());
+		} catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
+		} 
+    }
+    
+    @Test 
+    public void TestCaseDisableDecodeAutoPopulate() {
+    	try {
+    		if (this instanceof SCResend || this instanceof ACSResend) { // have no mandatory fields
+    			return;
+    		}
+    		String message = "";
+            if (this.getClass().isAnnotationPresent(Command.class)) {
+                message = ((Command)(this.getClass().getAnnotation(Command.class))).value();
+            } else {
+                Assert.fail("No command annotation present for class " + this.getClass().getName());
+            }    		
+    		Message.decode(message, null, false, false);
+        	Assert.fail("Missing mandatory fields not caught");
+		} catch (MandatoryFieldOmitted e) {
+			Assert.assertTrue("Caught missing mandatory field: " + e.getMessage(), true);
+		} catch (MessageNotUnderstood e) {
+            Assert.fail("Message not understood: " + e.getMessage());
+		} catch (ChecksumError e) {
+            Assert.fail("Checksum Error");
+        } catch (SequenceError e) {
+            Assert.fail("Sequence Error");
+		}
+    }    
+    
     @Test
     public void TestCaseDefaultEncode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
-                String t = this.getEmptyMessage().encode(null);
+                String t = this.getEmptyMessage().encode(null, true);
                 String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
                 Assert.assertEquals(v, t);
             } else {
@@ -911,7 +955,7 @@ public abstract class Message implements Serializable {
             if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
                 String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Message m = Message.decode(v, null, false);
+                Message m = Message.decode(v, null, false, false);
                 m.xmlEncode(stream);
                 String r = stream.toString();
                 stream = new ByteArrayOutputStream();
@@ -937,7 +981,7 @@ public abstract class Message implements Serializable {
     public void TestCasePopulatedEncode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
-                String t = this.getPopulatedMessage().encode(null);
+                String t = this.getPopulatedMessage().encode(null, false);
                 String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
                 Assert.assertEquals(v, t);
             } else {
@@ -958,7 +1002,7 @@ public abstract class Message implements Serializable {
             if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
                 String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Message m = Message.decode(v, null, false);
+                Message m = Message.decode(v, null, false, false);
                 m.xmlEncode(stream);
                 String r = stream.toString();
                 stream = new ByteArrayOutputStream();
@@ -983,10 +1027,10 @@ public abstract class Message implements Serializable {
     @Test
     public void TestCaseDefaultRoundTrip() {
         try {
-            String t = this.getEmptyMessage().encode('0');
+            String t = this.getEmptyMessage().encode('0', true);
             Message m;
-            m = Message.decode(t, '0', true);
-            Assert.assertEquals(t, m.encode('0'));
+            m = Message.decode(t, '0', true, false);
+            Assert.assertEquals(t, m.encode('0', false));
         } catch (MandatoryFieldOmitted e) {
             Assert.fail("Mandatory Field Omitted: " + e.getMessage());
         } catch (InvalidFieldLength e) {
@@ -1003,10 +1047,10 @@ public abstract class Message implements Serializable {
     @Test
     public void TestCasePopulatedRoundTrip() {
         try {
-            String t = this.getPopulatedMessage().encode('0');
+            String t = this.getPopulatedMessage().encode('0', false);
             Message m;
-            m = Message.decode(t, '0', true);
-            Assert.assertEquals(t, m.encode('0'));
+            m = Message.decode(t, '0', true, false);
+            Assert.assertEquals(t, m.encode('0', false));
         } catch (MandatoryFieldOmitted e) {
             Assert.fail("Mandatory Field Omitted: " + e.getMessage());
         } catch (InvalidFieldLength e) {
