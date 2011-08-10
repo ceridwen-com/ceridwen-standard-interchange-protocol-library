@@ -20,32 +20,32 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
 
-/**
- * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
- * </p>
- * 
- * @author Matthew J. Dovey
- * @version 1.0
- */
-
+@Command("23")
+@TestCaseDefault("2300019700101    010000AA|AC|AD|AO|")
+@TestCasePopulated("2302719700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|")
 public class PatronStatusRequest extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -4867507215519281871L;
+    @PositionedField(start = 2, end = 4)
     private Language language;
+    @PositionedField(start = 5, end = 22)
     private Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String terminalPassword;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronPassword;
 
-    @Override
-    public String getCommand() {
-        return "23";
-    }
 
     public String getInstitutionId() {
         return this.institutionId;

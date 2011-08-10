@@ -18,22 +18,30 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class RenewAll extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = -7106820916482094784L;
-    private java.util.Date transactionDate;
-    private String institutionId;
-    private String patronIdentifier;
-    private String patronPassword;
-    private String terminalPassword;
-    private Boolean feeAcknowledged;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
-    @Override
-    public String getCommand() {
-        return "65";
-    }
+@Command("65")
+@TestCaseDefault("6519700101    010000AA|AO|")
+@TestCasePopulated("6519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BOY|")
+public class RenewAll extends Message {
+    private static final long serialVersionUID = -7106820916482094784L;
+    @PositionedField(start = 2, end = 19)
+    private java.util.Date transactionDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String patronPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String terminalPassword;
+    @TaggedField
+    private Boolean feeAcknowledged;
 
     public java.util.Date getTransactionDate() {
         return this.transactionDate;

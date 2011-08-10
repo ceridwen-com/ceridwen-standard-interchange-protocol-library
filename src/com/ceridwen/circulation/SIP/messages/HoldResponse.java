@@ -18,28 +18,42 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class HoldResponse extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 2267131763722749419L;
-    private Boolean ok;
-    private Boolean available;
-    private java.util.Date transactionDate;
-    private java.util.Date expirationDate;
-    private Integer queuePosition;
-    private String pickupLocation;
-    private String institutionId;
-    private String patronIdentifier;
-    private String itemIdentifier;
-    private String titleIdentifier;
-    private String screenMessage;
-    private String printLine;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
-    @Override
-    public String getCommand() {
-        return "16";
-    }
+@Command("16")
+@TestCaseDefault("160N19700101    010000AA|AO|")
+@TestCasePopulated("161Y19700101    010000AApatronIdentifier|ABitemIdentifier|AFscreenMessage|AGprintLine|AJtitleIdentifier|AOinstitutionId|BR123456789|BSpickupLocation|BW19700101    010000|")
+public class HoldResponse extends Message {
+    private static final long serialVersionUID = 2267131763722749419L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean ok;
+    @PositionedField(start = 3, end = 3)
+    private Boolean available;
+    @PositionedField(start = 4, end = 21)
+    private java.util.Date transactionDate;
+    @TaggedField
+    private java.util.Date expirationDate;
+    @TaggedField
+    private Integer queuePosition;
+    @TaggedField
+    private String pickupLocation;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String itemIdentifier;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String titleIdentifier;
+    @TaggedField
+    private String screenMessage;
+    @TaggedField
+    private String printLine;
 
     public Boolean isOk() {
         return this.ok;

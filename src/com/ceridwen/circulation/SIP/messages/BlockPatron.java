@@ -18,22 +18,30 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class BlockPatron extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 7336173091305475737L;
-    private Boolean cardRetained;
-    private java.util.Date transactionDate;
-    private String institutionId;
-    private String blockedCardMessage;
-    private String patronIdentifier;
-    private String terminalPassword;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
-    @Override
-    public String getCommand() {
-        return "01";
-    }
+@Command("01")
+@TestCaseDefault("01N19700101    010000AA|AC|AL|AO|")
+@TestCasePopulated("01Y19700101    010000AApatronIdentifier|ACterminalPassword|ALblockedCardMessage|AOinstitutionId|")
+public class BlockPatron extends Message {
+    private static final long serialVersionUID = 7336173091305475737L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean cardRetained;
+    @PositionedField(start = 3, end = 20)
+    private java.util.Date transactionDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField
+    private String blockedCardMessage;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String terminalPassword;
 
     public Boolean isCardRetained() {
         return this.cardRetained;

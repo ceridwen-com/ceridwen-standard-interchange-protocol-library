@@ -29,25 +29,36 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
-public class CheckIn extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = -7321140594135175919L;
-    private Boolean noBlock;
-    private Date transactionDate;
-    private Date returnDate;
-    private String currentLocation;
-    private String institutionId;
-    private String itemIdentifier;
-    private String terminalPassword;
-    private String itemProperties;
-    private Boolean cancel;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
-    @Override
-    public String getCommand() {
-        return "09";
-    }
+@Command("09")
+@TestCaseDefault("09N19700101    010000                  AB|AC|AO|AP|")
+@TestCasePopulated("09Y19700101    01000019700101    010000ABitemIdentifier|ACterminalPassword|AOinstitutionId|APcurrentLocation|BIY|CHitemProperties|")
+public class CheckIn extends Message {
+    private static final long serialVersionUID = -7321140594135175919L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean noBlock;
+    @PositionedField(start = 3, end = 20)
+    private Date transactionDate;
+    @PositionedField(start = 21, end = 38)
+    private Date returnDate;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String currentLocation;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String itemIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String terminalPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String itemProperties;
+    @TaggedField
+    private Boolean cancel;
 
     public Boolean isCancel() {
         return this.cancel;

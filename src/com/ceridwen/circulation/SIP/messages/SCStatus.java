@@ -18,30 +18,24 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.enumerations.StatusCode;
 
-/**
- * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
- * </p>
- * 
- * @author Matthew J. Dovey
- * @version 1.0
- */
-
+@Command("99")
+@TestCaseDefault("9900002.00")
+@TestCasePopulated("9921231.00")
 public class SCStatus extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -6198644705404364776L;
+    @PositionedField(start = 2, end = 2)
     private StatusCode statusCode;
+    @PositionedField(start = 3, end = 5)
     private Integer maxPrintWidth;
+    @PositionedField(start = 6, end = 9)
     private ProtocolVersion protocolVersion;
-
-    @Override
-    public String getCommand() {
-        return "99";
-    }
 
     public Integer getMaxPrintWidth() {
         return this.maxPrintWidth;

@@ -20,40 +20,45 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 import com.ceridwen.circulation.SIP.types.enumerations.CurrencyType;
 import com.ceridwen.circulation.SIP.types.enumerations.Language;
 import com.ceridwen.circulation.SIP.types.flagfields.PatronStatus;
 
-/**
- * <p>Title: RTSI</p> <p>Description: Real Time Self Issue</p> <p>Copyright:
- * </p>
- * 
- * @author Matthew J. Dovey
- * @version 1.0
- */
-
+@Command("24")
+@TestCaseDefault("24              00019700101    010000AA|AE|AO|")
+@TestCasePopulated("24YYYYYYYYYYYYYY02719700101    010000AApatronIdentifier|AEpersonalName|AFscreenMessage|AGprintLine|AOinstitutionId|BHGBP|BLY|BVfeeAmount|CQY|")
 public class PatronStatusResponse extends Message {
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 163945073911230183L;
+    @PositionedField(start = 2, end = 15)
     private PatronStatus patronStatus = new PatronStatus();
+    @PositionedField(start = 16, end = 18)
     private Language language;
+    @PositionedField(start = 19, end = 36)
     private Date transactionDate;
+    @TaggedField
     private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
     private String patronIdentifier;
+    @TaggedField
     private String personalName;
+    @TaggedField
     private Boolean validPatron;
+    @TaggedField
     private Boolean validPatronPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private CurrencyType currencyType;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
     private String feeAmount;
+    @TaggedField
     private String screenMessage;
+    @TaggedField
     private String printLine;
-
-    @Override
-    public String getCommand() {
-        return "24";
-    }
 
     public CurrencyType getCurrencyType() {
         return this.currencyType;

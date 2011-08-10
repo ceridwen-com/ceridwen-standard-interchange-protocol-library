@@ -18,21 +18,28 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class EndPatronSession extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = -1263417214546161837L;
-    private java.util.Date transactionDate;
-    private String institutionId;
-    private String patronIdentifier;
-    private String terminalPassword;
-    private String patronPassword;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
-    @Override
-    public String getCommand() {
-        return "35";
-    }
+@Command("35")
+@TestCaseDefault("3519700101    010000AA|AC|AD|AO|")
+@TestCasePopulated("3519700101    010000AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|")
+public class EndPatronSession extends Message {
+    private static final long serialVersionUID = -1263417214546161837L;
+    @PositionedField(start = 2, end = 19)
+    private java.util.Date transactionDate;
+    @TaggedField()
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String terminalPassword;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronPassword;
 
     public java.util.Date getTransactionDate() {
         return this.transactionDate;

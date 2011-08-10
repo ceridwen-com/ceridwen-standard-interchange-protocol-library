@@ -16,27 +16,38 @@
  * Contributors:
  *     Matthew J. Dovey (www.ceridwen.com) - initial API and implementation
  ******************************************************************************/
-package com.ceridwen.circulation.SIP.messages;
+/**
+ * <p>Title: Self Issue</p>
+ * <p>Description: Self Issue Client</p>
+ * <p>Copyright: 2004,</p>
+ * <p>Company: ceridwen.com</p>
+ * @author Matthew J. Dovey
+ * @version 2.1
+ */
 
-import com.ceridwen.circulation.SIP.annotations.Command;
-import com.ceridwen.circulation.SIP.annotations.PositionedField;
-import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
-import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+package com.ceridwen.circulation.SIP.fields;
 
-@Command("94")
-@TestCaseDefault("940")
-@TestCasePopulated("941")
-public class LoginResponse extends Message {
-    private static final long serialVersionUID = -7739633345494042411L;
-    @PositionedField(start = 2, end = 2)
-    private Boolean ok;
+public class PositionedFieldDefinition extends FieldDefinition {
+    public int start;
+    public int end;
+    @SuppressWarnings("unused")
+    private final String tag = null;
 
-    public Boolean isOk() {
-        return this.ok;
+    protected PositionedFieldDefinition(String name, int start, int end, FieldDefinition d, FieldPolicy policy) {
+        super(name, d, policy);
+        this.start = start;
+        this.end = end;
     }
 
-    public void setOk(Boolean ok) {
-        this.ok = ok;
+    public PositionedFieldDefinition(int start, int end) {
+        this.start = start;
+        this.end = end;
+        this.policy = FieldPolicy.DEFAULT;
     }
 
+    public PositionedFieldDefinition(int start, int end, FieldPolicy policy) {
+        this.start = start;
+        this.end = end;
+        this.policy = policy;
+    }
 }

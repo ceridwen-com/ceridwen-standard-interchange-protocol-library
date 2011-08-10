@@ -18,22 +18,32 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.messages;
 
-public class EndSessionResponse extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 8955079727656656773L;
-    private Boolean endSession;
-    private String institutionId;
-    private String patronIdentifier;
-    private String screenMessage;
-    private String printLine;
-    private java.util.Date transactionDate;
+import java.util.Date;
 
-    @Override
-    public String getCommand() {
-        return "36";
-    }
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
+
+@Command("36")
+@TestCaseDefault("36N19700101    010000AA|AO|")
+@TestCasePopulated("36Y19700101    010000AApatronIdentifier|AFscreenMessage|AGprintLine|AOinstitutionId|")
+public class EndSessionResponse extends Message {
+    private static final long serialVersionUID = 8955079727656656773L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean endSession;
+    @PositionedField(start = 3, end = 20)
+    private Date transactionDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField
+    private String screenMessage;
+    @TaggedField
+    private String printLine;
 
     public Boolean isEndSession() {
         return this.endSession;

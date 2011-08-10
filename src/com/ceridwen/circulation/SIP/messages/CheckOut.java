@@ -29,28 +29,42 @@ package com.ceridwen.circulation.SIP.messages;
 
 import java.util.Date;
 
-public class CheckOut extends Message {
-    /**
-	 * 
-	 */
-    private static final long serialVersionUID = 8454866593857815453L;
-    private Boolean SCRenewalPolicy;
-    private Boolean noBlock;
-    private Date transactionDate;
-    private Date nbDueDate;
-    private String institutionId;
-    private String patronIdentifier;
-    private String itemIdentifier;
-    private String terminalPassword;
-    private String itemProperties;
-    private String patronPassword;
-    private Boolean feeAcknowledged;
-    private Boolean cancel;
+import com.ceridwen.circulation.SIP.annotations.Command;
+import com.ceridwen.circulation.SIP.annotations.PositionedField;
+import com.ceridwen.circulation.SIP.annotations.TaggedField;
+import com.ceridwen.circulation.SIP.annotations.TestCaseDefault;
+import com.ceridwen.circulation.SIP.annotations.TestCasePopulated;
+import com.ceridwen.circulation.SIP.fields.FieldPolicy;
 
-    @Override
-    public String getCommand() {
-        return "11";
-    }
+@Command("11")
+@TestCaseDefault("11NN19700101    010000                  AA|AB|AC|AO|")
+@TestCasePopulated("11YY19700101    01000019700101    010000AApatronIdentifier|ABitemIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BIY|BOY|CHitemProperties|")
+public class CheckOut extends Message {
+    private static final long serialVersionUID = 8454866593857815453L;
+    @PositionedField(start = 2, end = 2)
+    private Boolean SCRenewalPolicy;
+    @PositionedField(start = 3, end = 3)
+    private Boolean noBlock;
+    @PositionedField(start = 4, end = 21)
+    private Date transactionDate;
+    @PositionedField(start = 22, end = 39)
+    private Date nbDueDate;
+    @TaggedField
+    private String institutionId;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String patronIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String itemIdentifier;
+    @TaggedField(FieldPolicy.REQUIRED)
+    private String terminalPassword;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String itemProperties;
+    @TaggedField(FieldPolicy.NOT_REQUIRED)
+    private String patronPassword;
+    @TaggedField
+    private Boolean feeAcknowledged;
+    @TaggedField
+    private Boolean cancel;
 
     public Boolean isCancel() {
         return this.cancel;
