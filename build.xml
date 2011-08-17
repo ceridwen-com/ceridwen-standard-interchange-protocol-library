@@ -7,7 +7,6 @@
 <project basedir="." default="build" name="Circulation">
     <property environment="env"/>
     <property name="Utilities.location" value="../Utilities"/>
-    <property name="ECLIPSE_HOME" value="../../../../../../Program Files/eclipse"/>
     <property name="SelfIssue.location" value="../SelfIssue"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -20,10 +19,11 @@
         <pathelement location="${Utilities.location}/lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar"/>
         <pathelement location="${Utilities.location}/lib/commons-net-2.0/commons-net-2.0.jar"/>
         <pathelement location="${Utilities.location}/lib/commons-net-2.0/commons-net-ftp-2.0.jar"/>
+        <pathelement location="${Utilities.location}/lib/commons-lang3-3.0/commons-lang3-3.0.jar"/>
     </path>
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <pathelement location="../../../../../../eclipse/plugins/org.junit_4.8.2.v4_8_2_v20110321-1705/junit.jar"/>
+        <pathelement location="../../../../../../eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
     </path>
     <path id="Circulation.classpath">
         <pathelement location="bin"/>
@@ -37,12 +37,12 @@
         <pathelement location="lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar"/>
         <pathelement location="lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar"/>
         <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="${Utilities.location}/lib/commons-lang3-3.0/commons-lang3-3.0.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
-                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -89,69 +89,81 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="ACSResendTest">
+    <target name="Circulation">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ACSResendTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ACSResend" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ACSStatus" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.BlockPatron" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckIn" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckInResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckOut" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckOutResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.EndPatronSession" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.EndSessionResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.FeePaid" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.FeePaidResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.Hold" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.HoldResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemInformation" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemInformationResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemStatusUpdate" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemStatusUpdateResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.Login" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.LoginResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronEnable" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronEnableResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronInformation" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronInformationResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronStatusRequest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronStatusResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.Renew" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.RenewAll" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.RenewAllResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.RenewResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.SCResend" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.SCStatus" todir="${junit.output.dir}"/>
             <classpath refid="Circulation.classpath"/>
         </junit>
     </target>
-    <target name="AllTests">
+    <target name="com.ceridwen.circulation.SIP.messages">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ACSResendTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ACSStatusTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.BlockPatronTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.CheckInResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.CheckInTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.CheckOutResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.CheckOutTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.EndPatronSessionTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.EndSessionResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.FeePaidResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.FeePaidTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.HoldResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.HoldTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ItemInformationResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ItemInformationTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ItemStatusUpdateResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.ItemStatusUpdateTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.LoginResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.LoginTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.PatronEnableResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.PatronEnableTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.PatronInformationResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.PatronInformationTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.PatronStatusRequestTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.PatronStatusResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.RenewAllResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.RenewAllTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.RenewResponseTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.RenewTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.SCResendTest" todir="${junit.output.dir}"/>
-            <test name="com.ceridwen.circulation.SIP.tests.SCStatusTest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ACSResend" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ACSStatus" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.BlockPatron" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckIn" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckInResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckOut" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.CheckOutResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.EndPatronSession" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.EndSessionResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.FeePaid" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.FeePaidResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.Hold" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.HoldResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemInformation" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemInformationResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemStatusUpdate" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.ItemStatusUpdateResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.Login" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.LoginResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronEnable" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronEnableResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronInformation" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronInformationResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronStatusRequest" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.PatronStatusResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.Renew" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.RenewAll" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.RenewAllResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.RenewResponse" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.SCResend" todir="${junit.output.dir}"/>
+            <test name="com.ceridwen.circulation.SIP.messages.SCStatus" todir="${junit.output.dir}"/>
             <classpath refid="Circulation.classpath"/>
         </junit>
-    </target>
-    <target name="BlockPatronTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="com.ceridwen.circulation.SIP.tests.BlockPatronTest" todir="${junit.output.dir}"/>
-            <classpath refid="Circulation.classpath"/>
-        </junit>
-    </target>
-    <target name="Sample">
-        <java classname="com.ceridwen.circulation.SIP.samples.Sample" failonerror="true" fork="yes">
-            <classpath refid="Circulation.classpath"/>
-        </java>
-    </target>
-    <target name="Summary">
-        <java classname="com.ceridwen.circulation.SIP.types.flagfields.Summary" failonerror="true" fork="yes">
-            <classpath refid="Circulation.classpath"/>
-        </java>
     </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">

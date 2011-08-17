@@ -8,16 +8,29 @@
     	<delete>
     		<fileset dir="dist" includes="**"/>
     	</delete>
-        <copy file="../Circulation/bin/ceridwen-circulation.jar" todir="dist"/>
-        <copy file="../Utilities/bin/ceridwen-utilities.jar" todir="dist"/>
-        <copy file="../Utilities/lib/commons-logging-1.1.1/commons-logging-1.1.1.jar" todir="dist"/>
-        <copy file="../Utilities/lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar" todir="dist"/>
-        <copy file="../Utilities/lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar" todir="dist"/>
-        <copy file="../Utilities/lib/commons-net-2.0/commons-net-2.0.jar" todir="dist"/>
-        <copy file="../Utilities/lib/commons-net-2.0/commons-net-ftp-2.0.jar" todir="dist"/>
-        <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar" todir="dist"/>
-        <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar" todir="dist"/>
-        <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar" todir="dist"/>
+        <copy file="../Circulation/bin/ceridwen-circulation.jar" todir="dist/lib"/>
+        <copy file="../Utilities/bin/ceridwen-utilities.jar" todir="dist/lib"/>
+        <copy file="../Utilities/lib/commons-lang3-3.0/commons-lang3-3.0.jar" todir="dist/lib"/>
+        <copy todir="dist/third-party-licenses/commons-lang3-3.0">
+        	<fileset dir="../Utilities/lib/commons-lang3-3.0" includes="*.txt" />
+    	</copy>
+        <copy file="../Utilities/lib/commons-logging-1.1.1/commons-logging-1.1.1.jar" todir="dist/lib"/>
+        <copy file="../Utilities/lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar" todir="dist/lib"/>
+        <copy file="../Utilities/lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar" todir="dist/lib"/>
+        <copy todir="dist/third-party-licenses/commons-logging-1.1.1">
+        	<fileset dir="../Utilities/lib/commons-logging-1.1.1" includes="*.txt" />
+    	</copy>
+        <copy file="../Utilities/lib/commons-net-2.0/commons-net-2.0.jar" todir="dist/lib"/>
+        <copy file="../Utilities/lib/commons-net-2.0/commons-net-ftp-2.0.jar" todir="dist/lib"/>
+        <copy todir="dist/third-party-licenses/commons-net-2.0">
+        	<fileset dir="../Utilities/lib/commons-net-2.0" includes="*.txt" />
+    	</copy>
+        <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar" todir="dist/lib"/>
+        <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar" todir="dist/lib"/>
+        <copy file="../Circulation/lib/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar" todir="dist/lib"/>
+        <copy todir="dist/third-party-licenses/commons-beanutils-1.8.3">
+        	<fileset dir="../Circulation/lib/commons-beanutils-1.8.3" includes="*.txt" />
+        </copy>
         <copy file="changelog.txt" todir="dist"/>
         <copy file="license.txt" todir="dist"/>
         <copy file="src/com/ceridwen/circulation/SIP/samples/Sample.java" todir="dist"/>
