@@ -3,7 +3,10 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <property file="src/com/ceridwen/circulation/SIP/messages/Message.num" />
+    <property environment="env"/>
     <target name="create_run_jar">
+        <echo message="Build: ${env.build}" />
+        <echo message="Revision: ${env.revision}" />
         <mkdir dir="dist"/>
       <delete>
         <fileset dir="dist" includes="**"/>
