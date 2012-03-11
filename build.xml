@@ -22,8 +22,8 @@
         <pathelement location="${Utilities.location}/lib/commons-lang3-3.0/commons-lang3-3.0.jar"/>
     </path>
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="../../../../../../eclipse/plugins/org.junit_4.8.2.v4_8_2_v20110321-1705/junit.jar"/>
-        <pathelement location="../../../../../../eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <pathelement location="lib/junit-4.8.2/junit.jar"/>
+        <pathelement location="lib/junit-4.8.2/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
     </path>
     <path id="Circulation.classpath">
         <pathelement location="bin"/>
