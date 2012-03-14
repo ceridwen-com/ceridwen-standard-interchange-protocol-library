@@ -10,7 +10,9 @@ build-scripts/version-builder.xml -text
 /build.xml -text svneol=unset#text/plain
 /create-distribution.xml -text
 /javadoc.xml -text
-lib/ceridwen-utilities-1.40/ceridwen-utilities.jar -text
+lib/ceridwen-utilities-1.50/ceridwen-utilities-1.50.jar -text
+lib/ceridwen-utilities-1.50/changelog.txt -text
+lib/ceridwen-utilities-1.50/license.txt -text
 lib/commons-beanutils-1.8.3/LICENSE.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/NOTICE.txt -text svneol=unset#text/plain
 lib/commons-beanutils-1.8.3/RELEASE-NOTES.txt -text svneol=unset#text/plain

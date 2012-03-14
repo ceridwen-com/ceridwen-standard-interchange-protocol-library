@@ -82,7 +82,8 @@ public abstract class Message implements Serializable {
 	 */
     private static final long serialVersionUID = 1609258005567594730L;
     private static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
-    private static final String PROP_AUTOPOPULATE_OFF = "off";
+    @SuppressWarnings("unused")
+	private static final String PROP_AUTOPOPULATE_OFF = "off";
     private static final String PROP_AUTOPOPULATE_DECODE = "decode";
     private static final String PROP_AUTOPOPULATE_ENCODE = "encode";
     private static final String PROP_AUTOPOPULATE_BIDIRECTIONAL = "bidirectional";
@@ -656,8 +657,6 @@ public abstract class Message implements Serializable {
     private static Hashtable<String, Class<? extends Message>> messages = new Hashtable<String, Class<? extends Message>>();
 
     static {
-        com.ceridwen.util.versioning.ComponentRegistry.registerComponent(Message.class);
-
         for (Messages m: Messages.values()) {
             try {
                 @SuppressWarnings("unchecked")
