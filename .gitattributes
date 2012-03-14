@@ -77,7 +77,6 @@ src/com/ceridwen/circulation/SIP/messages/ItemStatusUpdateResponse.java -text
 src/com/ceridwen/circulation/SIP/messages/Login.java -text
 src/com/ceridwen/circulation/SIP/messages/LoginResponse.java -text
 src/com/ceridwen/circulation/SIP/messages/Message.java -text
-src/com/ceridwen/circulation/SIP/messages/Message.num -text
 src/com/ceridwen/circulation/SIP/messages/Messages.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/messages/PatronEnable.java -text
 src/com/ceridwen/circulation/SIP/messages/PatronEnableResponse.java -text
