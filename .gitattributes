@@ -1,5 +1,7 @@
 * text=auto !eol
 /.classpath -text
+.externalToolBuilders/Create[!!-~]Distribution.launch -text
+.externalToolBuilders/Javadoc.launch -text
 /.project -text
 .settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 /build-data.properties -text
