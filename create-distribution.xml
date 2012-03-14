@@ -8,7 +8,7 @@
 			<param name="lib.name" value="ceridwen-utilities-1.40" />
 		</antcall>
 		<antcall target="copy-library">
-			<param name="lib.name" value="commons-lang3-3.0" />
+			<param name="lib.name" value="commons-lang3-3.1" />
 		</antcall>
 		<antcall target="copy-library">
 			<param name="lib.name" value="commons-logging-1.1.1" />
