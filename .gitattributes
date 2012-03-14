@@ -27,10 +27,10 @@ lib/commons-logging-1.1.1/RELEASE-NOTES.txt -text
 lib/commons-logging-1.1.1/commons-logging-1.1.1.jar -text
 lib/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar -text
 lib/commons-logging-1.1.1/commons-logging-api-1.1.1.jar -text
-lib/commons-net-2.0/LICENSE.txt -text
-lib/commons-net-2.0/NOTICE.txt -text
-lib/commons-net-2.0/commons-net-2.0.jar -text
-lib/commons-net-2.0/commons-net-ftp-2.0.jar -text
+lib/commons-net-3.1/LICENSE.txt -text
+lib/commons-net-3.1/NOTICE.txt -text
+lib/commons-net-3.1/RELEASE-NOTES.txt -text
+lib/commons-net-3.1/commons-net-3.1.jar -text
 lib/junit-4.10/junit-4.10.jar -text
 readme/changelog.txt -text
 readme/license.txt -text
