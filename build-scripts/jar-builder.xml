@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*******************************************************************************
+ * Copyright (c) 2010 Matthew J. Dovey (www.ceridwen.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at 
+ * <http://www.gnu.org/licenses/>
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ -->
+
+<!-- Build script module for jar creation -->
+
+<project>
+  	<import file="version-builder.xml"/>
+
+  	<target name="clean" depends="stamp-build">
+    	<delete dir="${distrib.dir}"/>
+    	<mkdir dir="${distrib.dir}"/>
+  	</target>
+
+  	<target name="create-jar" depends="clean">
+    	<jar destfile="${distrib.dir}/${library.base-name}-${implementation-short-version}.jar">
+            <manifest>
+                <attribute name="Implementation-Title" value="${implementation-title}" />
+                <attribute name="Implementation-Version" value="${implementation-version}" />
+                <attribute name="Implementation-Vendor" value="${implementation-vendor}" />
+                <attribute name="Implementation-Vendor-Id" value="${implementation-vendor-id}" />
+                <attribute name="Implementation-URL" value="${implementation-url}" />
+                <attribute name="Implementation-Build-Date" value="${implementation-build-date}" />
+            </manifest>
+            <fileset dir="${jar.classes}" excludes="${excludes}"/>
+        </jar>
+    </target>
+</project>

@@ -151,8 +151,6 @@ public class ACSStatus extends Message {
      * Use getSupportedMessages().set(SupportedMessages.VALUE)
      * getSupportedMessages().unset(SupportedMessages.VALUE)
      * getSupportedMessages().unsetAll()
-     * 
-     * @param summary
      */
     @Deprecated
     public void setSupportedMessages(SupportedMessages supportedMessages) {
