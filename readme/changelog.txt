@@ -1,3 +1,12 @@
+Version 2.80: 15/03/2012 (421)
+Update Ceridwen Utilities from 1.40 to 1.51
+Update Apache Commons Lang3 from 3.0 to 3.1
+Update Apache Commons Net from 2.0 to 3.1
+Dependencies: ceridwen utilities 1.51
+              apache commons lang 3.1
+              apache commons net 3.1
+              apache commons logging 1.1.1 
+
 Version 2.70: 10/08/2011 (372)
 Merge with annotation refactoring
 Fixed bugs when autopopulation is not bidirectional 
