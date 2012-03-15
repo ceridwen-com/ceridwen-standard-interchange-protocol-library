@@ -1,3 +1,10 @@
+Version 1.51: 15/03/2012 (390)
+Use Specification-* where Implementation-* not available
+Bugfix: Null pointer exception thrown by LibraryIdentifier.equals for certain libraries
+Dependencies: apache commons lang 3.1
+              apache commons net 3.1
+              apache commons logging 1.1.1 
+
 Version 1.50: 14/03/2012 (384)
 Version reporting now based on jar manifest files
 Queue, Spool etc refactored into Collections subpackage

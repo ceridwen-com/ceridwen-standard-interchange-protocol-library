@@ -5,7 +5,7 @@
 	
 	<target name="create-distribution" depends="distribution-init">
 		<antcall target="copy-library">
-			<param name="lib.name" value="ceridwen-utilities-1.50" />
+			<param name="lib.name" value="ceridwen-utilities-1.51" />
 		</antcall>
 		<antcall target="copy-library">
 			<param name="lib.name" value="commons-lang3-3.1" />
