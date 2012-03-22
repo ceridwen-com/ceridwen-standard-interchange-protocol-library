@@ -702,7 +702,7 @@ public abstract class Message implements Serializable {
                             if (fld.policy == FieldPolicy.REQUIRED) {
                                 Method method = desc.getWriteMethod();
                                 if (method != null) {
-                                    method.invoke(msg, new Object[]{new Date(0)});
+                                    method.invoke(msg, new Object[]{demangleDate("19700101    010000")});
 }
                             }
                         }
@@ -713,7 +713,7 @@ public abstract class Message implements Serializable {
                             if (fld.policy == FieldPolicy.REQUIRED) {
                                 Method method = desc.getWriteMethod();
                                 if (method != null) {
-                                    method.invoke(msg, new Object[]{new Date(0)});
+                                    method.invoke(msg, new Object[]{demangleDate("19700101    010000")});
                                 }                                                
                             }
                         }
@@ -780,7 +780,7 @@ public abstract class Message implements Serializable {
                         if (field.getType() == Date.class) {
                             Method method = desc.getWriteMethod();
                             if (method != null) {
-                                method.invoke(msg, new Object[]{new Date(0)});
+                                method.invoke(msg, new Object[]{demangleDate("19700101    010000")});
                             }
                         }
                         Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
