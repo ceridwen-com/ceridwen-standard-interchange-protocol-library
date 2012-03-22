@@ -828,7 +828,7 @@ public abstract class Message implements Serializable {
                     if (method != null) {
                         Class<?> type = desc.getPropertyType();
                         if (type == Date.class) {
-                            method.invoke(msg, new Object[]{new Date(0)});
+                            method.invoke(msg, new Object[]{demangleDate("19700101    010000")});
                         }                    
                         if (type == Boolean.class) {
                             method.invoke(msg, new Object[]{new Boolean(true)});
