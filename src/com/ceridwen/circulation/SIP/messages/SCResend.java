@@ -29,11 +29,11 @@ public class SCResend extends Message {
     private static final long serialVersionUID = 7077005327500597112L;
 
     @Override
-    protected String AddChecksum(String command, Character sequence) {
+    protected String addChecksum(String command, Character sequence) {
         StringBuffer check = new StringBuffer();
         check.append("AZ");
         try {
-            check.append(Message.CalculateChecksum(command + check.toString()));
+            check.append(Message.calculateChecksum(command + check.toString()));
             return command + check.toString();
         } catch (Exception e) {
             return command;

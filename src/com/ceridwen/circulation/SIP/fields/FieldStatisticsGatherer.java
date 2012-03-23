@@ -34,11 +34,11 @@ public class FieldStatisticsGatherer extends Thread {
         return FieldStatisticsGatherer.fieldStatisticsGatherer;
     }
 
-    public void RecordUsage(String name, boolean required) {
+    public void recordUsage(String name, boolean required) {
         this.usages.put(name, new Usage(this.usages.get(name), required));
     }
 
-    public void PrintUsageStatistics() {
+    public void printUsageStatistics() {
         System.out.println("Usage stats");
         NavigableSet<String> names = this.usages.navigableKeySet();
         String name = names.first();
@@ -84,14 +84,14 @@ public class FieldStatisticsGatherer extends Thread {
 
     @Override
     public void run() {
-        FieldStatisticsGatherer.getFieldStatisticsGatherer().PrintUsageStatistics();
+        FieldStatisticsGatherer.getFieldStatisticsGatherer().printUsageStatistics();
     }
 
     static {
         // Runtime.getRuntime().addShutdownHook(new FieldStatisticsGatherer());
     }
 
-    public void LoadFieldDefinitions(Hashtable<String, FieldDefinition> fields) {
+    public void loadFieldDefinitions(Hashtable<String, FieldDefinition> fields) {
         Enumeration<String> names = fields.keys();
         while (names.hasMoreElements()) {
             String name = names.nextElement();

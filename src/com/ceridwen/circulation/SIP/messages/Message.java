@@ -355,7 +355,7 @@ public abstract class Message implements Serializable {
             }
         }
 
-        return this.AddChecksum(message.toString(), sequence);
+        return this.addChecksum(message.toString(), sequence);
     }
 
     private void setProp(PropertyDescriptor desc, String value) {
@@ -546,7 +546,7 @@ public abstract class Message implements Serializable {
             }
             String truncated = message.substring(0, message.length() - 4);
             String check = tail.substring(2);
-            String checksum = Message.CalculateChecksum(truncated);
+            String checksum = Message.calculateChecksum(truncated);
             return (checksum.equals(check));
         } catch (Exception ex) {
         }
@@ -567,7 +567,7 @@ public abstract class Message implements Serializable {
         return null;
     }
 
-    protected static String CalculateChecksum(String data) throws UnsupportedEncodingException {
+    protected static String calculateChecksum(String data) throws UnsupportedEncodingException {
         int checksum = 0;
         byte[] bytes = data.getBytes("ASCII");
         for (byte b : bytes) {
@@ -577,14 +577,14 @@ public abstract class Message implements Serializable {
         return Integer.toHexString(checksum).toUpperCase();
     }
 
-    protected String AddChecksum(String command, Character sequence) {
+    protected String addChecksum(String command, Character sequence) {
         StringBuffer check = new StringBuffer();
         if (sequence != null) {
             check.append("AY");
             check.append(sequence);
             check.append("AZ");
             try {
-                check.append(Message.CalculateChecksum(command + check.toString()));
+                check.append(Message.calculateChecksum(command + check.toString()));
                 return command + check.toString();
             } catch (Exception e) {
                 return command;
@@ -888,7 +888,7 @@ public abstract class Message implements Serializable {
     }    
     
     @Test 
-    public void TestCaseDisableEncodeAutoPopulate() {
+    public void testCaseDisableEncodeAutoPopulate() {
     	try {
     		if (this instanceof SCResend || this instanceof ACSResend) { // have no mandatory fields
     			return;
@@ -905,7 +905,7 @@ public abstract class Message implements Serializable {
     }
     
     @Test 
-    public void TestCaseDisableDecodeAutoPopulate() {
+    public void testCaseDisableDecodeAutoPopulate() {
     	try {
     		if (this instanceof SCResend || this instanceof ACSResend) { // have no mandatory fields
     			return;
@@ -930,7 +930,7 @@ public abstract class Message implements Serializable {
     }    
     
     @Test
-    public void TestCaseDefaultEncode() {
+    public void testCaseDefaultEncode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
                 String t = this.getEmptyMessage().encode(null, true);
@@ -949,7 +949,7 @@ public abstract class Message implements Serializable {
     }
 
     @Test
-    public void TestCaseDefaultDecode() {
+    public void testCaseDefaultDecode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCaseDefault.class)) {
                 String v = ((TestCaseDefault)(this.getClass().getAnnotation(TestCaseDefault.class))).value();
@@ -977,7 +977,7 @@ public abstract class Message implements Serializable {
     }
 
     @Test
-    public void TestCasePopulatedEncode() {
+    public void testCasePopulatedEncode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
                 String t = this.getPopulatedMessage().encode(null, false);
@@ -996,7 +996,7 @@ public abstract class Message implements Serializable {
     }
 
     @Test
-    public void TestCasePopulatedDecode() {
+    public void testCasePopulatedDecode() {
         try {
             if (this.getClass().isAnnotationPresent(TestCasePopulated.class)) {
                 String v = ((TestCasePopulated)(this.getClass().getAnnotation(TestCasePopulated.class))).value();
@@ -1024,7 +1024,7 @@ public abstract class Message implements Serializable {
     }
 
     @Test
-    public void TestCaseDefaultRoundTrip() {
+    public void testCaseDefaultRoundTrip() {
         try {
             String t = this.getEmptyMessage().encode('0', true);
             Message m;
@@ -1044,7 +1044,7 @@ public abstract class Message implements Serializable {
     }    
 
     @Test
-    public void TestCasePopulatedRoundTrip() {
+    public void testCasePopulatedRoundTrip() {
         try {
             String t = this.getPopulatedMessage().encode('0', false);
             Message m;

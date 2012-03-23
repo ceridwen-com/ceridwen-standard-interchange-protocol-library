@@ -54,7 +54,7 @@ import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 public class Sample {
     static SocketDaemon thread;
 
-    public static void StartServer() {
+    public static void startServer() {
         /**
          * Run simple socket server
          */
@@ -64,7 +64,7 @@ public class Sample {
         Sample.thread.start();
     }
 
-    public static void CheckOut() {
+    public static void checkOut() {
         /**
          * Now try basic client commands
          */
@@ -73,7 +73,7 @@ public class Sample {
 
         connection = new SocketConnection();
         ((SocketConnection) connection).setHost("localhost");
-        ((SocketConnection) connection).setPort(12345);
+        ((SocketConnection) connection).setPort(2345);
         ((SocketConnection) connection).setConnectionTimeout(30000);
         ((SocketConnection) connection).setIdleTimeout(30000);
         ((SocketConnection) connection).setRetryAttempts(2);
@@ -184,7 +184,7 @@ public class Sample {
         connection.disconnect();
     }
 
-    public static void StopServer() {
+    public static void stopServer() {
         /**
          * Stop simple socket server
          */
@@ -193,9 +193,9 @@ public class Sample {
     }
 
     public static void main(String[] args) {
-        Sample.StartServer();
-        Sample.CheckOut();
-        Sample.StopServer();
+        Sample.startServer();
+        Sample.checkOut();
+        Sample.stopServer();
 
     }
 }

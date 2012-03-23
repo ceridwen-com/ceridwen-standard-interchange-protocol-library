@@ -27,6 +27,7 @@ package com.ceridwen.circulation.SIP.transport;
  * @version 1.0
  */
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -242,7 +243,9 @@ public abstract class Connection {
                     understood = true;
                 } catch (ConnectionFailure ex) {
                     try {
-                        Thread.sleep(this.getRetryWait());
+                    	System.out.println(new Date());
+                        this.wait(this.getRetryWait());
+                    	System.out.println(new Date());
                     } catch (Exception ex1) {
                         Connection.log.debug("Thread sleep error", ex1);
                     }
