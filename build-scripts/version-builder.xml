@@ -48,7 +48,7 @@
     	</condition>
   	</target>
 	
-  	<target name="ci-update" depends="update" if="${bamboo}">
+  	<target name="ci-update" depends="update" if="bamboo">
     	<propertyfile file="${build-data.properties}" comment="Build Properties: ${build-data.properties}">
       		<entry key="Library-Build-Stamp" operation="=" value="${bamboo.revision}.${bamboo.build}"/>
     	</propertyfile>
@@ -66,11 +66,11 @@
 		<property file="${build-dirs.properties}"/>
 	</target>
 
-	<target name="ci-build-prop" depends="init-properties" if="${bamboo}">
+	<target name="ci-build-prop" depends="init-properties" if="bamboo">
 		<property name="implementation-version" value="${Library-Version}.${Library-Build-Stamp}"/>
   	</target>
 
-	<target name="local-build-prop" depends="init-properties" unless="${bamboo}">
+	<target name="local-build-prop" depends="init-properties" unless="bamboo">
 		<property name="implementation-version" value="${Library-Version}.${Library-Build-Count} (internal)"/>
   	</target>
 	

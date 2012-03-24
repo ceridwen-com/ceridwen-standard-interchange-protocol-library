@@ -22,19 +22,13 @@
 	<property environment="env" />
   	<import file="version-builder.xml"/>
 	
-	<target name="check-jira-release">
-		<condition property="jira.release">
-	   		<isset property="${env.bamboo_jira_version}"/>
-		</condition>
-	</target>
-
-  	<target name="record-release" depends="stamp-build, check-jira-release">
+  	<target name="record-release" depends="stamp-build" if="env.bamboo_jira_version">
   		<fail message="Version mismatch: Jira reports ${env.bamboo_jira_version} whilst build-data.properties reports ${implementation-short-version}">
-  			<not>
-		  		<condition>
+	  		<condition>
+  	  			<not>
 		  		    <equals arg1="${env.bamboo_jira_version}" arg2="${implementation-short-version}"/>
-		  		</condition>
-  			</not>
+    			</not>
+	  		</condition>
   		</fail>
   		
   		<echo message="Stamp as ${env.bamboo_jira_version}" />
