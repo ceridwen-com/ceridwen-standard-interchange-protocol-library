@@ -8,6 +8,7 @@
 /build-dirs.properties -text
 build-scripts/distribution-builder.xml -text
 build-scripts/jar-builder.xml -text
+build-scripts/release-builder.xml -text
 build-scripts/version-builder.xml -text
 /build.xml -text svneol=unset#text/plain
 /create-distribution.xml -text
@@ -38,6 +39,7 @@ lib/commons-net-3.1/commons-net-3.1.jar -text
 lib/junit-4.10/junit-4.10.jar -text
 readme/changelog.txt -text
 readme/license.txt -text
+/release.xml -text
 src/com/ceridwen/circulation/SIP/annotations/Command.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/Field.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/annotations/PositionedField.java -text svneol=unset#text/plain
