@@ -3,5 +3,7 @@
 <project default="release">
 	<import file="build-scripts/release-builder.xml"/>
 	
-	<target name="release" depends="record-release" />
+	<target name="release" depends="record-release">
+  		<echo message="Stamp as ${env.bamboo_jira_version}" />
+	</target>
 </project>
