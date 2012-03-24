@@ -61,7 +61,7 @@
 		<property name="svn.tag.message" value="Release ${env.bamboo_jira_version} build initiated from Jira by ${env.bamboo_jira_username}"/>
 		<property name="src.path"  value="${basedir}"/>
 		<property name="dest.url" value="${svn.base}/RELEASE - ${env.bamboo_jira_version}"/>
-		<svnSetting id="svn.setting" javahl="false" username="${env.bamboo_jira_username}" />
+		<svnSetting id="svn.setting" javahl="false" username="${bamboo.subversion.username}" password="${bamboo.subversion.password}" />
 		
 		<echo message="Tagging ${src.path} to ${dest.url} as ${svn.tag.message}" />
 
