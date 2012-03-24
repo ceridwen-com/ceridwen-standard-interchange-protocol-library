@@ -74,7 +74,17 @@
 		<property name="implementation-version" value="${Library-Version}.${Library-Build-Count} (internal)"/>
   	</target>
 	
-	<target name="stamp-build" depends="ci-build-prop, local-build-prop" />
+	<target name="check-release-build" depends="ci-build-prop, local-build-prop" if="env.bamboo_jira_version">
+  		<fail message="Version mismatch: Jira reports ${env.bamboo_jira_version} whilst build-data.properties reports ${implementation-short-version}">
+	  		<condition>
+  	  			<not>
+		  		    <equals arg1="${env.bamboo_jira_version}" arg2="${implementation-short-version}"/>
+    			</not>
+	  		</condition>
+  		</fail>
+	</target>
+	
+	<target name="stamp-build" depends="check-release-build" />
 </project>
 
 
