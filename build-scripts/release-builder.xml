@@ -52,6 +52,7 @@
 		<property name="dest.url" value="${bamboo.repository.svn.repositoryUrl}/../tags/RELEASE - ${env.bamboo_jira_version}"/>
 
 		<svn>
+			<svnSetting javahl="false" />
 	 		<copy srcPath="${src.path}" destUrl="${dest.url}" message="${svn.tag.message}"/>    
 	 	</svn>
 	</target>	
