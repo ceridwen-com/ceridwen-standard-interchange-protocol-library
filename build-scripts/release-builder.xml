@@ -28,7 +28,7 @@
 		</condition>
 	</target>
 
-  	<target name="record-release" depends="stamp-build, check-jira-release" if="${jira.release}">
+  	<target name="record-release" depends="stamp-build, check-jira-release">
   		<fail message="Version mismatch: Jira reports ${env.bamboo_jira_version} whilst build-data.properties reports ${implementation-short-version}">
   			<not>
 		  		<condition>
