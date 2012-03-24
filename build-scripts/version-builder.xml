@@ -20,6 +20,7 @@
 <!-- Autodect Bamboo and use its build data, otherwise using build count -->
 
 <project>
+  <property environment="env" />
   <property name="build-data.properties" value="build-data.properties" />
   <property name="build-dirs.properties" value="build-dirs.properties" />
   
