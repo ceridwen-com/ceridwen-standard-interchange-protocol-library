@@ -18,7 +18,44 @@
 
 <!-- Build script module for recording the release into subversion -->
 
+<!-- *************************************************************** -->
+<!--   Set-Up of SVN-ANT classpath                                   -->
+<!-- *************************************************************** -->  
+
+
+
 <project>
+    <path id="path.svnant">
+        <pathelement location="lib/svnant.jar"/>
+        <pathelement location="lib/svnClientAdapter.jar"/>
+    </path>
+
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="path.svnant" />
+
+	<target name="tool-availability">
+		<available resource="org/tigris/subversion/svnant/svnantlib.xml"
+			classpathref="path.svnant"
+			property="available.svnant"
+	 	/>
+	  	<echo message="SVN-ANT is available = ${available.svnant}"/>
+	</target>
+
+	<target name="does-svnant-exist" depends="tool-availability">
+		<fail unless="available.svnant">
+	  		SVN-ANT is not available, cannot perform tagging
+	 	</fail>  
+	</target>
+	
+	<target name="svntag" depends="does-svnant-exist" description="tags individual project using svnant task">    
+		<property name="svn.tag.message" value="Release ${env.bamboo_jira_version} build initiated from Jira"/>
+		<property name="src.path"  value="."/>
+		<property name="dest.url" value="${bamboo.repository.svn.repositoryUrl}/../tags/RELEASE - ${env.bamboo_jira_version}"/>
+
+		<svn>
+	 		<copy srcPath="${src.path}" destUrl="${dest.url}" message="${svn.tag.message}"/>    
+	 	</svn>
+	</target>	
+	
 	<property environment="env" />
   	<import file="version-builder.xml"/>
 	
@@ -31,6 +68,8 @@
 	  		</condition>
   		</fail>
   		
-  		<echo message="Stamp as ${env.bamboo_jira_version}" />
+  		<echo message="${bamboo.repository.svn.repositoryUrl}" />
+  		
+  		<ant-call target="svntag" /> 
   	</target>
 </project>
