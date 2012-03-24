@@ -46,10 +46,21 @@
 	 	</fail>  
 	</target>
 	
-	<target name="svntag" depends="does-svnant-exist" description="tags individual project using svnant task">    
+	<target name="get-svn-base">
+	    <echo message="${bamboo.repository.svn.repositoryUrl}" file="svn.tmp" />
+	    <loadfile property="svn.base" srcFile="svn.tmp">
+	        <filterchain>
+	            <tokenfilter>
+	                <replaceregex pattern="/trunk$" replace="/tags" flags="g"/>
+	            </tokenfilter>
+	        </filterchain>
+	    </loadfile>
+	</target>	
+	
+	<target name="svntag" depends="does-svnant-exist, get-svn-base" description="tags individual project using svnant task">    
 		<property name="svn.tag.message" value="Release ${env.bamboo_jira_version} build initiated from Jira by ${env.bamboo_jira_username}"/>
 		<property name="src.path"  value="${basedir}"/>
-		<property name="dest.url" value="${bamboo.repository.svn.repositoryUrl}/../tags/RELEASE - ${env.bamboo_jira_version}"/>
+		<property name="dest.url" value="${svn.base}/RELEASE - ${env.bamboo_jira_version}"/>
 		<svnSetting id="svn.setting" javahl="false" />
 
 		<svn refid="svn.setting">
