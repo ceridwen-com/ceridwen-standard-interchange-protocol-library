@@ -62,6 +62,8 @@
 		<property name="src.path"  value="${basedir}"/>
 		<property name="dest.url" value="${svn.base}/RELEASE - ${env.bamboo_jira_version}"/>
 		<svnSetting id="svn.setting" javahl="false" />
+		
+		<echo message="Tagging ${src.path} to ${dest.url} as {$svn.tag.message}" />
 
 		<svn refid="svn.setting">
 	 		<copy srcPath="${src.path}" destUrl="${dest.url}" message="${svn.tag.message}"/>    
