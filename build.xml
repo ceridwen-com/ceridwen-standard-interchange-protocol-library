@@ -21,7 +21,7 @@
         <pathelement location="lib/junit-4.10/junit-4.10.jar"/>
         <pathelement location="lib/commons-lang3-3.1/commons-lang3-3.1.jar"/>
         <pathelement location="lib/commons-net-3.1/commons-net-3.1.jar"/>
-        <pathelement location="lib/ceridwen-utilities-1.51/ceridwen-utilities-1.51.jar"/>
+        <pathelement location="lib/ceridwen-utilities-1.60/ceridwen-utilities-1.60.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
