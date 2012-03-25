@@ -1,3 +1,10 @@
+Version 1.60: 25/03/2012 (400)
+Implemented more resilient persistent queue based on com.gaborcselle code
+Modified collections Queue and Spooler interfaces to templates
+Dependencies: apache commons lang 3.1
+              apache commons net 3.1
+              apache commons logging 1.1.1 
+
 Version 1.51: 15/03/2012 (390)
 Use Specification-* where Implementation-* not available
 Bugfix: Null pointer exception thrown by LibraryIdentifier.equals for certain libraries
