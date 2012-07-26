@@ -73,7 +73,7 @@ public class Sample {
 
         connection = new SocketConnection();
         ((SocketConnection) connection).setHost("localhost");
-        ((SocketConnection) connection).setPort(2345);
+        ((SocketConnection) connection).setPort(12345);
         ((SocketConnection) connection).setConnectionTimeout(30000);
         ((SocketConnection) connection).setIdleTimeout(30000);
         ((SocketConnection) connection).setRetryAttempts(2);
@@ -119,7 +119,7 @@ public class Sample {
         }
 
         if (!(response instanceof ACSStatus)) {
-            System.err.println("Error");
+            System.err.println("Error - Status Request did not return valid response from server.");
             return;
         }
 
@@ -173,7 +173,7 @@ public class Sample {
         }
 
         if (!(response instanceof CheckOutResponse)) {
-            System.err.println("Error");
+            System.err.println("Error - CheckOut Request did not return valid response from server");
             return;
         }
         response.xmlEncode(System.out);
