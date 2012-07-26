@@ -83,6 +83,7 @@ public class Sample {
             connection.connect();
         } catch (Exception e1) {
             e1.printStackTrace();
+            return;
         }
 
         /**

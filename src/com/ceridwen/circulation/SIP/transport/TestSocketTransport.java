@@ -71,6 +71,7 @@ public class TestSocketTransport {
             connection.connect();
         } catch (Exception e1) {
         	fail("Connection failed: " + e1.getMessage());
+        	return;
         }
 
         /**
@@ -84,30 +85,31 @@ public class TestSocketTransport {
         try {
             response = connection.send(request);
         } catch (RetriesExceeded e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Retries exceeded: " + e.getMessage());
+        	return;
         } catch (ConnectionFailure e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Connection failure: " + e.getMessage());
+        	return;
         } catch (MessageNotUnderstood e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Message not understood: " + e.getMessage());
+        	return;
         } catch (ChecksumError e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Checksum error: " + e.getMessage());
+        	return;
         } catch (SequenceError e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Sequence error: " + e.getMessage());
+        	return;
         } catch (MandatoryFieldOmitted e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        	return;
         } catch (InvalidFieldLength e) {
-            e.printStackTrace();
-            return;
+        	Assert.fail("Invalid field length: " + e.getMessage());
+        	return;
         }
-
+        
         if (!(response instanceof ACSStatus)) {
             fail("Status Request did not return valid response from server.");
+        	return;
         }
 
 
@@ -116,6 +118,7 @@ public class TestSocketTransport {
          */
         if (!((ACSStatus) response).getSupportedMessages().isSet(SupportedMessages.CHECK_OUT)) {
         	fail("Check out not supported");
+        	return;
         }
 
         request = new CheckOut();
@@ -133,22 +136,30 @@ public class TestSocketTransport {
             response = connection.send(request);
         } catch (RetriesExceeded e) {
         	fail("Retries exceeded: " + e.getMessage());
+        	return;
         } catch (ConnectionFailure e) {
         	fail("Connection failure: " + e.getMessage());
+        	return;
         } catch (MessageNotUnderstood e) {
         	fail("Message not understood: " + e.getMessage());
+        	return;
         } catch (ChecksumError e) {
         	fail("Checksum error: " + e.getMessage());
+        	return;
         } catch (SequenceError e) {
         	fail("Sequence error: " + e.getMessage());
+        	return;
         } catch (MandatoryFieldOmitted e) {
         	fail("Mandatory Field Omitted: " + e.getMessage());
+        	return;
         } catch (InvalidFieldLength e) {
         	fail("Invalid field length: " + e.getMessage());
+        	return;
         }
 
         if (!(response instanceof CheckOutResponse)) {
             fail("Error - CheckOut Request did not return valid response from server");
+        	return;
         }
         
         try {
@@ -156,10 +167,13 @@ public class TestSocketTransport {
         	Assert.assertTrue(testCase.startsWith("120NUN") && testCase.contains("AA|AB|AH|AJ|AO|AY1AZ")); // strip out components which may change (transaction date and checksum)
 	    } catch (MessageNotUnderstood e) {
 	    	fail("Message not understood: " + e.getMessage());
+        	return;
         } catch (MandatoryFieldOmitted e) {
         	fail("Mandatory Field Omitted: " + e.getMessage());
+        	return;
 	    } catch (InvalidFieldLength e) {
 	    	fail("Invalid field length: " + e.getMessage());
+        	return;
 	    }
 	}
 }
