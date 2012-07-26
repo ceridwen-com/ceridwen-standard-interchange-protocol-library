@@ -99,6 +99,7 @@ src/com/ceridwen/circulation/SIP/server/SocketServer.java -text svneol=unset#tex
 src/com/ceridwen/circulation/SIP/transport/Connection.java -text
 src/com/ceridwen/circulation/SIP/transport/SocketConnection.java -text
 src/com/ceridwen/circulation/SIP/transport/TelnetConnection.java -text
+src/com/ceridwen/circulation/SIP/transport/TestSocketTransport.java -text
 src/com/ceridwen/circulation/SIP/types/enumerations/AbstractEnumeration.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/CirculationStatus.java -text svneol=unset#text/plain
 src/com/ceridwen/circulation/SIP/types/enumerations/CurrencyType.java -text svneol=unset#text/plain
