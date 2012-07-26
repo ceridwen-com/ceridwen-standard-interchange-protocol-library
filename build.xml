@@ -80,6 +80,7 @@
             <test name="com.ceridwen.circulation.SIP.messages.RenewResponse" todir="${junit.output.dir}"/>
             <test name="com.ceridwen.circulation.SIP.messages.SCResend" todir="${junit.output.dir}"/>
             <test name="com.ceridwen.circulation.SIP.messages.SCStatus" todir="${junit.output.dir}"/>
+        	<test name="com.ceridwen.circulation.SIP.transport.TestSocketTransport" todir="${junit.output.dir}"/>
             <classpath refid="Circulation.classpath"/>
         </junit>
     </target>
