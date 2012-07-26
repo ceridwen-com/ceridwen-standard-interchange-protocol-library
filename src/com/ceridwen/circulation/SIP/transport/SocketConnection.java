@@ -77,7 +77,7 @@ public class SocketConnection extends Connection {
     protected void internalSend(String cmd) throws ConnectionFailure {
         try {
             this.out.write(cmd);
-            this.out.newLine();
+            this.out.write('\r');
             this.out.flush();
         } catch (Exception ex) {
             throw new ConnectionFailure(ex);

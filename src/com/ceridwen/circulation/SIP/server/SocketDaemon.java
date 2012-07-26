@@ -107,7 +107,7 @@ class ConnectionThread extends Thread {
             PrintStream out = new PrintStream(this.server.getOutputStream());
             String input = in.readLine();
             do {
-                out.println(this.broker.process(input));
+                out.print(this.broker.process(input) + "\r");
                 input = in.readLine();
             } while (input != null);
             this.server.close();

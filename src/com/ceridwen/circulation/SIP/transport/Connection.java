@@ -243,9 +243,7 @@ public abstract class Connection {
                     understood = true;
                 } catch (ConnectionFailure ex) {
                     try {
-                    	System.out.println(new Date());
                         this.wait(this.getRetryWait());
-                    	System.out.println(new Date());
                     } catch (Exception ex1) {
                         Connection.log.debug("Thread sleep error", ex1);
                     }
