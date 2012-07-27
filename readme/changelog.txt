@@ -1,3 +1,13 @@
+Version 2.90: 27/07/2012 (477)
+Sample code connected to wrong port for demo server
+Commands terminated by \n rather than \r on linux platforms
+Dependencies: ceridwen utilities 1.60
+              apache commons beanutils 1.8.3
+              apache commons lang 3.1
+              apache commons logging 1.1.1 
+              apache commons net 3.1
+
+
 Version 2.81: 25/03/2012 (469)
 Update Ceridwen Utilities from 1.51 to 1.60
 Some jUnit tests were dependent on timezone
