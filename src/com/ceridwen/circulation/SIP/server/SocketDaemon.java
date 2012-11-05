@@ -21,7 +21,9 @@ package com.ceridwen.circulation.SIP.server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -52,7 +54,7 @@ public class SocketDaemon extends Thread {
     public boolean getStrictChecksumChecking() {
         return this.broker.getStrictChecksumChecking();
     }
-
+        
     @Override
     public void run() {
         try {
@@ -89,6 +91,8 @@ public class SocketDaemon extends Thread {
 }
 
 class ConnectionThread extends Thread {
+    private static final String PROP_CHARSET = "com.ceridwen.circulation.SIP.charset";
+    private static final String PROP_DEFAULT_CHARSET = "Cp850";    
     private static Log logger = LogFactory.getLog(ConnectionThread.class);
 
     private Socket server;
@@ -99,12 +103,16 @@ class ConnectionThread extends Thread {
         this.server = server;
     }
 
+    protected String getCharset() {
+        return System.getProperty(PROP_CHARSET, PROP_DEFAULT_CHARSET);    	
+    }
+
     @Override
     public void run() {
         try {
             ConnectionThread.logger.info("New connection from " + this.server.getInetAddress().toString());
-            BufferedReader in = new BufferedReader(new InputStreamReader(this.server.getInputStream()));
-            PrintStream out = new PrintStream(this.server.getOutputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(this.server.getInputStream(), getCharset()));
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(this.server.getOutputStream(), getCharset()));
             String input = in.readLine();
             do {
                 out.print(this.broker.process(input) + "\r");

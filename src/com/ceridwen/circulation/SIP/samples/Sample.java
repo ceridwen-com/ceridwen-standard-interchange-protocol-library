@@ -53,6 +53,7 @@ import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
  */
 public class Sample {
     static SocketDaemon thread;
+    
 
     public static void startServer() {
         /**
@@ -194,6 +195,8 @@ public class Sample {
     }
 
     public static void main(String[] args) {
+        System.setProperty("com.ceridwen.circulation.SIP.charset", "ISO8859_1");
+
         Sample.startServer();
         Sample.checkOut();
         Sample.stopServer();

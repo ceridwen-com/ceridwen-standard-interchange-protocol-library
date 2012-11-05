@@ -46,6 +46,9 @@ import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.SCResend;
 
 public abstract class Connection {
+    private static final String PROP_CHARSET = "com.ceridwen.circulation.SIP.charset";
+    private static final String PROP_DEFAULT_CHARSET = "Cp850";
+	
     private static Log log = LogFactory.getLog(Connection.class);
 
     private char sequence = '0';
@@ -141,6 +144,10 @@ public abstract class Connection {
         return ret;
     }
 
+    protected String getCharset() {
+        return System.getProperty(PROP_CHARSET, PROP_DEFAULT_CHARSET);    	
+    }
+    
     protected String strim(String input) {
         String ret = input;
 

@@ -1,3 +1,6 @@
+Version 2.91: 27/07/2012 (479)
+
+
 Version 2.90: 27/07/2012 (479)
 Sample code connected to wrong port for demo server
 Commands terminated by \n rather than \r on linux platforms

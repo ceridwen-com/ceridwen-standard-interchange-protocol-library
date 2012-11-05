@@ -43,8 +43,8 @@ public class SocketConnection extends Connection {
             this.socket = new java.net.Socket();
             this.socket.connect(new InetSocketAddress(this.getHost(), this.getPort()), this.getConnectionTimeout());
             this.socket.setSoTimeout(this.getIdleTimeout());
-            this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
-            this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream(), getCharset()));
+            this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream(), getCharset()));
         } catch (Exception ex) {
             if (retryAttempts > 0) {
                 try {

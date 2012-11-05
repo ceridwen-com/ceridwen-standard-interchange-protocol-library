@@ -82,8 +82,8 @@ public class TelnetConnection extends Connection {
             this.client.setDefaultTimeout(this.getIdleTimeout());
             this.client.connect(this.getHost(), this.getPort());
             this.client.setSoTimeout(this.getIdleTimeout());
-            this.out = new BufferedWriter(new OutputStreamWriter(this.client.getOutputStream()));
-            this.in = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
+            this.out = new BufferedWriter(new OutputStreamWriter(this.client.getOutputStream(), getCharset()));
+            this.in = new BufferedReader(new InputStreamReader(this.client.getInputStream(), getCharset()));
         } catch (Exception e) {
             if (retry > 0) {
                 try {
