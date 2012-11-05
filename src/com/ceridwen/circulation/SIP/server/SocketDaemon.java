@@ -19,6 +19,7 @@
 package com.ceridwen.circulation.SIP.server;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -112,10 +113,12 @@ class ConnectionThread extends Thread {
         try {
             ConnectionThread.logger.info("New connection from " + this.server.getInetAddress().toString());
             BufferedReader in = new BufferedReader(new InputStreamReader(this.server.getInputStream(), getCharset()));
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(this.server.getOutputStream(), getCharset()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(this.server.getOutputStream(), getCharset()));
             String input = in.readLine();
             do {
-                out.print(this.broker.process(input) + "\r");
+            	String resp = this.broker.process(input) + "\r";
+                out.write(resp);
+                out.flush();
                 input = in.readLine();
             } while (input != null);
             this.server.close();
