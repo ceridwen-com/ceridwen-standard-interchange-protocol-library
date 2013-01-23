@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.messages.Message;
 
 public class SocketConnection extends Connection {
     private static Log log = LogFactory.getLog(SocketConnection.class);
@@ -43,8 +44,8 @@ public class SocketConnection extends Connection {
             this.socket = new java.net.Socket();
             this.socket.connect(new InetSocketAddress(this.getHost(), this.getPort()), this.getConnectionTimeout());
             this.socket.setSoTimeout(this.getIdleTimeout());
-            this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream(), getCharset()));
-            this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream(), getCharset()));
+            this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream(), Message.getCharsetEncoding()));
+            this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream(), Message.getCharsetEncoding()));
         } catch (Exception ex) {
             if (retryAttempts > 0) {
                 try {

@@ -88,6 +88,8 @@ public abstract class Message implements Serializable {
     private static final String PROP_AUTOPOPULATE_ENCODE = "encode";
     private static final String PROP_AUTOPOPULATE_BIDIRECTIONAL = "bidirectional";
     private static final String PROP_AUTOPOPULATE_DEFAULT = PROP_AUTOPOPULATE_BIDIRECTIONAL;
+    private static final String PROP_CHARSET = "com.ceridwen.circulation.SIP.charset";
+    private static final String PROP_DEFAULT_CHARSET = "Cp850";
     private static Log log = LogFactory.getLog(Message.class);
 
     private Character SequenceCharacter = null;
@@ -96,6 +98,10 @@ public abstract class Message implements Serializable {
         return this.SequenceCharacter;
     }
 
+    public static String getCharsetEncoding() {
+        return System.getProperty(PROP_CHARSET, PROP_DEFAULT_CHARSET);    	
+    }
+    
     private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
         ois.defaultReadObject();
     }
@@ -569,7 +575,7 @@ public abstract class Message implements Serializable {
 
     protected static String calculateChecksum(String data) throws UnsupportedEncodingException {
         int checksum = 0;
-        byte[] bytes = data.getBytes("ASCII");
+        byte[] bytes = data.getBytes(Message.getCharsetEncoding());
         for (byte b : bytes) {
             checksum += b;
         }
