@@ -1,5 +1,11 @@
-Version 2.91: 27/07/2012 (479)
-
+Version 2.91: 01/01/2013 (479)
+Fixed issues in handling non-ASCII data: corrected checksum calculation; allowed configuration of code page encoding.
+Dependencies: ceridwen utilities 1.60
+              apache commons beanutils 1.8.3
+              apache commons lang 3.1
+              apache commons logging 1.1.1 
+              apache commons net 3.1
+ 
 
 Version 2.90: 27/07/2012 (479)
 Sample code connected to wrong port for demo server

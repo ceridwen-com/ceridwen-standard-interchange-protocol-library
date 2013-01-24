@@ -27,7 +27,6 @@ package com.ceridwen.circulation.SIP.transport;
  * @version 1.0
  */
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
