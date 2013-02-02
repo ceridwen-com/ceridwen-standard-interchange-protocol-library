@@ -81,15 +81,17 @@ public abstract class Message implements Serializable {
 	 * 
 	 */
     private static final long serialVersionUID = 1609258005567594730L;
-    private static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
-    @SuppressWarnings("unused")
-	private static final String PROP_AUTOPOPULATE_OFF = "off";
-    private static final String PROP_AUTOPOPULATE_DECODE = "decode";
-    private static final String PROP_AUTOPOPULATE_ENCODE = "encode";
-    private static final String PROP_AUTOPOPULATE_BIDIRECTIONAL = "bidirectional";
+    public static final String PROP_CHARSET = "com.ceridwen.circulation.SIP.charset";
+    public static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
+
+    public static final String PROP_AUTOPOPULATE_OFF = "off";
+    public static final String PROP_AUTOPOPULATE_DECODE = "decode";
+    public static final String PROP_AUTOPOPULATE_ENCODE = "encode";
+    public static final String PROP_AUTOPOPULATE_BIDIRECTIONAL = "bidirectional";
+    
     private static final String PROP_AUTOPOPULATE_DEFAULT = PROP_AUTOPOPULATE_BIDIRECTIONAL;
-    private static final String PROP_CHARSET = "com.ceridwen.circulation.SIP.charset";
-    private static final String PROP_DEFAULT_CHARSET = "Cp850";
+    private static final String PROP_DEFAULT_CHARSET = "cp850";
+
     private static Log log = LogFactory.getLog(Message.class);
 
     private Character SequenceCharacter = null;
