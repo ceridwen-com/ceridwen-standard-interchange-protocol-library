@@ -1,4 +1,4 @@
-Version 2.91: 02/02/2013 (521)
+Version 2.91: 02/02/2013 (525)
 Fixed issues in handling non-ASCII data: corrected checksum calculation; allowed configuration of code page encoding.
 Dependencies: ceridwen utilities 1.60
               apache commons beanutils 1.8.3
