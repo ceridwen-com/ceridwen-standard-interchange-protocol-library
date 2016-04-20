@@ -1,3 +1,16 @@
+Version 2.9.2: 20/04/2016
+Added netty server implementation
+Added field ordering options (alphabetic or specification listed)
+Changed holdQueueLength definition to match 3M emulator rather than specification
+Dependencies: ceridwen utilitiy 1.6.2
+              apache commons beanutils 1.9.2
+              apache commons lang 3.4
+              apache commons logging 1.2 
+              apache commons net 3.4
+              io.netty transport 4.0.36.Final
+              io.netty handler 4.0.36.Final
+          
+
 Version 2.91: 02/02/2013 (525)
 Fixed issues in handling non-ASCII data: corrected checksum calculation; allowed configuration of code page encoding.
 Dependencies: ceridwen utilities 1.60
