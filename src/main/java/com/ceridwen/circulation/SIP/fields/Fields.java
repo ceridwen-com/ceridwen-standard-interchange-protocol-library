@@ -105,7 +105,7 @@ public class Fields {
     HoldMode holdMode; 
     @Field(tag = "CM", policy = FieldPolicy.NOT_REQUIRED)
     Date holdPickupDate;
-    @Field(tag = "CF", policy = FieldPolicy.NOT_REQUIRED)
+    @Field(tag = "CF", length=5, policy = FieldPolicy.REQUIRED) // according to spec should be no length, not required but that breaks 3M emulator
     Integer holdQueueLength;
     @Field(tag = "BY", length = 1, policy = FieldPolicy.NOT_REQUIRED)
     HoldType holdType;
