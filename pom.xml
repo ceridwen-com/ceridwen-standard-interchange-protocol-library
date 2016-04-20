@@ -107,6 +107,16 @@
       <artifactId>commons-beanutils</artifactId>
       <version>1.9.2</version>
     </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport</artifactId>
+      <version>4.0.36.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-handler</artifactId>
+      <version>4.0.36.Final</version>
+    </dependency>
   </dependencies>
 
   <prerequisites>
