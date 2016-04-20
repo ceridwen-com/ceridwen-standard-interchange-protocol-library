@@ -105,6 +105,10 @@ public abstract class Message implements Serializable {
 
     private Character SequenceCharacter = null;
 
+    public void setSequenceCharacter(Character sequenceCharacter) {
+    	this.SequenceCharacter = sequenceCharacter;
+    }
+
     public Character getSequenceCharacter() {
         return this.SequenceCharacter;
     }
@@ -264,6 +268,14 @@ public abstract class Message implements Serializable {
         return ret.toString();
     }
 
+    public String encode() throws MandatoryFieldOmitted, InvalidFieldLength, MessageNotUnderstood {
+      return this.encode(this.getSequenceCharacter());
+    }
+    
+    public String encode(boolean autoPop) throws MandatoryFieldOmitted, InvalidFieldLength, MessageNotUnderstood {
+      return this.encode(this.getSequenceCharacter(), autoPop);
+    }    
+    
     public String encode(Character sequence) throws MandatoryFieldOmitted, InvalidFieldLength, MessageNotUnderstood {
         String pop = System.getProperty(Message.PROP_AUTOPOPULATE, PROP_AUTOPOPULATE_BIDIRECTIONAL);
         boolean autoPop = false;
