@@ -684,13 +684,11 @@ public abstract class Message implements Serializable {
         XMLEncoder out = new XMLEncoder(strm);
         out.writeObject(this);
         out.flush();
-        out.close();
     }
 
     public static Message xmlDecode(InputStream strm) {
         XMLDecoder in = new XMLDecoder(strm);
         Message msg = (Message) in.readObject();
-        in.close();
         return msg; 
     }
 
