@@ -6,16 +6,17 @@
 package com.ceridwen.circulation.SIP.transport;
 
 import java.net.Socket;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
  * @author Matthew.Dovey
  */
-public class SocketConnection extends AbstractSocketConnection {
+public class SSLSocketConnection extends AbstractSocketConnection {
 
   @Override
   Socket getSocket() throws Exception {
-    return new java.net.Socket();
+    return SSLSocketFactory.getDefault().createSocket();
   }
   
 }
