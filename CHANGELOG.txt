@@ -1,3 +1,14 @@
+Version 2.9.3: 06/09/2016
+Update sample to use netty server
+Added SSL Socket client connection
+Dependencies: ceridwen utilitiy 1.6.2
+              apache commons beanutils 1.9.2
+              apache commons lang 3.4
+              apache commons logging 1.2 
+              apache commons net 3.4
+              io.netty transport 4.0.36.Final
+              io.netty handler 4.0.36.Final
+
 Version 2.9.2: 20/04/2016
 Added netty server implementation
 Added field ordering options (alphabetic or specification listed)

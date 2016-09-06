@@ -18,15 +18,6 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.transport;
 
-/**
- * <p>Title: RTSI</p>
- * <p>Description: Real Time Self Issue</p>
- * <p>Copyright: </p>
-
- * @author Matthew J. Dovey
- * @version 1.0
- */
-
 import java.util.Timer;
 import java.util.TimerTask;
 
