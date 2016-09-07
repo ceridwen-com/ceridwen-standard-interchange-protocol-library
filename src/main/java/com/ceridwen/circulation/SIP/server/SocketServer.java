@@ -18,12 +18,13 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.server;
 
+@Deprecated
 public class SocketServer {
 
     /**
      * @param args
      */
-    public static void main(String[] args) {
+      public static void main(String[] args) {
         SocketDaemon thread = new SocketDaemon("localhost", 12345, new MessageHandlerDummyImpl());
         thread.start();
     }

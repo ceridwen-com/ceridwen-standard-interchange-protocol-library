@@ -29,6 +29,7 @@ import com.ceridwen.circulation.SIP.messages.ACSResend;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.SCResend;
 
+@Deprecated
 public class MessageBroker {
     private static Log logger = LogFactory.getLog(MessageBroker.class);
 
