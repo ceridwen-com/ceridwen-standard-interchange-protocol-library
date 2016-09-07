@@ -21,6 +21,7 @@ import javax.net.ssl.SSLSocketFactory;
 import java.security.cert.Certificate;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 /**
  *
@@ -111,12 +112,17 @@ public class SSLSocketConnection extends SocketConnection {
     if (clientPrivateKey != null && clientCertificate != null) {
       keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
       keyStore.load(null);
+        String data = new String(Files.readAllBytes(clientPrivateKey.toPath()));
+        data = data.replace("-----BEGIN PRIVATE KEY-----\n", "");
+        data = data.replace("-----END PRIVATE KEY-----", "");
+        data = data.replaceAll("\\s", "");
         if (clientPrivateKeyPassword == null) {
-          keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Files.readAllBytes(clientPrivateKey.toPath()))), null, cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));
+          keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(data))), null, cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));
+          keyManagerFactory.init(keyStore, null);
         } else {
-          keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Files.readAllBytes(clientPrivateKey.toPath()))), clientPrivateKeyPassword.toCharArray(), cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));       
+          keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(data))), clientPrivateKeyPassword.toCharArray(), cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));       
+          keyManagerFactory.init(keyStore, clientPrivateKeyPassword.toCharArray());
         }
-      keyManagerFactory.init(keyStore, "changeit".toCharArray());
     }
             
     if (serverCertificateCA != null) {
