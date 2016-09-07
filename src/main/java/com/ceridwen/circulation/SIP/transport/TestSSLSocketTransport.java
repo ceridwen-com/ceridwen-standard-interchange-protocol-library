@@ -1,14 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ceridwen.circulation.SIP.transport;
-
-import static org.junit.Assert.*;
-
-import java.util.Date;
-
-import junit.framework.Assert;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
@@ -26,14 +21,27 @@ import com.ceridwen.circulation.SIP.netty.server.SIPDaemon;
 import com.ceridwen.circulation.SIP.samples.netty.DummyDriverFactory;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
+import java.util.Date;
+import junit.framework.Assert;
+import org.junit.After;
+import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
 
-public class TestSocketTransport {
+/**
+ *
+ * @author Matthew.Dovey
+ */
+public class TestSSLSocketTransport {
   static SIPDaemon server;
+  static SelfSignedCertificate ssc;
 	
 	@Before
 	public void setUp() throws Exception {
       // Run netty server
-      server = new SIPDaemon("Sample", "localhost", 12345, new DummyDriverFactory(), true);
+      ssc = new SelfSignedCertificate();
+      server = new SIPDaemon("Sample", "localhost", 12345, ssc.certificate(), ssc.privateKey(), new DummyDriverFactory(), true);
 
       server.start();
 	}
@@ -51,7 +59,8 @@ public class TestSocketTransport {
         Connection connection;
         Message request, response;
 
-        connection = new SocketConnection();
+        connection = new SSLSocketConnection();
+        ((SSLSocketConnection) connection).setServerCertificateCA(ssc.certificate());
         ((SocketConnection) connection).setHost("localhost");
         ((SocketConnection) connection).setPort(12345);
         ((SocketConnection) connection).setConnectionTimeout(30000);
@@ -169,3 +178,9 @@ public class TestSocketTransport {
 	    }
 	}
 }
+  
+  
+  
+  
+  
+  
