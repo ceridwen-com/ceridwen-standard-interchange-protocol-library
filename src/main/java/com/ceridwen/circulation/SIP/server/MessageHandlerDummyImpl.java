@@ -36,6 +36,7 @@ import com.ceridwen.circulation.SIP.messages.RenewResponse;
 import com.ceridwen.circulation.SIP.messages.SCStatus;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
+@Deprecated
 public class MessageHandlerDummyImpl implements MessageHandler {
 
     @Override

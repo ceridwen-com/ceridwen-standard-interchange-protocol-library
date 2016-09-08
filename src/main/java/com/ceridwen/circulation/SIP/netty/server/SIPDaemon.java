@@ -16,17 +16,19 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
 import io.netty.util.concurrent.GenericFutureListener;
+import io.netty.util.internal.StringUtil;
+import java.io.File;
 
 public class SIPDaemon implements GenericFutureListener<ChannelFuture> {
   private static final Log log = LogFactory.getLog(SIPDaemon.class);
 
-
 	private final String name;
 	private final String ip;
   private final int port;
-  private final boolean ssl;
+  private final File keyCertChainFile;
+  private final File keyFile;
+  private final String keyPassword;
   private final DriverFactory driverFactory;
   private final boolean strictChecksumChecking;
 
@@ -34,26 +36,40 @@ public class SIPDaemon implements GenericFutureListener<ChannelFuture> {
   private EventLoopGroup bossGroup;
   private EventLoopGroup workerGroup;
     
+  public SIPDaemon(String name, String ip, int port, File keyCertChainFile, File keyFile, DriverFactory driverFactory, boolean strictChecksumChecking) {
+    this(name, ip, port, keyCertChainFile, keyFile, null, driverFactory, strictChecksumChecking);
+  }
 
-  public SIPDaemon(String name, String ip, int port, boolean ssl, DriverFactory driverFactory, boolean strictChecksumChecking) {
+  public SIPDaemon(String name, String ip, int port, DriverFactory driverFactory, boolean strictChecksumChecking) {
+    this(name, ip, port, null, null, null, driverFactory, strictChecksumChecking);
+  }
+  
+  public SIPDaemon(String name, String ip, int port, File keyCertChainFile, File keyFile, String keyPassword, DriverFactory driverFactory, boolean strictChecksumChecking) {
     this.name = name;
     this.ip = ip;
     this.port = port;
-    this.ssl = ssl;
+    this.keyCertChainFile = keyCertChainFile;
+    this.keyFile = keyFile;
+    this.keyPassword = keyPassword;
     this.driverFactory = driverFactory;
     this.strictChecksumChecking = strictChecksumChecking;
   }
+  
 
   public void start() throws Exception {
       // Configure SSL.
       log.info("Server " + name + " on " + ip + " " + port + " starting...");
 
-    final SslContext sslCtx;
-      if (ssl) {
-          SelfSignedCertificate ssc = new SelfSignedCertificate();
-          sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
+      final SslContext sslCtx;
+      
+      if (keyCertChainFile == null || keyFile == null) {
+        sslCtx = null;
       } else {
-          sslCtx = null;
+        if (StringUtil.isNullOrEmpty(keyPassword)) {
+          sslCtx = SslContextBuilder.forServer(keyCertChainFile, keyFile).build();
+        } else {
+          sslCtx = SslContextBuilder.forServer(keyCertChainFile, keyFile, keyPassword).build();
+        }
       }    	
 
       bossGroup = new NioEventLoopGroup(1);

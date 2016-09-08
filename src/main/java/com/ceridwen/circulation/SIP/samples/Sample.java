@@ -36,14 +36,19 @@ import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.circulation.SIP.messages.SCStatus;
 import com.ceridwen.circulation.SIP.netty.server.SIPDaemon;
 import com.ceridwen.circulation.SIP.samples.netty.DummyDriverFactory;
+import com.ceridwen.circulation.SIP.transport.SSLSocketConnection;
 import com.ceridwen.circulation.SIP.transport.SocketConnection;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Sample {
-
+  
+  private static final boolean SSL = false;
+  private static SelfSignedCertificate ssc;
+  
   public static void main(String[] args) {
     try {
       System.setProperty("com.ceridwen.circulation.SIP.charset", "ISO8859_1");
@@ -51,7 +56,12 @@ public class Sample {
       SIPDaemon server;
 
       // Run netty server
-      server = new SIPDaemon("Sample", "localhost", 12345, false, new DummyDriverFactory(), true);
+      if (SSL) {
+        ssc = new SelfSignedCertificate();
+        server = new SIPDaemon("Sample", "localhost", 12345, ssc.certificate(), ssc.privateKey(), new DummyDriverFactory(), true);
+      } else {
+        server = new SIPDaemon("Sample", "localhost", 12345, new DummyDriverFactory(), true);
+      }
       server.start();
 
       // Do sample checkout
@@ -70,7 +80,12 @@ public class Sample {
      */
     SocketConnection connection;
 
-    connection = new SocketConnection();
+    if (SSL) {
+      connection = new SSLSocketConnection();
+      ((SSLSocketConnection) connection).setServerCertificateCA(ssc.certificate());
+    } else {
+      connection = new SocketConnection();
+    }
     connection.setHost("localhost");
     connection.setPort(12345);
     connection.setConnectionTimeout(30000);
