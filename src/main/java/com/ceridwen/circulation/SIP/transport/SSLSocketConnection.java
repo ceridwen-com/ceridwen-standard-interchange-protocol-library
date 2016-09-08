@@ -102,38 +102,43 @@ public class SSLSocketConnection extends SocketConnection {
 
   @Override
   protected Socket getSocket() throws Exception {
-    KeyManagerFactory keyManagerFactory = null; 
-    TrustManagerFactory trustManagerFactory =  null;
+    KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");; 
+    TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
     KeyStore keyStore = KeyStore.getInstance("PKCS12");
     KeyStore trustStore = KeyStore.getInstance("PKCS12");
     CertificateFactory cf = CertificateFactory.getInstance("X.509");
     KeyFactory kf = KeyFactory.getInstance("RSA");
     
     if (clientPrivateKey != null && clientCertificate != null) {
-      keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
       keyStore.load(null);
-        String data = new String(Files.readAllBytes(clientPrivateKey.toPath()));
-        data = data.replace("-----BEGIN PRIVATE KEY-----\n", "");
-        data = data.replace("-----END PRIVATE KEY-----", "");
-        data = data.replaceAll("\\s", "");
-        if (clientPrivateKeyPassword == null) {
-          keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(data))), null, cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));
-          keyManagerFactory.init(keyStore, null);
-        } else {
-          keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(data))), clientPrivateKeyPassword.toCharArray(), cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));       
-          keyManagerFactory.init(keyStore, clientPrivateKeyPassword.toCharArray());
-        }
+      String data = new String(Files.readAllBytes(clientPrivateKey.toPath()));
+      data = data.replace("-----BEGIN PRIVATE KEY-----\n", "");
+      data = data.replace("-----END PRIVATE KEY-----", "");
+      data = data.replaceAll("\\s", "");
+      if (clientPrivateKeyPassword == null) {
+        keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(data))), null, cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));
+        keyManagerFactory.init(keyStore, null);
+      } else {
+        keyStore.setKeyEntry("client", kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(data))), clientPrivateKeyPassword.toCharArray(), cf.generateCertificates(new FileInputStream(clientCertificate)).toArray(new Certificate[]{}));       
+        keyManagerFactory.init(keyStore, clientPrivateKeyPassword.toCharArray());
+      }
+    } else {
+      keyManagerFactory = null;
     }
             
     if (serverCertificateCA != null) {
-      trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
       trustStore.load(null);
       trustStore.setCertificateEntry("ca", cf.generateCertificate(new FileInputStream(serverCertificateCA)));
       trustManagerFactory.init(trustStore);
+    } else {
+      if (keyManagerFactory == null) {
+        return SSLContext.getDefault().getSocketFactory().createSocket();
+      } else {
+        trustManagerFactory.init((KeyStore)null);
+      }
     }
-
     SSLContext context = SSLContext.getInstance("TLS");
-    context.init(keyManagerFactory == null?null:keyManagerFactory.getKeyManagers(), trustManagerFactory == null?null:trustManagerFactory.getTrustManagers(), new SecureRandom());
+    context.init(keyManagerFactory == null?null:keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), new SecureRandom());
     SSLSocketFactory sockFact = context.getSocketFactory();
     return sockFact.createSocket();
   }
