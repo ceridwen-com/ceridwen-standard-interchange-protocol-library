@@ -67,12 +67,7 @@ public class SIPChannelHandler extends SimpleChannelInboundHandler<Message> {
 
         response.setSequenceCharacter(request.getSequenceCharacter());
         
-        boolean close = false;
-
         ChannelFuture future = ctx.write(response);
-        if (close) {
-            future.addListener(ChannelFutureListener.CLOSE);
-        }
     }
 
     @Override
