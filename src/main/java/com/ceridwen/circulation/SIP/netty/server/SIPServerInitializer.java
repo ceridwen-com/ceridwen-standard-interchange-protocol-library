@@ -20,12 +20,12 @@ import io.netty.handler.ssl.SslContext;
 
 public class SIPServerInitializer extends ChannelInitializer<SocketChannel> {
 	
-    private static final StringDecoder DECODER = new StringDecoder();
-    private static final StringEncoder ENCODER = new StringEncoder();
-    private static SIPMessageDecoder SIPDECODER;
-    private static final SIPMessageEncoder SIPENCODER = new SIPMessageEncoder();
+    private final StringDecoder DECODER = new StringDecoder();
+    private final StringEncoder ENCODER = new StringEncoder();
+    private SIPMessageDecoder SIPDECODER;
+    private final SIPMessageEncoder SIPENCODER = new SIPMessageEncoder();
 
-    private static SIPChannelHandler SERVER_HANDLER;
+    private SIPChannelHandler SERVER_HANDLER;
 
     private final SslContext sslCtx;
 
@@ -45,8 +45,8 @@ public class SIPServerInitializer extends ChannelInitializer<SocketChannel> {
     
     public SIPServerInitializer(DriverFactory driverFactory, boolean strictChecksumChecking) {
     	this.sslCtx = null;
-        SIPDECODER = new SIPMessageDecoder(strictChecksumChecking);
-        SERVER_HANDLER = new SIPChannelHandler(driverFactory);
+      SIPDECODER = new SIPMessageDecoder(strictChecksumChecking);
+      SERVER_HANDLER = new SIPChannelHandler(driverFactory);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class SIPServerInitializer extends ChannelInitializer<SocketChannel> {
         // Add the text line codec combination first,
         pipeline.addLast(new DelimiterBasedFrameDecoder(8192, getDelimiters()));
         
-        // the encoder and decoder are static as these are sharable
+        // Add encoders and decoders
         pipeline.addLast(DECODER);
         pipeline.addLast(ENCODER);
         pipeline.addLast(SIPDECODER);
