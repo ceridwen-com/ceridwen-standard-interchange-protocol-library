@@ -247,9 +247,9 @@ public class Fields {
         } catch (Exception ex) {
             throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor not defined: " + fieldName);            
         }
-        if (fld == null) {
-            throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor not defined: " + fieldName);            
-        }
+//        if (fld == null) {
+//            throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor not defined: " + fieldName);            
+//        }
         Field fldann = fld.getAnnotation(Field.class);
         if (fldann == null) {
             throw new java.lang.AssertionError(messageName + " - Positioned FieldDescriptor not defined: " + fieldName);            
@@ -273,9 +273,9 @@ public class Fields {
         } catch (Exception ex) {
             throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor not defined: " + fieldName);            
         }
-        if (fld == null) {
-            throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor not defined: " + fieldName);            
-        }
+//        if (fld == null) {
+//            throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor not defined: " + fieldName);            
+//        }
         Field fldann = fld.getAnnotation(Field.class);
         if (fldann == null) {
             throw new java.lang.AssertionError(messageName + " - Tagged FieldDescriptor not defined: " + fieldName);            
