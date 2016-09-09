@@ -34,5 +34,10 @@ public class RetriesExceeded extends Exception {
     private static final long serialVersionUID = 1416841113916472161L;
 
     public RetriesExceeded() {
+      super();
+    }
+    
+    public RetriesExceeded(Throwable ex) {
+      super(ex);
     }
 }

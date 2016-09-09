@@ -111,7 +111,7 @@ public class Sample {
 
     try {
       scStatusResponse = connection.send(scStatusRequest);
-    } catch (RetriesExceeded | ConnectionFailure | MessageNotUnderstood | ChecksumError | SequenceError | MandatoryFieldOmitted | InvalidFieldLength ex) {
+    } catch (RetriesExceeded | MessageNotUnderstood | ChecksumError | SequenceError | MandatoryFieldOmitted | InvalidFieldLength ex) {
       Logger.getLogger(Sample.class.getName()).log(Level.SEVERE, null, ex);
       return;
     }
@@ -148,7 +148,7 @@ public class Sample {
 
     try {
       checkOutResponse = connection.send(checkOutRequest);
-    } catch (RetriesExceeded | ConnectionFailure | MessageNotUnderstood | ChecksumError | SequenceError | MandatoryFieldOmitted | InvalidFieldLength ex) {
+    } catch (RetriesExceeded | MessageNotUnderstood | ChecksumError | SequenceError | MandatoryFieldOmitted | InvalidFieldLength ex) {
       Logger.getLogger(Sample.class.getName()).log(Level.SEVERE, null, ex);
       return;
     }

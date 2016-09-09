@@ -327,7 +327,7 @@ public abstract class Message implements Serializable {
                     desc.getPropertyType().getName());
               }
             }
-            if (fixed.containsKey(new Integer(field.start))) {
+            if (fixed.containsKey(Integer.valueOf(field.start))) {
               throw new java.lang.AssertionError("Positioning error inserting field at " + field.start + " for class " + this.getClass().getName());                    
             }
             fixed.put(new Integer(field.start), this.pad(value[0], field));
@@ -411,7 +411,7 @@ public abstract class Message implements Serializable {
             if (desc.getPropertyType() == Integer.class) {
                     if (!value.trim().isEmpty()) {
                 desc.getWriteMethod().invoke(this,
-                                     new Object[] { new Integer(value.trim()) });
+                                     new Object[] {Integer.valueOf(value.trim()) });
                     }
                 return;
             }
@@ -806,7 +806,7 @@ public abstract class Message implements Serializable {
                         if (field.getType() == Integer.class) {
                             Method method = desc.getWriteMethod();
                             if (method != null) {
-                                method.invoke(msg, new Object[]{new Integer(0)});
+                                method.invoke(msg, new Object[]{Integer.valueOf(0)});
                             }
                         }
                         if (field.getType() == Boolean.class) {
@@ -876,7 +876,7 @@ public abstract class Message implements Serializable {
                             if (length != 0) {
                                 value = value.substring(0, length);
                             }
-                            method.invoke(msg, new Object[]{new Integer(value)});
+                            method.invoke(msg, new Object[]{Integer.valueOf(value)});
                         }                    
                         if (type == String.class) {
                             String value = field.getName();

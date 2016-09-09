@@ -35,7 +35,7 @@ public class SIPDaemon implements GenericFutureListener<ChannelFuture> {
   private ChannelFuture f;
   private EventLoopGroup bossGroup;
   private EventLoopGroup workerGroup;
-    
+
   public SIPDaemon(String name, String ip, int port, File keyCertChainFile, File keyFile, DriverFactory driverFactory, boolean strictChecksumChecking) {
     this(name, ip, port, keyCertChainFile, keyFile, null, driverFactory, strictChecksumChecking);
   }
@@ -55,6 +55,21 @@ public class SIPDaemon implements GenericFutureListener<ChannelFuture> {
     this.strictChecksumChecking = strictChecksumChecking;
   }
   
+  public String getName() {
+    return name;
+  }
+
+  public String getIp() {
+    return ip;
+  }
+
+  public int getPort() {
+    return port;
+  }
+
+  public boolean isStrictChecksumChecking() {
+    return strictChecksumChecking;
+  }
 
   public void start() throws Exception {
       // Configure SSL.
