@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.messages.Message;
 
 public class SocketConnection extends Connection {
@@ -59,7 +60,7 @@ public class SocketConnection extends Connection {
                 }
                 this.connect(retryAttempts - 1);
             } else {
-                throw ex;
+                throw new RetriesExceeded(ex);
             }
         }
     }

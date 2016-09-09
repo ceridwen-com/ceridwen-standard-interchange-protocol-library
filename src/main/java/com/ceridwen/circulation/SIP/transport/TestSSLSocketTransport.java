@@ -6,7 +6,6 @@
 package com.ceridwen.circulation.SIP.transport;
 
 import com.ceridwen.circulation.SIP.exceptions.ChecksumError;
-import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 import com.ceridwen.circulation.SIP.exceptions.InvalidFieldLength;
 import com.ceridwen.circulation.SIP.exceptions.MandatoryFieldOmitted;
 import com.ceridwen.circulation.SIP.exceptions.MessageNotUnderstood;
@@ -23,7 +22,6 @@ import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
 import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 import java.util.Date;
-import junit.framework.Assert;
 import org.junit.After;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -34,8 +32,8 @@ import org.junit.Test;
  * @author Matthew.Dovey
  */
 public class TestSSLSocketTransport {
-  static SIPDaemon server;
-  static SelfSignedCertificate ssc;
+  SIPDaemon server;
+  SelfSignedCertificate ssc;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -86,25 +84,22 @@ public class TestSSLSocketTransport {
         try {
             response = connection.send(request);
         } catch (RetriesExceeded e) {
-        	Assert.fail("Retries exceeded: " + e.getMessage());
-        	return;
-        } catch (ConnectionFailure e) {
-        	Assert.fail("Connection failure: " + e.getMessage());
+        	fail("Retries exceeded: " + e.getMessage());
         	return;
         } catch (MessageNotUnderstood e) {
-        	Assert.fail("Message not understood: " + e.getMessage());
+        	fail("Message not understood: " + e.getMessage());
         	return;
         } catch (ChecksumError e) {
-        	Assert.fail("Checksum error: " + e.getMessage());
+        	fail("Checksum error: " + e.getMessage());
         	return;
         } catch (SequenceError e) {
-        	Assert.fail("Sequence error: " + e.getMessage());
+        	fail("Sequence error: " + e.getMessage());
         	return;
         } catch (MandatoryFieldOmitted e) {
-        	Assert.fail("Mandatory Field Omitted: " + e.getMessage());
+        	fail("Mandatory Field Omitted: " + e.getMessage());
         	return;
         } catch (InvalidFieldLength e) {
-        	Assert.fail("Invalid field length: " + e.getMessage());
+        	fail("Invalid field length: " + e.getMessage());
         	return;
         }
         
@@ -138,9 +133,6 @@ public class TestSSLSocketTransport {
         } catch (RetriesExceeded e) {
         	fail("Retries exceeded: " + e.getMessage());
         	return;
-        } catch (ConnectionFailure e) {
-        	fail("Connection failure: " + e.getMessage());
-        	return;
         } catch (MessageNotUnderstood e) {
         	fail("Message not understood: " + e.getMessage());
         	return;
@@ -165,16 +157,13 @@ public class TestSSLSocketTransport {
         
         try {
         	String testCase = response.encode('1');
-        	Assert.assertTrue(testCase.startsWith("120NUN") && testCase.contains("AA|AB|AH|AJ|AO|AY1AZ")); // strip out components which may change (transaction date and checksum)
+        	assert(testCase.startsWith("120NUN") && testCase.contains("AA|AB|AH|AJ|AO|AY1AZ")); // strip out components which may change (transaction date and checksum)
 	    } catch (MessageNotUnderstood e) {
 	    	fail("Message not understood: " + e.getMessage());
-        	return;
-        } catch (MandatoryFieldOmitted e) {
-        	fail("Mandatory Field Omitted: " + e.getMessage());
-        	return;
+      } catch (MandatoryFieldOmitted e) {
+        fail("Mandatory Field Omitted: " + e.getMessage());
 	    } catch (InvalidFieldLength e) {
 	    	fail("Invalid field length: " + e.getMessage());
-        	return;
 	    }
 	}
 }

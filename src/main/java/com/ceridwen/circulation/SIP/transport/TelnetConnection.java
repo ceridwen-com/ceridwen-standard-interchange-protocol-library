@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.net.telnet.TelnetClient;
 
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.messages.Message;
 import com.ceridwen.util.net.TimeoutSocketFactory;
 
@@ -94,7 +95,7 @@ public class TelnetConnection extends Connection {
                 }
                 this.connect(retry - 1);
             } else {
-                throw e;
+                throw new RetriesExceeded(e);
             }
         }
         try {
@@ -110,7 +111,7 @@ public class TelnetConnection extends Connection {
                 }
                 this.connect(retry - 1);
             } else {
-                throw e;
+                throw new RetriesExceeded(e);
             }
         }
     }
