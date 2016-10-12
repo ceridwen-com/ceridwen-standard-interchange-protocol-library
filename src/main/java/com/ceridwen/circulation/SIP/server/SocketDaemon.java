@@ -31,6 +31,7 @@ import java.net.SocketException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+@Deprecated
 public class SocketDaemon extends Thread {
     private static Log logger = LogFactory.getLog(SocketDaemon.class);
 

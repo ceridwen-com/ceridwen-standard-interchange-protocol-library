@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
+import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.messages.Message;
 
 public class SocketConnection extends Connection {
@@ -38,10 +39,14 @@ public class SocketConnection extends Connection {
     private BufferedReader in;
     private BufferedWriter out;
 
+    protected Socket getSocket() throws Exception {
+      return new java.net.Socket();
+    } 
+
     @Override
     protected void connect(int retryAttempts) throws Exception {
         try {
-            this.socket = new java.net.Socket();
+            this.socket = this.getSocket();
             this.socket.connect(new InetSocketAddress(this.getHost(), this.getPort()), this.getConnectionTimeout());
             this.socket.setSoTimeout(this.getIdleTimeout());
             this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream(), Message.getCharsetEncoding()));
@@ -55,7 +60,7 @@ public class SocketConnection extends Connection {
                 }
                 this.connect(retryAttempts - 1);
             } else {
-                throw ex;
+                throw new RetriesExceeded(ex);
             }
         }
     }

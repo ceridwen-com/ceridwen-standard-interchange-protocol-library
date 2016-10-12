@@ -1,22 +1,9 @@
-/*******************************************************************************
- * Copyright (c) 2010 Matthew J. Dovey (www.ceridwen.com).
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at 
- * <http://www.gnu.org/licenses/>
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Contributors:
- *     Matthew J. Dovey (www.ceridwen.com) - initial API and implementation
- ******************************************************************************/
-package com.ceridwen.circulation.SIP.server;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ceridwen.circulation.SIP.samples.netty;
 
 import com.ceridwen.circulation.SIP.messages.ACSStatus;
 import com.ceridwen.circulation.SIP.messages.CheckInResponse;
@@ -34,32 +21,52 @@ import com.ceridwen.circulation.SIP.messages.PatronStatusResponse;
 import com.ceridwen.circulation.SIP.messages.RenewAllResponse;
 import com.ceridwen.circulation.SIP.messages.RenewResponse;
 import com.ceridwen.circulation.SIP.messages.SCStatus;
-import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
+import com.ceridwen.circulation.SIP.netty.server.driver.AbstractDriver;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.BlockPatronOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.CheckInOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.CheckOutOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.EndPatronSessionOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.FeePaidOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.HoldOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.ItemInformationOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.ItemStatusUpdateOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.LoginOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.PatronEnableOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.PatronInformationOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.PatronStatusOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.RenewAllOperation;
+import com.ceridwen.circulation.SIP.netty.server.driver.operation.RenewOperation;
 
-@Deprecated
-public class MessageHandlerDummyImpl implements MessageHandler {
+/**
+ *
+ * @author Matthew
+ */
+public class DummyDriver extends AbstractDriver
+  implements  BlockPatronOperation,
+              CheckInOperation,
+              CheckOutOperation,
+              EndPatronSessionOperation,
+              FeePaidOperation,
+              HoldOperation,
+              ItemInformationOperation,
+              ItemStatusUpdateOperation,
+              LoginOperation,
+              PatronEnableOperation,
+              PatronInformationOperation,
+              PatronStatusOperation,
+              RenewAllOperation,
+              RenewOperation
+{
 
-    @Override
-    public ACSStatus Status(SCStatus msg) {
-        ACSStatus response = new ACSStatus();
-        response.getSupportedMessages().set(SupportedMessages.BLOCK_PATRON);
-        response.getSupportedMessages().set(SupportedMessages.CHECK_IN);
-        response.getSupportedMessages().set(SupportedMessages.CHECK_OUT);
-        response.getSupportedMessages().set(SupportedMessages.END_PATRON_SESSION);
-        response.getSupportedMessages().set(SupportedMessages.FEE_PAID);
-        response.getSupportedMessages().set(SupportedMessages.HOLD);
-        response.getSupportedMessages().set(SupportedMessages.ITEM_INFORMATION);
-        response.getSupportedMessages().set(SupportedMessages.ITEM_STATUS_UPDATE);
-        response.getSupportedMessages().set(SupportedMessages.LOGIN);
-        response.getSupportedMessages().set(SupportedMessages.PATRON_ENABLE);
-        response.getSupportedMessages().set(SupportedMessages.PATRON_INFORMATION);
-        response.getSupportedMessages().set(SupportedMessages.PATRON_STATUS_REQUEST);
-        response.getSupportedMessages().set(SupportedMessages.RENEW);
-        response.getSupportedMessages().set(SupportedMessages.RENEW_ALL);
-        response.getSupportedMessages().set(SupportedMessages.REQUEST_SC_ACS_RESEND);
-        response.getSupportedMessages().set(SupportedMessages.SC_ACS_STATUS);
-        return response;
-    }
+  @Override
+  public ACSStatus Status(ACSStatus status, SCStatus msg) {
+    status.setACSRenewalPolicy(false);
+    status.setCheckInOk(true);
+    status.setCheckOutOk(true);
+    status.setOfflineOk(false);
+    status.setStatusUpdateOk(true);
+    return status;
+  }
 
     @Override
     public PatronStatusResponse BlockPatron(
@@ -140,5 +147,4 @@ public class MessageHandlerDummyImpl implements MessageHandler {
             com.ceridwen.circulation.SIP.messages.RenewAll msg) {
         return new RenewAllResponse();
     }
-
 }

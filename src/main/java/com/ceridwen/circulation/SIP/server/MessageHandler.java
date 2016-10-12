@@ -48,6 +48,7 @@ import com.ceridwen.circulation.SIP.messages.RenewAllResponse;
 import com.ceridwen.circulation.SIP.messages.RenewResponse;
 import com.ceridwen.circulation.SIP.messages.SCStatus;
 
+@Deprecated
 public interface MessageHandler {
     public ACSStatus Status(SCStatus msg);
 

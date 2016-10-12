@@ -18,15 +18,6 @@
  ******************************************************************************/
 package com.ceridwen.circulation.SIP.transport;
 
-/**
- * <p>Title: RTSI</p>
- * <p>Description: Real Time Self Issue</p>
- * <p>Copyright: </p>
-
- * @author Matthew J. Dovey
- * @version 1.0
- */
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -207,7 +198,7 @@ public abstract class Connection {
         return ret;
     }
 
-    public synchronized Message send(Message msg) throws ConnectionFailure, RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood,
+    public synchronized Message send(Message msg) throws RetriesExceeded, ChecksumError, SequenceError, MessageNotUnderstood,
             MandatoryFieldOmitted, InvalidFieldLength {
         String request, response = null;
         Message responseMessage = null;
@@ -217,13 +208,12 @@ public abstract class Connection {
         }
         try {
             boolean retry;
-            boolean understood = false;
             int retries = 0;
             do {
                 retry = false;
                 try {
                     if (this.getAddSequenceAndChecksum()) {
-                        request = msg.encode(new Character(this.getNextSequence()));
+                        request = msg.encode(Character.valueOf(this.getNextSequence()));
                     } else {
                         request = msg.encode(null);
                     }
@@ -238,28 +228,28 @@ public abstract class Connection {
                         responseMessage = Message.decode(response, null, this.getStrictChecksumChecking());
                     }
                     if (responseMessage instanceof SCResend) {
-                        throw new ConnectionFailure();
+                      throw new MessageNotUnderstood();
                     }
-                    understood = true;
-                } catch (ConnectionFailure ex) {
+                } catch (ConnectionFailure | MessageNotUnderstood ex) {
                     try {
                         this.wait(this.getRetryWait());
                     } catch (Exception ex1) {
                         Connection.log.debug("Thread sleep error", ex1);
                     }
-                    retry = true;
                     retries++;
                     if (retries > this.getRetryAttempts()) {
-                        if (understood) {
-                            throw new RetriesExceeded();
-                        } else {
-                            throw new MessageNotUnderstood();
-                        }
+                      if (ex instanceof MessageNotUnderstood) {
+                        throw (MessageNotUnderstood)ex;
+                      } else {
+                        throw new RetriesExceeded(ex);
+                      }
+                    } else {
+                      retry = true;
                     }
                 }
             } while (retry);
             if (responseMessage == null) {
-                throw new ConnectionFailure();
+                throw new MessageNotUnderstood();
             }
             return responseMessage;
         } catch (RetriesExceeded e) {
