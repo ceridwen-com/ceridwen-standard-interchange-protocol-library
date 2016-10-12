@@ -1,6 +1,7 @@
-Version 2.9.3: 06/09/2016
+Version 2.9.3: 10/10/2016
 Update sample to use netty server
 Added SSL Socket client connection
+Updated Netty SSL server to load certificates
 Dependencies: ceridwen utilitiy 1.6.2
               apache commons beanutils 1.9.2
               apache commons lang 3.4
