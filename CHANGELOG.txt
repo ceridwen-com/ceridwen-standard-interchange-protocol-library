@@ -1,8 +1,19 @@
+Version 2.9.4: 20/02/2017
+Made field ordering option constants publicly accessible
+Update dependencies apache commons lang and net
+Dependencies: ceridwen utility 1.6.2
+              apache commons beanutils 1.9.3
+              apache commons lang 3.5
+              apache commons logging 1.2 
+              apache commons net 3.6
+              io.netty transport 4.1.5.Final
+              io.netty handler 4.1.5.Final
+
 Version 2.9.3: 10/10/2016
 Update sample to use netty server
 Added SSL Socket client connection
 Updated Netty SSL server to load certificates
-Dependencies: ceridwen utilitiy 1.6.2
+Dependencies: ceridwen utility 1.6.2
               apache commons beanutils 1.9.3
               apache commons lang 3.4
               apache commons logging 1.2 
@@ -14,7 +25,7 @@ Version 2.9.2: 20/04/2016
 Added netty server implementation
 Added field ordering options (alphabetic or specification listed)
 Changed holdQueueLength definition to match 3M emulator rather than specification
-Dependencies: ceridwen utilitiy 1.6.2
+Dependencies: ceridwen utility 1.6.2
               apache commons beanutils 1.9.2
               apache commons lang 3.4
               apache commons logging 1.2 
