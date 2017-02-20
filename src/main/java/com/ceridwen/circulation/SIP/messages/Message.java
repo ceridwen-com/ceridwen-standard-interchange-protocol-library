@@ -85,19 +85,19 @@ public abstract class Message implements Serializable {
     private static final long serialVersionUID = 1609258005567594730L;
     public static final String PROP_CHARSET = "com.ceridwen.circulation.SIP.charset";
     public static final String PROP_AUTOPOPULATE = "com.ceridwen.circulation.SIP.messages.AutoPopulationEmptyRequiredFields";
-    private static final String PROP_VARIABLE_FIELD_ORDERING = "com.ceridwen.circulation.SIP.VariableFieldOrdering";
+    public static final String PROP_VARIABLE_FIELD_ORDERING = "com.ceridwen.circulation.SIP.VariableFieldOrdering";
 
     public static final String PROP_AUTOPOPULATE_OFF = "off";
     public static final String PROP_AUTOPOPULATE_DECODE = "decode";
     public static final String PROP_AUTOPOPULATE_ENCODE = "encode";
     public static final String PROP_AUTOPOPULATE_BIDIRECTIONAL = "bidirectional";
     
-    private static final String PROP_AUTOPOPULATE_DEFAULT = PROP_AUTOPOPULATE_BIDIRECTIONAL;
+    public static final String PROP_AUTOPOPULATE_DEFAULT = PROP_AUTOPOPULATE_BIDIRECTIONAL;
     
-    private static final String PROP_VARIABLE_FIELD_ORDERING_ALPHABETICAL = "alphabetical";
-    private static final String PROP_VARIABLE_FIELD_ORDERING_SPECIFICATION = "specification";
+    public static final String PROP_VARIABLE_FIELD_ORDERING_ALPHABETICAL = "alphabetical";
+    public static final String PROP_VARIABLE_FIELD_ORDERING_SPECIFICATION = "specification";
  
-    private static final String PROP_VARIABLE_FIELD_ORDERING_DEFAULT =  PROP_VARIABLE_FIELD_ORDERING_ALPHABETICAL;
+    public static final String PROP_VARIABLE_FIELD_ORDERING_DEFAULT =  PROP_VARIABLE_FIELD_ORDERING_ALPHABETICAL;
 
     private static final String PROP_DEFAULT_CHARSET = "cp850";
 
