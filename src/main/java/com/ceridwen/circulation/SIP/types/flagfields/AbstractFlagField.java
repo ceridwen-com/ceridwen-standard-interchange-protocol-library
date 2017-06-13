@@ -26,7 +26,7 @@ import java.io.Serializable;
 public abstract class AbstractFlagField implements Serializable {
 
     private static final long serialVersionUID = -3439876098750195408L;
-    String flags;
+    private String flags;
 
     AbstractFlagField(String flags) {
         this.flags = flags;
@@ -69,7 +69,7 @@ public abstract class AbstractFlagField implements Serializable {
         return this.flags;
     }
 
-    public boolean isSet(int field) {
+    protected boolean isSet(int field) {
         this.checkLength();
         if ((field < this.flags.length()) && (this.getValid().length > 0)) {
             if (this.flags.charAt(field) == this.getValid()[this.getValid().length - 1]) {
@@ -82,21 +82,29 @@ public abstract class AbstractFlagField implements Serializable {
         }
     }
 
-    public void set(int field) {
+    protected void set(int field, boolean flag) {
+      if (flag) {
+        this.set(field);
+      } else {
+        this.unset(field);
+      }
+    }
+    
+    private void set(int field) {
         this.checkLength();
         if ((field < this.flags.length()) && (this.getValid().length > 0)) {
             this.flags = this.flags.substring(0, field) + this.getValid()[this.getValid().length - 1] + this.flags.substring(field + 1);
         }
     }
 
-    public void unset(int field) {
+    private void unset(int field) {
         this.checkLength();
         if ((field < this.flags.length()) && (this.getValid().length > 0)) {
             this.flags = this.flags.substring(0, field) + this.getValid()[0] + this.flags.substring(field + 1);
         }
     }
 
-    public void unsetAll() {
+    public void clear() {
         this.flags = "";
         this.checkLength();
     }

@@ -102,7 +102,7 @@ public class TestSocketTransport {
         /**
          * Check if the server can support checkout
          */
-        if (!((ACSStatus) response).getSupportedMessages().isSet(SupportedMessages.CHECK_OUT)) {
+        if (!((ACSStatus) response).getSupportedMessages().isCheckOut()) {
         	fail("Check out not supported");
         	return;
         }

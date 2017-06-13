@@ -21,7 +21,6 @@ import com.ceridwen.circulation.SIP.netty.server.driver.operation.RenewOperation
 import com.ceridwen.circulation.SIP.netty.server.driver.operation.RequestResendOperation;
 import com.ceridwen.circulation.SIP.netty.server.driver.operation.StatusOperation;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
-import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 
 public abstract class AbstractDriver implements Driver {
 
@@ -30,52 +29,52 @@ public abstract class AbstractDriver implements Driver {
 		// TODO Auto-generated method stub
         ACSStatus response = new ACSStatus(); 
         if (this instanceof BlockPatronOperation) {
-        	response.getSupportedMessages().set(SupportedMessages.BLOCK_PATRON);
+        	response.getSupportedMessages().setBlockPatron(true);
         }
         if (this instanceof CheckInOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.CHECK_IN);
+	        response.getSupportedMessages().setCheckIn(true);
         }
         if (this instanceof CheckOutOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.CHECK_OUT);
+	        response.getSupportedMessages().setCheckOut(true);
 		}
         if (this instanceof EndPatronSessionOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.END_PATRON_SESSION);
+	        response.getSupportedMessages().setEndPatronSession(true);
 		}
         if (this instanceof FeePaidOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.FEE_PAID);
+	        response.getSupportedMessages().setFeePaid(true);
 	    }
         if (this instanceof HoldOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.HOLD);
+	        response.getSupportedMessages().setHold(true);
 	    }
 		if (this instanceof ItemInformationOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.ITEM_INFORMATION);
+	        response.getSupportedMessages().setItemInformation(true);
     	}
 		if (this instanceof ItemStatusUpdateOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.ITEM_STATUS_UPDATE);
+	        response.getSupportedMessages().setItemStatusUpdate(true);
 	    }
 	    if (this instanceof LoginOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.LOGIN);
+	        response.getSupportedMessages().setLogin(true);
 	    }
 	    if (this instanceof PatronEnableOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.PATRON_ENABLE);
+	        response.getSupportedMessages().setPatronEnable(true);
 	    }
 	    if (this instanceof PatronInformationOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.PATRON_INFORMATION);
+	        response.getSupportedMessages().setPatronInformation(true);
 	    }
 	    if (this instanceof PatronStatusOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.PATRON_STATUS_REQUEST);
+	        response.getSupportedMessages().setPatronStatusRequest(true);
 	    }
 	    if (this instanceof RenewOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.RENEW);
+	        response.getSupportedMessages().setRenew(true);
 	    }
 	    if (this instanceof RenewAllOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.RENEW_ALL);
+	        response.getSupportedMessages().setRenewAll(true);
 	    }
 	    if (this instanceof RequestResendOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.REQUEST_SC_ACS_RESEND);
+	        response.getSupportedMessages().setRequestScAcsResend(true);
 	    }
 	    if (this instanceof StatusOperation) {
-	        response.getSupportedMessages().set(SupportedMessages.SC_ACS_STATUS);
+	        response.getSupportedMessages().setScAcsStatus(true);
     	}
 	    
 	    response.setDateTimeSync(new Date());

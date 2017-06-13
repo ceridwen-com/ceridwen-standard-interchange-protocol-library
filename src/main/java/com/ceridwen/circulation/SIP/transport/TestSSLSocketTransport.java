@@ -19,7 +19,6 @@ import com.ceridwen.circulation.SIP.messages.SCStatus;
 import com.ceridwen.circulation.SIP.netty.server.SIPDaemon;
 import com.ceridwen.circulation.SIP.samples.netty.DummyDriverFactory;
 import com.ceridwen.circulation.SIP.types.enumerations.ProtocolVersion;
-import com.ceridwen.circulation.SIP.types.flagfields.SupportedMessages;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 import java.util.Date;
 import org.junit.After;
@@ -112,7 +111,7 @@ public class TestSSLSocketTransport {
         /**
          * Check if the server can support checkout
          */
-        if (!((ACSStatus) response).getSupportedMessages().isSet(SupportedMessages.CHECK_OUT)) {
+        if (!((ACSStatus) response).getSupportedMessages().isCheckOut()) {
         	fail("Check out not supported");
         	return;
         }

@@ -20,20 +20,21 @@ package com.ceridwen.circulation.SIP.types.flagfields;
 
 public class PatronStatus extends AbstractFlagField {
     private static final long serialVersionUID = -1160351918609471912L;
-    public static final int CHARGE_PRIVILEGES_DENIED = 0;
-    public static final int RENEWAL_PRIVILIGES_DENIED = 1;
-    public static final int RECALL_PRIVILIGES_DENIED = 2;
-    public static final int HOLD_PRIVILIGES_DENIED = 3;
-    public static final int CARD_REPORTED_LOST = 4;
-    public static final int TOO_MANY_ITEMS_CHARGED = 5;
-    public static final int TOO_MANY_ITEMS_OVERDUE = 6;
-    public static final int TOO_MANY_RENEWALS = 7;
-    public static final int TOO_MANY_CLAIMS_OF_ITEMS_RETURNED = 8;
-    public static final int TOO_MANY_ITEMS_LOST = 9;
-    public static final int EXCESSIVE_OUTSTANDING_FINES = 10;
-    public static final int EXCESSIVE_OUTSTANDING_FEES = 11;
-    public static final int RECALL_OVERDUE = 12;
-    public static final int TOO_MANY_ITEMS_BILLED = 13;
+    
+    private static final int CHARGE_PRIVILEGES_DENIED = 0;
+    private static final int RENEWAL_PRIVILIGES_DENIED = 1;
+    private static final int RECALL_PRIVILIGES_DENIED = 2;
+    private static final int HOLD_PRIVILIGES_DENIED = 3;
+    private static final int CARD_REPORTED_LOST = 4;
+    private static final int TOO_MANY_ITEMS_CHARGED = 5;
+    private static final int TOO_MANY_ITEMS_OVERDUE = 6;
+    private static final int TOO_MANY_RENEWALS = 7;
+    private static final int TOO_MANY_CLAIMS_OF_ITEMS_RETURNED = 8;
+    private static final int TOO_MANY_ITEMS_LOST = 9;
+    private static final int EXCESSIVE_OUTSTANDING_FINES = 10;
+    private static final int EXCESSIVE_OUTSTANDING_FEES = 11;
+    private static final int RECALL_OVERDUE = 12;
+    private static final int TOO_MANY_ITEMS_BILLED = 13;
 
     public PatronStatus(String flags) {
         super(flags);
@@ -47,88 +48,86 @@ public class PatronStatus extends AbstractFlagField {
       return this.isSet(CHARGE_PRIVILEGES_DENIED);
     }
     public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+      this.set(CHARGE_PRIVILEGES_DENIED, flag);
     }
     public boolean isRenewalPrivilegesDenied() {
       return this.isSet(RENEWAL_PRIVILIGES_DENIED);
     }
     public void setRenewalPrivilegesDenied(boolean flag) {
-      this.set(RENEWAL_PRIVILIGES_DENIED);
+      this.set(RENEWAL_PRIVILIGES_DENIED, flag);
     }
     public boolean isRecallPrivilegesDenied() {
       return this.isSet(RECALL_PRIVILIGES_DENIED);
     }
     public void setRecallPrivilegesDenied(boolean flag) {
-      this.set(RECALL_PRIVILIGES_DENIED);
+      this.set(RECALL_PRIVILIGES_DENIED, flag);
     }
     public boolean isHoldPrivilegesDenied() {
       return this.isSet(HOLD_PRIVILIGES_DENIED);
     }
     public void setHoldPrivilegesDenied(boolean flag) {
-      this.set(HOLD_PRIVILIGES_DENIED);
+      this.set(HOLD_PRIVILIGES_DENIED, flag);
     }
     public boolean isCardReportedLost() {
       return this.isSet(CARD_REPORTED_LOST);
     }
     public void setCardReportedLost(boolean flag) {
-      this.set(CARD_REPORTED_LOST);
+      this.set(CARD_REPORTED_LOST, flag);
     }
     public boolean isTooManyItemsCharged() {
       return this.isSet(TOO_MANY_ITEMS_CHARGED);
     }
     public void setTooManyItemsCharged(boolean flag) {
-      this.set(TOO_MANY_ITEMS_CHARGED);
+      this.set(TOO_MANY_ITEMS_CHARGED, flag);
     }
-/**
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+   public boolean isTooManyItemsOverdue() {
+      return this.isSet(TOO_MANY_ITEMS_OVERDUE);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setTooManyItemsOverdue(boolean flag) {
+      this.set(TOO_MANY_ITEMS_OVERDUE, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isTooManyRenewals() {
+      return this.isSet(TOO_MANY_RENEWALS);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setTooManyRenewals(boolean flag) {
+      this.set(TOO_MANY_RENEWALS, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isTooManyClaimsOfItemsReturned() {
+      return this.isSet(TOO_MANY_CLAIMS_OF_ITEMS_RETURNED);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setTooManyClaimsOfItemsReturned(boolean flag) {
+      this.set(TOO_MANY_CLAIMS_OF_ITEMS_RETURNED, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isTooManyItemsLost() {
+      return this.isSet(TOO_MANY_ITEMS_LOST);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setTooManyItemsLost(boolean flag) {
+      this.set(TOO_MANY_ITEMS_LOST, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isExcessiveOutstandingFines() {
+      return this.isSet(EXCESSIVE_OUTSTANDING_FINES);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setExcessiveOutstandingFines(boolean flag) {
+      this.set(EXCESSIVE_OUTSTANDING_FINES, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isExcessiveOutstandingFees() {
+      return this.isSet(EXCESSIVE_OUTSTANDING_FEES);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setExcessiveOutstandingFees(boolean flag) {
+      this.set(EXCESSIVE_OUTSTANDING_FEES, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isRecallOverdue() {
+      return this.isSet(RECALL_OVERDUE);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
+    public void setRecallOverdue(boolean flag) {
+      this.set(RECALL_OVERDUE, flag);
     }
-    public boolean isChargePrivilegesDenied() {
-      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    public boolean isTooManyItemsBilled() {
+      return this.isSet(TOO_MANY_ITEMS_BILLED);
     }
-    public void setChargePrivilegesDenied(boolean flag) {
-      this.set(CHARGE_PRIVILEGES_DENIED);
-    }
-**/    
+    public void setTooManyItemsBilled(boolean flag) {
+      this.set(TOO_MANY_ITEMS_BILLED, flag);
+    }    
 
     @Override
     protected int getLength() {
@@ -145,10 +144,10 @@ public class PatronStatus extends AbstractFlagField {
 
         System.out.println("*012345678901234567890*");
         System.out.println("*" + test.toString() + "*");
-        test.set(PatronStatus.TOO_MANY_ITEMS_BILLED);
-        test.set(PatronStatus.CARD_REPORTED_LOST);
+        test.setTooManyItemsBilled(true);
+        test.setCardReportedLost(true);
         System.out.println("*" + test.toString() + "*");
-        test.unset(PatronStatus.CARD_REPORTED_LOST);
+        test.setCardReportedLost(false);
         System.out.println("*" + test.toString() + "*");
     }
 
