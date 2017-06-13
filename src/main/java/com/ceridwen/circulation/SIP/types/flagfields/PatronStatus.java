@@ -42,6 +42,93 @@ public class PatronStatus extends AbstractFlagField {
     public PatronStatus() {
         super("");
     }
+    
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isRenewalPrivilegesDenied() {
+      return this.isSet(RENEWAL_PRIVILIGES_DENIED);
+    }
+    public void setRenewalPrivilegesDenied(boolean flag) {
+      this.set(RENEWAL_PRIVILIGES_DENIED);
+    }
+    public boolean isRecallPrivilegesDenied() {
+      return this.isSet(RECALL_PRIVILIGES_DENIED);
+    }
+    public void setRecallPrivilegesDenied(boolean flag) {
+      this.set(RECALL_PRIVILIGES_DENIED);
+    }
+    public boolean isHoldPrivilegesDenied() {
+      return this.isSet(HOLD_PRIVILIGES_DENIED);
+    }
+    public void setHoldPrivilegesDenied(boolean flag) {
+      this.set(HOLD_PRIVILIGES_DENIED);
+    }
+    public boolean isCardReportedLost() {
+      return this.isSet(CARD_REPORTED_LOST);
+    }
+    public void setCardReportedLost(boolean flag) {
+      this.set(CARD_REPORTED_LOST);
+    }
+    public boolean isTooManyItemsCharged() {
+      return this.isSet(TOO_MANY_ITEMS_CHARGED);
+    }
+    public void setTooManyItemsCharged(boolean flag) {
+      this.set(TOO_MANY_ITEMS_CHARGED);
+    }
+/**
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+    public boolean isChargePrivilegesDenied() {
+      return this.isSet(CHARGE_PRIVILEGES_DENIED);
+    }
+    public void setChargePrivilegesDenied(boolean flag) {
+      this.set(CHARGE_PRIVILEGES_DENIED);
+    }
+**/    
 
     @Override
     protected int getLength() {

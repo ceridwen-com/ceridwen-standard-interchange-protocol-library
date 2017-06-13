@@ -28,17 +28,6 @@ public abstract class AbstractFlagField implements Serializable {
     private static final long serialVersionUID = -3439876098750195408L;
     String flags;
 
-    @Deprecated
-    public String getFlags() {
-        return this.flags;
-    }
-
-    @Deprecated
-    public void setFlags(String flags) {
-        this.flags = flags;
-        this.checkLength();
-    }
-
     AbstractFlagField(String flags) {
         this.flags = flags;
         this.checkLength();
