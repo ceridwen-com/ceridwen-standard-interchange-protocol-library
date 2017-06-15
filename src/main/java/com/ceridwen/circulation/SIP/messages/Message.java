@@ -345,7 +345,7 @@ public abstract class Message implements Serializable {
               throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
             }
             String[] value = this.getProp(desc, field, autoPop);
-            if (StringUtils.isNotEmpty(value[0])) {
+            if (value.length > 0 && StringUtils.isNotEmpty(value[0])) {
               if (field.length != 0) {
                 if (desc.getPropertyType() == String.class) {
                   if (value[0].length() > field.length) {
