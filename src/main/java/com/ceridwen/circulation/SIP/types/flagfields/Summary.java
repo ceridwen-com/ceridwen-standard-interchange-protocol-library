@@ -20,13 +20,13 @@ package com.ceridwen.circulation.SIP.types.flagfields;
 
 public class Summary extends AbstractFlagField {
     private static final long serialVersionUID = 5874238608719119875L;
-    public static final int HOLD_ITEMS = 0;
-    public static final int OVERDUE_ITEMS = 1;
-    public static final int CHARGED_ITEMS = 2;
-    public static final int FINE_ITEMS = 3;
-    public static final int RECALL_ITEMS = 4;
-    public static final int UNAVAILABLE_HOLDS = 5;
-    public static final int FEE_ITEMS = 6;
+    private static final int HOLD_ITEMS = 0;
+    private static final int OVERDUE_ITEMS = 1;
+    private static final int CHARGED_ITEMS = 2;
+    private static final int FINE_ITEMS = 3;
+    private static final int RECALL_ITEMS = 4;
+    private static final int UNAVAILABLE_HOLDS = 5;
+    private static final int FEE_ITEMS = 6;
 
     public Summary(String flags) {
         super(flags);
@@ -34,6 +34,49 @@ public class Summary extends AbstractFlagField {
 
     public Summary() {
         super("");
+    }
+    
+    public boolean isHoldItems() {
+      return this.isSet(HOLD_ITEMS);
+    }
+    public void setHoldItems(boolean flag) {
+      this.set(HOLD_ITEMS, flag);
+    }
+    public boolean isOverdueItems() {
+      return this.isSet(OVERDUE_ITEMS);
+    }
+    public void setOverdueItems(boolean flag) {
+      this.set(OVERDUE_ITEMS, flag);
+    }
+    public boolean isChargedItems() {
+      return this.isSet(CHARGED_ITEMS);
+    }
+    public void setChargedItems(boolean flag) {
+      this.set(CHARGED_ITEMS, flag);
+    }
+    public boolean isFineItems() {
+      return this.isSet(FINE_ITEMS);
+    }
+    public void setFineItems(boolean flag) {
+      this.set(FINE_ITEMS, flag);
+    }
+    public boolean isRecallItems() {
+      return this.isSet(RECALL_ITEMS);
+    }
+    public void setRecallItems(boolean flag) {
+      this.set(RECALL_ITEMS, flag);
+    }
+    public boolean isUnavaibleHolds() {
+      return this.isSet(UNAVAILABLE_HOLDS);
+    }
+    public void setUnavaibleHolds(boolean flag) {
+      this.set(UNAVAILABLE_HOLDS, flag);
+    }
+    public boolean isFeeItems() {
+      return this.isSet(FEE_ITEMS);
+    }
+    public void setFeeItems(boolean flag) {
+      this.set(FEE_ITEMS, flag);
     }
 
     @Override
@@ -47,9 +90,11 @@ public class Summary extends AbstractFlagField {
     }
 
     @Override
-    public void set(int field) {
-        super.unsetAll();
-        super.set(field);
+    protected void set(int field, boolean flag) {
+      if (flag) {
+        super.clear();
+      }
+      super.set(field, flag);
     }
 
     public static void main(String[] args) {
@@ -57,15 +102,15 @@ public class Summary extends AbstractFlagField {
 
         System.out.println("*012345678901234567890*");
         System.out.println("*" + test.toString() + "*");
-        test.set(Summary.FEE_ITEMS);
+        test.setFeeItems(true);
         System.out.println("*" + test.toString() + "*");
-        test.set(Summary.RECALL_ITEMS);
+        test.setRecallItems(true);
         System.out.println("*" + test.toString() + "*");
-        test.unset(Summary.RECALL_ITEMS);
+        test.setRecallItems(false);
         System.out.println("*" + test.toString() + "*");
-        test.set(Summary.RECALL_ITEMS);
+        test.setRecallItems(true);
         System.out.println("*" + test.toString() + "*");
-        test.unsetAll();
+        test.clear();
         System.out.println("*" + test.toString() + "*");
     }
 }

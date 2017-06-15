@@ -40,7 +40,7 @@ import com.ceridwen.circulation.SIP.types.flagfields.Summary;
 
 @Command("63")
 @TestCaseDefault("6300019700101    010000          AA|AO|")
-@TestCasePopulated("6302719700101    010000      Y   AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BP123456789|BQ123456789|")
+@TestCasePopulated("6302719700101    010000     Y    AApatronIdentifier|ACterminalPassword|ADpatronPassword|AOinstitutionId|BP123456789|BQ123456789|")
 public class PatronInformation extends Message {
     /**
 	 * 
