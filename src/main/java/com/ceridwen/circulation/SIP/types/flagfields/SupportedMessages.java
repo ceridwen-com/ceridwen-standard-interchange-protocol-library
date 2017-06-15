@@ -75,7 +75,7 @@ public class SupportedMessages extends AbstractFlagField {
     public void setScAcsStatus(boolean flag) {
       this.set(SC_ACS_STATUS, flag);
     }
-    public boolean isRequestScAcsResent() {
+    public boolean isRequestScAcsResend() {
       return this.isSet(REQUEST_SC_ACS_RESEND);
     }
     public void setRequestScAcsResend(boolean flag) {
