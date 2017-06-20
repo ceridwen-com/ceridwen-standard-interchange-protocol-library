@@ -345,7 +345,7 @@ public abstract class Message implements Serializable {
               throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());                    
             }
             String[] value = this.getProp(desc, field, autoPop);
-            if (StringUtils.isNotEmpty(value[0])) {
+            if (value.length > 0 && StringUtils.isNotEmpty(value[0])) {
               if (field.length != 0) {
                 if (desc.getPropertyType() == String.class) {
                   if (value[0].length() > field.length) {
@@ -886,14 +886,19 @@ public abstract class Message implements Serializable {
                             method.invoke(msg, new Object[]{new String(value)});
                         }
                         if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
-                            Class<?> tp = field.getType();
-                            Field[] fds = tp.getDeclaredFields();
-                            for (Field fd: fds) {
-                              if ((fd.getModifiers() & (Modifier.PUBLIC | Modifier.FINAL | Modifier.STATIC)) == (Modifier.PUBLIC | Modifier.FINAL | Modifier.STATIC)) {
-                                  AbstractFlagField aff = (AbstractFlagField)desc.getReadMethod().invoke(msg, new Object[]{});
-                                  aff.set(fd.getInt(null));
+                          AbstractFlagField afd = (AbstractFlagField)desc.getReadMethod().invoke(msg, new Object[]{});
+                          PropertyDescriptor[] dscs = PropertyUtils.getPropertyDescriptors(desc.getPropertyType());
+                          for (PropertyDescriptor dsc: dscs) {
+                            String name = dsc.getPropertyType().getName();
+                            if (name != null) {
+                              if (name.equalsIgnoreCase("boolean")) {
+                                 Method writer = dsc.getWriteMethod();
+                                 if (writer != null) {
+                                   writer.invoke(afd, new Object[]{new Boolean(true)});                                   
+                                 }
                               }
                             }
+                          }
                         }
                         Class<?>[] interfaces = desc.getPropertyType().getInterfaces();
                         for (Class<?> interfce : interfaces) {
@@ -920,7 +925,7 @@ public abstract class Message implements Serializable {
             }
             return msg;
         } catch (Exception ex) {
-            Assert.fail("Exception getting populated message: " + ex.getMessage());
+            Assert.fail("Exception getting populated message: " + ex.getClass().getName());
             return null;
         }
     }    

@@ -129,7 +129,7 @@ public class Sample {
     /**
      * Check if the server can support checkout
      */
-    if (!((ACSStatus) scStatusResponse).getSupportedMessages().isSet(SupportedMessages.CHECK_OUT)) {
+    if (!((ACSStatus) scStatusResponse).getSupportedMessages().isCheckOut()) {
       Logger.getLogger(Sample.class.getName()).log(Level.SEVERE, "Check out not supported");
       return;
     }

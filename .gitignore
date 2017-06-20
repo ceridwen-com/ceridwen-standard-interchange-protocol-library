@@ -17,3 +17,4 @@ dependency-reduced-pom.xml
 .idea
 *.iml
 .sonar_lock
+/nbproject/project.properties
