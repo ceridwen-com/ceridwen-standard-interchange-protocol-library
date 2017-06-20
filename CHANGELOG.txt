@@ -1,3 +1,14 @@
+Version 2.9.5: 20/06/2017
+Refactored flag field type to be more bean-like
+Fixed unwanted array index out of bounds exception if repeating field is set to zero length array
+Dependencies: ceridwen utility 1.6.2
+              apache commons beanutils 1.9.3
+              apache commons lang 3.6
+              apache commons logging 1.2 
+              apache commons net 3.6
+              io.netty transport 4.1.12.Final
+              io.netty handler 4.1.12.Final
+
 Version 2.9.4: 20/02/2017
 Made field ordering option constants publicly accessible
 Update dependencies apache commons lang and net
