@@ -123,7 +123,7 @@ public class SIPDaemon implements GenericFutureListener<ChannelFuture> {
       }
       workerGroup.shutdownGracefully();
       bossGroup.shutdownGracefully();		
-      log.info("Server " + name + " on " + ip + " " + port + " shuttdown  complete.");
+      log.info("Server " + name + " on " + ip + " " + port + " shutdown complete.");
   }
 
 	@Override
@@ -131,6 +131,6 @@ public class SIPDaemon implements GenericFutureListener<ChannelFuture> {
         log.info("Server " + name + " on " + ip + " " + port + " shutting down...");
         workerGroup.shutdownGracefully();
         bossGroup.shutdownGracefully();		
-        log.info("Server " + name + " on " + ip + " " + port + " shuttdown  complete.");
+        log.info("Server " + name + " on " + ip + " " + port + " shutdown complete.");
 	}
 }
