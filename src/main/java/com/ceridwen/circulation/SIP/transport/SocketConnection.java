@@ -95,12 +95,13 @@ public class SocketConnection extends Connection {
         StringBuffer message = new StringBuffer();
         char buffer[] = new char[2048];
         int len;
+        long giveup = System.currentTimeMillis() + this.getIdleTimeout();
 
         try {
             do {
                 len = this.in.read(buffer);
                 message.append(new String(buffer, 0, len));
-            } while ((message.toString()).lastIndexOf(match) < 0);
+            } while ((message.toString()).lastIndexOf(match) < 0 && System.currentTimeMillis() < giveup);
         } catch (Exception ex) {
             throw new ConnectionFailure(ex);
         }
