@@ -26,30 +26,29 @@ public abstract class AbstractDriver implements Driver {
 
 	@Override
 	public final ACSStatus Status(SCStatus msg) {
-		// TODO Auto-generated method stub
-        ACSStatus response = new ACSStatus(); 
-        if (this instanceof BlockPatronOperation) {
-        	response.getSupportedMessages().setBlockPatron(true);
-        }
-        if (this instanceof CheckInOperation) {
-	        response.getSupportedMessages().setCheckIn(true);
-        }
-        if (this instanceof CheckOutOperation) {
-	        response.getSupportedMessages().setCheckOut(true);
-		}
-        if (this instanceof EndPatronSessionOperation) {
+      ACSStatus response = new ACSStatus(); 
+      if (this instanceof BlockPatronOperation) {
+      	response.getSupportedMessages().setBlockPatron(true);
+      }
+      if (this instanceof CheckInOperation) {
+	      response.getSupportedMessages().setCheckIn(true);
+      }
+      if (this instanceof CheckOutOperation) {
+	      response.getSupportedMessages().setCheckOut(true);
+		  }
+      if (this instanceof EndPatronSessionOperation) {
 	        response.getSupportedMessages().setEndPatronSession(true);
-		}
-        if (this instanceof FeePaidOperation) {
+		  }
+      if (this instanceof FeePaidOperation) {
 	        response.getSupportedMessages().setFeePaid(true);
 	    }
-        if (this instanceof HoldOperation) {
+      if (this instanceof HoldOperation) {
 	        response.getSupportedMessages().setHold(true);
 	    }
-		if (this instanceof ItemInformationOperation) {
+		  if (this instanceof ItemInformationOperation) {
 	        response.getSupportedMessages().setItemInformation(true);
     	}
-		if (this instanceof ItemStatusUpdateOperation) {
+		  if (this instanceof ItemStatusUpdateOperation) {
 	        response.getSupportedMessages().setItemStatusUpdate(true);
 	    }
 	    if (this instanceof LoginOperation) {
@@ -81,7 +80,8 @@ public abstract class AbstractDriver implements Driver {
 	    response.setProtocolVersion(ProtocolVersion.VERSION_2_00);
 	    response.setRetriesAllowed(999);
 	    response.setTimeoutPeriod(999);
-		return this.Status(response, msg);
+      response.setOnlineStatus(true);
+		  return this.Status(response, msg);
 	}
 	
 	abstract public ACSStatus Status(ACSStatus status, SCStatus msg);
