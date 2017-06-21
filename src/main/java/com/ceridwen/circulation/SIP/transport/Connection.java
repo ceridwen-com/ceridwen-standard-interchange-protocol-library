@@ -179,7 +179,7 @@ public abstract class Connection {
     public String waitfor(String match) throws ConnectionFailure {
         String ret = null;
         Timer timer = null;
-        long timeout = this.getIdleTimeout();
+        long timeout = this.getIdleTimeout() + 250;
         if (timeout > 0) {
             timer = new Timer();
             timer.schedule(new KillConnectionTask(this), timeout);
