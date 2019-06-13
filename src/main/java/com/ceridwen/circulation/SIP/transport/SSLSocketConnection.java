@@ -17,6 +17,8 @@ import java.security.cert.CertificateFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
+import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.security.cert.Certificate;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -98,7 +100,13 @@ public class SSLSocketConnection extends SocketConnection {
   public void setClientPrivateKeyPassword(String clientPrivateKeyPassword) {
     this.clientPrivateKeyPassword = clientPrivateKeyPassword;
   }
-  
+
+  private Socket setParameters(Socket socket) {
+    SSLParameters sslParams = new SSLParameters();
+    sslParams.setEndpointIdentificationAlgorithm("HTTPS");
+    ((SSLSocket) socket).setSSLParameters(sslParams);
+    return socket;
+  }
 
   @Override
   protected Socket getSocket() throws Exception {
@@ -132,7 +140,7 @@ public class SSLSocketConnection extends SocketConnection {
       trustManagerFactory.init(trustStore);
     } else {
       if (keyManagerFactory == null) {
-        return SSLContext.getDefault().getSocketFactory().createSocket();
+        return setParameters(SSLContext.getDefault().getSocketFactory().createSocket());
       } else {
         trustManagerFactory.init((KeyStore)null);
       }
@@ -140,7 +148,7 @@ public class SSLSocketConnection extends SocketConnection {
     SSLContext context = SSLContext.getInstance("TLS");
     context.init(keyManagerFactory == null?null:keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), new SecureRandom());
     SSLSocketFactory sockFact = context.getSocketFactory();
-    return sockFact.createSocket();
+    return setParameters(sockFact.createSocket());
   }
   
 }
