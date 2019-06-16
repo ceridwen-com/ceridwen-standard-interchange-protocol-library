@@ -39,7 +39,7 @@ public abstract class Connection {
 	
     private static Log log = LogFactory.getLog(Connection.class);
 
-    private char sequence = '0';
+    private char sequence = '9'; //start at -1 as will be incremented on use
 
     private int connectionTimeout;
     private int idleTimeout;
