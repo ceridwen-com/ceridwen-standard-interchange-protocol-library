@@ -64,6 +64,8 @@ public class TestSSLSocketTransport {
         ((SocketConnection) connection).setIdleTimeout(30000);
         ((SocketConnection) connection).setRetryAttempts(2);
         ((SocketConnection) connection).setRetryWait(500);
+        ((SocketConnection) connection).setStrictChecksumChecking(true);
+        ((SocketConnection) connection).setStrictSequenceChecking(true);
 
         try {
             connection.connect();

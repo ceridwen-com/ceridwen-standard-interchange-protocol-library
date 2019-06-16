@@ -39,7 +39,7 @@ public abstract class Connection {
 	
     private static Log log = LogFactory.getLog(Connection.class);
 
-    private char sequence = '0';
+    private char sequence = '9'; //start at -1 as will be incremented on use
 
     private int connectionTimeout;
     private int idleTimeout;
@@ -124,12 +124,11 @@ public abstract class Connection {
     }
 
     private char getNextSequence() {
-        char ret = this.sequence;
         this.sequence++;
         if (this.sequence > '9') {
             this.sequence = '0';
         }
-        return ret;
+        return sequence;
     }
     
     protected String strim(String input) {
@@ -213,7 +212,7 @@ public abstract class Connection {
                 retry = false;
                 try {
                     if (this.getAddSequenceAndChecksum()) {
-                        request = msg.encode(Character.valueOf(this.getNextSequence()));
+                        request = msg.encode(this.getNextSequence());
                     } else {
                         request = msg.encode(null);
                     }
