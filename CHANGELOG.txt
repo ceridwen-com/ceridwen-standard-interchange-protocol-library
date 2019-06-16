@@ -1,3 +1,19 @@
+Version 2.9.6: 16/06/2019
+Set onlinestatus to true in AbstractDriver.java
+Reduce force disconnect scenarios
+Fix sequence checking logic (Courtesy of https://github.com/pranavbhatt)
+String handling optimisations (Courtesy of https://github.com/pranavbhatt)
+Make SocketConnection autoclosable (Courtesy of https://github.com/pranavbhatt)
+Perform verification of server hostname (Courtesy of https://github.com/xanc)
+Dependencies: ceridwen utility 1.7.0
+              apache commons beanutils 1.9.3
+              apache commons lang 3.9
+              apache commons logging 1.2 
+              apache commons net 3.6
+              io.netty transport 4.1.36.Final
+              io.netty handler 4.1.36.Final
+
+
 Version 2.9.5: 20/06/2017
 Refactored flag field type to be more bean-like
 Fixed unwanted array index out of bounds exception if repeating field is set to zero length array

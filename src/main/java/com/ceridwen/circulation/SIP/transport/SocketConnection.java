@@ -32,7 +32,7 @@ import com.ceridwen.circulation.SIP.exceptions.ConnectionFailure;
 import com.ceridwen.circulation.SIP.exceptions.RetriesExceeded;
 import com.ceridwen.circulation.SIP.messages.Message;
 
-public class SocketConnection extends Connection {
+public class SocketConnection extends Connection implements AutoCloseable {
     private static Log log = LogFactory.getLog(SocketConnection.class);
 
     private Socket socket;
@@ -92,15 +92,16 @@ public class SocketConnection extends Connection {
 
     @Override
     protected String internalWaitfor(String match) throws ConnectionFailure {
-        StringBuffer message = new StringBuffer();
+        StringBuilder message = new StringBuilder();
         char buffer[] = new char[2048];
         int len;
+        long giveup = System.currentTimeMillis() + this.getIdleTimeout();
 
         try {
             do {
                 len = this.in.read(buffer);
                 message.append(new String(buffer, 0, len));
-            } while ((message.toString()).lastIndexOf(match) < 0);
+            } while (message.lastIndexOf(match) < 0 && System.currentTimeMillis() < giveup);
         } catch (Exception ex) {
             throw new ConnectionFailure(ex);
         }
@@ -109,5 +110,12 @@ public class SocketConnection extends Connection {
         int cutoff = msg.lastIndexOf(match);
         String ret = msg.substring(0, cutoff);
         return ret;
+    }
+
+    @Override
+    public void close() throws Exception {
+        this.socket.close();
+        this.in.close();
+        this.out.close();
     }
 }
