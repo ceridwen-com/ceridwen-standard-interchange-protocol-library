@@ -30,7 +30,7 @@ import java.util.Base64;
  * @author Matthew.Dovey
  */
 public class SSLSocketConnection extends SocketConnection {
-  
+  public static final String PROP_DISABLESSLHOSTCHECK = "com.ceridwen.circulation.SIP.disableSSLHostCheck";
   
   private File clientCertificate;
   private File clientPrivateKey;
@@ -102,9 +102,11 @@ public class SSLSocketConnection extends SocketConnection {
   }
 
   private Socket setParameters(Socket socket) {
-    SSLParameters sslParams = new SSLParameters();
-    sslParams.setEndpointIdentificationAlgorithm("HTTPS");
-    ((SSLSocket) socket).setSSLParameters(sslParams);
+    if ("true".equals(System.getProperty(PROP_DISABLESSLHOSTCHECK, "false"))) {
+        SSLParameters sslParams = new SSLParameters();
+        sslParams.setEndpointIdentificationAlgorithm("HTTPS");
+        ((SSLSocket) socket).setSSLParameters(sslParams);
+    }
     return socket;
   }
 
