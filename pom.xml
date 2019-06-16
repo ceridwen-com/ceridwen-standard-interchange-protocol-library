@@ -262,7 +262,8 @@
                         <versionTagPrefix>version/${project.artifactId}-</versionTagPrefix>
                         <origin>origin</origin>
                     </gitFlowConfig>     
-                    <versionDigitToIncrement>1</versionDigitToIncrement>       
+                    <versionDigitToIncrement>1</versionDigitToIncrement>  
+                    <pushRemote>true</pushRemote>     
                     <allowSnapshots>false</allowSnapshots>
                     <keepBranch>true</keepBranch>
                     <noDeploy>true</noDeploy>
