@@ -24,7 +24,7 @@
     <version>2.9.7-maven-central-edits-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ceridwen-standard-interchange-protocol-library</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>Java Implementation of the 3M SIP2 and NISO SIP3 Protocols for library circulation and self-check facilities.</description>
     <inceptionYear>2004</inceptionYear>
     <url>https://software.ceridwen.com/redmine/projects/ceridwen-standard-interchange-protocol-library</url>
@@ -41,6 +41,15 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Matthew J. Dovey</name>
+            <email>development@ceridwen.com</email>
+            <organization>Ceridwen Limited</organization>
+            <organizationUrl>http://www.ceridwen.com</organizationUrl>
+        </developer>
+    </developers>    
+
     <issueManagement>
         <system>Redmine</system>
         <url>https://software.ceridwen.com/redmine/projects/ceridwen-standard-interchange-protocol-library/issues</url>
@@ -48,7 +57,8 @@
 
     <scm>
         <url>https://software.ceridwen.com/redmine/projects/ceridwen-standard-interchange-protocol-library/repository</url>
-        <connection>scm:git:https://software.ceridwen.com/redmine/ceridwen-standard-interchange-protocol-library.git</connection>
+        <connection>scm:git:https://github.com/ceridwen-com/ceridwen-standard-interchange-protocol-library.git</connection>
+        <developerConnection>scm:git:https://software.ceridwen.com/redmine/ceridwen-standard-interchange-protocol-library.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -57,32 +67,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>EEE, d MMMM, yyyy - HH:mm:ss zzz</maven.build.timestamp.format>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>ceridwen-libs-release</id>
-            <name>Ceridwen Release Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-release</url>
-        </repository>
-        <repository>
-            <id>ceridwen-libs-snapshot</id>
-            <name>Ceridwen Snapshot Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-snapshot</url>
-        </repository>
-    </repositories>
-  
-    <pluginRepositories>
-        <pluginRepository>
-            <id>ceridwen-plugins-release</id>
-            <name>Ceridwen Release Plugin Repository</name>
-            <url>https://software.ceridwen.com/artifactory/plugins-release</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>ceridwen-plugins-snapshot</id>
-            <name>Ceridwen Snapshot Plugin Repository</name>
-            <url>https://software.ceridwen.com/artifactory/plugins-snapshot</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <dependencies>
         <dependency>
@@ -93,7 +77,7 @@
         <dependency>
             <groupId>com.ceridwen.util</groupId>
             <artifactId>ceridwen-util</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -132,6 +116,16 @@
     </prerequisites> 
   
     <build>
+        <resources>
+            <resource>
+                <directory></directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.md</include>
+                </includes>
+            </resource>
+        </resources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -199,11 +193,17 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.1.0</version>
+                    <configuration>
+                        <failOnError>false</failOnError>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.1.0</version>
+                    <configuration>
+                        <includePom>true</includePom>
+                    </configuration> 
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
