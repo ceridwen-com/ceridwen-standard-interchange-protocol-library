@@ -1,30 +1,28 @@
 <!--
- Copyright (c) 2010 Matthew J. Dovey (www.ceridwen.com).
- All rights reserved. This program and the accompanying materials
- are made available under the terms of the GNU Public License v3.0
- which accompanies this distribution, and is available at 
- <http://www.gnu.org/licenses />
-  
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses />.
- 
- Contributors:
-     Matthew J. Dovey (www.ceridwen.com) - initial API and implementation
+Copyright (C) 2019 Ceridwen Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ceridwen.circulation</groupId>
     <artifactId>ceridwen-standard-interchange-protocol-library</artifactId>
-    <version>2.9.6</version>
+    <version>2.9.7</version>
     <packaging>jar</packaging>
 
-    <name>ceridwen-standard-interchange-protocol-library</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>Java Implementation of the 3M SIP2 and NISO SIP3 Protocols for library circulation and self-check facilities.</description>
     <inceptionYear>2004</inceptionYear>
     <url>https://software.ceridwen.com/redmine/projects/ceridwen-standard-interchange-protocol-library</url>
@@ -41,6 +39,15 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Matthew J. Dovey</name>
+            <email>development@ceridwen.com</email>
+            <organization>Ceridwen Limited</organization>
+            <organizationUrl>http://www.ceridwen.com</organizationUrl>
+        </developer>
+    </developers>    
+
     <issueManagement>
         <system>Redmine</system>
         <url>https://software.ceridwen.com/redmine/projects/ceridwen-standard-interchange-protocol-library/issues</url>
@@ -48,7 +55,8 @@
 
     <scm>
         <url>https://software.ceridwen.com/redmine/projects/ceridwen-standard-interchange-protocol-library/repository</url>
-        <connection>scm:git:https://software.ceridwen.com/redmine/ceridwen-standard-interchange-protocol-library.git</connection>
+        <connection>scm:git:https://github.com/ceridwen-com/ceridwen-standard-interchange-protocol-library.git</connection>
+        <developerConnection>scm:git:https://software.ceridwen.com/redmine/ceridwen-standard-interchange-protocol-library.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -56,33 +64,8 @@
         <project.scm.id>git</project.scm.id>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>EEE, d MMMM, yyyy - HH:mm:ss zzz</maven.build.timestamp.format>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>ceridwen-libs-release</id>
-            <name>Ceridwen Release Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-release</url>
-        </repository>
-        <repository>
-            <id>ceridwen-libs-snapshot</id>
-            <name>Ceridwen Snapshot Repository</name>
-            <url>https://software.ceridwen.com/artifactory/libs-snapshot</url>
-        </repository>
-    </repositories>
-  
-    <pluginRepositories>
-        <pluginRepository>
-            <id>ceridwen-plugins-release</id>
-            <name>Ceridwen Release Plugin Repository</name>
-            <url>https://software.ceridwen.com/artifactory/plugins-release</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>ceridwen-plugins-snapshot</id>
-            <name>Ceridwen Snapshot Plugin Repository</name>
-            <url>https://software.ceridwen.com/artifactory/plugins-snapshot</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <dependencies>
         <dependency>
@@ -93,7 +76,7 @@
         <dependency>
             <groupId>com.ceridwen.util</groupId>
             <artifactId>ceridwen-util</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -132,6 +115,16 @@
     </prerequisites> 
   
     <build>
+        <resources>
+            <resource>
+                <directory></directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.md</include>
+                </includes>
+            </resource>
+        </resources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -199,11 +192,17 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.1.0</version>
+                    <configuration>
+                        <failOnError>false</failOnError>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.1.0</version>
+                    <configuration>
+                        <includePom>true</includePom>
+                    </configuration> 
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
