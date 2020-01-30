@@ -599,7 +599,7 @@ public abstract class Message implements Serializable {
           checksum += b & 0xff;
         }
         checksum = -checksum & 0xffff;
-        return Integer.toHexString(checksum).toUpperCase();
+        return String.format("%1$04X", checksum);
     }
 
     protected String addChecksum(String command, Character sequence) {
