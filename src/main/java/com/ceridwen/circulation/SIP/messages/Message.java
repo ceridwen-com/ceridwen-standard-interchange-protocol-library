@@ -595,11 +595,12 @@ public abstract class Message implements Serializable {
         // Fix from Rustam Usmanov
         byte[] bytes = data.getBytes(Message.getCharsetEncoding());
         for (byte b : bytes) {          
-            // Fix from Rustam Usmanov
+          // Fix from Rustam Usmanov
           checksum += b & 0xff;
         }
         checksum = -checksum & 0xffff;
-        return Integer.toHexString(checksum).toUpperCase();
+        // Fix from Rustam Usmanov
+        return String.format("%1$04X", checksum);
     }
 
     protected String addChecksum(String command, Character sequence) {
