@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2019 Ceridwen Limited
+ * Copyright (C) 2020 Ceridwen Limited
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -595,11 +595,12 @@ public abstract class Message implements Serializable {
         // Fix from Rustam Usmanov
         byte[] bytes = data.getBytes(Message.getCharsetEncoding());
         for (byte b : bytes) {          
-            // Fix from Rustam Usmanov
+          // Fix from Rustam Usmanov
           checksum += b & 0xff;
         }
         checksum = -checksum & 0xffff;
-        return Integer.toHexString(checksum).toUpperCase();
+        // Fix from Rustam Usmanov
+        return String.format("%1$04X", checksum);
     }
 
     protected String addChecksum(String command, Character sequence) {
