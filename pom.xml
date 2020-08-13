@@ -106,7 +106,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-handler</artifactId>
-            <version>4.1.45.Final</version>
+            <version>4.1.46.Final</version>
         </dependency>
     </dependencies>
 
