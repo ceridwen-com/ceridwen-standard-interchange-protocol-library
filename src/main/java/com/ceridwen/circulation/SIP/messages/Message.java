@@ -771,6 +771,7 @@ public abstract class Message implements Serializable {
                     if (field.isAnnotationPresent(TaggedField.class)) {
                         TaggedField annotation = (TaggedField)field.getAnnotation(TaggedField.class);               
                         TaggedFieldDefinition fld = Fields.getTaggedFieldDefinition(this.getClass().getName(), field.getName(), annotation);
+						length = 0;
                         if (fld.policy == FieldPolicy.REQUIRED) {
                             required = (fld.policy == FieldPolicy.REQUIRED);
                         }
@@ -779,7 +780,7 @@ public abstract class Message implements Serializable {
                         Method method = desc.getWriteMethod();
                         if (method != null) {
                             if (length > 0) {
-                                method.invoke(msg, new Object[]{String.format("%0$" + length + "c", ' ')});
+                                method.invoke(msg, new Object[]{String.format("%1$" + length + "c", ' ')});
                             }
                         }
                     }
