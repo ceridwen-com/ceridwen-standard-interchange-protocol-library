@@ -49,7 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </developers>    
 
     <issueManagement>
-        <system>Redmine</system>
+        <system>github</system>
         <url>https://github.com/ceridwen-com/ceridwen-standard-interchange-protocol-library/issues</url>
     </issueManagement>
 
