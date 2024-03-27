@@ -114,8 +114,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcpkix-jdk15on</artifactId>
-			<version>1.70</version>
+			<artifactId>bcpkix-jdk18on</artifactId>
+			<version>1.77</version>
 		</dependency>
     </dependencies>
   
