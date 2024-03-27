@@ -46,7 +46,7 @@ public class TestSocketTransport {
 	@Before
 	public void setUp() throws Exception {
       // Run netty server
-      server = new SIPDaemon("Sample", "localhost", 12345, new DummyDriverFactory(), true);
+      server = new SIPDaemon("Sample", "localhost", 1234, new DummyDriverFactory(), true);
 
       server.start();
 	}
@@ -66,7 +66,7 @@ public class TestSocketTransport {
 
         connection = new SocketConnection();
         ((SocketConnection) connection).setHost("localhost");
-        ((SocketConnection) connection).setPort(12345);
+        ((SocketConnection) connection).setPort(1234);
         ((SocketConnection) connection).setConnectionTimeout(30000);
         ((SocketConnection) connection).setIdleTimeout(30000);
         ((SocketConnection) connection).setRetryAttempts(2);
