@@ -257,7 +257,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <installProject>false</installProject>
                     <verbose>false</verbose>
                     <gitFlowConfig>
-                        <productionBranch>master</productionBranch>
+                        <productionBranch>main</productionBranch>
                         <developmentBranch>develop</developmentBranch>
                         <featureBranchPrefix>feature/</featureBranchPrefix>
                         <releaseBranchPrefix>release/${project.artifactId}-</releaseBranchPrefix>
