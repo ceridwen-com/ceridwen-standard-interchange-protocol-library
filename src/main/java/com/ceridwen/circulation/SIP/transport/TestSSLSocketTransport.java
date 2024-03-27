@@ -49,7 +49,7 @@ public class TestSSLSocketTransport {
 	public void setUp() throws Exception {
       // Run netty server
       ssc = new SelfSignedCertificate();
-      server = new SIPDaemon("Sample", "localhost", 12345, ssc.certificate(), ssc.privateKey(), new DummyDriverFactory(), true);
+      server = new SIPDaemon("Sample", "localhost", 1234, ssc.certificate(), ssc.privateKey(), new DummyDriverFactory(), true);
 
       server.start();
 	}
@@ -70,7 +70,7 @@ public class TestSSLSocketTransport {
         connection = new SSLSocketConnection();
         ((SSLSocketConnection) connection).setServerCertificateCA(ssc.certificate());
         ((SocketConnection) connection).setHost("localhost");
-        ((SocketConnection) connection).setPort(12345);
+        ((SocketConnection) connection).setPort(1234);
         ((SocketConnection) connection).setConnectionTimeout(30000);
         ((SocketConnection) connection).setIdleTimeout(30000);
         ((SocketConnection) connection).setRetryAttempts(2);
