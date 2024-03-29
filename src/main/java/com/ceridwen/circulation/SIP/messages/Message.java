@@ -29,12 +29,11 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -65,6 +64,8 @@ import com.ceridwen.circulation.SIP.fields.PositionedFieldDefinition;
 import com.ceridwen.circulation.SIP.fields.TaggedFieldDefinition;
 import com.ceridwen.circulation.SIP.types.enumerations.AbstractEnumeration;
 import com.ceridwen.circulation.SIP.types.flagfields.AbstractFlagField;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
 public abstract class Message implements Serializable {
     /**
@@ -122,7 +123,7 @@ public abstract class Message implements Serializable {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd    HHmmss");
         try {
             return sdf.parse(date);
-        } catch (Exception ex) {
+        } catch (ParseException ex) {
             return null;
         }
     }
@@ -163,9 +164,9 @@ public abstract class Message implements Serializable {
                         }
                     }
                 } else if (desc.getName().equalsIgnoreCase("ok")) {
-                    ret = new String[] { ((Boolean) value).booleanValue() ? "1" : "0" };
+                    ret = new String[] { ((Boolean) value) ? "1" : "0" };
                 } else {
-                    ret = new String[] { ((Boolean) value).booleanValue() ? "Y" : "N" };
+                    ret = new String[] { ((Boolean) value) ? "Y" : "N" };
                 }
             } else if (desc.getPropertyType() == Date.class) {
                 if (value != null) {
@@ -237,7 +238,7 @@ public abstract class Message implements Serializable {
             }
         } catch (MandatoryFieldOmitted mfo) {
             throw mfo;
-        } catch (Exception ex) {
+        } catch (IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException ex) {
             Message.log.error("Unexpected error getting " + desc.getDisplayName(), ex);
         }
 
@@ -245,7 +246,7 @@ public abstract class Message implements Serializable {
     }
 
     private String pad(String input, PositionedFieldDefinition field) {
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
 
         ret.append(input);
 
@@ -274,15 +275,15 @@ public abstract class Message implements Serializable {
     }
 
     private String encode(Character sequence, boolean autoPop) throws MandatoryFieldOmitted, InvalidFieldLength, MessageNotUnderstood {
-        Map<Integer, String> fixed = new TreeMap<Integer, String>();
+        Map<Integer, String> fixed = new TreeMap<>();
         String order = System.getProperty(Message.PROP_VARIABLE_FIELD_ORDERING, PROP_VARIABLE_FIELD_ORDERING_DEFAULT);
         Map<String, String[]> variable;
         if (order.equalsIgnoreCase(Message.PROP_VARIABLE_FIELD_ORDERING_SPECIFICATION)) {
-          variable = new LinkedHashMap<String, String[]>();
+          variable = new LinkedHashMap<>();
         } else {
-          variable = new TreeMap<String, String[]>();         
+          variable = new TreeMap<>();         
         }
-        StringBuffer message = new StringBuffer();
+        StringBuilder message = new StringBuilder();
 
         Field[] fields = this.getClass().getDeclaredFields(); 
 
@@ -293,7 +294,7 @@ public abstract class Message implements Serializable {
             PropertyDescriptor desc;
             try {
               desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-            } catch (Exception ex) {
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
               throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
             }
             if (desc == null) {
@@ -315,10 +316,10 @@ public abstract class Message implements Serializable {
                     desc.getPropertyType().getName());
               }
             }
-            if (fixed.containsKey(Integer.valueOf(field.start))) {
+            if (fixed.containsKey(field.start)) {
               throw new java.lang.AssertionError("Positioning error inserting field at " + field.start + " for class " + this.getClass().getName());                    
             }
-            fixed.put(new Integer(field.start), this.pad(value[0], field));
+            fixed.put(field.start, this.pad(value[0], field));
           }
           if (fld.isAnnotationPresent(TaggedField.class)) {
             TaggedField annotation = (TaggedField)fld.getAnnotation(TaggedField.class);               
@@ -326,7 +327,7 @@ public abstract class Message implements Serializable {
             PropertyDescriptor desc;
             try {
               desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-            } catch (Exception ex) {
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
               throw new java.lang.AssertionError("Introspection problem during encoding for " + fld.getName() + " in " + this.getClass().getName());
             }
             if (desc == null) {
@@ -358,18 +359,14 @@ public abstract class Message implements Serializable {
             throw new java.lang.AssertionError("No command annotation present for class " + this.getClass().getName());
         }
 
-        Iterator<Integer> fixedIterate = fixed.keySet().iterator();
-        while (fixedIterate.hasNext()) {
-            Integer key = fixedIterate.next();
-            if (message.length() != key.intValue()) {
+        for (Integer key : fixed.keySet()) {
+            if (message.length() != key) {
                 throw new java.lang.AssertionError("Positioning error inserting field at " + key + " for class " + this.getClass().getName());
             }            
             message.append(fixed.get(key));
         }
 
-        Iterator<String> varIterate = variable.keySet().iterator();
-        while (varIterate.hasNext()) {
-            String key = varIterate.next();
+        for (String key : variable.keySet()) {
             String[] values = variable.get(key);
             for (String value : values) {
                 message.append(key);
@@ -386,7 +383,7 @@ public abstract class Message implements Serializable {
             if (desc.getPropertyType() == Boolean.class) {
                 desc.getWriteMethod().invoke(this,
                                      new Object[] { value.equalsIgnoreCase("U") ? null :
-                                             new Boolean(value.
+                                             Boolean.valueOf(value.
                                                      equalsIgnoreCase("Y") ||
                                                      value.equalsIgnoreCase("1")) });
                 return;
@@ -405,11 +402,11 @@ public abstract class Message implements Serializable {
             }
             if (desc.getPropertyType() == String.class) {
                 desc.getWriteMethod().invoke(this,
-                                     new Object[] { new String(value) });
+                                     new Object[] { value});
                 return;
             }
             if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
-                Object data = desc.getPropertyType().getConstructor(new Class[] { String.class }).newInstance(new Object[] { new String(value) });
+                Object data = desc.getPropertyType().getConstructor(new Class[] { String.class }).newInstance(new Object[] { value});
                     if (data != null) {
                 desc.getWriteMethod().invoke(this,
                         new Object[] { data });
@@ -426,7 +423,7 @@ public abstract class Message implements Serializable {
                     Object[] values = (Object[]) mthdInst.invoke(null, new Object[] {});
                     if (values.length > 0) {
                         Object data = mthd.invoke(values[0],
-                                new Object[] { new String(value) });
+                                new Object[] { value});
                         desc.getWriteMethod().invoke(this,
                                 new Object[] { data });
                         return;
@@ -437,18 +434,16 @@ public abstract class Message implements Serializable {
                 String[] current = (String[]) desc.getReadMethod().invoke(this, new Object[0]);
                 if (current == null) {
                     desc.getWriteMethod().invoke(this,
-                            new Object[] { new String[] { new String(value) } });
-                    return;
+                            new Object[] { new String[] { value} });
                 } else {
-                    List<String> l = new ArrayList<String>(current.length + 1);
+                    List<String> l = new ArrayList<>(current.length + 1);
                     l.addAll(Arrays.asList(current));
-                    l.add(new String(value));
+                    l.add(value);
                     desc.getWriteMethod().invoke(this,
-                            new Object[] { l.toArray(new String[l.size()]) });
-                    return;
+                            new Object[] { l.toArray(new String[0]) });
                 }
             }
-        } catch (Exception ex) {
+        } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException ex) {
             Message.log.error("Unexpected error setting " + desc.getDisplayName() + " to " + value, ex);
         }
     }
@@ -494,7 +489,7 @@ public abstract class Message implements Serializable {
         Message msg;
     try {
             msg = msgClass.newInstance();
-        } catch (Exception ex) {
+        } catch (IllegalAccessException | InstantiationException ex) {
             throw new java.lang.AssertionError("Instantiation problem creating new " + msgClass.getName());
         }
         Field[] fields = msg.getClass().getDeclaredFields();
@@ -508,7 +503,7 @@ public abstract class Message implements Serializable {
                 PropertyDescriptor desc;
                 try {
                     desc = PropertyUtils.getPropertyDescriptor(msg, fld.getName());
-                } catch (Exception ex) {
+                } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
                     throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + msg.getClass().getName());
                 }
                 if (desc == null) {
@@ -540,7 +535,7 @@ public abstract class Message implements Serializable {
                 PropertyDescriptor desc;
                 try {
                     desc = PropertyUtils.getPropertyDescriptor(msg, fld.getName());
-                } catch (Exception ex) {
+                } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
                     throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + msg.getClass().getName());
                 }
                 if (desc == null) {
@@ -571,7 +566,7 @@ public abstract class Message implements Serializable {
             String check = tail.substring(2);
             String checksum = Message.calculateChecksum(truncated);
             return (checksum.equals(check));
-        } catch (Exception ex) {
+        } catch (UnsupportedEncodingException ex) {
         }
 
         return true;
@@ -604,7 +599,7 @@ public abstract class Message implements Serializable {
     }
 
     protected String addChecksum(String command, Character sequence) {
-        StringBuffer check = new StringBuffer();
+        StringBuilder check = new StringBuilder();
         if (sequence != null) {
             check.append("AY");
             check.append(sequence);
@@ -612,7 +607,7 @@ public abstract class Message implements Serializable {
             try {
                 check.append(Message.calculateChecksum(command + check.toString()));
                 return command + check.toString();
-            } catch (Exception e) {
+            } catch (UnsupportedEncodingException e) {
                 return command;
             }
         } else {
@@ -626,24 +621,28 @@ public abstract class Message implements Serializable {
         StringBuffer fielddata = new StringBuffer();
 
         for (int n = offset; n < data.length(); n++) {
-            if (status == 1) {
-                fieldtag = new StringBuffer();
-                fieldtag.append(data.charAt(n));
-                status = 2;
-            } else if (status == 2) {
-                fielddata = new StringBuffer();
-                fieldtag.append(data.charAt(n));
-                status = 3;
-            } else if (status == 3) {
-                if (data.charAt(n) == TaggedFieldDefinition.TERMINATOR) {
-                    this.setFieldProp(fieldtag.toString(), fielddata.toString());
-                    status = 1;
-                } else {
-                    fielddata.append(data.charAt(n));
-                }
+            switch (status) {
+                case 1:
+                    fieldtag = new StringBuffer();
+                    fieldtag.append(data.charAt(n));
+                    status = 2;
+                    break;
+                case 2:
+                    fielddata = new StringBuffer();
+                    fieldtag.append(data.charAt(n));
+                    status = 3;
+                    break;
+                case 3:
+                    if (data.charAt(n) == TaggedFieldDefinition.TERMINATOR) {
+                        this.setFieldProp(fieldtag.toString(), fielddata.toString());
+                        status = 1;
+                    } else {
+                        fielddata.append(data.charAt(n));
+                    }   break;
+                default:
+                    break;
             }
         }
-        return;
     }
 
     private void setFieldProp(String tag, String data) {
@@ -656,7 +655,7 @@ public abstract class Message implements Serializable {
                     PropertyDescriptor desc;
                     try {
                         desc = PropertyUtils.getPropertyDescriptor(this, fld.getName());
-                    } catch (Exception ex) {
+                    } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
                         throw new java.lang.AssertionError("Introspection problem during decoding for " + fld.getName() + " in " + this.getClass().getName());                                            
                     }
                     if (desc == null) {
@@ -681,7 +680,7 @@ public abstract class Message implements Serializable {
         return msg; 
     }
 
-    private static Hashtable<String, Class<? extends Message>> messages = new Hashtable<String, Class<? extends Message>>();
+    private static HashMap<String, Class<? extends Message>> messages = new HashMap<>();
 
     static {
         for (Messages m: Messages.values()) {
@@ -700,7 +699,7 @@ public abstract class Message implements Serializable {
                         Message.messages.put(cmd, (Class<? extends Message>)message);
                     }
                 }
-            } catch (Exception ex) {
+            } catch (ClassNotFoundException ex) {
                 Message.log.warn(m.name() + " not yet implemented.");
             }
         }
@@ -748,7 +747,7 @@ public abstract class Message implements Serializable {
                 }
             }
             return msg;
-        } catch (Exception ex) {
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException ex) {
             Assert.fail("Exception getting default message: " + ex.getMessage());
             return null;
         }
@@ -796,13 +795,13 @@ public abstract class Message implements Serializable {
                         if (field.getType() == Integer.class) {
                             Method method = desc.getWriteMethod();
                             if (method != null) {
-                                method.invoke(msg, new Object[]{Integer.valueOf(0)});
+                                method.invoke(msg, new Object[]{0});
                             }
                         }
                         if (field.getType() == Boolean.class) {
                             Method method = desc.getWriteMethod();
                             if (method != null) {
-                                method.invoke(msg, new Object[]{new Boolean(false)});
+                                method.invoke(msg, new Object[]{false});
                             }
                         }
                         if (field.getType() == Date.class) {
@@ -829,7 +828,7 @@ public abstract class Message implements Serializable {
                 }
             }
             return msg;
-        } catch (Exception ex) {
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException ex) {
             Assert.fail("Exception getting default message: " + ex.getMessage());
             return null;
         }
@@ -859,7 +858,7 @@ public abstract class Message implements Serializable {
                             method.invoke(msg, new Object[]{demangleDate("19700101    010000")});
                         }                    
                         if (type == Boolean.class) {
-                            method.invoke(msg, new Object[]{new Boolean(true)});
+                            method.invoke(msg, new Object[]{true});
                         }                    
                         if (type == Integer.class) {
                             String value = "123456789";
@@ -873,7 +872,7 @@ public abstract class Message implements Serializable {
                             if (length != 0) {
                                 value = value.substring(0, length);
                             }
-                            method.invoke(msg, new Object[]{new String(value)});
+                            method.invoke(msg, new Object[]{value});
                         }
                         if (desc.getPropertyType().getSuperclass() == AbstractFlagField.class) {
                           AbstractFlagField afd = (AbstractFlagField)desc.getReadMethod().invoke(msg, new Object[]{});
@@ -884,7 +883,7 @@ public abstract class Message implements Serializable {
                               if (name.equalsIgnoreCase("boolean")) {
                                  Method writer = dsc.getWriteMethod();
                                  if (writer != null) {
-                                   writer.invoke(afd, new Object[]{new Boolean(true)});                                   
+                                   writer.invoke(afd, new Object[]{true});                                   
                                  }
                               }
                             }
@@ -907,14 +906,14 @@ public abstract class Message implements Serializable {
                             if (length != 0) {
                                 value = value.substring(0, length-1);
                             }
-                            method.invoke(msg, new Object[]{new String[]{new String(value + "1"), new String(value + "2")}});                            
+                            method.invoke(msg, new Object[]{new String[]{(value + "1"), (value + "2")}});                            
                         }
                         
                     }
                 }
             }
             return msg;
-        } catch (Exception ex) {
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | NumberFormatException | SecurityException | InvocationTargetException ex) {
             Assert.fail("Exception getting populated message: " + ex.getClass().getName());
             return null;
         }
