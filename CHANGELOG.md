@@ -1,3 +1,13 @@
+**Version 2.11.1: 11/04/2024**
+Updated ceridwen-utils to 1.8.1
+Updated org.bouncy-castle to 1.78
+
+**Version 2.11.0: 29/03/2024**
+Added additional validation checks in pom.xml
+
+**Version 2.10.0: 29/03/2024**
+Updated dependencies
+
 **Version 2.9.8: 03/02/2020**
 Fixed checksum generation (courtesy of https://github.com/zcc39r)
 Dependencies: ceridwen utility 1.7.1
